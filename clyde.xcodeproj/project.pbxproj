@@ -31,6 +31,11 @@
 		B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A322BBD94400AA0634 /* ViewController.swift */; };
 		B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A522BBD94400AA0634 /* SWRevealViewController.m */; };
 		B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */; };
+		B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */; };
+		B227D0AF22BBEAE000AA0634 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */; };
+		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
+		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
+		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -74,6 +79,11 @@
 		B227D0A422BBD94400AA0634 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		B227D0A522BBD94400AA0634 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInTableViewController.swift; sourceTree = "<group>"; };
+		B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorViewController.swift; sourceTree = "<group>"; };
+		B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
+		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
 		CEA8CA031F071B2300448B51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -119,6 +129,11 @@
 				B227D09622BBD91B00AA0634 /* Sign In */,
 				B227D09522BBD90D00AA0634 /* Log In */,
 				B227D09422BBD90400AA0634 /* Sign Up */,
+				B227D0B022BBEAF200AA0634 /* Profile */,
+				B227D0B322BBEB8200AA0634 /* Majors */,
+				B227D0AC22BBE5E900AA0634 /* Counselor */,
+				B227D0AD22BBEABD00AA0634 /* Events */,
+				B227D0B622BBEC0600AA0634 /* Questions */,
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
 				B227D07822BBD84C00AA0634 /* Resources */,
 				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
@@ -222,6 +237,46 @@
 			children = (
 			);
 			name = "Sign In";
+			sourceTree = "<group>";
+		};
+		B227D0AC22BBE5E900AA0634 /* Counselor */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */,
+			);
+			name = Counselor;
+			sourceTree = "<group>";
+		};
+		B227D0AD22BBEABD00AA0634 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		B227D0B022BBEAF200AA0634 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		B227D0B322BBEB8200AA0634 /* Majors */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */,
+			);
+			name = Majors;
+			sourceTree = "<group>";
+		};
+		B227D0B622BBEC0600AA0634 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */,
+			);
+			name = Questions;
 			sourceTree = "<group>";
 		};
 		DDFDDF0A29E4BDD114B51BBC /* Pods */ = {
@@ -375,18 +430,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
+				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				B227D09E22BBD92F00AA0634 /* UIView.swift in Sources */,
 				B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
 				B227D09D22BBD92F00AA0634 /* SignUpViewController.swift in Sources */,
+				B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */,
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */,
+				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
 				4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */,
 				B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */,
+				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
+				B227D0AF22BBEAE000AA0634 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
+				DEVELOPMENT_TEAM = 39Z2QRTVV2;
 				INFOPLIST_FILE = clyde/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -523,6 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
+				DEVELOPMENT_TEAM = 39Z2QRTVV2;
 				INFOPLIST_FILE = clyde/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

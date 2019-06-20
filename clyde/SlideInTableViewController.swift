@@ -85,33 +85,6 @@ class SlideInTableViewController: UITableViewController{
     
     
     
-/*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller: UIViewController?
-        switch indexPath.row {
-        
-        case 0: //For "one"
-            controller = self.storyboard?.instantiateViewController(withIdentifier: "HomeView")
-        case 1: //For "one"
-            controller = self.storyboard?.instantiateViewController(withIdentifier: "ProfileView")
-        case 2: //For "two"
-            controller = self.storyboard?.instantiateViewController(withIdentifier:"MajorsView")
-        case 3: //For "three"
-            controller = self.storyboard?.instantiateViewController(withIdentifier:"CounselorView")
-        case 4: //For "four"
-            controller = self.storyboard?.instantiateViewController(withIdentifier:"EventsView")
-        case 5:
-            controller = self.storyboard?.instantiateViewController(withIdentifier:"QuestionsView")
-        default:
-            controller = self.storyboard?.instantiateViewController(withIdentifier:"HomeView")
-        }
-        if (controller != nil) {
-            let cell = tableView.cellForRow(at: indexPath)
-            controller!.title = cell?.textLabel?.text
-            let navController = UINavigationController(rootViewController: controller!)
-            revealViewController().pushFrontViewController(navController, animated:true)
-        }
-    }*/
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
