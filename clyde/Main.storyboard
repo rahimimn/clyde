@@ -14,19 +14,19 @@
         <!--StartScreen-->
         <scene sceneID="dxd-1U-puR">
             <objects>
-                <viewController title="StartScreen" id="ba2-OQ-fLX" customClass="InitialViewController" customModule="clydeClubIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="StartScreen" id="ba2-OQ-fLX" customClass="InitialViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OmJ-Fy-ZQH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="N1f-H4-qg4">
-                                <rect key="frame" x="5" y="286.5" width="404" height="323"/>
+                                <rect key="frame" x="5" y="354.5" width="404" height="187"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="i9q-my-pL7">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="152"/>
+                                        <rect key="frame" x="194" y="0.0" width="16" height="16"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="9Au-m1-5hX">
-                                        <rect key="frame" x="104.5" y="214" width="195" height="109"/>
+                                        <rect key="frame" x="104.5" y="78" width="195" height="109"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2I-vb-I9M">
                                                 <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
@@ -105,7 +105,7 @@
         <!--LogIn-->
         <scene sceneID="oKf-ve-meO">
             <objects>
-                <viewController title="LogIn" id="jEc-5a-Ddq" customClass="LogInViewController" customModule="clydeClubIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="LogIn" id="jEc-5a-Ddq" customClass="LogInViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ku4-Jl-ymG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,7 +235,7 @@
         <!--SignUp-->
         <scene sceneID="q0l-aC-Fpa">
             <objects>
-                <viewController title="SignUp" id="bXM-CV-chd" customClass="SignUpViewController" customModule="clydeClubIos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SignUp" id="bXM-CV-chd" customClass="SignUpViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fVv-LO-Zy9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -561,7 +561,7 @@
         <!--Slide In Table View Controller-->
         <scene sceneID="hKy-Z3-inc">
             <objects>
-                <tableViewController id="rno-tT-VHz" customClass="SlideInTableViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="rno-tT-VHz" customClass="SlideInTableViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DZc-2n-AAz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -820,7 +820,7 @@
         <!--Homepage-->
         <scene sceneID="3oL-wm-vs5">
             <objects>
-                <viewController title="Homepage" id="tkJ-xS-pVa" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Homepage" id="tkJ-xS-pVa" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQp-r6-RJd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -855,7 +855,6 @@
         <!--Root View Controller-->
         <scene sceneID="SVW-nq-Fjl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UmO-3T-IKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="649-8O-hPK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KrE-aH-DGT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -878,26 +877,27 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="T32-l9-wdf"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UmO-3T-IKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5632" y="-256"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="byx-Wx-mdA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oLc-6C-LGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="3mg-Y8-fe4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Ij-H2-E9q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oLc-6C-LGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4710" y="-256"/>
         </scene>
         <!--Counselor-->
         <scene sceneID="NUb-0Q-7IC">
             <objects>
-                <viewController storyboardIdentifier="CounselorView" title="Counselor" id="cAJ-Ob-QrU" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CounselorView" title="Counselor" id="cAJ-Ob-QrU" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cxo-xV-TBE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -921,7 +921,7 @@
         <!--Profile-->
         <scene sceneID="VI8-8h-lVG">
             <objects>
-                <viewController storyboardIdentifier="ProfileView" title="Profile" id="ocI-fn-mg8" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileView" title="Profile" id="ocI-fn-mg8" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e4A-zv-nwB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -945,7 +945,7 @@
         <!--Majors-->
         <scene sceneID="qvk-c5-iCi">
             <objects>
-                <viewController storyboardIdentifier="MajorsView" title="Majors" id="FVz-8F-UYx" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MajorsView" title="Majors" id="FVz-8F-UYx" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Be-3H-e9O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -980,7 +980,7 @@
         <!--Questions-->
         <scene sceneID="Utn-MI-5wQ">
             <objects>
-                <viewController storyboardIdentifier="QuestionsView" title="Questions" id="B6Z-Th-sYg" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionsView" title="Questions" id="B6Z-Th-sYg" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XEO-l7-HJ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1015,7 +1015,7 @@
         <!--Events-->
         <scene sceneID="qP2-Xn-WNd">
             <objects>
-                <viewController storyboardIdentifier="EventsView" title="Events" id="Oof-WD-iVo" customClass="ViewController" customModule="IOS_Swift_SlideInMenuSW" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsView" title="Events" id="Oof-WD-iVo" customClass="ViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fAe-nq-y8q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1060,7 +1060,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DYY-bQ-oG7"/>
-        <segue reference="e0H-zs-B40"/>
+        <segue reference="bao-Lz-Rny"/>
         <segue reference="9O5-vY-3Li"/>
     </inferredMetricsTieBreakers>
 </document>
