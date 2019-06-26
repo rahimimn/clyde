@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F393A281C3C8BCD00B3EA13 /* main.swift */; };
 		4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */; };
-		4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49C1B755242002F9F90 /* RootViewController.swift */; };
 		4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49D1B755242002F9F90 /* InitialViewController.swift */; };
 		78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_clyde.framework */; };
 		B227D07522BBD80900AA0634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227D07422BBD80900AA0634 /* Main.storyboard */; };
@@ -36,6 +35,31 @@
 		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
+		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
+		B2C19FF422BC17E400C5634C /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF322BC17E300C5634C /* images.png */; };
+		B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */; };
+		B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */; };
+		B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */; };
+		B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19FFC22BD411200C5634C /* CheckInViewController.swift */; };
+		B2C1A00322BD5D2600C5634C /* pass.json in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A00222BD5D2600C5634C /* pass.json */; };
+		B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09122BBD8BB00AA0634 /* acaslonpro-bold.otf */; };
+		B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09222BBD8BB00AA0634 /* acaslonpro-bolditalic.otf */; };
+		B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09022BBD8BB00AA0634 /* acaslonpro-italic.otf */; };
+		B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D08E22BBD8BB00AA0634 /* acaslonpro-regular.otf */; };
+		B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D08F22BBD8BB00AA0634 /* acaslonpro-semibold.otf */; };
+		B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D08D22BBD8BB00AA0634 /* acaslonpro-semibolditalic.otf */; };
+		B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */; };
+		B2C1A01B22C25B9C00C5634C /* charleston.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A01A22C25B9B00C5634C /* charleston.jpg */; };
+		B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A01C22C2682200C5634C /* basketball.jpg */; };
+		B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A01E22C2693B00C5634C /* cofc-orientation-1-750x499.jpg */; };
+		B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02022C27A8B00C5634C /* cofc-campus.jpg */; };
+		B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02722C27BAE00C5634C /* full-logo.jpg */; };
+		B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02922C27C4200C5634C /* red-symbol.jpg */; };
+		B2C1A02C22C2866C00C5634C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */; };
+		B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */; };
+		B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */; };
+		B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */; };
+		B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03922C395DA00C5634C /* accounting.jpg */; };
 		B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -48,7 +72,6 @@
 		4FD6C4781B754AF1002F9F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD6C49A1B755242002F9F90 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		4FD6C49C1B755242002F9F90 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		4FD6C49D1B755242002F9F90 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		4FF12F8A1DCA91F5004D9EF9 /* clyde.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clyde.entitlements; sourceTree = "<group>"; };
 		762732C14CFE40A989C3AD70 /* Pods-clyde.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clyde.debug.xcconfig"; path = "Pods/Target Support Files/Pods-clyde/Pods-clyde.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +107,26 @@
 		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
+		B2C19FF322BC17E300C5634C /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
+		B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Details Popup.png"; sourceTree = "<group>"; };
+		B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Maintenance.png"; sourceTree = "<group>"; };
+		B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-iOS Photos.png"; sourceTree = "<group>"; };
+		B2C19FFC22BD411200C5634C /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
+		B2C1A00222BD5D2600C5634C /* pass.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pass.json; sourceTree = "<group>"; };
+		B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern.jpg"; sourceTree = "<group>"; };
+		B2C1A01A22C25B9B00C5634C /* charleston.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = charleston.jpg; sourceTree = "<group>"; };
+		B2C1A01C22C2682200C5634C /* basketball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = basketball.jpg; sourceTree = "<group>"; };
+		B2C1A01E22C2693B00C5634C /* cofc-orientation-1-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cofc-orientation-1-750x499.jpg"; sourceTree = "<group>"; };
+		B2C1A02022C27A8B00C5634C /* cofc-campus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cofc-campus.jpg"; sourceTree = "<group>"; };
+		B2C1A02622C27B8B00C5634C /* three-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "three-dots.png"; path = "../../Downloads/three-dots.png"; sourceTree = "<group>"; };
+		B2C1A02722C27BAE00C5634C /* full-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "full-logo.jpg"; sourceTree = "<group>"; };
+		B2C1A02922C27C4200C5634C /* red-symbol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "red-symbol.jpg"; sourceTree = "<group>"; };
+		B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "cofc-campusE.jpg"; path = "../../Desktop/College of Charleston/Images/cofc-campusE.jpg"; sourceTree = "<group>"; };
+		B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern-profile.jpg"; sourceTree = "<group>"; };
+		B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cisternyard_splash.jpg; sourceTree = "<group>"; };
+		B2C1A03922C395DA00C5634C /* accounting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = accounting.jpg; sourceTree = "<group>"; };
 		B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
 		CEA8CA031F071B2300448B51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -122,9 +165,9 @@
 		4FD6C4761B754AF1002F9F90 /* clyde */ = {
 			isa = PBXGroup;
 			children = (
+				B2C1A00422BD5D3E00C5634C /* Pass */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
-				4FD6C49C1B755242002F9F90 /* RootViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B227D09622BBD91B00AA0634 /* Sign In */,
 				B227D09522BBD90D00AA0634 /* Log In */,
@@ -133,8 +176,10 @@
 				B227D0B322BBEB8200AA0634 /* Majors */,
 				B227D0AC22BBE5E900AA0634 /* Counselor */,
 				B227D0AD22BBEABD00AA0634 /* Events */,
+				B2C19FFB22BD40DF00C5634C /* Check-In */,
 				B227D0B622BBEC0600AA0634 /* Questions */,
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
+				B2C1A01522C24FF700C5634C /* Homepage */,
 				B227D07822BBD84C00AA0634 /* Resources */,
 				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
 			);
@@ -175,15 +220,10 @@
 		B227D07922BBD85900AA0634 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B227D07D22BBD87600AA0634 /* 3844408-48.png */,
-				B227D07E22BBD87600AA0634 /* cofc-red.jpg */,
-				B227D08122BBD87600AA0634 /* icons8-FAQ.png */,
-				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
-				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
-				B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */,
-				B227D08022BBD87600AA0634 /* icons8-User Manual.png */,
-				B227D08222BBD87600AA0634 /* icons8-Vertical Settings Mixer.png */,
-				B227D07B22BBD87600AA0634 /* white-logo.png */,
+				B2C1A03B22C395DD00C5634C /* Majors */,
+				B2C1A02422C27B6F00C5634C /* Icons */,
+				B2C1A02322C27B5C00C5634C /* Logos */,
+				B2C1A02222C27B1000C5634C /* College of Charleston Photos */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -207,7 +247,6 @@
 				B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */,
 				B227D0A422BBD94400AA0634 /* SWRevealViewController.h */,
 				B227D0A522BBD94400AA0634 /* SWRevealViewController.m */,
-				B227D0A322BBD94400AA0634 /* ViewController.swift */,
 			);
 			name = "Menu Bar";
 			sourceTree = "<group>";
@@ -215,7 +254,6 @@
 		B227D09422BBD90400AA0634 /* Sign Up */ = {
 			isa = PBXGroup;
 			children = (
-				B227D09722BBD92F00AA0634 /* RestClient + Student.swift */,
 				B227D09822BBD92F00AA0634 /* SignUpExtension.swift */,
 				B227D09922BBD92F00AA0634 /* SignUpViewController.swift */,
 				B227D09A22BBD92F00AA0634 /* UIView.swift */,
@@ -226,6 +264,7 @@
 		B227D09522BBD90D00AA0634 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
+				B227D09722BBD92F00AA0634 /* RestClient + Student.swift */,
 				B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */,
 				B227D0A022BBD93A00AA0634 /* LogInViewController.swift */,
 			);
@@ -235,6 +274,7 @@
 		B227D09622BBD91B00AA0634 /* Sign In */ = {
 			isa = PBXGroup;
 			children = (
+				B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */,
 			);
 			name = "Sign In";
 			sourceTree = "<group>";
@@ -243,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */,
+				B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */,
 			);
 			name = Counselor;
 			sourceTree = "<group>";
@@ -277,6 +318,83 @@
 				B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */,
 			);
 			name = Questions;
+			sourceTree = "<group>";
+		};
+		B2C19FFB22BD40DF00C5634C /* Check-In */ = {
+			isa = PBXGroup;
+			children = (
+				B2C19FFC22BD411200C5634C /* CheckInViewController.swift */,
+			);
+			name = "Check-In";
+			sourceTree = "<group>";
+		};
+		B2C1A00422BD5D3E00C5634C /* Pass */ = {
+			isa = PBXGroup;
+			children = (
+				B2C1A00222BD5D2600C5634C /* pass.json */,
+			);
+			name = Pass;
+			sourceTree = "<group>";
+		};
+		B2C1A01522C24FF700C5634C /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				B227D0A322BBD94400AA0634 /* ViewController.swift */,
+			);
+			name = Homepage;
+			sourceTree = "<group>";
+		};
+		B2C1A02222C27B1000C5634C /* College of Charleston Photos */ = {
+			isa = PBXGroup;
+			children = (
+				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
+				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
+				B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */,
+				B2C1A01A22C25B9B00C5634C /* charleston.jpg */,
+				B2C1A01E22C2693B00C5634C /* cofc-orientation-1-750x499.jpg */,
+				B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */,
+				B2C1A01C22C2682200C5634C /* basketball.jpg */,
+				B2C1A02022C27A8B00C5634C /* cofc-campus.jpg */,
+			);
+			name = "College of Charleston Photos";
+			sourceTree = "<group>";
+		};
+		B2C1A02322C27B5C00C5634C /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				B2C1A02922C27C4200C5634C /* red-symbol.jpg */,
+				B2C1A02722C27BAE00C5634C /* full-logo.jpg */,
+				B227D07E22BBD87600AA0634 /* cofc-red.jpg */,
+				B227D07B22BBD87600AA0634 /* white-logo.png */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
+		B2C1A02422C27B6F00C5634C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				B227D07D22BBD87600AA0634 /* 3844408-48.png */,
+				B2C1A02622C27B8B00C5634C /* three-dots.png */,
+				B2C19FF322BC17E300C5634C /* images.png */,
+				B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */,
+				B227D08122BBD87600AA0634 /* icons8-FAQ.png */,
+				B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */,
+				B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */,
+				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
+				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
+				B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */,
+				B227D08022BBD87600AA0634 /* icons8-User Manual.png */,
+				B227D08222BBD87600AA0634 /* icons8-Vertical Settings Mixer.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		B2C1A03B22C395DD00C5634C /* Majors */ = {
+			isa = PBXGroup;
+			children = (
+				B2C1A03922C395DA00C5634C /* accounting.jpg */,
+			);
+			name = Majors;
 			sourceTree = "<group>";
 		};
 		DDFDDF0A29E4BDD114B51BBC /* Pods */ = {
@@ -355,18 +473,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
+				B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */,
+				B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */,
 				B227D08622BBD87600AA0634 /* 3844408-48.png in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
+				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
+				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
+				B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */,
 				B227D08422BBD87600AA0634 /* white-logo.png in Resources */,
 				B77BD8A321125B510036B284 /* bootconfig.plist in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
+				B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */,
+				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
+				B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */,
+				B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */,
+				B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */,
+				B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */,
 				B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */,
+				B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */,
 				B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */,
+				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
 				B227D08722BBD87600AA0634 /* cofc-red.jpg in Resources */,
+				B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */,
+				B2C19FF422BC17E400C5634C /* images.png in Resources */,
+				B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */,
+				B2C1A01B22C25B9C00C5634C /* charleston.jpg in Resources */,
 				B227D08B22BBD87600AA0634 /* icons8-Vertical Settings Mixer.png in Resources */,
+				B2C1A00322BD5D2600C5634C /* pass.json in Resources */,
+				B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */,
+				B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */,
+				B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */,
 				B227D07522BBD80900AA0634 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +570,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
+				B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				B227D09E22BBD92F00AA0634 /* UIView.swift in Sources */,
 				B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */,
@@ -439,7 +580,7 @@
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
-				4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */,
+				B2C1A02C22C2866C00C5634C /* LaunchViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */,
 				B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */,
@@ -447,6 +588,7 @@
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B227D0AF22BBEAE000AA0634 /* EventsViewController.swift in Sources */,
+				B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

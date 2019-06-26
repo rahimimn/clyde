@@ -9,7 +9,6 @@
 import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
-
     var alert:UIAlertController!
     var wasSubmitted = false
     
@@ -22,11 +21,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var startTerm: UITextField!
     
+   
+    
+
+    
     
     @IBOutlet weak var alreadyHaveAnAccount: UIButton!
     @IBAction func SegueToLogIn(_ sender: UIButton) {
         performSegue(withIdentifier: "SegueToLogIn", sender: self)
     }
+
     
     //birthday
     let datePicker = UIDatePicker()
@@ -38,8 +42,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var alias: String!
     var contactID: String!
     
-    
-    
+  
     
     private func showDatePicker(){
         //formats date
@@ -80,6 +83,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             lastName = nameArray![1]
             alias = firstName.prefix(1)+lastName
             
+            //this will need to be changed to allow for multiple high schools
             if highSchool.text == "West Ashley High"{
                 highSchoolId = "001S000000zAt4SIAS"
                 
@@ -121,6 +125,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         name.delegate = self
@@ -137,6 +143,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-
 }
+
 

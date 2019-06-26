@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SlideInTableViewController: UITableViewController{
    
@@ -14,83 +15,50 @@ class SlideInTableViewController: UITableViewController{
         super.viewDidLoad()
     }
 
-    // MARK: - Table view data source
-
+    // Dispose of any resources that can be recreated.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    //Returns the number of sections.
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    //Returns the number of rows in the section.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 11
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    //Determines which cell was selected, and then presents the corresponding url.
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let urlArray = ["https://www.cofc.edu/", "https://my.cofc.edu/cp/home/displaylogin","https://cofcharleston.force.com/portal/TX_SiteLogin?startURL=%2Fportal%2FTargetX_Base__Portal&_ga=2.125371468.736608744.1561053275-124322718.1558454919"]
+        if indexPath.row == 8{
+            show(urlArray[0])}
+        if indexPath.row == 9{
+            show(urlArray[1])
+        }
+        if indexPath.row == 10{
+            show(urlArray[2])
+        }
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    //Takes a url as a parameter, and then makes it appear with an internal safari page.
+    func show(_ url: String) {
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
-     //MARK: - Navigation
-    
-
-    
-    
-    
-    
-    
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+

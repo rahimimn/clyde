@@ -1,0 +1,14 @@
+{
+    "formatVersion" : 1,
+    "passTypeIdentifier" : "pass.com.yourdomain.couponfreehug",
+    "serialNumber" : "001",
+    "teamIdentifier" : "<YOUR TEAM IDENTIFIER>",
+    "organizationName" : "College of Charleston",
+    "description" : "Event Pass for anticipated students."
+},
+"organizationName" : "College of Charleston",
+"description" : "Student Event Pass",
+"logoText" : "Clyde Club",
+"foregroundColor" : "rgb(255, 255, 255)",
+"backgroundColor" : "rgb(206, 140, 53)"
+    ],

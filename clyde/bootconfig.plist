@@ -5,7 +5,7 @@
 	<key>remoteAccessConsumerKey</key>
 	<string>3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5</string>
 	<key>oauthRedirectURI</key>
-	<string>cofcapp:///ouath/done</string>
+	<string>cofcapp://oauth/done</string>
 	<key>oauthScopes</key>
 	<array>
 		<string>web</string>

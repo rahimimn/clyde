@@ -7,11 +7,36 @@
 //
 
 import UIKit
+import SalesforceSDKCore
 
 class CounselorViewController: UIViewController {
+
+    var name: String = ""
+    var about: String = ""
+    var email: String = ""
+    var id: String = ""
+    
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    @IBOutlet weak var counselorName: UILabel!
+    @IBOutlet weak var aboutMeText: UITextView!
     
+    
+    func getId(){
+        var counselorId: String = ""
+        let request = RestClient.shared.request(forQuery: "SELECT OwnerId FROM Contact WHERE Name = 'John Doe'")
+        RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
+        SalesforceLogger.d(type(of:self), message:"Error invoking: \(request)")
+        }) { [weak self] (response, urlResponse) in
+        
+        if let JSON = response as? Dictionary<String,Any>{
+        if let records = JSON["records"] as? [Dictionary<String, Any>]{
+        for record in records{
+            counselorId = record["OwnerId"] as? String ?? ""
+        
+            }}}}}
+            
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         if revealViewController() != nil {
@@ -22,16 +47,7 @@ class CounselorViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }
+
