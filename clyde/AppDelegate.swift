@@ -25,11 +25,14 @@
 import Foundation
 import UIKit
 import SalesforceSDKCore
+import SmartStore
+
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    
-    
+    let RemoteAccessConsumerKey = "3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5"
+    let OAuthRedirectURI = "cofcapp://oauth/done"
+    let scopes = ["full"]
     
     //Initializes the Mobile SDK and registers a block to handle user change notifications.
     override init() {
@@ -48,26 +51,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
-        
+
         //Uncomment the code below to see how you can customize the color, textcolor, font and fontsize of the navigation bar
         let loginViewConfig = SalesforceLoginViewControllerConfig()
-        
+
         //Set showSettingsIcon to NO if you want to hide the settings icon on the nav bar
-        //loginViewConfig.showsSettingsIcon = false
-        
+        loginViewConfig.showsSettingsIcon = false
+
         //Set showNavBar to NO if you want to hide the top bar
-        //loginViewConfig.showsNavigationBar = false
-        
+        loginViewConfig.showsNavigationBar = false
+
         //loginViewConfig.navBarColor = UIColor(red: 0.051, green: 0.765, blue: 0.733, alpha: 1.0)
         //loginViewConfig.navBarTextColor = UIColor.white
         //loginViewConfig.navBarFont = UIFont(name: "Helvetica", size: 16.0)
-        
+
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
-        
+
         AuthHelper.loginIfRequired {
             self.setupRootViewController()
         }
-        
+
         return true
     }
     
@@ -107,5 +110,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         postResetBlock()
     }
     
-    
+   
 }

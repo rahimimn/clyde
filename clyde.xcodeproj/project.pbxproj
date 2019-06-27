@@ -31,17 +31,20 @@
 		B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A522BBD94400AA0634 /* SWRevealViewController.m */; };
 		B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */; };
 		B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */; };
-		B227D0AF22BBEAE000AA0634 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */; };
 		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
+		B28E066422C3A0FE0035A40F /* icons8-tick-box-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */; };
+		B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */; };
+		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
+		B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */; };
+		B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E066B22C3AC270035A40F /* EventsTableViewController.swift */; };
 		B2C19FF422BC17E400C5634C /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF322BC17E300C5634C /* images.png */; };
 		B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */; };
 		B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */; };
 		B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */; };
 		B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19FFC22BD411200C5634C /* CheckInViewController.swift */; };
-		B2C1A00322BD5D2600C5634C /* pass.json in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A00222BD5D2600C5634C /* pass.json */; };
 		B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09122BBD8BB00AA0634 /* acaslonpro-bold.otf */; };
 		B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09222BBD8BB00AA0634 /* acaslonpro-bolditalic.otf */; };
 		B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09022BBD8BB00AA0634 /* acaslonpro-italic.otf */; };
@@ -55,7 +58,6 @@
 		B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02022C27A8B00C5634C /* cofc-campus.jpg */; };
 		B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02722C27BAE00C5634C /* full-logo.jpg */; };
 		B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A02922C27C4200C5634C /* red-symbol.jpg */; };
-		B2C1A02C22C2866C00C5634C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */; };
 		B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */; };
 		B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */; };
 		B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */; };
@@ -103,17 +105,20 @@
 		B227D0A522BBD94400AA0634 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInTableViewController.swift; sourceTree = "<group>"; };
 		B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorViewController.swift; sourceTree = "<group>"; };
-		B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
+		B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-tick-box-100.png"; sourceTree = "<group>"; };
+		B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-close-window-100.png"; sourceTree = "<group>"; };
+		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
+		B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2016-Orientation-750x499.jpg"; sourceTree = "<group>"; };
+		B28E066B22C3AC270035A40F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
 		B2C19FF322BC17E300C5634C /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Details Popup.png"; sourceTree = "<group>"; };
 		B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Maintenance.png"; sourceTree = "<group>"; };
 		B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-iOS Photos.png"; sourceTree = "<group>"; };
 		B2C19FFC22BD411200C5634C /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
-		B2C1A00222BD5D2600C5634C /* pass.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pass.json; sourceTree = "<group>"; };
 		B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern.jpg"; sourceTree = "<group>"; };
 		B2C1A01A22C25B9B00C5634C /* charleston.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = charleston.jpg; sourceTree = "<group>"; };
 		B2C1A01C22C2682200C5634C /* basketball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = basketball.jpg; sourceTree = "<group>"; };
@@ -122,7 +127,6 @@
 		B2C1A02622C27B8B00C5634C /* three-dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "three-dots.png"; path = "../../Downloads/three-dots.png"; sourceTree = "<group>"; };
 		B2C1A02722C27BAE00C5634C /* full-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "full-logo.jpg"; sourceTree = "<group>"; };
 		B2C1A02922C27C4200C5634C /* red-symbol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "red-symbol.jpg"; sourceTree = "<group>"; };
-		B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "cofc-campusE.jpg"; path = "../../Desktop/College of Charleston/Images/cofc-campusE.jpg"; sourceTree = "<group>"; };
 		B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern-profile.jpg"; sourceTree = "<group>"; };
 		B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cisternyard_splash.jpg; sourceTree = "<group>"; };
@@ -165,7 +169,6 @@
 		4FD6C4761B754AF1002F9F90 /* clyde */ = {
 			isa = PBXGroup;
 			children = (
-				B2C1A00422BD5D3E00C5634C /* Pass */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
@@ -274,7 +277,6 @@
 		B227D09622BBD91B00AA0634 /* Sign In */ = {
 			isa = PBXGroup;
 			children = (
-				B2C1A02B22C2866C00C5634C /* LaunchViewController.swift */,
 			);
 			name = "Sign In";
 			sourceTree = "<group>";
@@ -291,7 +293,7 @@
 		B227D0AD22BBEABD00AA0634 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				B227D0AE22BBEAE000AA0634 /* EventsViewController.swift */,
+				B28E066B22C3AC270035A40F /* EventsTableViewController.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -328,14 +330,6 @@
 			name = "Check-In";
 			sourceTree = "<group>";
 		};
-		B2C1A00422BD5D3E00C5634C /* Pass */ = {
-			isa = PBXGroup;
-			children = (
-				B2C1A00222BD5D2600C5634C /* pass.json */,
-			);
-			name = Pass;
-			sourceTree = "<group>";
-		};
 		B2C1A01522C24FF700C5634C /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
+				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
 				B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */,
 				B2C1A01A22C25B9B00C5634C /* charleston.jpg */,
@@ -376,10 +371,13 @@
 				B227D07D22BBD87600AA0634 /* 3844408-48.png */,
 				B2C1A02622C27B8B00C5634C /* three-dots.png */,
 				B2C19FF322BC17E300C5634C /* images.png */,
+				B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */,
+				B28E066722C3A2670035A40F /* icons8-help-100.png */,
 				B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */,
 				B227D08122BBD87600AA0634 /* icons8-FAQ.png */,
 				B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */,
 				B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */,
+				B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */,
 				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
 				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
 				B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */,
@@ -495,15 +493,18 @@
 				B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */,
 				B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */,
 				B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */,
+				B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */,
 				B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */,
+				B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */,
 				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
 				B227D08722BBD87600AA0634 /* cofc-red.jpg in Resources */,
+				B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */,
 				B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */,
 				B2C19FF422BC17E400C5634C /* images.png in Resources */,
 				B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */,
 				B2C1A01B22C25B9C00C5634C /* charleston.jpg in Resources */,
 				B227D08B22BBD87600AA0634 /* icons8-Vertical Settings Mixer.png in Resources */,
-				B2C1A00322BD5D2600C5634C /* pass.json in Resources */,
+				B28E066422C3A0FE0035A40F /* icons8-tick-box-100.png in Resources */,
 				B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */,
 				B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */,
 				B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */,
@@ -528,6 +529,7 @@
 				"${BUILT_PRODUCTS_DIR}/SalesforceSDKCore/SalesforceSDKCore.framework",
 				"${BUILT_PRODUCTS_DIR}/SmartStore/SmartStore.framework",
 				"${BUILT_PRODUCTS_DIR}/SmartSync/SmartSync.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -538,6 +540,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SalesforceSDKCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartSync.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -580,14 +583,13 @@
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
-				B2C1A02C22C2866C00C5634C /* LaunchViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */,
 				B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
-				B227D0AF22BBEAE000AA0634 /* EventsViewController.swift in Sources */,
+				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,7 +714,6 @@
 				INFOPLIST_FILE = clyde/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DSIGNPOST_ENABLED";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cofc.club.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "clyde/Bridging-Header.h";

@@ -44,7 +44,6 @@ class SlideInTableViewController: UITableViewController{
         if indexPath.row == 10{
             show(urlArray[2])
         }
-        
     }
     
     //Takes a url as a parameter, and then makes it appear with an internal safari page.
@@ -57,7 +56,6 @@ class SlideInTableViewController: UITableViewController{
             present(vc, animated: true)
         }
     }
-    
 }
 
 

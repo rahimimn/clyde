@@ -21,6 +21,8 @@ class CounselorViewController: UIViewController {
     @IBOutlet weak var counselorName: UILabel!
     @IBOutlet weak var aboutMeText: UITextView!
     
+    //TO-DO: pull counselor information based on user, and then present name, contact email, and about me.
+    
     
     func getId(){
         var counselorId: String = ""
@@ -39,15 +41,14 @@ class CounselorViewController: UIViewController {
             
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //reveals menu
         if revealViewController() != nil {
             menuBarButton.target = self.revealViewController()
             menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
             
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
-        // Do any additional setup after loading the view.
     }
- 
-
 }
 

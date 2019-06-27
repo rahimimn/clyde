@@ -12,6 +12,7 @@ pod 'SalesforceAnalytics', :path => 'mobile_sdk/SalesforceMobileSDK-iOS'
 pod 'SalesforceSDKCore', :path => 'mobile_sdk/SalesforceMobileSDK-iOS'
 pod 'SmartStore', :path => 'mobile_sdk/SalesforceMobileSDK-iOS'
 pod 'SmartSync', :path => 'mobile_sdk/SalesforceMobileSDK-iOS'
+pod 'SwiftyJSON', '~> 4.0'
 
 end
 

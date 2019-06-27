@@ -12,11 +12,14 @@ import SafariServices
 
 class HomeViewController: UIViewController{
 
+    // TO-DO: pull the most recent three articles from cofc.today and present them on the homepage
+    
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //reveals menu
         if revealViewController() != nil {
             menuBarItem.target = self.revealViewController()
             menuBarItem.action = #selector(SWRevealViewController().revealToggle(_:))
@@ -29,7 +32,6 @@ class HomeViewController: UIViewController{
     //Homepage news button articles. These will eventually have to be replaced to allow automation.
     @IBAction func clickFirst(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/24/beat-the-heat-public-health-heat-related-illness/")}
-    
     @IBAction func clickSecond(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/21/jarrell-brantley-nba-draft/")}
     
@@ -50,13 +52,6 @@ class HomeViewController: UIViewController{
             present(vc, animated: true)
         }
     }
-    
-    
-    @IBAction func clickToEvents(_ sender: UIButton) {
-        performSegue(withIdentifier: "SegueFromHomeToEvents", sender: self)
-    }
-    
-    
 }
     
     
