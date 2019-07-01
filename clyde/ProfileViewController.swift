@@ -8,90 +8,25 @@
 //login.salesforce.com
 import UIKit
 import MobileCoreServices
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-   
+import SalesforceSDKCore
+import SmartSync
 
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     @IBOutlet weak var profileImageView: UIImageView!
-    let tapRec = UITapGestureRecognizer()
+   
     
     @IBOutlet weak var userName: UILabel!
     
-    @IBOutlet weak var state: UIPickerView!
-    @IBOutlet weak var city: UITextField!
-    @IBOutlet weak var address: UITextField!
-    var newPic: Bool?
     
-    var stateData: [String] = [String]()
-    var selectedState = ""
+
     //TO-DO: Create functions that allow the "edit" button to be tapped, and THEN allow for profile editing.
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        self.state.delegate = self
-        self.state.dataSource = self
-        stateData = [ "AK - Alaska",
-                       "AL - Alabama",
-                       "AR - Arkansas",
-                       "AS - American Samoa",
-                       "AZ - Arizona",
-                       "CA - California",
-                       "CO - Colorado",
-                       "CT - Connecticut",
-                       "DC - District of Columbia",
-                       "DE - Delaware",
-                       "FL - Florida",
-                       "GA - Georgia",
-                       "GU - Guam",
-                       "HI - Hawaii",
-                       "IA - Iowa",
-                       "ID - Idaho",
-                       "IL - Illinois",
-                       "IN - Indiana",
-                       "KS - Kansas",
-                       "KY - Kentucky",
-                       "LA - Louisiana",
-                       "MA - Massachusetts",
-                       "MD - Maryland",
-                       "ME - Maine",
-                       "MI - Michigan",
-                       "MN - Minnesota",
-                       "MO - Missouri",
-                       "MS - Mississippi",
-                       "MT - Montana",
-                       "NC - North Carolina",
-                       "ND - North Dakota",
-                       "NE - Nebraska",
-                       "NH - New Hampshire",
-                       "NJ - New Jersey",
-                       "NM - New Mexico",
-                       "NV - Nevada",
-                       "NY - New York",
-                       "OH - Ohio",
-                       "OK - Oklahoma",
-                       "OR - Oregon",
-                       "PA - Pennsylvania",
-                       "PR - Puerto Rico",
-                       "RI - Rhode Island",
-                       "SC - South Carolina",
-                       "SD - South Dakota",
-                       "TN - Tennessee",
-                       "TX - Texas",
-                       "UT - Utah",
-                       "VA - Virginia",
-                       "VI - Virgin Islands",
-                       "VT - Vermont",
-                       "WA - Washington",
-                       "WI - Wisconsin",
-                       "WV - West Virginia",
-                       "WY - Wyoming"]
-        
-        
-        
-        
         
         //Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
@@ -100,9 +35,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         self.profileImageView.layer.cornerRadius = 10
         
-        //allows image to be tapped
-        tapRec.addTarget(self, action: #selector(tappedView))
-        profileImageView.addGestureRecognizer(tapRec)
         
         //menu reveal
         if revealViewController() != nil {
@@ -113,19 +45,139 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1    }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return stateData.count
+
+    
+    
+}
+
+
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
+    
+    
+    
+    
+  //Variables
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var stateTextField: UITextField!
+    @IBOutlet weak var zipTextField: UITextField!
+    @IBOutlet weak var birthDateTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var highSchoolTextField: UITextField!
+    @IBOutlet weak var graduationYearTextField: UITextField!
+    @IBOutlet weak var ethnicOriginTextField: UITextField!
+    
+    var newPic: Bool?
+    let tapRec = UITapGestureRecognizer()
+    
+    //birthday
+    let datePicker = UIDatePicker()
+    //Creates a date picker object for the birthday field
+    private func showDatePicker(){
+        //formats date
+        datePicker.datePickerMode = .date
+        
+        //toolbar
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        
+        //done button & cancel button
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        
+        toolbar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        
+        birthDateTextField.inputAccessoryView = toolbar
+        birthDateTextField.inputView = datePicker
+        
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return stateData[row]
+    //Determines when the user stops editing the date picker
+    @objc func doneDatePicker(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        birthDateTextField.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedState = stateData[row]
+    //Ends editing of the date picker
+    @objc func cancelDatePicker(){
+        self.view.endEditing(true)
+    }
+    
+    
+    //Method that determines actions after "save" button pressed
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
+        let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
+        saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        
+        self.present(saveAlert, animated: true)
+        
+        
+    }
+    
+    
+
+ 
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Sets the image style
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        self.profileImageView.clipsToBounds = true;
+        self.profileImageView.layer.borderWidth = 3
+        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.profileImageView.layer.cornerRadius = 10
+        
+        
+        tapRec.addTarget(self, action: #selector(tappedView))
+        profileImageView.addGestureRecognizer(tapRec)
+        addressTextField.delegate = self
+        cityTextField.delegate = self
+        stateTextField.delegate = self
+        zipTextField.delegate = self
+        birthDateTextField.delegate = self
+        emailTextField.delegate = self
+        highSchoolTextField.delegate = self
+        graduationYearTextField.delegate = self
+        ethnicOriginTextField.delegate = self
+        
+        
+        //menu reveal
+        if revealViewController() != nil {
+            menuBarButton.target = self.revealViewController()
+            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
+            
+            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    
+    //Upserts information into Salesforce
+    private func upsertInformation(){
+        var record = [String: Any]()
+        record["MailingAddress"] = self.addressTextField.text
+        record["MailingCity"] = self.cityTextField.text
+        record["MailingState"] = self.stateTextField.text
+        record["MailingPostalCode"] = self.zipTextField.text
+        
+    }
+    
+    
+    
+    //Returns textfield's value
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     //function that creates the camera and photo library action
     @objc func tappedView(){
@@ -141,6 +193,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.newPic = true
             }
         }
+        
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
                 let imagePicker = UIImagePickerController()
@@ -185,6 +238,4 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
 }
