@@ -10,6 +10,9 @@ import UIKit
 import MobileCoreServices
 import SalesforceSDKCore
 import SmartSync
+import SwiftyJSON
+
+
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -52,7 +55,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 }
 
 
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate{
     
     
     
@@ -78,6 +81,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     //birthday
     let datePicker = UIDatePicker()
     //Creates a date picker object for the birthday field
+   
     private func showDatePicker(){
         //formats date
         datePicker.datePickerMode = .date
@@ -114,12 +118,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     //Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
+         upsertInformation()
         let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
         saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         
         self.present(saveAlert, animated: true)
         
-        
+       
     }
     
     
@@ -150,6 +155,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         highSchoolTextField.delegate = self
         graduationYearTextField.delegate = self
         ethnicOriginTextField.delegate = self
+        showDatePicker()
         
         
         //menu reveal
@@ -158,19 +164,73 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
             
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
+            
+        }
+        
+
+    }
+    
+    //Upserts information into Salesforce
+    private func upsertInformation(){
+        
+        
+        
+       
+        
+        
+        //Creates a new record and stores appropriate fields.
+        var record = [String: Any]()
+        record["MailingStreet"] = self.addressTextField.text
+        record["MailingCity"] = self.cityTextField.text
+        record["MailingState"] = self.stateTextField.text
+        record["MailingPostalCode"] = self.zipTextField.text
+        record["TargetX_SRMb__Graduation_Year__c"] = self.graduationYearTextField.text
+        record["TargetX_SRMb__Ethnicity__c"] = self.ethnicOriginTextField.text
+        record["Email"] = self.emailTextField.text
+        record["School_Company_name__c"] = self.highSchoolTextField.text
+        
+        print(record)
+        
+        // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
+        //Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
+        let userRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking: \(userRequest)")
+        }) { [weak self] (response, urlResponse) in
+            let userAccountJSON = JSON(response!)
+            let userAccountID = userAccountJSON["user_id"].stringValue
+            
+            
+            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
+            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
+            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
+                SalesforceLogger.d(type(of:self!), message:"Error invoking: \(userRequest)")
+            }) { [weak self] (response, urlResponse) in
+                let contactAccountJSON = JSON(response!)
+                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
+               
+            
+            
+      
+        
+        //Creates the upsert request.
+        let upsertRequest = RestClient.shared.requestForUpsert(withObjectType: "Contact", externalIdField: "Id", externalId: contactAccountID, fields: record)
+        
+        
+        
+        
+        //Sends the upsert request
+        RestClient.shared.send(request: upsertRequest, onFailure: { (error, URLResponse) in
+             SalesforceLogger.d(type(of:self!), message:"Error invoking: \(upsertRequest)")
+        }){(response, URLResponse) in
+            os_log("\nSuccessful response received")
+        }
+    }
         }
     }
     
     
-    //Upserts information into Salesforce
-    private func upsertInformation(){
-        var record = [String: Any]()
-        record["MailingAddress"] = self.addressTextField.text
-        record["MailingCity"] = self.cityTextField.text
-        record["MailingState"] = self.stateTextField.text
-        record["MailingPostalCode"] = self.zipTextField.text
-        
-    }
+    
     
     
     

@@ -36,6 +36,9 @@
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
 		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
+		B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */; };
+		B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */; };
+		B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0522CA95B700A122F7 /* banner037.jpg */; };
 		B28E066422C3A0FE0035A40F /* icons8-tick-box-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */; };
 		B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */; };
 		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
@@ -111,6 +114,9 @@
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
 		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Org Unit.png"; sourceTree = "<group>"; };
+		B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
+		B2760A0522CA95B700A122F7 /* banner037.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner037.jpg; sourceTree = "<group>"; };
 		B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-tick-box-100.png"; sourceTree = "<group>"; };
 		B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-close-window-100.png"; sourceTree = "<group>"; };
 		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
@@ -177,15 +183,16 @@
 				B227D09622BBD91B00AA0634 /* Sign In */,
 				B227D09522BBD90D00AA0634 /* Log In */,
 				B227D09422BBD90400AA0634 /* Sign Up */,
+				B2C1A01522C24FF700C5634C /* Homepage */,
 				B227D0B022BBEAF200AA0634 /* Profile */,
 				B227D0B322BBEB8200AA0634 /* Majors */,
 				B227D0AC22BBE5E900AA0634 /* Counselor */,
 				B227D0AD22BBEABD00AA0634 /* Events */,
 				B2C19FFB22BD40DF00C5634C /* Check-In */,
 				B227D0B622BBEC0600AA0634 /* Questions */,
+				B2760A0222CA947100A122F7 /* Resources */,
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
-				B2C1A01522C24FF700C5634C /* Homepage */,
-				B227D07822BBD84C00AA0634 /* Resources */,
+				B227D07822BBD84C00AA0634 /* Assets */,
 				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
 				B27609FE22CA4FD300A122F7 /* user.swift */,
 			);
@@ -214,13 +221,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B227D07822BBD84C00AA0634 /* Resources */ = {
+		B227D07822BBD84C00AA0634 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				B227D07A22BBD85F00AA0634 /* Fonts */,
 				B227D07922BBD85900AA0634 /* Images */,
 			);
-			name = Resources;
+			name = Assets;
 			sourceTree = "<group>";
 		};
 		B227D07922BBD85900AA0634 /* Images */ = {
@@ -325,6 +332,14 @@
 			name = Questions;
 			sourceTree = "<group>";
 		};
+		B2760A0222CA947100A122F7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B2C19FFB22BD40DF00C5634C /* Check-In */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +363,7 @@
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
 				B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */,
+				B2760A0522CA95B700A122F7 /* banner037.jpg */,
 				B2C1A01A22C25B9B00C5634C /* charleston.jpg */,
 				B2C1A01E22C2693B00C5634C /* cofc-orientation-1-750x499.jpg */,
 				B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */,
@@ -374,6 +390,7 @@
 				B227D07D22BBD87600AA0634 /* 3844408-48.png */,
 				B2C1A02622C27B8B00C5634C /* three-dots.png */,
 				B2C19FF322BC17E300C5634C /* images.png */,
+				B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */,
 				B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */,
 				B28E066722C3A2670035A40F /* icons8-help-100.png */,
 				B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */,
@@ -478,6 +495,7 @@
 				B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */,
 				B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */,
 				B227D08622BBD87600AA0634 /* 3844408-48.png in Resources */,
+				B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
@@ -500,6 +518,7 @@
 				B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */,
 				B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */,
 				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
+				B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */,
 				B227D08722BBD87600AA0634 /* cofc-red.jpg in Resources */,
 				B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */,
 				B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */,
@@ -578,6 +597,7 @@
 				B27609FF22CA4FD400A122F7 /* user.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
 				B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */,
+				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				B227D09E22BBD92F00AA0634 /* UIView.swift in Sources */,
 				B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */,
