@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         //Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -185,9 +185,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["MailingState"] = self.stateTextField.text
         record["MailingPostalCode"] = self.zipTextField.text
         record["TargetX_SRMb__Graduation_Year__c"] = self.graduationYearTextField.text
-        record["TargetX_SRMb__Ethnicity__c"] = self.ethnicOriginTextField.text
+        //record["TargetX_SRMb__IPEDS_Ethnicities__c"] = self.ethnicOriginTextField.text
         record["Email"] = self.emailTextField.text
-        record["School_Company_name__c"] = self.highSchoolTextField.text
+       // record["AccountId"] = "001S00000105zkuIAA"
         
         print(record)
         
@@ -195,7 +195,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
         let userRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking: \(userRequest)")
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
         }) { [weak self] (response, urlResponse) in
             let userAccountJSON = JSON(response!)
             let userAccountID = userAccountJSON["user_id"].stringValue
@@ -204,15 +204,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
             RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
-                SalesforceLogger.d(type(of:self!), message:"Error invoking: \(userRequest)")
+                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
                
             
-            
+            //the error may be with the contactID request
       
-        
+        print("Creating upsert request")
         //Creates the upsert request.
         let upsertRequest = RestClient.shared.requestForUpsert(withObjectType: "Contact", externalIdField: "Id", externalId: contactAccountID, fields: record)
         
@@ -221,7 +221,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         //Sends the upsert request
         RestClient.shared.send(request: upsertRequest, onFailure: { (error, URLResponse) in
-             SalesforceLogger.d(type(of:self!), message:"Error invoking: \(upsertRequest)")
+            SalesforceLogger.d(type(of:self!), message:"Error invoking while sending upsert request: \(upsertRequest), error: \(error)")
         }){(response, URLResponse) in
             os_log("\nSuccessful response received")
         }
