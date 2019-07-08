@@ -35,6 +35,8 @@
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
+		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
+		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B24F998022CCEF4F0024BAC4 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */; };
 		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
 		B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */; };
@@ -114,6 +116,8 @@
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
+		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
+		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDataSource.swift; path = ../UserDataSource.swift; sourceTree = "<group>"; };
 		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Org Unit.png"; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */,
 				78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +224,7 @@
 		6B868AEB1ACA7FCA4636C7F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2358DDB22D3A7F800E00348 /* MapKit.framework */,
 				82A29C75280BDF73123F14B4 /* Pods_clyde.framework */,
 			);
 			name = Frameworks;
@@ -404,6 +410,7 @@
 				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
 				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
 				B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */,
+				B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */,
 				B227D08022BBD87600AA0634 /* icons8-User Manual.png */,
 				B227D08222BBD87600AA0634 /* icons8-Vertical Settings Mixer.png */,
 			);
@@ -466,6 +473,9 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -521,6 +531,7 @@
 				B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */,
 				B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */,
 				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
+				B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */,
 				B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */,
 				B227D08722BBD87600AA0634 /* cofc-red.jpg in Resources */,
 				B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */,

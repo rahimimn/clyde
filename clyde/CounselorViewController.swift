@@ -18,7 +18,8 @@ class CounselorViewController: UIViewController {
     var id: String = ""
     var studentID: String = ""
     
-    @IBOutlet weak var counselorImage: UIView!
+   
+    @IBOutlet weak var counselorImage: UIImageView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var counselorName: UILabel!
     @IBOutlet weak var aboutMeText: UITextView!
@@ -60,7 +61,7 @@ class CounselorViewController: UIViewController {
                     
                     
                     //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name FROM User WHERE Id = '\(counselorId)'")
+                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name, FullPhotoUrl FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
@@ -69,6 +70,7 @@ class CounselorViewController: UIViewController {
                         let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
+                        let counselorImage = counselorInfoJSON["records"][0]["FullImageUrl"].string
                 
                 DispatchQueue.main.async {
                     self!.aboutMeText.text = counselorAbout

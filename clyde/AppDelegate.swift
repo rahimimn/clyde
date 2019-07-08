@@ -43,7 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.setupRootViewController()
             }
         })
-        
+    }
+    
+    func handleSdkManagerLogout(){
         
     }
     
