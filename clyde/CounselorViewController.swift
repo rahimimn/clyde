@@ -71,7 +71,7 @@ class CounselorViewController: UIViewController {
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
                         let counselorImage = counselorInfoJSON["records"][0]["FullImageUrl"].string
-                
+                print(counselorImage)
                 DispatchQueue.main.async {
                     self!.aboutMeText.text = counselorAbout
                     self!.name = counselorName

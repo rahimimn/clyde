@@ -38,12 +38,12 @@ class ResourcesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return 16
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //CHANGE THESE
-        let urlArray = ["https://www.cofc.edu/", "https://charleston.campusdish.com/","http://housing.cofc.edu/residence-halls/","http://parkingservices.cofc.edu/","http://finaid.cofc.edu/students/incoming-freshmen/index.php","https://www.youvisit.com/tour/cofc/140487?pl=v&m_prompt=1","http://cofc.edu/athletics/","https://www.mapdevelopers.com/distance_from_to.php","http://greeks.cofc.edu/","http://honors.cofc.edu/admission/"]
+        let urlArray = ["http://cofc.edu/","http://cofc.edu/athletics/","http://volunteer.cofc.edu/","http://disabilityservices.cofc.edu/","https://tunein.com/radio/CisternYard-Radio-s208531/","https://cofc.campuslabs.com/engage/organizations", "https://charleston.campusdish.com/","http://finaid.cofc.edu/students/incoming-freshmen/index.php","http://greeks.cofc.edu/","https://www.youvisit.com/tour/cofc/140487?pl=v&m_prompt=1","http://honors.cofc.edu/admission/","http://www.cofc.edu/campuslife/lifeincharleston/index.php","http://parkingservices.cofc.edu/","http://reslife.cofc.edu/","http://finaid.cofc.edu/types-of-financial-aid/scholarships/","http://housing.cofc.edu/residence-halls/"]
         
         let urlString = urlArray[indexPath.row]
         show(urlString)
