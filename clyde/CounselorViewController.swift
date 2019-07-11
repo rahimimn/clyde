@@ -24,9 +24,13 @@ class CounselorViewController: UIViewController {
     @IBOutlet weak var counselorName: UILabel!
     @IBOutlet weak var aboutMeText: UITextView!
     @IBOutlet weak var counselorEmail: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var contactLabel: UILabel!
     
     
     //TO-DO: pull counselor information based on user, and then present name, contact email, and about me.
+    
+   
     
     func pullInformation(){
         
@@ -70,13 +74,20 @@ class CounselorViewController: UIViewController {
                         let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
-                        let counselorImage = counselorInfoJSON["records"][0]["FullImageUrl"].string
-                print(counselorImage)
+                        var counselorImageUrl = counselorInfoJSON["records"][0]["FullPhotoUrl"].stringValue
+                        counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "\"", with: "")
+                        counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "/clydeTest", with: "")
+                        counselorImageUrl = "https://c.cs1.content.force.com\(counselorImageUrl)"
+                        let url = URL(string: counselorImageUrl)!
+                print("This is the image url \(url)")
+                
                 DispatchQueue.main.async {
                     self!.aboutMeText.text = counselorAbout
                     self!.name = counselorName
                     self!.counselorName.text = counselorName
                     self!.counselorEmail.text = counselorEmail
+                    self!.contactLabel.text = "Contact Information"
+                    self!.aboutLabel.text = "About"
                 }//dispatch
                     }//counselor info
                 }//counselor id
@@ -88,7 +99,8 @@ class CounselorViewController: UIViewController {
     override func viewDidLoad() {
         self.pullInformation()
         super.viewDidLoad()
-        
+
+    
         //reveals menu
         if revealViewController() != nil {
             menuBarButton.target = self.revealViewController()
@@ -99,5 +111,5 @@ class CounselorViewController: UIViewController {
         
         
     }
-}
 
+}

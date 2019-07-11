@@ -37,7 +37,11 @@
 		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
 		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
+		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
+		B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B23C492422D3D9F800A88C48 /* cistern.jpg */; };
 		B24F998022CCEF4F0024BAC4 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */; };
+		B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */; };
+		B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */; };
 		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
 		B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */; };
 		B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */; };
@@ -118,7 +122,11 @@
 		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
 		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
+		B23C492422D3D9F800A88C48 /* cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cistern.jpg; sourceTree = "<group>"; };
 		B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDataSource.swift; path = ../UserDataSource.swift; sourceTree = "<group>"; };
+		B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableViewController.swift; sourceTree = "<group>"; };
+		B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
 		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Org Unit.png"; sourceTree = "<group>"; };
 		B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C19FFC22BD411200C5634C /* CheckInViewController.swift */,
+				B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */,
 			);
 			name = "Check-In";
 			sourceTree = "<group>";
@@ -368,7 +377,9 @@
 		B2C1A02222C27B1000C5634C /* College of Charleston Photos */ = {
 			isa = PBXGroup;
 			children = (
+				B23C492422D3D9F800A88C48 /* cistern.jpg */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
+				B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */,
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
 				B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */,
@@ -413,6 +424,7 @@
 				B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */,
 				B227D08022BBD87600AA0634 /* icons8-User Manual.png */,
 				B227D08222BBD87600AA0634 /* icons8-Vertical Settings Mixer.png */,
+				B23C492222D3D75500A88C48 /* cal.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -506,10 +518,13 @@
 			files = (
 				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
 				B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */,
+				B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */,
 				B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */,
 				B227D08622BBD87600AA0634 /* 3844408-48.png in Resources */,
 				B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */,
+				B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
+				B23C492322D3D75600A88C48 /* cal.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
 				B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */,
@@ -629,6 +644,7 @@
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B24F998022CCEF4F0024BAC4 /* UserDataSource.swift in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
+				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
 				B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

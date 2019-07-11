@@ -14,6 +14,8 @@ class CheckInViewController: UIViewController {
     
     
     
+
+
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
  
     @IBOutlet weak var qrView: UIImageView!

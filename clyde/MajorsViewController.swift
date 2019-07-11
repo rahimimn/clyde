@@ -15,6 +15,8 @@ import UIKit
 
 class MajorsViewController: UIViewController {
 
+
+    
     @IBOutlet weak var majorImage: UIImageView!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var majorDescription: UITextView!
@@ -35,7 +37,5 @@ class MajorsViewController: UIViewController {
         }
     }
     
-    func setObjects(){
-       
-    }
+
 }

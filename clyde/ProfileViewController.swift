@@ -16,7 +16,7 @@ import CoreLocation
 
 
 /// Class for the Profile view
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate{
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,8 +31,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Outlet for user's profile picture image view
     @IBOutlet weak var profileImageView: UIImageView!
     
-    // Outlet for the user's name label
+    // Outlets for "Your Information"
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var addressText: UITextView!
+    @IBOutlet weak var birthdateText: UILabel!
+    @IBOutlet weak var emailText: UILabel!
+    @IBOutlet weak var schoolText: UILabel!
+    @IBOutlet weak var graduationText: UILabel!
+    @IBOutlet weak var ethnicText: UILabel!
+    
+    
+
+    
+    
     
     // Private variables for map
     private var locationManager = CLLocationManager()
@@ -58,25 +69,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
        
         
-        
-        //Map
+        // MAP
         profileMap.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        profileMap.showsUserLocation = true
+        profileMap.showsUserLocation = false
         profileMap.layoutMargins = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
-
+        
         
         guard let currentLocation = locationManager.location else{
             return
         }
         
-      
+        
         let cofcLocation = CLLocationCoordinate2D(latitude: 32.783830198, longitude: -79.936162922)
         let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
-       
+        
         let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
         let cofcPlacemark = MKPlacemark(coordinate: cofcLocation, addressDictionary: nil)
         
@@ -105,22 +115,73 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         let calculateDirections = MKDirections(request: directionsRequest)
         
-        calculateDirections.calculate { [unowned self] response, error in
+        calculateDirections.calculate { [weak self] response, error in
             guard let unwrappedResponse = response else { return }
             
             for route in unwrappedResponse.routes {
-                self.profileMap.addOverlay(route.polyline)
-                self.profileMap.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self?.profileMap.addOverlay(route.polyline)
+                self?.profileMap.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
         }
         
-     
+        
         let cofcAddress = CLLocation(latitude: cofcLocation.latitude, longitude: cofcLocation.longitude)
         let distanceInMeters = currentLocation.distance(from:cofcAddress)
         
-        self.distanceText.text = "Miles: \((distanceInMeters/1609.344).rounded().formatForProfile)"
-        print(distanceInMeters)
+        self.distanceText.text = "\((distanceInMeters/1609.344).rounded().formatForProfile) miles"
         
+        
+        
+        
+        
+        //-----------------------------------------------
+        // USER INFORMATION
+        addressText.delegate = self
+        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
+        let userRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
+        }) { [weak self] (response, urlResponse) in
+            let userAccountJSON = JSON(response!)
+            let userAccountID = userAccountJSON["user_id"].stringValue
+            
+            
+            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
+            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
+            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
+                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
+            }) { [weak self] (response, urlResponse) in
+                let contactAccountJSON = JSON(response!)
+                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet,MailingCity,MailingPostalCode,MailingState,Email,Name, Birthdate,TargetX_SRMb__Graduation_Year__c,TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
+                        SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
+                    }) { [weak self] (response, urlResponse) in
+                        let contactInfoJSON = JSON(response!)
+                        
+                        let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
+                        let contactEmail = contactInfoJSON["records"][0]["Email"].string
+                        let contactEthnic = contactInfoJSON["records"][0][ "TargetX_SRMb__IPEDS_Ethnicities__c"].string
+                        let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
+                        let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
+                        let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
+                        let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
+                        let contactName = contactInfoJSON["records"][0]["Name"].stringValue
+                        let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
+                
+                
+                
+                DispatchQueue.main.async {
+                    self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
+                    self?.birthdateText.text = contactBirth
+                    self?.emailText.text = contactEmail
+                    self?.ethnicText.text = contactEthnic
+                    self?.graduationText.text = contactGradYear
+                    self?.userName.text = contactName
+                }
+                }}}
+        
+        //-------------------------------------------------
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -308,9 +369,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
                
-            
-            //the error may be with the contactID request
-      
         print("Creating upsert request")
         //Creates the upsert request.
         let upsertRequest = RestClient.shared.requestForUpsert(withObjectType: "Contact", externalIdField: "Id", externalId: contactAccountID, fields: record)
