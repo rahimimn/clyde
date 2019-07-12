@@ -10,6 +10,7 @@ import UIKit
 import SalesforceSDKCore
 import SwiftyJSON
 
+
 class CounselorViewController: UIViewController {
 
     var name: String = ""
@@ -19,6 +20,7 @@ class CounselorViewController: UIViewController {
     var studentID: String = ""
     
    
+    @IBOutlet var counselorView: UIView!
     @IBOutlet weak var counselorImage: UIImageView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var counselorName: UILabel!
@@ -28,12 +30,36 @@ class CounselorViewController: UIViewController {
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var phoneText: UILabel!
     @IBOutlet weak var header: UIView!
+    @IBOutlet weak var instagramButton: UIButton!
     
-    //TO-DO: pull counselor information based on user, and then present name, contact email, and about me.
     
+    @IBAction func instagram(_ sender: UIButton) {
+        
+        show("https://www.instagram.com/cofcadmissions/")    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.pullInformation()
+        self.menuBar(menuBarItem: menuBarButton)
+        
+        
+    }
    
     
     func pullInformation(){
+        var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
+        loadingIndicator.center = counselorView.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
+        counselorView.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
+        
+        
+        
+        
         
         //get user info
        let userRequest = RestClient.shared.requestForUserInfo()
@@ -79,19 +105,19 @@ class CounselorViewController: UIViewController {
                         var counselorImageUrl = counselorInfoJSON["records"][0]["FullPhotoUrl"].stringValue
                         counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "\"", with: "")
                         counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "/clydeTest", with: "")
-                        counselorImageUrl = "https://c.cs1.content.force.com/servlet/servlet.ImageServer?id=015S0000000x8nd&oid=00DS0000003Eiop&lastMod=1562873682000"  //"https://c.cs1.content.force.com\(counselorImageUrl)"
-                        let url = URL(string: counselorImageUrl)!
                         
-                        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-                            guard let data = data, error == nil else {return}
-                            DispatchQueue.main.async {
-                                self!.counselorImage.image = UIImage(data:data)
-                            }
-                        }
-                        task.resume()
-                print("This is the image url \(url)")
                 
                 DispatchQueue.main.async {
+                    counselorImageUrl = "https://c.cs1.content.force.com/servlet/servlet.ImageServer?id=015S0000000x8nd&oid=00DS0000003Eiop&lastMod=1562873682000"  //"https://c.cs1.content.force.com\(counselorImageUrl)"
+                    let url = URL(string: counselorImageUrl)!
+                    
+                    let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                        guard let data = data, error == nil else {return}
+                        DispatchQueue.main.async {
+                            self!.counselorImage.image = UIImage(data:data)
+                        }
+                    }
+                    task.resume()
                     self!.aboutMeText.text = counselorAbout
                     self!.name = counselorName
                     self!.counselorName.text = counselorName
@@ -100,6 +126,8 @@ class CounselorViewController: UIViewController {
                     self!.contactLabel.text = "Contact Information"
                     self!.aboutLabel.text = "About"
                     self!.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    self!.instagramButton.setTitle("@cofcadmissions", for: .normal)
+                    loadingIndicator.stopAnimating()
                     
                 }//dispatch
                     }//counselor info
@@ -108,13 +136,18 @@ class CounselorViewController: UIViewController {
     }//user
     }
             
+
+    func show(_ url: String) {
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
             
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.pullInformation()
-        self.menuBar(menuBarItem: menuBarButton)
-        
-        
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
     }
+
+
+
 
 }

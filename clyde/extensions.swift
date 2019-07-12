@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SafariServices
 
 /// Extension for Double that removes the remainder
 extension Double {

@@ -76,6 +76,7 @@
 		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
 		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
+		B2D8013F22D8FC430050E376 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013E22D8FC430050E376 /* instagram.png */; };
 		B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -159,6 +160,7 @@
 		B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Installing Updates.png"; sourceTree = "<group>"; };
 		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		B2D8013C22D8F9230050E376 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		B2D8013E22D8FC430050E376 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
 		B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
 		CEA8CA031F071B2300448B51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -418,6 +420,7 @@
 				B227D07D22BBD87600AA0634 /* 3844408-48.png */,
 				B2C1A02622C27B8B00C5634C /* three-dots.png */,
 				B2C19FF322BC17E300C5634C /* images.png */,
+				B2D8013E22D8FC430050E376 /* instagram.png */,
 				B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */,
 				B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */,
 				B28E066722C3A2670035A40F /* icons8-help-100.png */,
@@ -543,6 +546,7 @@
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
+				B2D8013F22D8FC430050E376 /* instagram.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
 				B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */,
