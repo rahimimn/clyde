@@ -26,7 +26,8 @@ class CounselorViewController: UIViewController {
     @IBOutlet weak var counselorEmail: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
-    
+    @IBOutlet weak var phoneText: UILabel!
+    @IBOutlet weak var header: UIView!
     
     //TO-DO: pull counselor information based on user, and then present name, contact email, and about me.
     
@@ -65,7 +66,7 @@ class CounselorViewController: UIViewController {
                     
                     
                     //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name, FullPhotoUrl FROM User WHERE Id = '\(counselorId)'")
+                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,FullPhotoUrl FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
@@ -74,20 +75,32 @@ class CounselorViewController: UIViewController {
                         let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
+                        let counselorPhone = counselorInfoJSON["records"][0]["Phone"].stringValue
                         var counselorImageUrl = counselorInfoJSON["records"][0]["FullPhotoUrl"].stringValue
                         counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "\"", with: "")
                         counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "/clydeTest", with: "")
-                        counselorImageUrl = "https://c.cs1.content.force.com\(counselorImageUrl)"
+                        counselorImageUrl = "https://c.cs1.content.force.com/servlet/servlet.ImageServer?id=015S0000000x8nd&oid=00DS0000003Eiop&lastMod=1562873682000"  //"https://c.cs1.content.force.com\(counselorImageUrl)"
                         let url = URL(string: counselorImageUrl)!
+                        
+                        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                            guard let data = data, error == nil else {return}
+                            DispatchQueue.main.async {
+                                self!.counselorImage.image = UIImage(data:data)
+                            }
+                        }
+                        task.resume()
                 print("This is the image url \(url)")
                 
                 DispatchQueue.main.async {
                     self!.aboutMeText.text = counselorAbout
                     self!.name = counselorName
                     self!.counselorName.text = counselorName
-                    self!.counselorEmail.text = counselorEmail
+                    self!.counselorEmail.text = "Email: \(counselorEmail)"
+                    self!.phoneText.text = "Phone: \(counselorPhone)"
                     self!.contactLabel.text = "Contact Information"
                     self!.aboutLabel.text = "About"
+                    self!.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    
                 }//dispatch
                     }//counselor info
                 }//counselor id
@@ -97,17 +110,9 @@ class CounselorViewController: UIViewController {
             
             
     override func viewDidLoad() {
-        self.pullInformation()
         super.viewDidLoad()
-
-    
-        //reveals menu
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+        self.pullInformation()
+        self.menuBar(menuBarItem: menuBarButton)
         
         
     }

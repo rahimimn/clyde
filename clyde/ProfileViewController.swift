@@ -64,11 +64,81 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return polylineRenderer
     }
     
+    
+
+    
     /// Loads the profile view
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.createMap()
+        self.menuBar(menuBarItem: menuBarButton)
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
+      
+        //-----------------------------------------------
+        // USER INFORMATION
+        addressText.delegate = self
+        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
+        let userRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
+        }) { [weak self] (response, urlResponse) in
+            let userAccountJSON = JSON(response!)
+            let userAccountID = userAccountJSON["user_id"].stringValue
+            
+            
+            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
+            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
+            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
+                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
+            }) { [weak self] (response, urlResponse) in
+                let contactAccountJSON = JSON(response!)
+                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet,MailingCity,MailingPostalCode,MailingState,Email,Name, Birthdate,TargetX_SRMb__Graduation_Year__c,TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
+                        SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
+                    }) { [weak self] (response, urlResponse) in
+                        let contactInfoJSON = JSON(response!)
+                        
+                        let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
+                        let contactEmail = contactInfoJSON["records"][0]["Email"].string
+                        let contactEthnic = contactInfoJSON["records"][0][ "TargetX_SRMb__IPEDS_Ethnicities__c"].string
+                        let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
+                        let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
+                        let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
+                        let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
+                        let contactName = contactInfoJSON["records"][0]["Name"].stringValue
+                        let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
+                
+                
+                
+                DispatchQueue.main.async {
+                    self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
+                    self?.birthdateText.text = contactBirth
+                    self?.emailText.text = contactEmail
+                    self?.ethnicText.text = contactEthnic
+                    self?.graduationText.text = contactGradYear
+                    self?.userName.text = contactName
+                }
+                }}}
         
+        //-------------------------------------------------
+        // Sets the image style
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        self.profileImageView.clipsToBounds = true;
+        self.profileImageView.layer.borderWidth = 3
+        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.profileImageView.layer.cornerRadius = 10
+        
+        
+        
+    }
+    
+    
+    /// Function that adds the map to the view and calculates the distance between the user and college of charleston
+    func createMap(){
         // MAP
         profileMap.delegate = self
         locationManager.delegate = self
@@ -134,77 +204,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         
         
-        //-----------------------------------------------
-        // USER INFORMATION
-        addressText.delegate = self
-        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
-        let userRequest = RestClient.shared.requestForUserInfo()
-        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
-        }) { [weak self] (response, urlResponse) in
-            let userAccountJSON = JSON(response!)
-            let userAccountID = userAccountJSON["user_id"].stringValue
-            
-            
-            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
-            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
-            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
-                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
-            }) { [weak self] (response, urlResponse) in
-                let contactAccountJSON = JSON(response!)
-                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet,MailingCity,MailingPostalCode,MailingState,Email,Name, Birthdate,TargetX_SRMb__Graduation_Year__c,TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
-                    RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
-                        SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
-                    }) { [weak self] (response, urlResponse) in
-                        let contactInfoJSON = JSON(response!)
-                        
-                        let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
-                        let contactEmail = contactInfoJSON["records"][0]["Email"].string
-                        let contactEthnic = contactInfoJSON["records"][0][ "TargetX_SRMb__IPEDS_Ethnicities__c"].string
-                        let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
-                        let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
-                        let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
-                        let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
-                        let contactName = contactInfoJSON["records"][0]["Name"].stringValue
-                        let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
-                
-                
-                
-                DispatchQueue.main.async {
-                    self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
-                    self?.birthdateText.text = contactBirth
-                    self?.emailText.text = contactEmail
-                    self?.ethnicText.text = contactEthnic
-                    self?.graduationText.text = contactGradYear
-                    self?.userName.text = contactName
-                }
-                }}}
-        
-        //-------------------------------------------------
-        // Sets the image style
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-        self.profileImageView.clipsToBounds = true;
-        self.profileImageView.layer.borderWidth = 3
-        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.profileImageView.layer.cornerRadius = 10
-        
-        
-        // Reveals the menu when the menu button is pressed.
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
     }
 }
 
-
-extension Double {
-    var formatForProfile: String {
-        return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
-    }
-}
 
 /// Class for the Edit Profile View
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate{
@@ -324,15 +326,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         // Calls showDatePicker
         showDatePicker()
-        
-        
-        // Reveals the menu when the menu button is tapped.
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+        menuBar(menuBarItem: menuBarButton)
+    
     }
     
     /// Fucntion that sends data into Salesforce, this will need to be edited at some point

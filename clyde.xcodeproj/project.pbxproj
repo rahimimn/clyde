@@ -24,7 +24,6 @@
 		B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09722BBD92F00AA0634 /* RestClient + Student.swift */; };
 		B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09822BBD92F00AA0634 /* SignUpExtension.swift */; };
 		B227D09D22BBD92F00AA0634 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09922BBD92F00AA0634 /* SignUpViewController.swift */; };
-		B227D09E22BBD92F00AA0634 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09A22BBD92F00AA0634 /* UIView.swift */; };
 		B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */; };
 		B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A022BBD93A00AA0634 /* LogInViewController.swift */; };
 		B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A322BBD94400AA0634 /* ViewController.swift */; };
@@ -73,6 +72,10 @@
 		B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */; };
 		B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */; };
 		B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03922C395DA00C5634C /* accounting.jpg */; };
+		B2D8013622D78D0D0050E376 /* F.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013522D78D0D0050E376 /* F.png */; };
+		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
+		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
+		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
 		B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -108,7 +111,6 @@
 		B227D09722BBD92F00AA0634 /* RestClient + Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RestClient + Student.swift"; sourceTree = "<group>"; };
 		B227D09822BBD92F00AA0634 /* SignUpExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
 		B227D09922BBD92F00AA0634 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B227D09A22BBD92F00AA0634 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInDataSource.swift; sourceTree = "<group>"; };
 		B227D0A022BBD93A00AA0634 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B227D0A322BBD94400AA0634 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,10 @@
 		B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern-profile.jpg"; sourceTree = "<group>"; };
 		B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cisternyard_splash.jpg; sourceTree = "<group>"; };
 		B2C1A03922C395DA00C5634C /* accounting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = accounting.jpg; sourceTree = "<group>"; };
+		B2D8013522D78D0D0050E376 /* F.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F.png; sourceTree = "<group>"; };
+		B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Installing Updates.png"; sourceTree = "<group>"; };
+		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
+		B2D8013C22D8F9230050E376 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
 		CEA8CA031F071B2300448B51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -196,6 +202,7 @@
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
+				B2D8013C22D8F9230050E376 /* extensions.swift */,
 				B227D09622BBD91B00AA0634 /* Sign In */,
 				B227D09522BBD90D00AA0634 /* Log In */,
 				B227D09422BBD90400AA0634 /* Sign Up */,
@@ -205,6 +212,7 @@
 				B227D0AC22BBE5E900AA0634 /* Counselor */,
 				B227D0AD22BBEABD00AA0634 /* Events */,
 				B2C19FFB22BD40DF00C5634C /* Check-In */,
+				B2D8013922D7A8010050E376 /* Games */,
 				B227D0B622BBEC0600AA0634 /* Questions */,
 				B2760A0222CA947100A122F7 /* Resources */,
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
@@ -286,7 +294,6 @@
 			children = (
 				B227D09822BBD92F00AA0634 /* SignUpExtension.swift */,
 				B227D09922BBD92F00AA0634 /* SignUpViewController.swift */,
-				B227D09A22BBD92F00AA0634 /* UIView.swift */,
 			);
 			name = "Sign Up";
 			sourceTree = "<group>";
@@ -378,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				B23C492422D3D9F800A88C48 /* cistern.jpg */,
+				B2D8013522D78D0D0050E376 /* F.png */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
 				B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */,
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
@@ -420,6 +428,7 @@
 				B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */,
 				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
 				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
+				B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */,
 				B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */,
 				B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */,
 				B227D08022BBD87600AA0634 /* icons8-User Manual.png */,
@@ -435,6 +444,14 @@
 				B2C1A03922C395DA00C5634C /* accounting.jpg */,
 			);
 			name = Majors;
+			sourceTree = "<group>";
+		};
+		B2D8013922D7A8010050E376 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				B2D8013A22D7A8250050E376 /* GamesViewController.swift */,
+			);
+			name = Games;
 			sourceTree = "<group>";
 		};
 		DDFDDF0A29E4BDD114B51BBC /* Pods */ = {
@@ -524,6 +541,7 @@
 				B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */,
 				B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
+				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
@@ -543,6 +561,7 @@
 				B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */,
 				B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */,
 				B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */,
+				B2D8013622D78D0D0050E376 /* F.png in Resources */,
 				B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */,
 				B28E066622C3A1EF0035A40F /* icons8-close-window-100.png in Resources */,
 				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
@@ -627,8 +646,8 @@
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
 				B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */,
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,
+				B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
-				B227D09E22BBD92F00AA0634 /* UIView.swift in Sources */,
 				B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
 				B227D09D22BBD92F00AA0634 /* SignUpViewController.swift in Sources */,
@@ -637,6 +656,7 @@
 				B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
+				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
 				B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */,
 				B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,

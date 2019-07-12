@@ -53,8 +53,21 @@
 	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
 	<key>SFDCOAuthLoginHost</key>
 	<string>mrdev-cofcharleston.cs1.force.com/clydeTest</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>admissions.cofc.edu</key>
+			<string></string>
+			<key>cofc.edu</key>
+			<string></string>
+		</dict>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string></string>
 		<string>acaslonpro-regular.otf</string>
 		<string>acaslonpro-bold.otf</string>
 		<string>acaslonpro-bolditalic.otf</string>

@@ -19,22 +19,10 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //reveals menu
-        if revealViewController() != nil {
-            menuBarItem.target = self.revealViewController()
-            menuBarItem.action = #selector(SWRevealViewController().revealToggle(_:))
-            self.revealViewController()?.rearViewRevealWidth = 350
-            
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
-        
-        
-        
-            
-            
-
+        self.menuBar(menuBarItem: menuBarItem)
         
     }
+    
     //Homepage news button articles. These will eventually have to be replaced to allow automation.
     @IBAction func clickFirst(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/24/beat-the-heat-public-health-heat-related-illness/")}
