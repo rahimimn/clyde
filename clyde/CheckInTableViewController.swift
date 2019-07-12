@@ -17,12 +17,7 @@ class CheckInTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
-        // Reveals the menu when the menu button is pressed.
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+        self.menuBar(menuBarItem: menuBarButton)
     }
 
     // MARK: - Table view data source

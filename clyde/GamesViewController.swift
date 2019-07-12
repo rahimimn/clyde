@@ -13,11 +13,7 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+        self.menuBar(menuBarItem: menuBarButton)
         // Do any additional setup after loading the view.
     }
     

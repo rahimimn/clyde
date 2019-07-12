@@ -16,11 +16,7 @@ class ResourcesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+        self.menuBar(menuBarItem: menuBarButton)
     }
     
     

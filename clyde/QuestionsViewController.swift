@@ -17,10 +17,6 @@ class QuestionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //reveals menu
-        if revealViewController() != nil {
-            menuBarButton.target = self.revealViewController()
-            menuBarButton.action = #selector(SWRevealViewController().revealToggle(_:))
-             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
-        }
+       self.menuBar(menuBarItem: menuBarButton)
     }
 }
