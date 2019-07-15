@@ -21,11 +21,6 @@
 		B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D08122BBD87600AA0634 /* icons8-FAQ.png */; };
 		B227D08B22BBD87600AA0634 /* icons8-Vertical Settings Mixer.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D08222BBD87600AA0634 /* icons8-Vertical Settings Mixer.png */; };
 		B227D08C22BBD87600AA0634 /* icons8-Online Support.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D08322BBD87600AA0634 /* icons8-Online Support.png */; };
-		B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09722BBD92F00AA0634 /* RestClient + Student.swift */; };
-		B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09822BBD92F00AA0634 /* SignUpExtension.swift */; };
-		B227D09D22BBD92F00AA0634 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09922BBD92F00AA0634 /* SignUpViewController.swift */; };
-		B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */; };
-		B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A022BBD93A00AA0634 /* LogInViewController.swift */; };
 		B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A322BBD94400AA0634 /* ViewController.swift */; };
 		B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A522BBD94400AA0634 /* SWRevealViewController.m */; };
 		B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0A622BBD94500AA0634 /* SlideInTableViewController.swift */; };
@@ -109,11 +104,6 @@
 		B227D09022BBD8BB00AA0634 /* acaslonpro-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "acaslonpro-italic.otf"; sourceTree = "<group>"; };
 		B227D09122BBD8BB00AA0634 /* acaslonpro-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "acaslonpro-bold.otf"; sourceTree = "<group>"; };
 		B227D09222BBD8BB00AA0634 /* acaslonpro-bolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "acaslonpro-bolditalic.otf"; sourceTree = "<group>"; };
-		B227D09722BBD92F00AA0634 /* RestClient + Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RestClient + Student.swift"; sourceTree = "<group>"; };
-		B227D09822BBD92F00AA0634 /* SignUpExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
-		B227D09922BBD92F00AA0634 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInDataSource.swift; sourceTree = "<group>"; };
-		B227D0A022BBD93A00AA0634 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B227D0A322BBD94400AA0634 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B227D0A422BBD94400AA0634 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		B227D0A522BBD94400AA0634 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -205,9 +195,6 @@
 				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
-				B227D09622BBD91B00AA0634 /* Sign In */,
-				B227D09522BBD90D00AA0634 /* Log In */,
-				B227D09422BBD90400AA0634 /* Sign Up */,
 				B2C1A01522C24FF700C5634C /* Homepage */,
 				B227D0B022BBEAF200AA0634 /* Profile */,
 				B227D0B322BBEB8200AA0634 /* Majors */,
@@ -289,32 +276,6 @@
 				B227D0A522BBD94400AA0634 /* SWRevealViewController.m */,
 			);
 			name = "Menu Bar";
-			sourceTree = "<group>";
-		};
-		B227D09422BBD90400AA0634 /* Sign Up */ = {
-			isa = PBXGroup;
-			children = (
-				B227D09822BBD92F00AA0634 /* SignUpExtension.swift */,
-				B227D09922BBD92F00AA0634 /* SignUpViewController.swift */,
-			);
-			name = "Sign Up";
-			sourceTree = "<group>";
-		};
-		B227D09522BBD90D00AA0634 /* Log In */ = {
-			isa = PBXGroup;
-			children = (
-				B227D09722BBD92F00AA0634 /* RestClient + Student.swift */,
-				B227D09F22BBD93A00AA0634 /* LogInDataSource.swift */,
-				B227D0A022BBD93A00AA0634 /* LogInViewController.swift */,
-			);
-			name = "Log In";
-			sourceTree = "<group>";
-		};
-		B227D09622BBD91B00AA0634 /* Sign In */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Sign In";
 			sourceTree = "<group>";
 		};
 		B227D0AC22BBE5E900AA0634 /* Counselor */ = {
@@ -514,10 +475,9 @@
 			};
 			buildConfigurationList = 4FD6C46F1B754AF1002F9F90 /* Build configuration list for PBXProject "clyde" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -652,17 +612,12 @@
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,
 				B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
-				B227D0A122BBD93A00AA0634 /* LogInDataSource.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
-				B227D09D22BBD92F00AA0634 /* SignUpViewController.swift in Sources */,
 				B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */,
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
-				B227D09C22BBD92F00AA0634 /* SignUpExtension.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
-				B227D09B22BBD92F00AA0634 /* RestClient + Student.swift in Sources */,
-				B227D0A222BBD93A00AA0634 /* LogInViewController.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,

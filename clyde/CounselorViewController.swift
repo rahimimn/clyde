@@ -9,9 +9,10 @@
 import UIKit
 import SalesforceSDKCore
 import SwiftyJSON
+import MessageUI
 
 
-class CounselorViewController: UIViewController {
+class CounselorViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
     var name: String = ""
     var about: String = ""
@@ -25,13 +26,44 @@ class CounselorViewController: UIViewController {
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var counselorName: UILabel!
     @IBOutlet weak var aboutMeText: UITextView!
-    @IBOutlet weak var counselorEmail: UILabel!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
-    @IBOutlet weak var phoneText: UILabel!
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var instagramButton: UIButton!
+    @IBOutlet weak var counselorEmail: UIButton!
+    @IBOutlet weak var phoneText: UIButton!
     
+    @IBAction func phone(_ sender: UIButton) {
+        if  let phone = phoneText.titleLabel?.text{
+            if let url = URL(string: "tel://\(phone.digitsOnly())"),
+                UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler:nil)
+                } else {
+                    UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+                }
+            } else {
+                print("This is not a valid number.")
+            }
+        }
+    }
+    
+    @IBAction func email(_ sender: UIButton) {
+        if let email = counselorEmail.titleLabel?.text{
+            let subject = "Question Sent From Clyde Club"
+            let body = "Hi!"
+            let to = [email]
+            let mailView: MFMailComposeViewController = MFMailComposeViewController()
+            mailView.mailComposeDelegate = self
+            mailView.setSubject(subject)
+            mailView.setMessageBody(body, isHTML: false)
+            mailView.setToRecipients(to)
+            
+            self.present(mailView, animated: true, completion: nil)
+
+        }
+        
+    }
     
     @IBAction func instagram(_ sender: UIButton) {
         
@@ -46,6 +78,21 @@ class CounselorViewController: UIViewController {
         
     }
    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result.rawValue {
+        case MFMailComposeResult.cancelled.rawValue:
+            print("Cancelled")
+        case MFMailComposeResult.saved.rawValue:
+            print("Saved")
+        case MFMailComposeResult.sent.rawValue:
+            print("Sent")
+        case MFMailComposeResult.failed.rawValue:
+            print("Error: \(String(describing: error?.localizedDescription))")
+        default:
+            break
+        }
+        controller.dismiss(animated: true, completion: nil)
+    }
     
     func pullInformation(){
         var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -115,18 +162,24 @@ class CounselorViewController: UIViewController {
                         guard let data = data, error == nil else {return}
                         DispatchQueue.main.async {
                             self!.counselorImage.image = UIImage(data:data)
+                            
                         }
                     }
                     task.resume()
+                    self!.counselorImage.layer.cornerRadius = 15
                     self!.aboutMeText.text = counselorAbout
+                    self!.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    self!.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                     self!.name = counselorName
                     self!.counselorName.text = counselorName
-                    self!.counselorEmail.text = "Email: \(counselorEmail)"
-                    self!.phoneText.text = "Phone: \(counselorPhone)"
+                    self!.counselorEmail.setTitle("cofcadmissions@cofc.edu", for: .normal)
+                         //"Email: \(counselorEmail)"
+                    self!.phoneText.setTitle("843-343-8884", for: .normal) //"Phone: \(counselorPhone)"
                     self!.contactLabel.text = "Contact Information"
                     self!.aboutLabel.text = "About"
                     self!.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-                    self!.instagramButton.setTitle("@cofcadmissions", for: .normal)
+                self!.instagramButton.setTitle("@cofcadmissions", for: .normal)
+                    self!.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
                     loadingIndicator.stopAnimating()
                     
                 }//dispatch
