@@ -166,7 +166,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                         }
                     }
                     task.resume()
-                    self!.counselorImage.layer.cornerRadius = 15
                     self!.aboutMeText.text = counselorAbout
                     self!.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                     self!.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
