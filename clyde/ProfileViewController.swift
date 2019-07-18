@@ -37,9 +37,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var birthdateText: UILabel!
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var schoolText: UILabel!
-    @IBOutlet weak var graduationText: UILabel!
+    @IBOutlet weak var anticipatedStartText: UILabel!
     @IBOutlet weak var ethnicText: UILabel!
-    
+    @IBOutlet weak var genderText: UILabel!
+    @IBOutlet weak var genderIdentityText: UILabel!
+    @IBOutlet weak var mobileText: UILabel!
+    @IBOutlet weak var studentTypeText: UILabel!
+    @IBOutlet weak var honersCollegeInterestText: UILabel!
+    @IBOutlet weak var mobileOptInText: UILabel!
     
 
     
@@ -96,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet,MailingCity,MailingPostalCode,MailingState,Email,Name, Birthdate,TargetX_SRMb__Graduation_Year__c,TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, smagicinteract__SMSOptOut__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
                     RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
@@ -111,16 +116,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
                         let contactName = contactInfoJSON["records"][0]["Name"].stringValue
                         let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
-                
-                
+                        let cell = contactInfoJSON["records"][0]["MobilePhone"].stringValue
+                        let gender = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
+                        let genderID = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
+                        let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
                 
                 DispatchQueue.main.async {
                     self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
                     self?.birthdateText.text = contactBirth
                     self?.emailText.text = contactEmail
                     self?.ethnicText.text = contactEthnic
-                    self?.graduationText.text = contactGradYear
+                    self?.anticipatedStartText.text = contactGradYear
                     self?.userName.text = contactName
+                    self?.mobileText.text = cell
+                    self?.genderText.text = gender
+                    self?.genderIdentityText.text = genderID
+                    self?.studentTypeText.text = studentType
                 }
                 }}}
         
@@ -209,7 +220,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 
 /// Class for the Edit Profile View
-class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate{
+class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -218,6 +230,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
   // Variables
     
+    //Picker options
+    var genderOptions = ["Female","Male","Other"]
+    var studentTypeOptions = ["Freshman","Transfer"]
+    
+    
+    let genderPicker = UIPickerView()
+    let genderIdentityPicker = UIPickerView()
+    let studentTypePicker = UIPickerView()
     
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -236,7 +256,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var highSchoolTextField: UITextField!
     @IBOutlet weak var graduationYearTextField: UITextField!
     @IBOutlet weak var ethnicOriginTextField: UITextField!
-    
+    @IBOutlet weak var mobileTextField: UITextField!
+    @IBOutlet weak var genderTextField: UITextField!
+    @IBOutlet weak var genderIdentityTextField: UITextField!
+    @IBOutlet weak var studentTypeTextField: UITextField!
     
     
     // Boolean variable to determine whether a new picture was added.
@@ -260,7 +283,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         // Creates the various buttons.
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPicker));
     
         // Sets the buttons.
         toolbar.setItems([doneButton, spaceButton, cancelButton], animated: false)
@@ -277,8 +300,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.view.endEditing(true)
     }
     
-    /// Ends editing of the date picker
-    @objc func cancelDatePicker(){
+    @objc func cancelPicker(){
         self.view.endEditing(true)
     }
     
@@ -294,9 +316,34 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.present(saveAlert, animated: true)
     }
     
+    /// UIPickerView Functions
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if (pickerView == genderIdentityPicker) || (pickerView == genderPicker){
+        return genderOptions.count
+        } else{
+          return studentTypeOptions.count
+        }}
     
-   
-    
+    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if (pickerView == genderIdentityPicker) || (pickerView == genderPicker){
+            return genderOptions[row]
+        } else{
+            return studentTypeOptions[row]
+        }
+    }
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == self.genderIdentityPicker{
+            self.genderIdentityTextField.text = genderOptions[row]
+        }else if pickerView == self.genderPicker{
+        self.genderTextField.text = genderOptions[row]
+        }else{
+            self.studentTypeTextField.text = studentTypeOptions[row]
+        }
+    }
+
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -322,13 +369,40 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         highSchoolTextField.delegate = self
         graduationYearTextField.delegate = self
         ethnicOriginTextField.delegate = self
-        
+        mobileTextField.delegate = self
+ 
         
         // Calls showDatePicker
         showDatePicker()
         menuBar(menuBarItem: menuBarButton)
-    
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        
+        // Gender and Gender Identity pickers
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelPicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([doneButton, spaceButton], animated: false)
+        
+        genderTextField.inputAccessoryView = toolbar
+        
+        genderTextField.inputView = genderPicker
+        genderPicker.delegate = self
+        
+        genderIdentityTextField.inputAccessoryView = toolbar
+        genderIdentityTextField.inputView = genderIdentityPicker
+        genderIdentityPicker.delegate = self
+        
+        
+        studentTypeTextField.inputAccessoryView = toolbar
+        studentTypeTextField.inputView = studentTypePicker
+        studentTypePicker.delegate = self
     }
+    
+    
+
+    
+    
+    
     
     /// Fucntion that sends data into Salesforce, this will need to be edited at some point
     private func upsertInformation(){
@@ -454,4 +528,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
+
 }

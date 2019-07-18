@@ -11,16 +11,17 @@ import SalesforceSDKCore
 import SwiftyJSON
 import MessageUI
 
-
+/// Pulls the user's admission counselor from Salesforce and then presents the data on the view controller.
 class CounselorViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
+    //Variable names
     var name: String = ""
     var about: String = ""
     var email: String = ""
     var id: String = ""
     var studentID: String = ""
     
-   
+   //Outlets for the view controller
     @IBOutlet var counselorView: UIView!
     @IBOutlet weak var counselorImage: UIImageView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -33,6 +34,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     @IBOutlet weak var counselorEmail: UIButton!
     @IBOutlet weak var phoneText: UIButton!
     
+    
+    /// When button is pressed, will take in the counselor's phone number, remove the - and (), and then call the number.
+    /// - Parameter sender: action button
     @IBAction func phone(_ sender: UIButton) {
         if  let phone = phoneText.titleLabel?.text{
             if let url = URL(string: "tel://\(phone.digitsOnly())"),
@@ -48,6 +52,10 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         }
     }
     
+    
+    /// When button is tapped, will email the counselor.
+    ///
+    /// - Parameter sender: action button
     @IBAction func email(_ sender: UIButton) {
         if let email = counselorEmail.titleLabel?.text{
             let subject = "Question Sent From Clyde Club"
@@ -65,11 +73,15 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         
     }
     
+
+    /// Will present a view controller with the Office of Admissions
+    /// Instagram Page after the button is tapped.
+    ///
+    /// - Parameter sender: action button
     @IBAction func instagram(_ sender: UIButton) {
-        
         show("https://www.instagram.com/cofcadmissions/")    }
     
-    
+    /// ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pullInformation()
@@ -78,6 +90,13 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         
     }
    
+    /// Tells the delegate that the user wants to close the mail composition
+    /// view.
+    ///
+    /// - Parameters:
+    ///   - controller: The view controller that manages the mail composition view.
+    ///   - result: The result of the user’s action.
+    ///   - error: Contains an error, if an error occurs.
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result.rawValue {
         case MFMailComposeResult.cancelled.rawValue:
@@ -94,7 +113,12 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         controller.dismiss(animated: true, completion: nil)
     }
     
+    
+    /// Pulls counselor infomation from Salesforce and then presents it.
+    /// Information pulled: Image, Name, About, Email, Phone
     func pullInformation(){
+        
+        // Loading Indicator is created, starts animated before user's information request is sent
         var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
         loadingIndicator.center = counselorView.center
@@ -108,7 +132,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         
         
         
-        //get user info
+        //Gets the user's information from Salesforce using the user's id.
        let userRequest = RestClient.shared.requestForUserInfo()
        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking on user info request: \(userRequest)")
@@ -130,7 +154,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 
                 // Creates a request for the user's counselor id, sends it, and saves json into response, uses SWIFTYJSON to convert needed data
                 let counselorIDRequest = RestClient.shared.request(forQuery: "SELECT OwnerId FROM Contact WHERE Id = '\(contactAccountID)'")
-                
                 RestClient.shared.send(request: counselorIDRequest, onFailure: { (error, urlResponse) in
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor ID Request: \(counselorIDRequest)")
                 }) { [weak self] (response, urlResponse) in
@@ -139,7 +162,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     
                     
                     //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,FullPhotoUrl FROM User WHERE Id = '\(counselorId)'")
+                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,image_url__c FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
@@ -149,13 +172,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
                         let counselorPhone = counselorInfoJSON["records"][0]["Phone"].stringValue
-                        var counselorImageUrl = counselorInfoJSON["records"][0]["FullPhotoUrl"].stringValue
-                        counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "\"", with: "")
-                        counselorImageUrl = counselorImageUrl.replacingOccurrences(of: "/clydeTest", with: "")
-                        
+                        var counselorImageUrl = counselorInfoJSON["records"][0]["image_url__c"].stringValue
                 
                 DispatchQueue.main.async {
-                    counselorImageUrl = "https://c.cs1.content.force.com/servlet/servlet.ImageServer?id=015S0000000x8nd&oid=00DS0000003Eiop&lastMod=1562873682000"  //"https://c.cs1.content.force.com\(counselorImageUrl)"
                     let url = URL(string: counselorImageUrl)!
                     
                     let task = URLSession.shared.dataTask(with: url){ data,response, error in
@@ -171,9 +190,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     self!.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                     self!.name = counselorName
                     self!.counselorName.text = counselorName
-                    self!.counselorEmail.setTitle("cofcadmissions@cofc.edu", for: .normal)
-                         //"Email: \(counselorEmail)"
-                    self!.phoneText.setTitle("843-343-8884", for: .normal) //"Phone: \(counselorPhone)"
+                    self!.counselorEmail.setTitle("Email: \(counselorEmail)", for: .normal)
+                    self!.phoneText.setTitle("Phone: \(counselorPhone)", for: .normal)
                     self!.contactLabel.text = "Contact Information"
                     self!.aboutLabel.text = "About"
                     self!.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
@@ -189,6 +207,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     }
             
 
+    /// Displays the URL within Safari
+    ///
+    /// - Parameter url: the url to be displayed
     func show(_ url: String) {
         if let url = URL(string: url) {
             let config = SFSafariViewController.Configuration()
