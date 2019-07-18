@@ -28,12 +28,10 @@
 		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
-		B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */; };
 		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
 		B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B23C492422D3D9F800A88C48 /* cistern.jpg */; };
-		B24F998022CCEF4F0024BAC4 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */; };
 		B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */; };
 		B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */; };
 		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
@@ -112,12 +110,10 @@
 		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
-		B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounselorDataSource.swift; sourceTree = "<group>"; };
 		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		B23C492422D3D9F800A88C48 /* cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cistern.jpg; sourceTree = "<group>"; };
-		B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDataSource.swift; path = ../UserDataSource.swift; sourceTree = "<group>"; };
 		B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableViewController.swift; sourceTree = "<group>"; };
 		B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
 		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
@@ -190,7 +186,6 @@
 		4FD6C4761B754AF1002F9F90 /* clyde */ = {
 			isa = PBXGroup;
 			children = (
-				B24F997F22CCEF4F0024BAC4 /* UserDataSource.swift */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
@@ -282,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				B227D0AA22BBE58200AA0634 /* CounselorViewController.swift */,
-				B227D0B922BBF48200AA0634 /* CounselorDataSource.swift */,
 			);
 			name = Counselor;
 			sourceTree = "<group>";
@@ -621,10 +615,8 @@
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
-				B24F998022CCEF4F0024BAC4 /* UserDataSource.swift in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
-				B227D0BA22BBF48200AA0634 /* CounselorDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
