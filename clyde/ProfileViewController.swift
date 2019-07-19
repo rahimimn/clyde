@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var genderIdentityText: UILabel!
     @IBOutlet weak var mobileText: UILabel!
     @IBOutlet weak var studentTypeText: UILabel!
-    @IBOutlet weak var honersCollegeInterestText: UILabel!
+    @IBOutlet weak var honorsCollegeInterestText: UILabel!
     @IBOutlet weak var mobileOptInText: UILabel!
     
 
@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, smagicinteract__SMSOptOut__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, TargetX_SRMb__IPEDS_Ethnicities__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c FROM Contact WHERE Id = '\(contactAccountID)'")
                     RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         
                         let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                         let contactEmail = contactInfoJSON["records"][0]["Email"].string
-                        let contactEthnic = contactInfoJSON["records"][0][ "TargetX_SRMb__IPEDS_Ethnicities__c"].string
+                        let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
                         let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
                         let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
                         let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
@@ -120,6 +120,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         let gender = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
                         let genderID = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
                         let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
+                        let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
+                        let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].string
                 
                 DispatchQueue.main.async {
                     self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
@@ -133,6 +135,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self?.genderText.text = gender
                     self?.genderIdentityText.text = genderID
                     self?.studentTypeText.text = studentType
+                    if mobileOptIn == "false"{ self?.mobileOptInText.text = "Opt-out"}
+                    else{ self?.mobileOptInText.text = "Opt-in"}
+                    if honorsCollegeInterest == "false"{self?.honorsCollegeInterestText.text = "Yes"}
+                    else{self?.honorsCollegeInterestText.text = "No"}
                 }
                 }}}
         
@@ -235,18 +241,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var birthSexOptions = ["Female","Male"]
     var genderOptions = ["Female","Male","Other"]
     var studentTypeOptions = ["Freshman","Transfer"]
-    
+    var ethnicOptions = ["Alaskan Native", "American Indian", "Asian", "Black or African American", "Hispanic", "Mexican or Mexican American", "Middle Eastern", "Native Hawaiian", "Other", "Pacific Islander", "Prefer to not respond", "Puerto Rican", "Two or more races", "White"]
     
     let genderPicker = UIPickerView()
     let genderIdentityPicker = UIPickerView()
     let studentTypePicker = UIPickerView()
+    let ethnicPicker = UIPickerView()
     
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     // Outlet for user's profile photo image view
     @IBOutlet weak var profileImageView: UIImageView!
-    
+ 
     
     // Outlets for the UI Textfields
     @IBOutlet weak var addressTextField: UITextField!
@@ -262,6 +269,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var genderIdentityTextField: UITextField!
     @IBOutlet weak var studentTypeTextField: UITextField!
+    @IBOutlet weak var userName: UILabel!
+    
+    private var honorsCollegeInterestText = "false"
+    @IBOutlet weak var honorsSwitch: UISwitch!
+    @IBAction func honorsAction(_ sender: UISwitch) {
+        if sender.isOn == true{
+            print("on")
+        }else{
+            print("off")
+        }
+    }
+    
+    
+    private var mobileOptInText = "false"
+    @IBOutlet weak var mobileSwitch: UISwitch!
     
     
     // Boolean variable to determine whether a new picture was added.
@@ -312,10 +334,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         // Call to push data into Salesforce
         upsertInformation()
         
-        //Creates a save alert to be presented whenever the user saves their information
-        let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
-        saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(saveAlert, animated: true)
+        
     }
     
     /// UIPickerView Functions
@@ -327,7 +346,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             return genderOptions.count
         }else if (pickerView == genderPicker){
             return birthSexOptions.count
-        }else{
+        }else if (pickerView == ethnicPicker){
+            return ethnicOptions.count
+        }
+        else{
           return studentTypeOptions.count
         }}
     
@@ -336,6 +358,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             return genderOptions[row]
         } else if pickerView == genderPicker{
             return birthSexOptions[row]
+        }else if pickerView == ethnicPicker{
+            return ethnicOptions[row]
         }
         else{
             return studentTypeOptions[row]
@@ -346,6 +370,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.genderIdentityTextField.text = genderOptions[row]
         }else if pickerView == self.genderPicker{
         self.genderTextField.text = genderOptions[row]
+        }else if pickerView == self.ethnicPicker{
+            self.ethnicOriginTextField.text = ethnicOptions[row]
         }else{
             self.studentTypeTextField.text = studentTypeOptions[row]
         }
@@ -377,7 +403,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         graduationYearTextField.delegate = self
         ethnicOriginTextField.delegate = self
         mobileTextField.delegate = self
- 
+        genderIdentityTextField.delegate = self
+        genderTextField.delegate = self
+        studentTypeTextField.delegate = self
         
         // Calls showDatePicker
         showDatePicker()
@@ -388,7 +416,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         // Gender and Gender Identity pickers
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelPicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([doneButton, spaceButton], animated: false)
+        toolbar.setItems([spaceButton, doneButton], animated: false)
         
         genderTextField.inputAccessoryView = toolbar
         
@@ -403,10 +431,85 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         studentTypeTextField.inputAccessoryView = toolbar
         studentTypeTextField.inputView = studentTypePicker
         studentTypePicker.delegate = self
+        
+        ethnicOriginTextField.inputAccessoryView = toolbar
+        ethnicOriginTextField.inputView = ethnicPicker
+        ethnicPicker.delegate = self
     }
     
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        //-----------------------------------------------
+        // USER INFORMATION
+        addressTextField.delegate = self
+        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
+        let userRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
+        }) { [weak self] (response, urlResponse) in
+            let userAccountJSON = JSON(response!)
+            let userAccountID = userAccountJSON["user_id"].stringValue
+            
+            
+            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
+            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
+            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
+                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
+            }) { [weak self] (response, urlResponse) in
+                let contactAccountJSON = JSON(response!)
+                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
+                let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
+                    SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
+                }) { [weak self] (response, urlResponse) in
+                    let contactInfoJSON = JSON(response!)
+                    
+                    let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
+                    let contactEmail = contactInfoJSON["records"][0]["Email"].string
+                    let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
+                    let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
+                    let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
+                    let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
+                    let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
+                    let contactName = contactInfoJSON["records"][0]["Name"].stringValue
+                    let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
+                    let cell = contactInfoJSON["records"][0]["MobilePhone"].stringValue
+                    let gender = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
+                    let genderID = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
+                    let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
+                    let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
+                    let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].string
+                    
+                    DispatchQueue.main.async {
+                        self?.addressTextField.text = contactStreet
+                        self?.cityTextField.text = contactCity
+                        self?.stateTextField.text = contactState
+                        self?.zipTextField.text = contactCode
+                        self?.birthDateTextField.text = contactBirth
+                        self?.emailTextField.text = contactEmail
+                        self?.ethnicOriginTextField.text = contactEthnic
+                        self?.graduationYearTextField.text = contactGradYear
+                        self?.userName.text = contactName
+                        self?.userName.textColor = UIColor.black
+                        self?.mobileTextField.text = cell
+                        self?.genderTextField.text = gender
+                        self?.genderIdentityTextField.text = genderID
+                        self?.studentTypeTextField.text = studentType
+                        if mobileOptIn == "false"{ self?.mobileOptInText = "false"
+                            self?.mobileSwitch.setOn(false, animated: true)
+                        }
+                        else{ self?.mobileOptInText = "true"
+                            self?.mobileSwitch.setOn(true, animated: true)
+                        }
+                        if honorsCollegeInterest == "Hot Prospect"{self?.honorsCollegeInterestText = "Hot Prospect"
+                            self?.honorsSwitch.setOn(true, animated: true)
+                        }
+                        else{self?.honorsCollegeInterestText = "false"
+                            self?.honorsSwitch.setOn(false, animated: true)
+                        }
+                    }
+                }}}}
     
     
     
@@ -455,7 +558,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //Sends the upsert request
         RestClient.shared.send(request: upsertRequest, onFailure: { (error, URLResponse) in
             SalesforceLogger.d(type(of:self!), message:"Error invoking while sending upsert request: \(upsertRequest), error: \(error)")
+            //Creates a save alert to be presented whenever the user saves their information
+            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self?.present(errorAlert, animated: true)
         }){(response, URLResponse) in
+            //Creates a save alert to be presented whenever the user saves their information
+            let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
+            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self?.present(saveAlert, animated: true)
             os_log("\nSuccessful response received")
         }
     }
@@ -485,6 +596,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.textColor = UIColor.black
     }
     
     /// Method that creates the camera and photo library action
