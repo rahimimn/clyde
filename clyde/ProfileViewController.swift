@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact WHERE Id = '\(contactAccountID)'")
                     RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
@@ -275,15 +275,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var honorsSwitch: UISwitch!
     @IBAction func honorsAction(_ sender: UISwitch) {
         if sender.isOn == true{
-            print("on")
+            honorsCollegeInterestText = "Hot Prospect"
         }else{
-            print("off")
+            honorsCollegeInterestText = "false"
         }
     }
     
     
     private var mobileOptInText = "false"
     @IBOutlet weak var mobileSwitch: UISwitch!
+    @IBAction func mobileAction(_ sender: UISwitch) {
+        if sender.isOn == true{
+            mobileOptInText = "true"
+        }else{
+            mobileOptInText = "false"
+        }
+    }
     
     
     // Boolean variable to determine whether a new picture was added.
@@ -459,7 +466,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact WHERE Id = '\(contactAccountID)'")
                 RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                 }) { [weak self] (response, urlResponse) in
@@ -524,10 +531,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["MailingState"] = self.stateTextField.text
         record["MailingPostalCode"] = self.zipTextField.text
         record["TargetX_SRMb__Graduation_Year__c"] = self.graduationYearTextField.text
-        //record["TargetX_SRMb__IPEDS_Ethnicities__c"] = self.ethnicOriginTextField.text
+        record["Ethnicity_Non_Applicants__c"] = self.ethnicOriginTextField.text
         record["Email"] = self.emailTextField.text
-       // record["AccountId"] = "001S00000105zkuIAA"
-        
+        //record["AccountId"] = "001S00000105zkuIAA"
+        record["Birthdate"] = self.birthDateTextField.text
+        record["MobilePhone"] = self.mobileTextField.text
+        record["TargetX_SRMb__Gender__c"] = self.genderTextField.text
+        record["Gender_Identity__c"] = self.genderIdentityTextField.text
+        record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
+        record["Honors_College_Interest__c"] = self.honorsCollegeInterestText
+        record["Text_Message_Consent__c"] = self.mobileOptInText
         print(record)
         
         // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
