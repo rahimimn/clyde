@@ -128,6 +128,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self?.ethnicText.text = contactEthnic
                     self?.anticipatedStartText.text = contactGradYear
                     self?.userName.text = contactName
+                    self?.userName.textColor = UIColor.black
                     self?.mobileText.text = cell
                     self?.genderText.text = gender
                     self?.genderIdentityText.text = genderID
@@ -231,6 +232,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
   // Variables
     
     //Picker options
+    var birthSexOptions = ["Female","Male"]
     var genderOptions = ["Female","Male","Other"]
     var studentTypeOptions = ["Freshman","Transfer"]
     
@@ -321,16 +323,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if (pickerView == genderIdentityPicker) || (pickerView == genderPicker){
-        return genderOptions.count
-        } else{
+        if (pickerView == genderIdentityPicker){
+            return genderOptions.count
+        }else if (pickerView == genderPicker){
+            return birthSexOptions.count
+        }else{
           return studentTypeOptions.count
         }}
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if (pickerView == genderIdentityPicker) || (pickerView == genderPicker){
+        if (pickerView == genderIdentityPicker){
             return genderOptions[row]
-        } else{
+        } else if pickerView == genderPicker{
+            return birthSexOptions[row]
+        }
+        else{
             return studentTypeOptions[row]
         }
     }
@@ -347,7 +354,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.pushImage()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -455,7 +462,18 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    
+    private func pushImage(){
+        let userRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
+        }) { [weak self] (response, urlResponse) in
+            let userAccountJSON = JSON(response!)
+            let userAccountID = userAccountJSON["picture"].stringValue
+            print(userAccountJSON)
+            print(userAccountID)
+        }
+        
+    }
     
     
     
