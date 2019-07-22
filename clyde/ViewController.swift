@@ -14,7 +14,7 @@ import SalesforceSDKCore
 
 class HomeViewController: UIViewController{
 
-    // TO-DO: pull the most recent three articles from cofc.today and present them on the homepage
+
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -23,20 +23,35 @@ class HomeViewController: UIViewController{
         
     }
     
-    //Homepage news button articles. These will eventually have to be replaced to allow automation.
+    
+    /// Will present the article webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func clickFirst(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/24/beat-the-heat-public-health-heat-related-illness/")}
+    
+    /// Will present the article webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func clickSecond(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/21/jarrell-brantley-nba-draft/")}
     
+    /// Will present the article webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func clickThird(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/12/college-of-charleston-orientation-2019/")}
     
+    /// Will present the article webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func clickMore(_ sender: UIButton) {
         show("https://today.cofc.edu/")}
     
     
-    //When called, this function will present the url (parameter) within the app using a SafariViewController.
+    /// Displays the url as a Safari view controller
+    ///
+    /// - Parameter url: the url to be displayed.
     func show(_ url: String) {
         if let url = URL(string: url) {
             let config = SFSafariViewController.Configuration()
