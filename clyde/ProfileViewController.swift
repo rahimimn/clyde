@@ -18,9 +18,19 @@ import CoreLocation
 /// Class for the Profile view
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     
+    
+    
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    var profileStore = SmartStore.shared(withName: "profileName")
+    
+    
+    
     
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -69,19 +79,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return polylineRenderer
     }
     
-    
-
-    
+    override func loadView() {
+        super.loadView()
+        self.createMap()
+    }
+   
     /// Loads the profile view
     override func viewDidLoad() {
         super.viewDidLoad()
         self.createMap()
+        self.placeInfo()
         self.menuBar(menuBarItem: menuBarButton)
         }
     
-    override func viewWillAppear(_ animated: Bool) {
-
-      
+    
+    
+    
+     /// Pulls the Salesforce data and displays it on the page
+     func placeInfo() {
         //-----------------------------------------------
         // USER INFORMATION
         addressText.delegate = self
@@ -183,6 +198,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         let currentPointAnnotation = MKPointAnnotation()
         currentPointAnnotation.title = "You"
+        currentPointAnnotation.subtitle = "This is your location."
         if let location = currentPlacemark.location {
             currentPointAnnotation.coordinate = location.coordinate
         }

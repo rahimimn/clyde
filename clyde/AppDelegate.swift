@@ -25,7 +25,7 @@
 import Foundation
 import UIKit
 import SalesforceSDKCore
-import SmartStore
+import SmartSync
 
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         SalesforceManager.initializeSDK()
+        SmartSyncSDKManager.initializeSDK()
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
             self?.resetViewState {
                 self?.setupRootViewController()
@@ -54,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
-
         //Uncomment the code below to see how you can customize the color, textcolor, font and fontsize of the navigation bar
         let loginViewConfig = SalesforceLoginViewControllerConfig()
 
@@ -72,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AuthHelper.loginIfRequired {
             self.setupRootViewController()
+           // SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
         }
 
         return true
