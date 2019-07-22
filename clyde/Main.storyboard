@@ -288,8 +288,29 @@
                                             <segue destination="B8s-eZ-LMZ" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="bS3-K8-3Q6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Helpful Links" id="lWP-vm-RvE">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Resources" id="TbM-XX-G1I">
                                         <rect key="frame" x="0.0" y="396" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TbM-XX-G1I" id="9ZV-9F-GsF">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5BG-ja-jp8">
+                                                    <rect key="frame" x="65" y="11" width="187" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-Logout Rounded.png" translatesAutoresizingMaskIntoConstraints="NO" id="fzb-Fd-hDQ">
+                                                    <rect key="frame" x="10" y="5" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Helpful Links" id="lWP-vm-RvE">
+                                        <rect key="frame" x="0.0" y="440" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lWP-vm-RvE" id="SAx-NY-DD1">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -306,7 +327,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CofC Website" id="BP1-zC-xoZ">
-                                        <rect key="frame" x="0.0" y="440" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="484" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BP1-zC-xoZ" id="6cR-Ar-xSd">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -323,7 +344,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyCharleston" id="MI5-yv-ZJu">
-                                        <rect key="frame" x="0.0" y="484" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="528" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MI5-yv-ZJu" id="f0h-Np-hmO">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -340,7 +361,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Application" id="Emr-mK-zep">
-                                        <rect key="frame" x="0.0" y="528" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="572" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Emr-mK-zep" id="sqT-Dl-qTJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -418,6 +439,11 @@
                                                                             <constraint firstAttribute="width" constant="127" id="wQ9-j7-lVj"/>
                                                                         </constraints>
                                                                         <state key="normal" image="charleston.jpg"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                <integer key="value" value="8"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="clickFirst:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="4gr-AS-OHo"/>
                                                                         </connections>
@@ -446,6 +472,11 @@
                                                                             <constraint firstAttribute="width" constant="127" id="r9I-2w-pKt"/>
                                                                         </constraints>
                                                                         <state key="normal" title="Button" image="basketball.jpg"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                <integer key="value" value="8"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="clickSecond:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="FvS-jU-2aw"/>
                                                                         </connections>
@@ -474,6 +505,11 @@
                                                                             <constraint firstAttribute="width" constant="127" id="nma-BP-4z4"/>
                                                                         </constraints>
                                                                         <state key="normal" title="Button" image="cofc-orientation-1-750x499.jpg"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                <integer key="value" value="8"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="clickThird:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="pbh-s2-PVI"/>
                                                                         </connections>
@@ -3536,6 +3572,7 @@
         <image name="icons8-Details Popup.png" width="64" height="64"/>
         <image name="icons8-FAQ.png" width="64" height="64"/>
         <image name="icons8-Installing Updates.png" width="64" height="64"/>
+        <image name="icons8-Logout Rounded.png" width="64" height="64"/>
         <image name="icons8-Mind Map.png" width="64" height="64"/>
         <image name="icons8-Online Support.png" width="64" height="64"/>
         <image name="icons8-Org Unit.png" width="64" height="64"/>
@@ -3639,8 +3676,8 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LCQ-5E-sfJ"/>
-        <segue reference="1iM-Yc-Rlk"/>
+        <segue reference="GMS-AL-n0r"/>
+        <segue reference="aQm-Ru-QlM"/>
         <segue reference="ZyM-Gc-xOH"/>
     </inferredMetricsTieBreakers>
 </document>
