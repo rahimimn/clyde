@@ -26,6 +26,7 @@ import Foundation
 import UIKit
 import SalesforceSDKCore
 import SmartSync
+import SmartStore
 
 
 class AppDelegate: UIResponder, UIApplicationDelegate {

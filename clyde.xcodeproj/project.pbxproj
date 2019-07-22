@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F393A281C3C8BCD00B3EA13 /* main.swift */; };
 		4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */; };
-		4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49D1B755242002F9F90 /* InitialViewController.swift */; };
 		78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_clyde.framework */; };
 		B227D07522BBD80900AA0634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227D07422BBD80900AA0634 /* Main.storyboard */; };
 		B227D08422BBD87600AA0634 /* white-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D07B22BBD87600AA0634 /* white-logo.png */; };
@@ -82,7 +81,6 @@
 		4FD6C4781B754AF1002F9F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FD6C49A1B755242002F9F90 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		4FD6C49D1B755242002F9F90 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		4FF12F8A1DCA91F5004D9EF9 /* clyde.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clyde.entitlements; sourceTree = "<group>"; };
 		762732C14CFE40A989C3AD70 /* Pods-clyde.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clyde.debug.xcconfig"; path = "Pods/Target Support Files/Pods-clyde/Pods-clyde.debug.xcconfig"; sourceTree = "<group>"; };
 		82A29C75280BDF73123F14B4 /* Pods_clyde.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_clyde.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
-				4FD6C49D1B755242002F9F90 /* InitialViewController.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
 				B2C1A01522C24FF700C5634C /* Homepage */,
@@ -613,7 +610,6 @@
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
-				4FD6C4A01B755242002F9F90 /* InitialViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 import MobileCoreServices
 import SalesforceSDKCore
 import SmartSync
+import SmartStore
 import SwiftyJSON
 import MapKit
 import CoreLocation
@@ -21,6 +22,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+   
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
     
     override func didReceiveMemoryWarning() {
@@ -145,9 +147,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         
                         
                         
-                        if (((self?.store.soupExists(forName: "profileName"))!)){
-                            self?.store.clearSoup("profileName")
-                            self?.store.upsert(entries: result!, forSoupNamed: "profileName")
+                        if (((self?.store.soupExists(forName: "defaultStore"))!)){
+                            self?.store.clearSoup("defaultStore")
+                            self?.store.upsert(entries: result!, forSoupNamed: "defaultStore")
                             os_log("\nSmartStore loaded records.")
                         }else{
                             print("this did not work")
