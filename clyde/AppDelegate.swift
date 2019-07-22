@@ -30,8 +30,8 @@ import SmartStore
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    let RemoteAccessConsumerKey = "3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5"
-    let OAuthRedirectURI = "cofcapp://oauth/done"
+    let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR" //"3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5"
+    let OAuthRedirectURI = "cofcapppartial://oauth/done"
     let scopes = ["full"]
     
     //Initializes the Mobile SDK and registers a block to handle user change notifications.

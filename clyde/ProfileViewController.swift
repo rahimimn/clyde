@@ -608,12 +608,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// - Returns: Boolean on whether a textfield should return.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        textField.textColor = UIColor.black
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.textColor = UIColor.black
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = UIColor.black
+    }
     /// Method that creates the camera and photo library action
     @objc func tappedView(){
         let alert = UIAlertController(title: "Select Image From", message: "", preferredStyle: .actionSheet)

@@ -52,7 +52,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
 	<key>SFDCOAuthLoginHost</key>
-	<string>mrdev-cofcharleston.cs1.force.com/clydeTest</string>
+	<string>partial-cofcharleston.cs40.force.com/portal/TX_SiteLogin?startURL=%2Fportal%2FTargetX_Portal__PB</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
