@@ -82,13 +82,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func loadView() {
         super.loadView()
         self.createMap()
+         self.placeInfo()
+        let request = RestClient.shared.request(forQuery: "SELECT Name, Id FROM User")
     }
+ 
    
     /// Loads the profile view
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.createMap()
-        self.placeInfo()
+       
         self.menuBar(menuBarItem: menuBarButton)
         }
     
@@ -121,7 +123,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
                         let contactInfoJSON = JSON(response!)
-                        
+                        let jsonResponse = response as? Dictionary<String, Any>
+                        let result = jsonResponse! ["records"] as? [Dictionary<String,Any>]
+                        print(result)
                         let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                         let contactEmail = contactInfoJSON["records"][0]["Email"].string
                         let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
@@ -137,7 +141,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
                         let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
                         let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].string
-                
+                        
+                        
+                        
+                        
+                        if (((self?.store.soupExists(forName: "profileName"))!)){
+                            self?.store.clearSoup("profileName")
+                            self?.store.upsert(entries: result!, forSoupNamed: "profileName")
+                            os_log("\nSmartStore loaded records.")
+                        }else{
+                            print("this did not work")
+                        }
+                            
+                            
+                            
                 DispatchQueue.main.async {
                     self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
                     self?.birthdateText.text = contactBirth
@@ -557,7 +574,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
         record["Honors_College_Interest__c"] = self.honorsCollegeInterestText
         record["Text_Message_Consent__c"] = self.mobileOptInText
-        print(record)
         
         // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
         // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
