@@ -20,17 +20,9 @@ import CoreLocation
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     
     
-    
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
-   
-    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    var profileStore = SmartStore.shared(withName: "profileName")
-    
     
     
     
@@ -85,7 +77,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.loadView()
         self.createMap()
          self.placeInfo()
-        let request = RestClient.shared.request(forQuery: "SELECT Name, Id FROM User")
     }
  
    
@@ -125,9 +116,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
                         let contactInfoJSON = JSON(response!)
-                        let jsonResponse = response as? Dictionary<String, Any>
-                        let result = jsonResponse! ["records"] as? [Dictionary<String,Any>]
-                        print(result)
                         let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                         let contactEmail = contactInfoJSON["records"][0]["Email"].string
                         let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
@@ -147,15 +135,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         
                         
                         
-                        if (((self?.store.soupExists(forName: "defaultStore"))!)){
-                            self?.store.clearSoup("defaultStore")
-                            self?.store.upsert(entries: result!, forSoupNamed: "defaultStore")
-                            os_log("\nSmartStore loaded records.")
-                        }else{
-                            print("this did not work")
-                        }
-                            
-                            
+                     
                             
                 DispatchQueue.main.async {
                     self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"

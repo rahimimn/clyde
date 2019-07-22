@@ -27,6 +27,7 @@
 		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
+		B230DD1E22E638EA005674B4 /* userstore.json in Resources */ = {isa = PBXBuildFile; fileRef = B230DD1D22E638EA005674B4 /* userstore.json */; };
 		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
@@ -108,6 +109,7 @@
 		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		B230DD1D22E638EA005674B4 /* userstore.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userstore.json; sourceTree = "<group>"; };
 		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		4FD6C4761B754AF1002F9F90 /* clyde */ = {
 			isa = PBXGroup;
 			children = (
+				B230DD1D22E638EA005674B4 /* userstore.json */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
@@ -487,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B230DD1E22E638EA005674B4 /* userstore.json in Resources */,
 				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
 				B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */,
 				B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */,

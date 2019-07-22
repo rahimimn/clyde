@@ -39,16 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         super.init()
         SalesforceManager.initializeSDK()
-        SmartSyncSDKManager.initializeSDK()
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
             self?.resetViewState {
                 self?.setupRootViewController()
             }
         })
-    }
-    
-    func handleSdkManagerLogout(){
-        
     }
     
     // MARK: - App delegate lifecycle
@@ -71,9 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
 
-        AuthHelper.loginIfRequired {
-            self.setupRootViewController()
-           // SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
+        AuthHelper.loginIfRequired { [weak self] in
+            self?.setupRootViewController()
         }
 
         return true
