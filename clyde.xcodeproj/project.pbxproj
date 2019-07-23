@@ -187,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				B230DD1D22E638EA005674B4 /* userstore.json */,
+				B27609FE22CA4FD300A122F7 /* user.swift */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
@@ -202,7 +203,6 @@
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
 				B227D07822BBD84C00AA0634 /* Assets */,
 				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
-				B27609FE22CA4FD300A122F7 /* user.swift */,
 			);
 			path = clyde;
 			sourceTree = "<group>";

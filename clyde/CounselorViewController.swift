@@ -9,7 +9,9 @@
 import UIKit
 import SalesforceSDKCore
 import SwiftyJSON
+import SmartSync
 import MessageUI
+
 
 /// Pulls the user's admission counselor from Salesforce and then presents the data on the view controller.
 class CounselorViewController: UIViewController, MFMailComposeViewControllerDelegate {
@@ -129,9 +131,13 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         loadingIndicator.startAnimating()
         
         
-        
-        
-        
+//        let idquerySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:Id} from {User}", pageSize: 1)
+//        do{
+//            let records = try self.store.query(using: idquerySpec!, startingFromPageIndex: 0)
+//            guard let
+//        }
+//
+//
         //Gets the user's information from Salesforce using the user's id.
        let userRequest = RestClient.shared.requestForUserInfo()
        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in

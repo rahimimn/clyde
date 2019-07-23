@@ -75,19 +75,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return polylineRenderer
     }
     
+    
+    
+    
     override func loadView() {
         super.loadView()
         self.createMap()
         self.placeInfo()
-        let request = RestClient.shared.requestForUserInfo()
+        let request = RestClient.shared.request(forQuery: "SELECT Name, Id FROM User")
         RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(request)")
         }){ [weak self] (response, urlResponse) in
             guard let strongSelf = self,
                 let jsonResponse = response as? Dictionary<String,Any>,
                //error
-                let result = jsonResponse["user_id"] as? [Dictionary<String,Any>]
+                let result = jsonResponse["records"] as? [Dictionary<String,Any>]
                 else {
+                    print("oh no")
                     return
             }
             SalesforceLogger.d(type(of:strongSelf),message:"Invoked: \(request)")
@@ -104,7 +108,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {user:Name}, {user:Id} from {user}",
+            smartSql: "select {User:Id} from {User}",
             pageSize: 1)
 
         
@@ -113,16 +117,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         do {
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
-            print(records)
-            guard let rows = records as? [[String]] else {
-                print("we ARE LOOKING HERE!")
+            print("here-----------------")
+            print(records[0])
+            guard let record = records as? [[String]] else {
+                print("-------------we ARE LOOKING HERE!")
                 print(records)
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }
-            print(rows[0])
+           self.userId = (record[0][0])
             DispatchQueue.main.async {
-                
+                print(self.userId)
             }
         } catch let e as Error? {
             print(e as Any)
@@ -140,12 +145,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /// Loads the profile view
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         self.menuBar(menuBarItem: menuBarButton)
-        }
-    
-    
-    
+    }
     
      /// Pulls the Salesforce data and displays it on the page
      func placeInfo() {
@@ -159,8 +160,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }) { [weak self] (response, urlResponse) in
             let userAccountJSON = JSON(response!)
             let userAccountID = userAccountJSON["user_id"].stringValue
-            let jsonResponse = JSON(response!)
-            print(jsonResponse)
+            let jsonResponse = response as? Dictionary<String,Any>
             //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
             RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in

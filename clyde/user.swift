@@ -9,59 +9,61 @@
 import Foundation
 import SalesforceSDKCore
 
-protocol UserDelegate: AnyObject {
+struct User : Decodable{
+    var id: String
+    var name: String
+    var counselor: Counselor?
+    var streetAddress: String
+    var city: String
+    var state: String
+    var zipCode: String
+    var phone: String
+    var email: String
+    var gender: String
+    var honorsCollegeInterest: Bool
+    var mobileOpt: Bool
+    var genderId: String
+    var ethnicity: String
+    var studentType: String
+    var graduationYear: String
     
-    
-    /// - Parameter dataSource: The data source that was updated.
-    func UserDidUpdateRecords(_ dataSource: User)
-    
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case counselor = "Counselor"
+        case streetAddress = "MailingStreet"
+        case city = "MailingCity"
+        case state = "MailingState"
+        case zipCode = "MailingPostalCode"
+        case phone = "Phone"
+        case email = "Email"
+        case gender = "TargetX_SRMb__Gender__c"
+        case honorsCollegeInterest = "Honors_College_Interest__c"
+        case mobileOpt = "Text_Message_Consent__c"
+        case genderId = "Gender_Identity__c"
+        case ethnicity = "Ethnicity_Non_Applicants__c"
+        case studentType = "TargetX_SRMb__Student_Type__c"
+        case graduationYear = "TargetX_SRMb__Graduation_Year__c"
+        
+    }
+
 }
 
-class User: NSObject {
-
-    var user = UserAccount.init()
-    //MARK: Properties
-    var fullName: String
-    var ID: UserAccountIdentity
+struct Counselor : Decodable{
+    var id: String
+    var name: String
+    var about: String
+    var phone: String
+    var email: String
+    var imageURL: String
     
-    
-    
-    
-    //MARK: Initiallization
-    init(fullName: String) {
-        self.fullName = fullName
-        self.ID = user.accountIdentity
-        
-        
+    enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case name = "Name"
+        case about = "AboutMe"
+        case phone = "Phone"
+        case email = "Email"
+        case imageURL = "image_url__c"
     }
     
-    typealias salesForceRecord = [String : Any]
-    private(set) var records: [salesForceRecord] = []
-    weak var delegate: UserDelegate?
-    
-    private func handleError(_ error: Error?, urlResponse: URLResponse? = nil) {
-        let errorDescription: String
-        if let error = error {
-            errorDescription = "\(error)"
-        } else {
-            errorDescription = "An unknown error occurred."
-        }
-        SalesforceLogger.e(type(of: self), message: "Failed to successfully complete the REST request. \(errorDescription)")
-    }
-    
-    @objc func fetchData(){
-        let request = RestClient.shared.request(forQuery: "SELECT FullName FROM Contact")
-        RestClient.shared.send(request: request, onFailure: handleError) { [weak self] response, _ in
-            guard let self = self else { return }
-            var resultsToReturn = [salesForceRecord]()
-            if let dictionaryResponse = response as? [String: Any],
-                let records = dictionaryResponse["records"] as? [salesForceRecord] {
-                resultsToReturn = records
-            }
-            DispatchQueue.main.async {
-                self.records = resultsToReturn
-                self.delegate?.UserDidUpdateRecords(self)
-            }
-        }
-    }
 }
