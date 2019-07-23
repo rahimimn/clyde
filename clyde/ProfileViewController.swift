@@ -84,8 +84,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(request)")
         }){ [weak self] (response, urlResponse) in
             guard let strongSelf = self,
-                let jsonResponse = JSON(response).dictionaryObject,
-                let result = jsonResponse as? [Dictionary<String,Any>]
+                let jsonResponse = response as? Dictionary<String,Any>,
+               //error
+                let result = jsonResponse["user_id"] as? [Dictionary<String,Any>]
                 else {
                     return
             }
@@ -93,6 +94,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             if ((strongSelf.store.soupExists(forName: "User"))) {
                 strongSelf.store.clearSoup("User")
                 strongSelf.store.upsert(entries: result, forSoupNamed: "User")
+                strongSelf.loadDataFromStore()
                 os_log("\nSmartStore loaded records.", log: strongSelf.mylog, type: .debug)
             }
         }
@@ -101,8 +103,37 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
-            smartSql: "select {User:Name}, {User:Id} from {User}",
+
+            smartSql: "select {user:Name}, {user:Id} from {user}",
             pageSize: 1)
+
+        
+        
+        print(querySpec!)
+    
+        do {
+            let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
+            print(records)
+            guard let rows = records as? [[String]] else {
+                print("we ARE LOOKING HERE!")
+                print(records)
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return
+            }
+            print(rows[0])
+            DispatchQueue.main.async {
+                
+            }
+        } catch let e as Error? {
+            print(e as Any)
+            print("Youre a failure dude")
+            os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
+        }
+    
+    
+    
+    
+    
     }
  
    
@@ -128,10 +159,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }) { [weak self] (response, urlResponse) in
             let userAccountJSON = JSON(response!)
             let userAccountID = userAccountJSON["user_id"].stringValue
-            let jsonResponse = response as? Dictionary<String,Any>
-            let result = userAccountJSON.dictionaryObject
-            print(result)
-            
+            let jsonResponse = JSON(response!)
+            print(jsonResponse)
             //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
             RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
