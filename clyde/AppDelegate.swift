@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Initializes the Mobile SDK and registers a block to handle user change notifications.
     override init() {
         super.init()
-        SalesforceManager.initializeSDK()
+        SmartSyncSDKManager.initializeSDK()
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
             self?.resetViewState {
                 self?.setupRootViewController()
@@ -68,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AuthHelper.loginIfRequired { [weak self] in
             self?.setupRootViewController()
+            SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
+
         }
 
         return true

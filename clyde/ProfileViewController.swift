@@ -51,7 +51,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var mobileOptInText: UILabel!
     
 
-    
+    var store = SmartStore.shared(withName: "userInfo")
+
     
     
     // Private variables for map
