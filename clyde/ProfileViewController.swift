@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    
+    private var userId = ""
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
@@ -51,7 +51,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var mobileOptInText: UILabel!
     
 
-    var store = SmartStore.shared(withName: "userInfo")
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
 
     
     
@@ -77,7 +78,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func loadView() {
         super.loadView()
         self.createMap()
-         self.placeInfo()
+        self.placeInfo()
+        let request = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(request)")
+        }){ [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = JSON(response).dictionaryObject,
+                let result = jsonResponse as? [Dictionary<String,Any>]
+                else {
+                    return
+            }
+            SalesforceLogger.d(type(of:strongSelf),message:"Invoked: \(request)")
+            if ((strongSelf.store.soupExists(forName: "User"))) {
+                strongSelf.store.clearSoup("User")
+                strongSelf.store.upsert(entries: result, forSoupNamed: "User")
+                os_log("\nSmartStore loaded records.", log: strongSelf.mylog, type: .debug)
+            }
+        }
+        
+        }
+    
+    func loadDataFromStore(){
+        let querySpec = QuerySpec.buildSmartQuerySpec(
+            smartSql: "select {User:Name}, {User:Id} from {User}",
+            pageSize: 1)
     }
  
    
@@ -103,7 +128,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }) { [weak self] (response, urlResponse) in
             let userAccountJSON = JSON(response!)
             let userAccountID = userAccountJSON["user_id"].stringValue
-            
+            let jsonResponse = response as? Dictionary<String,Any>
+            let result = userAccountJSON.dictionaryObject
+            print(result)
             
             //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
@@ -154,6 +181,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     else{ self?.mobileOptInText.text = "Opt-in"}
                     if honorsCollegeInterest == "false"{self?.honorsCollegeInterestText.text = "Yes"}
                     else{self?.honorsCollegeInterestText.text = "No"}
+                    self?.userId = userAccountID
                 }
                 }}}
         
