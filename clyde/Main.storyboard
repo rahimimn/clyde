@@ -2162,14 +2162,14 @@
         <scene sceneID="O0U-gF-Bf8">
             <objects>
                 <viewController storyboardIdentifier="EventsCheckInView" title="Event Check In" id="uEY-Yj-Mvz" customClass="CheckInViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Vuq-yw-RXW">
+                    <view key="view" contentMode="scaleToFill" id="Vuq-yw-RXW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gr-8q-wEP">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gr-8q-wEP">
                                 <rect key="frame" x="0.0" y="554" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Scan this QR code at check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USH-88-KA1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan this QR code at check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USH-88-KA1">
                                         <rect key="frame" x="35.333333333333343" y="13" width="343.66666666666663" height="34.333333333333336"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2183,17 +2183,17 @@
                                     <constraint firstItem="USH-88-KA1" firstAttribute="centerY" secondItem="1gr-8q-wEP" secondAttribute="centerY" id="nox-We-TaF"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="diL-vh-mLt">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="diL-vh-mLt">
                                 <rect key="frame" x="0.0" y="164" width="414" height="382"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="382" id="AXQ-EA-DwI"/>
                                 </constraints>
                             </mapView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLo-ya-Yuh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLo-ya-Yuh">
                                 <rect key="frame" x="0.0" y="96" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Directions to check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv1-wP-GuG">
-                                        <rect key="frame" x="80" y="13" width="254.33333333333337" height="34.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions to check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv1-wP-GuG">
+                                        <rect key="frame" x="80.000000000000014" y="13" width="254.33333333333337" height="34.333333333333336"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2217,7 +2217,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYs-Jc-HTG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eYs-Jc-HTG">
                                 <rect key="frame" x="87" y="622" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eYs-Jc-HTG" secondAttribute="height" multiplier="1:1" id="jyF-E8-pjm"/>
@@ -2549,7 +2549,7 @@
                                                                 <rect key="frame" x="73" y="0.0" width="311" height="28"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" textContentType="address-line1"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -2566,7 +2566,7 @@
                                                                 <rect key="frame" x="43.666666666666657" y="0.0" width="340.33333333333337" height="30"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" textContentType="address-level2"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -2586,7 +2586,7 @@
                                                                         <rect key="frame" x="49.333333333333329" y="0.0" width="132.66666666666669" height="24"/>
                                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" textContentType="address-level1"/>
                                                                     </textField>
                                                                 </subviews>
                                                             </stackView>
@@ -2606,7 +2606,7 @@
                                                                         <rect key="frame" x="38" y="0.0" width="144" height="24"/>
                                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" textContentType="postal-code"/>
                                                                     </textField>
                                                                 </subviews>
                                                             </stackView>
@@ -2645,7 +2645,7 @@
                                                                 <rect key="frame" x="57" y="0.0" width="327" height="30"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -2665,7 +2665,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
                                                                 <variation key="heightClass=compact-widthClass=regular">
                                                                     <mask key="constraints">
                                                                         <exclude reference="Mcb-cQ-6ui"/>
@@ -2690,7 +2690,7 @@
                                                                 <rect key="frame" x="111.66666666666666" y="0.0" width="272.33333333333337" height="30"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" textContentType="organization"/>
                                                             </textField>
                                                         </subviews>
                                                         <constraints>
@@ -2710,7 +2710,7 @@
                                                                 <rect key="frame" x="187.33333333333337" y="0.0" width="196.66666666666663" height="30"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             </textField>
                                                         </subviews>
                                                         <constraints>
@@ -2773,11 +2773,11 @@
                                                             <constraint firstAttribute="height" constant="30" id="k8x-L0-nWj"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="H92-ya-PrQ">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="H92-ya-PrQ">
                                                         <rect key="frame" x="0.0" y="372" width="384" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender Identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-fI-SdU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="131" height="30"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -3677,7 +3677,7 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="GMS-AL-n0r"/>
-        <segue reference="aQm-Ru-QlM"/>
+        <segue reference="1iM-Yc-Rlk"/>
         <segue reference="ZyM-Gc-xOH"/>
     </inferredMetricsTieBreakers>
 </document>

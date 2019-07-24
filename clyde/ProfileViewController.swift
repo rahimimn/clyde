@@ -76,57 +76,50 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    
-    
-    override func loadView() {
-        super.loadView()
-        self.createMap()
-        self.placeInfo()
-        let request = RestClient.shared.request(forQuery: "SELECT ContactId, Name, Id FROM User")
-        RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(request)")
-        }){ [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
-                let jsonResponse = response as? Dictionary<String,Any>,
-               //error
-                let result = jsonResponse["records"] as? [Dictionary<String,Any>]
-                else {
-                    print("oh no")
-                    return
-            }
-            SalesforceLogger.d(type(of:strongSelf),message:"Invoked: \(request)")
-            if ((strongSelf.store.soupExists(forName: "User"))) {
-                strongSelf.store.clearSoup("User")
-                strongSelf.store.upsert(entries: result, forSoupNamed: "User")
-                strongSelf.loadDataFromStore()
-                os_log("\nSmartStore loaded records.", log: strongSelf.mylog, type: .debug)
-            }
-            
-            
-        }
-        
-        }
-    
+//{Contact:Honors_College_Interest__c},
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {Contact: Name}, {Contact: MobilePhone}, {Contact: MailingStreet},{Contact:MailingCity from {User}",
-            pageSize: 1)
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c} from {Contact}",
+            pageSize: 10)
 
 
         do {
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
-            print("here-----------------")
-            print(records[0])
+            print("\nThese are the records\(records)")
+            
             guard let record = records as? [[String]] else {
-                print("-------------we ARE LOOKING HERE!")
-                print(records)
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }
-           self.userId = (record[0][0])
+            let name = (record[0][0])
+            let phone = record[0][1]
+            let address = record[0][2]
+            let genderId = record[0][6]
+            let email = record[0][7]
+            let birthday = record[0][8]
+            let birthsex = record[0][9]
+            let studentType = record[0][10]
+            let graduationYear = record[0][11]
+            let ethnicity = record[0][12]
+            let mobileOpt = record[0][13]
+            
             DispatchQueue.main.async {
-                print(self.userId)
+                self.userName.text = name
+                self.userName.textColor = UIColor.black
+                self.mobileText.text = phone
+                self.addressText.text = address
+                self.emailText.text = email
+                self.birthdateText.text = birthday
+                self.genderIdentityText.text = genderId
+                self.genderText.text = birthsex
+                self.studentTypeText.text = studentType
+                self.anticipatedStartText.text = graduationYear
+                self.ethnicText.text = ethnicity
+                if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
+                else{ self.mobileOptInText.text = "Opt-in"}
+                
+                
             }
         } catch let e as Error? {
             print(e as Any)
@@ -138,8 +131,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     }
- 
-   
+    override func loadView() {
+        super.loadView()
+        self.loadDataFromStore()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.createMap()
+    }
     /// Loads the profile view
     override func viewDidLoad() {
         super.viewDidLoad()

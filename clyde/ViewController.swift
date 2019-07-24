@@ -71,6 +71,7 @@ class HomeViewController: UIViewController{
     }
     
     
+    /// Loads important data into the offline storage
     func loadDataIntoStore(){
         //Loads user id into store
         let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User")
@@ -101,6 +102,7 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
+                print(results)
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
@@ -146,7 +148,7 @@ class HomeViewController: UIViewController{
 
 
 
-}
+}//class
     
     
        

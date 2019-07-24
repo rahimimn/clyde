@@ -1,0 +1,46 @@
+
+{ "soups": [
+    {
+        "soupName": "User",
+        "indexes": [
+            { "path": "Id", "type": "string"},
+            { "path": "Name", "type": "string"},
+            { "path": "Email", "type": "string"},
+            { "path": "ContactId"}
+            
+        ]
+    },
+    {
+        "soupName": "Contact",
+        "indexes": [
+            { "path": "Name", "type": "string"},
+            { "path": "MobilePhone", "type": "string"},
+            { "path": "MailingStreet", "type": "string"},
+            { "path": "MailingCity", "type": "string"},
+            { "path": "MailingState", "type": "string"},
+            { "path": "MailingPostalCode", "type": "string"},
+            { "path": "Gender_Identity__c", "type": "string"},
+            { "path": "TargetX_SRMb__Gender__c", "type": "string"},
+            { "path": "Honors_College_Interest__c", "type": "full_text"},
+            { "path": "Email", "type": "string"},
+            { "path": "Birthdate", "type": "string"},
+            { "path": "TargetX_SRMb__Student_Type__c", "type": "string"},
+            { "path": "TargetX_SRMb__Graduation_Year__c", "type": "string"},
+            { "path": "Ethnicity_Non_Applicants__c", "type": "string"},
+            { "path": "Text_Message_Consent__c", "type": "string"},
+            { "path": "OwnerId", "type": "string"}
+        ]
+    },
+    {
+        "soupName": "Counselor",
+        "indexes": [
+            { "path": "AboutMe", "type": "string"},
+            { "path": "Email", "type": "string"},
+            { "path": "Phone", "type": "string"},
+            { "path": "Name", "type": "string"},
+            { "path": "MediumPhotoUrl", "type": "stting"}
+        ]
+    }
+    
+    
+]}
