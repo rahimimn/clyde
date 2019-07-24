@@ -133,6 +133,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func loadView() {
         super.loadView()
         self.loadDataFromStore()
+        //-------------------------------------------------
+        // Sets the image style
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        self.profileImageView.clipsToBounds = true;
+        self.profileImageView.layer.borderWidth = 3
+        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.profileImageView.layer.cornerRadius = 10
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.createMap()
@@ -209,15 +218,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
                 }}}
         
-        //-------------------------------------------------
-        // Sets the image style
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-        self.profileImageView.clipsToBounds = true;
-        self.profileImageView.layer.borderWidth = 3
-        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.profileImageView.layer.cornerRadius = 10
-        
-        
+
         
     }
     
