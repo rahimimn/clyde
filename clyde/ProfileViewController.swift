@@ -387,7 +387,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPicker));
     
         // Sets the buttons.
-        toolbar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         // Adds the datepicker and toolbar to the birthdate text field.
         birthDateTextField.inputAccessoryView = toolbar
         birthDateTextField.inputView = datePicker
