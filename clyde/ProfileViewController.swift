@@ -86,7 +86,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         do {
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
-            print("\nThese are the records\(records)")
             
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
@@ -298,7 +297,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 /// Class for the Edit Profile View
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -452,11 +452,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.studentTypeTextField.text = studentTypeOptions[row]
         }
     }
+    override func loadView() {
+        super.loadView()
+        self.loadDataFromStore()
+    }
 
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pushImage()
+      //  self.pushImage()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -513,9 +517,68 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         ethnicPicker.delegate = self
     }
     
-    
+    func loadDataFromStore(){
+        let querySpec = QuerySpec.buildSmartQuerySpec(
+            
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c} from {Contact}",
+            pageSize: 10)
+        
+        
+        do {
+            let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
+            print(records)
+            
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return
+            }
+            let name = (record[0][0])
+            let phone = record[0][1]
+            let address = record[0][2]
+            let city = record[0][3]
+            let state = record[0][4]
+            let zip = record[0][5]
+            let genderId = record[0][6]
+            let email = record[0][7]
+            let birthday = record[0][8]
+            let birthsex = record[0][9]
+            let studentType = record[0][10]
+            let graduationYear = record[0][11]
+            let ethnicity = record[0][12]
+            let mobileOpt = record[0][13]
+            
+            DispatchQueue.main.async {
+                self.userName.text = name
+                self.userName.textColor = UIColor.black
+                self.mobileTextField.text = phone
+                self.addressTextField.text = address
+                self.cityTextField.text = city
+                self.stateTextField.text = state
+                self.zipTextField.text = zip
+                self.emailTextField.text = email
+                self.birthDateTextField.text = birthday
+                self.genderIdentityTextField.text = genderId
+                self.genderTextField.text = birthsex
+                self.studentTypeTextField.text = studentType
+                self.graduationYearTextField.text = graduationYear
+                self.ethnicOriginTextField.text = ethnicity
+                if mobileOpt == "1" { self.mobileOptInText = "true"
+                    self.mobileSwitch.setOn(true, animated: true)
+                }
+                else{ self.mobileOptInText = "false"
+                    self.mobileSwitch.setOn(false, animated: true)
+                }
+                
+                
+            }
+        } catch let e as Error? {
+            print(e as Any)
+            os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
+        }
+    }
 
-    override func viewWillAppear(_ animated: Bool) {
+
+     func loadDataFromSalesforce() {
         //-----------------------------------------------
         // USER INFORMATION
         addressTextField.delegate = self
@@ -539,8 +602,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                 }) { [weak self] (response, urlResponse) in
+                   
                     let contactInfoJSON = JSON(response!)
-                    
+                     print(contactInfoJSON)
                     let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                     let contactEmail = contactInfoJSON["records"][0]["Email"].string
                     let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
@@ -555,7 +619,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     let genderID = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
                     let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
                     let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
-                    let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].string
+                    let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].boolValue
                     
                     DispatchQueue.main.async {
                         self?.addressTextField.text = contactStreet
@@ -572,11 +636,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         self?.genderTextField.text = gender
                         self?.genderIdentityTextField.text = genderID
                         self?.studentTypeTextField.text = studentType
-                        if mobileOptIn == "false"{ self?.mobileOptInText = "false"
-                            self?.mobileSwitch.setOn(false, animated: true)
-                        }
-                        else{ self?.mobileOptInText = "true"
+                        if mobileOptIn == true{ self?.mobileOptInText = "true"
                             self?.mobileSwitch.setOn(true, animated: true)
+                        }
+                        else{ self?.mobileOptInText = "false"
+                            self?.mobileSwitch.setOn(false, animated: true)
                         }
                         if honorsCollegeInterest == "Hot Prospect"{self?.honorsCollegeInterestText = "Hot Prospect"
                             self?.honorsSwitch.setOn(true, animated: true)
@@ -610,7 +674,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
         record["Honors_College_Interest__c"] = self.honorsCollegeInterestText
         record["Text_Message_Consent__c"] = self.mobileOptInText
-        
+        print(record)
         // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
         // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
         let userRequest = RestClient.shared.requestForUserInfo()
