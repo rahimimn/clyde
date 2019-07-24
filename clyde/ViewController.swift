@@ -10,10 +10,14 @@ import UIKit
 import SafariServices
 import SwiftyJSON
 import SalesforceSDKCore
+import SmartSync
+import SmartStore
 
 
 class HomeViewController: UIViewController{
 
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
 
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     
@@ -23,6 +27,10 @@ class HomeViewController: UIViewController{
         
     }
     
+    override func loadView() {
+        super.loadView()
+        loadDataIntoStore()
+    }
     
     /// Will present the article webpage when tapped
     ///
@@ -61,13 +69,73 @@ class HomeViewController: UIViewController{
             present(vc, animated: true)
         }
     }
-
-
-
-
-  
     
+    
+    func loadDataIntoStore(){
+        //Loads user id into store
+        let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User")
+        RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+            let jsonResponse = response as? Dictionary<String, Any>,
+            let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+            if ((strongSelf.store.soupExists(forName: "User"))) {
+                strongSelf.store.clearSoup("User")
+                strongSelf.store.upsert(entries: results, forSoupNamed: "User")
+                os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
+            }
+        
+            //Loads contactData into store
+            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact")
+            RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+            }) { [weak self] (response, urlResponse) in
+                guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                    else{
+                        print("\nWeak or absent connection.")
+                        return
+                }
+                let jsonContact = JSON(response)
+                let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+                SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+                if ((strongSelf.store.soupExists(forName: "Contact"))){
+                    strongSelf.store.clearSoup("Contact")
+                    strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
+                    os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
+                }
+                print(counselorId)
+                
+                //Loads counselor data into the store
+                let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,Phone,MediumPhotoUrl FROM User WHERE Id = '\(counselorId)'")
+                RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
+                }) { [weak self] (response, urlResponse) in
+                    guard let strongSelf = self,
+                        let jsonResponse = response as? Dictionary<String, Any>,
+                        let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                        else{
+                            print("\nWeak or absent connection.")
+                            return
+                    }
+                    print(jsonResponse)
+                    SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
+                    if ((strongSelf.store.soupExists(forName: "Counselor"))){
+                        strongSelf.store.clearSoup("Counselor")
+                        strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
+                        os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
+                    }
+                }
+            }
+        }
+    }
 
+    
+    
     
 
 

@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
     }
     
-    
+
     private var userId = ""
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.loadView()
         self.createMap()
         self.placeInfo()
-        let request = RestClient.shared.request(forQuery: "SELECT Name, Id FROM User")
+        let request = RestClient.shared.request(forQuery: "SELECT ContactId, Name, Id FROM User")
         RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(request)")
         }){ [weak self] (response, urlResponse) in
@@ -101,6 +101,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 strongSelf.loadDataFromStore()
                 os_log("\nSmartStore loaded records.", log: strongSelf.mylog, type: .debug)
             }
+            
+            
         }
         
         }
@@ -108,13 +110,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {User:Id} from {User}",
+            smartSql: "select {Contact: Name}, {Contact: MobilePhone}, {Contact: MailingStreet},{Contact:MailingCity from {User}",
             pageSize: 1)
 
-        
-        
-        print(querySpec!)
-    
+
         do {
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
             print("here-----------------")
@@ -131,7 +130,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         } catch let e as Error? {
             print(e as Any)
-            print("Youre a failure dude")
             os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
         }
     
@@ -160,7 +158,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }) { [weak self] (response, urlResponse) in
             let userAccountJSON = JSON(response!)
             let userAccountID = userAccountJSON["user_id"].stringValue
-            let jsonResponse = response as? Dictionary<String,Any>
             //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
             RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
@@ -168,11 +165,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact WHERE Id = '\(contactAccountID)'")
+                    let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact") //WHERE Id = '\(contactAccountID)'")
                     RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
                         let contactInfoJSON = JSON(response!)
+                        print(contactInfoJSON)
                         let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                         let contactEmail = contactInfoJSON["records"][0]["Email"].string
                         let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string

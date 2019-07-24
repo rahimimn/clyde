@@ -129,8 +129,10 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
         counselorView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
+        let alert = UIAlertController(title: "Counselor Not Available", message: "There was an error involving the database.", preferredStyle: .alert)
         
-        
+        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
 //        let idquerySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:Id} from {User}", pageSize: 1)
 //        do{
 //            let records = try self.store.query(using: idquerySpec!, startingFromPageIndex: 0)
@@ -142,9 +144,11 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
        let userRequest = RestClient.shared.requestForUserInfo()
        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking on user info request: \(userRequest)")
-        }) { [weak self] (response, urlResponse) in
-           let userAccountJSON = JSON(response!)
-           let userAccountID = userAccountJSON["user_id"].stringValue
+            loadingIndicator.stopAnimating()
+            self.present(alert, animated:true)
+        
+       }) { [weak self] (response, urlResponse) in
+        let userAccountJSON = JSON(response!);           let userAccountID = userAccountJSON["user_id"].stringValue
         
             
         
@@ -153,6 +157,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
             RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
                 SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
+                loadingIndicator.stopAnimating()
+                self!.present(alert, animated:true)
             }) { [weak self] (response, urlResponse) in
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
@@ -161,6 +167,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 // Creates a request for the user's counselor id, sends it, and saves json into response, uses SWIFTYJSON to convert needed data
                 let counselorIDRequest = RestClient.shared.request(forQuery: "SELECT OwnerId FROM Contact WHERE Id = '\(contactAccountID)'")
                 RestClient.shared.send(request: counselorIDRequest, onFailure: { (error, urlResponse) in
+                    loadingIndicator.stopAnimating()
+                    self!.present(alert, animated:true)
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor ID Request: \(counselorIDRequest)")
                 }) { [weak self] (response, urlResponse) in
                     let counselorAccountJSON = JSON(response!)
@@ -171,6 +179,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,image_url__c FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
+                        loadingIndicator.stopAnimating()
+                        self!.present(alert, animated:true)
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
                     }) { [weak self] (response, urlResponse) in
                         let counselorInfoJSON = JSON(response!)
