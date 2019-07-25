@@ -17,14 +17,9 @@ import CoreLocation
 
 
 /// Class for the Profile view
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
+   
     private var userId = ""
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -50,11 +45,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var honorsCollegeInterestText: UILabel!
     @IBOutlet weak var mobileOptInText: UILabel!
     
-
+    //offline management
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
 
-    
     
     // Private variables for map
     private var locationManager = CLLocationManager()
@@ -62,6 +56,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Outlet for map view
     @IBOutlet weak var profileMap: MKMapView!
     
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.loadDataFromStore()
+        // Sets the image style
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        self.profileImageView.clipsToBounds = true;
+        self.profileImageView.layer.borderWidth = 3
+        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.profileImageView.layer.cornerRadius = 10
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.createMap()
+    }
+    
+    /// Loads the profile view
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.menuBar(menuBarItem: menuBarButton)
+    }
     
     /// Function that updates the location constantly.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
@@ -77,6 +96,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
 //{Contact:Honors_College_Interest__c},
+    
+    /// Loads the profile data from the SmartStore soup
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
@@ -117,43 +138,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.ethnicText.text = ethnicity
                 if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
                 else{ self.mobileOptInText.text = "Opt-in"}
-                
-                
+
             }
         } catch let e as Error? {
             print(e as Any)
             os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
         }
-    
-    
-    
-    
-    
-    }
-    override func loadView() {
-        super.loadView()
-        self.loadDataFromStore()
-        //-------------------------------------------------
-        // Sets the image style
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-        self.profileImageView.clipsToBounds = true;
-        self.profileImageView.layer.borderWidth = 3
-        self.profileImageView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        self.profileImageView.layer.cornerRadius = 10
-        
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        self.createMap()
-    }
-    /// Loads the profile view
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.menuBar(menuBarItem: menuBarButton)
+
     }
     
-     /// Pulls the Salesforce data and displays it on the page
-     func placeInfo() {
+  
+
+    
+    
+     /// Loads the profile data directly from Salesforce
+     func loadDataFromSalesforce() {
         //-----------------------------------------------
         // USER INFORMATION
         addressText.delegate = self
@@ -192,12 +191,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
                         let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
                         let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].string
-                        
-                        
-                        
-                        
-                     
-                            
                 DispatchQueue.main.async {
                     self?.addressText.text = "\(contactStreet)\n\(contactCity), \(contactState), \(contactCode)"
                     self?.birthdateText.text = contactBirth
@@ -216,14 +209,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     else{self?.honorsCollegeInterestText.text = "No"}
                     self?.userId = userAccountID
                 }
-                }}}
-        
-
-        
+                }
+            }
+        }
     }
     
     
-    /// Function that adds the map to the view and calculates the distance between the user and college of charleston
+    /// Adds the map to the view and calculates the distance between the user and College of Charleston
     func createMap(){
         // MAP
         profileMap.delegate = self
@@ -280,17 +272,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self?.profileMap.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
         }
-        
-        
         let cofcAddress = CLLocation(latitude: cofcLocation.latitude, longitude: cofcLocation.longitude)
         let distanceInMeters = currentLocation.distance(from:cofcAddress)
         
         self.distanceText.text = "\((distanceInMeters/1609.344).rounded().formatForProfile) miles"
-        
-        
-        
-        
-        
     }
 }
 
@@ -298,14 +283,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 /// Class for the Edit Profile View
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    
+     // Variables
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-  // Variables
     
     //Picker options
     var birthSexOptions = ["Female","Male"]
@@ -371,8 +352,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     // Creates a date picker for the birthday field.
     let datePicker = UIDatePicker()
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
    
-    /// Function that shows the date picker for the birthdate field when called.
+    /// Shows the date picker for the birthdate field when called.
     private func showDatePicker(){
         // Formats the date picker.
         datePicker.datePickerMode = .date
