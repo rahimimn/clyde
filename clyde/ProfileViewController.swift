@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c} from {Contact}",
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest__c} from {Contact}",
             pageSize: 10)
 
 
@@ -112,6 +112,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }
+            print(record)
             let name = (record[0][0])
             let phone = record[0][1]
             let address = record[0][2]
@@ -123,6 +124,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let graduationYear = record[0][11]
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
+            let honors = record[0][14]
             
             DispatchQueue.main.async {
                 self.userName.text = name
@@ -138,6 +140,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.ethnicText.text = ethnicity
                 if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
                 else{ self.mobileOptInText.text = "Opt-in"}
+                if honors == "Hot Prospect"{
+                    self.honorsCollegeInterestText.text = "Yes"
+                }else{ self.honorsCollegeInterestText.text = "No"}
 
             }
         } catch let e as Error? {
@@ -520,7 +525,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
             
-            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c} from {Contact}",
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest__c} from {Contact}",
             pageSize: 10)
         
         
@@ -546,6 +551,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let graduationYear = record[0][11]
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
+            let honors = record[0][14]
             
             DispatchQueue.main.async {
                 self.userName.text = name
@@ -567,6 +573,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
                 else{ self.mobileOptInText = "false"
                     self.mobileSwitch.setOn(false, animated: true)
+                }
+                if honors == "Hot Prospect"{
+                    self.honorsCollegeInterestText = "true"
+                    self.honorsSwitch.setOn(true, animated: true)
+                }else{
+                    self.honorsCollegeInterestText = "false"
+                    self.honorsSwitch.setOn(false, animated: true)
                 }
                 
                 

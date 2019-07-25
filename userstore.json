@@ -21,7 +21,7 @@
             { "path": "MailingPostalCode", "type": "string"},
             { "path": "Gender_Identity__c", "type": "string"},
             { "path": "TargetX_SRMb__Gender__c", "type": "string"},
-            { "path": "Honors_College_Interest__c", "type": "full_text"},
+            { "path": "Honors_College_Interest__c", "type": "json1"},
             { "path": "Email", "type": "string"},
             { "path": "Birthdate", "type": "string"},
             { "path": "TargetX_SRMb__Student_Type__c", "type": "string"},
