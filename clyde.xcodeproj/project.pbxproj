@@ -28,6 +28,8 @@
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B230DD3422E8A7E0005674B4 /* userstore.json in Resources */ = {isa = PBXBuildFile; fileRef = B230DD3322E8A7DF005674B4 /* userstore.json */; };
+		B230DD4022E9FACB005674B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		B230DD4522EA04E7005674B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B230DD4422EA04E7005674B4 /* Reachability.m */; };
 		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
@@ -110,6 +112,9 @@
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B230DD3322E8A7DF005674B4 /* userstore.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = userstore.json; path = ../userstore.json; sourceTree = "<group>"; };
+		B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B230DD4222E9FB60005674B4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../Downloads/Reachability-master/Reachability.h"; sourceTree = "<group>"; };
+		B230DD4422EA04E7005674B4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../Downloads/Reachability-master/Reachability.m"; sourceTree = "<group>"; };
 		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
@@ -157,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B230DD4022E9FACB005674B4 /* SystemConfiguration.framework in Frameworks */,
 				B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */,
 				78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */,
 			);
@@ -213,6 +219,8 @@
 				4F393A281C3C8BCD00B3EA13 /* main.swift */,
 				4FF12F8A1DCA91F5004D9EF9 /* clyde.entitlements */,
 				B77BD8A221125B510036B284 /* bootconfig.plist */,
+				B230DD4422EA04E7005674B4 /* Reachability.m */,
+				B230DD4222E9FB60005674B4 /* Reachability.h */,
 				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
 				B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */,
 				CEA8CA031F071B2300448B51 /* Images.xcassets */,
@@ -224,6 +232,7 @@
 		6B868AEB1ACA7FCA4636C7F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */,
 				B2358DDB22D3A7F800E00348 /* MapKit.framework */,
 				82A29C75280BDF73123F14B4 /* Pods_clyde.framework */,
 			);
@@ -617,6 +626,7 @@
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
+				B230DD4522EA04E7005674B4 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

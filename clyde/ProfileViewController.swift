@@ -1,11 +1,9 @@
 //
 //  ProfileViewController.swift
-//  clyde
 //
 //  Created by Rahimi, Meena Nichole (Student) on 6/20/19.
-//  Copyright © 2019 Salesforce. All rights reserved.
 //
-//login.salesforce.com
+
 import UIKit
 import MobileCoreServices
 import SalesforceSDKCore
@@ -17,9 +15,10 @@ import CoreLocation
 
 
 /// Class for the Profile view
-
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
    
+    
+    
     private var userId = ""
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -48,7 +47,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //offline management
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
-
+   
     
     // Private variables for map
     private var locationManager = CLLocationManager()
@@ -80,6 +79,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
+        
     }
     
     /// Function that updates the location constantly.
@@ -287,6 +287,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
      // Variables
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    var reach: Reachability?
+    var internetConnection = false
     
     //Picker options
     var birthSexOptions = ["Female","Male"]
@@ -359,7 +361,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     
-   
+    func reachabilityChanged(notification: NSNotification) {
+        if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN() {
+            print("Service available!!!")
+        } else {
+            print("No service available!!!")
+        }
+    }
+    
     /// Shows the date picker for the birthdate field when called.
     private func showDatePicker(){
         // Formats the date picker.
@@ -397,7 +406,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         // Call to push data into Salesforce
-        upsertInformation()
+        updateSalesforceData()
+       // if internetConnection == true{
+         //   upsertInformationintoSalesforce()}
         
         
     }
@@ -644,7 +655,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     /// Fucntion that sends data into Salesforce, this will need to be edited at some point
-    private func upsertInformation(){
+    private func updateSalesforceData(){
         
         // Creates a new record and stores appropriate fields.
         var record = [String: Any]()
@@ -682,16 +693,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 let contactAccountJSON = JSON(response!)
                 let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
                
-        print("Creating upsert request")
-        //Creates the upsert request.
-        let upsertRequest = RestClient.shared.requestForUpsert(withObjectType: "Contact", externalIdField: "Id", externalId: contactAccountID, fields: record)
-        
-        
-        
-        
-        //Sends the upsert request
-        RestClient.shared.send(request: upsertRequest, onFailure: { (error, URLResponse) in
-            SalesforceLogger.d(type(of:self!), message:"Error invoking while sending upsert request: \(upsertRequest), error: \(error)")
+        print("Creating update request")
+                
+        //Creates the update request.
+        let updateRequest = RestClient.shared.requestForUpdate(withObjectType: "Contact", objectId: contactAccountID, fields: record)
+
+        //Sends the update request
+        RestClient.shared.send(request: updateRequest, onFailure: { (error, URLResponse) in
+            SalesforceLogger.d(type(of:self!), message:"Error invoking while sending upsert request: \(updateRequest), error: \(error)")
             //Creates a save alert to be presented whenever the user saves their information
             let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))

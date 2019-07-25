@@ -35,11 +35,8 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         let userRequest = RestClient.shared.requestForUpsert(withObjectType: "Test__c", externalIdField: "Id", externalId: "a3m540000006nvzAAA", fields: record)
         print(record)
         RestClient.shared.send(request: userRequest, onFailure: { (error, URLResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(userRequest), error: \(error)")
+            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(userRequest)")
             //Creates a save alert to be presented whenever the user saves their information
-            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(errorAlert, animated: true)
         }){(response, URLResponse) in
             //Creates a save alert to be presented whenever the user saves their information
             let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)

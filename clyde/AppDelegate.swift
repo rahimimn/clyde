@@ -31,6 +31,7 @@ import SmartStore
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var reach: Reachability?
     let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR" //"3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5"
     let OAuthRedirectURI = "cofcapppartial://oauth/done"
     let scopes = ["full"]
@@ -71,6 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
 
         }
+        
+       self.reach = Reachability.forInternetConnection()
+        self.reach!.reachableOnWWAN = false
+
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: NSNotification.Name.reachabilityChanged, object: nil)
+        self.reach!.startNotifier()
 
         return true
     }
@@ -109,6 +116,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         postResetBlock()
+    }
+    
+    @objc func reachabilityChanged(notification: NSNotification){
+        if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN(){
+            print("\nService available")
+        }else{
+            print("\nNo Service")
+        }
     }
     
    
