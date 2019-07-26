@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func loadView() {
         super.loadView()
-        
+        self.loadDataIntoStore()
         if let smartStore = self.store,
             let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
             do {
@@ -100,6 +100,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         self.currentLocation = locations.last as CLLocation?
     }
+    
+    
+    func loadDataIntoStore(){
+        let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest__c FROM Contact")
+        RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            print(results)
+            let jsonContact = JSON(response)
+            let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+            SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+            if (((strongSelf.store?.soupExists(forName: "Contact"))!)){
+                strongSelf.store?.clearSoup("Contact")
+                strongSelf.store?.upsert(entries: results, forSoupNamed: "Contact")
+                os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
+            }
+        }
+    }
+    
     
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
@@ -340,7 +365,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
      // Variables
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
     var reach: Reachability?
     var internetConnection = false
@@ -389,14 +414,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    
-    private var mobileOptInText = "false"
+    private var mobileText = ""
+    private var mobileOptInText = false
     @IBOutlet weak var mobileSwitch: UISwitch!
     @IBAction func mobileAction(_ sender: UISwitch) {
         if sender.isOn == true{
-            mobileOptInText = "true"
+            mobileOptInText = true
         }else{
-            mobileOptInText = "false"
+            mobileOptInText = false
         }
     }
     
@@ -419,8 +444,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func reachabilityChanged(notification: NSNotification) {
         if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN() {
             print("Service available!!!")
+            self.internetConnection = true
         } else {
             print("No service available!!!")
+            self.internetConnection = false
         }
     }
     
@@ -461,9 +488,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         // Call to push data into Salesforce
-        updateSalesforceData()
-       // if internetConnection == true{
-         //   upsertInformationintoSalesforce()}
+       // updateSalesforceData()
+        
+              // if internetConnection == true{
+         //   updateSalesforceData()}
         
         
     }
@@ -509,8 +537,43 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     override func loadView() {
         super.loadView()
-        self.loadDataFromStore()
+        self.syncDown()
+        
+        //self.loadDataFromStore()
     }
+    
+    
+    
+    func syncDown(){
+        if let smartStore = self.store,
+            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+            do {
+                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
+                    if syncState.isDone() {
+                        self?.loadFromStore()
+                    }
+                }
+            } catch {
+                print("Unexpected sync error: \(error).")
+            }
+        }    }
+    
+    
+    
+    
+    func syncUp(){
+        if let smartStore = self.store,
+            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+            do {
+                try syncMgr.reSync(named: "syncUpContact") { [weak self] syncState in
+                    if syncState.isDone() {
+                        self?.syncDown()
+                    }
+                }
+            } catch {
+                print("Unexpected sync error: \(error).")
+            }
+        }     }
 
     /// Presents view
     override func viewDidLoad() {
@@ -570,7 +633,81 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         ethnicOriginTextField.inputAccessoryView = toolbar
         ethnicOriginTextField.inputView = ethnicPicker
         ethnicPicker.delegate = self
+        
+        
+        
+        mobileTextField.inputAccessoryView = toolbar
+        graduationYearTextField.inputAccessoryView = toolbar
     }
+    func loadFromStore(){
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest__c} from {Contact}", pageSize: 1),
+            let smartStore = self.store,
+            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
+            let name = (record[0][0])
+            let phone = record[0][1]
+            let address = record[0][2]
+            let city = record[0][3]
+            let state = record[0][4]
+            let zip = record[0][5]
+            let genderId = record[0][6]
+            let email = record[0][7]
+            let birthday = record[0][8]
+            let birthsex = record[0][9]
+            let studentType = record[0][10]
+            let graduationYear = record[0][11]
+            let ethnicity = record[0][12]
+            let mobileOpt = record[0][13]
+            let honors = record[0][14]
+            
+            DispatchQueue.main.async {
+                self.userName.text = name
+                self.userName.textColor = UIColor.black
+                self.mobileTextField.text = phone
+                self.addressTextField.text = address
+                self.cityTextField.text = city
+                self.stateTextField.text = state
+                self.zipTextField.text = zip
+                self.emailTextField.text = email
+                self.birthDateTextField.text = birthday
+                self.genderIdentityTextField.text = genderId
+                self.genderTextField.text = birthsex
+                self.studentTypeTextField.text = studentType
+                self.graduationYearTextField.text = graduationYear
+                self.ethnicOriginTextField.text = ethnicity
+                if mobileOpt == "0"{ self.mobileText = "Opt-out"}
+                else{ self.mobileText = "Opt-in"}
+                if honors == "Hot prospect"{
+                    self.honorsCollegeInterestText = "Yes"
+                }else{ self.honorsCollegeInterestText = "No"}
+                
+            }
+        }    }
+    
+    
+    func loadDataIntoStore(){
+        let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest__c FROM Contact")
+        RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            print(results)
+            let jsonContact = JSON(response)
+            let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+            SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+            if (((strongSelf.store?.soupExists(forName: "Contact"))!)){
+                strongSelf.store?.clearSoup("Contact")
+                strongSelf.store?.upsert(entries: results, forSoupNamed: "Contact")
+                os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
+            }
+        }
+    }
+    
+    
     
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
@@ -580,7 +717,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         
         do {
-            let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             print(records)
             
             guard let record = records as? [[String]] else {
@@ -618,10 +755,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 self.studentTypeTextField.text = studentType
                 self.graduationYearTextField.text = graduationYear
                 self.ethnicOriginTextField.text = ethnicity
-                if mobileOpt == "1" { self.mobileOptInText = "true"
+                if mobileOpt == "1" { self.mobileOptInText = true
                     self.mobileSwitch.setOn(true, animated: true)
                 }
-                else{ self.mobileOptInText = "false"
+                else{ self.mobileOptInText = false
                     self.mobileSwitch.setOn(false, animated: true)
                 }
                 if honors == "Hot prospect"{
@@ -641,83 +778,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
 
 
-     func loadDataFromSalesforce() {
-        //-----------------------------------------------
-        // USER INFORMATION
-        addressTextField.delegate = self
-        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
-        let userRequest = RestClient.shared.requestForUserInfo()
-        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
-        }) { [weak self] (response, urlResponse) in
-            let userAccountJSON = JSON(response!)
-            let userAccountID = userAccountJSON["user_id"].stringValue
-            
-            
-            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
-            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
-            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
-                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
-            }) { [weak self] (response, urlResponse) in
-                let contactAccountJSON = JSON(response!)
-                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                let contactInformationRequest = RestClient.shared.request(forQuery: "SELECT MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, Honors_College_Interest__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c FROM Contact WHERE Id = '\(contactAccountID)'")
-                RestClient.shared.send(request: contactInformationRequest, onFailure: { (error, urlResponse) in
-                    SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
-                }) { [weak self] (response, urlResponse) in
-                   
-                    let contactInfoJSON = JSON(response!)
-                     print(contactInfoJSON)
-                    let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
-                    let contactEmail = contactInfoJSON["records"][0]["Email"].string
-                    let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
-                    let contactStreet = contactInfoJSON["records"][0]["MailingStreet"].stringValue
-                    let contactCode = contactInfoJSON["records"][0]["MailingPostalCode"].stringValue
-                    let contactState = contactInfoJSON["records"][0]["MailingState"].stringValue
-                    let contactCity = contactInfoJSON["records"][0]["MailingCity"].stringValue
-                    let contactName = contactInfoJSON["records"][0]["Name"].stringValue
-                    let contactBirth = contactInfoJSON["records"][0]["Birthdate"].stringValue
-                    let cell = contactInfoJSON["records"][0]["MobilePhone"].stringValue
-                    let gender = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
-                    let genderID = contactInfoJSON["records"][0]["TargetX_SRMb__Gender__c"].stringValue
-                    let studentType = contactInfoJSON["records"][0]["TargetX_SRMb__Student_Type__c"].stringValue
-                    let honorsCollegeInterest = contactInfoJSON["records"][0]["Honors_College_Interest__c"].stringValue
-                    let mobileOptIn = contactInfoJSON["records"][0]["Text_Message_Consent__c"].boolValue
-                    
-                    DispatchQueue.main.async {
-                        self?.addressTextField.text = contactStreet
-                        self?.cityTextField.text = contactCity
-                        self?.stateTextField.text = contactState
-                        self?.zipTextField.text = contactCode
-                        self?.birthDateTextField.text = contactBirth
-                        self?.emailTextField.text = contactEmail
-                        self?.ethnicOriginTextField.text = contactEthnic
-                        self?.graduationYearTextField.text = contactGradYear
-                        self?.userName.text = contactName
-                        self?.userName.textColor = UIColor.black
-                        self?.mobileTextField.text = cell
-                        self?.genderTextField.text = gender
-                        self?.genderIdentityTextField.text = genderID
-                        self?.studentTypeTextField.text = studentType
-                        if mobileOptIn == true{ self?.mobileOptInText = "true"
-                            self?.mobileSwitch.setOn(true, animated: true)
-                        }
-                        else{ self?.mobileOptInText = "false"
-                            self?.mobileSwitch.setOn(false, animated: true)
-                        }
-                        if honorsCollegeInterest == "Hot prospect"{self?.honorsCollegeInterestText = "Hot prospect"
-                            self?.honorsSwitch.setOn(true, animated: true)
-                        }
-                        else{self?.honorsCollegeInterestText = "--None--"
-                            self?.honorsSwitch.setOn(false, animated: true)
-                        }
-                    }
-                }}}}
-    
-    
-    
-    
-    /// Fucntion that sends data into Salesforce, this will need to be edited at some point
+    /// Sends data into Salesforce, this will need to be edited at some point
     private func updateSalesforceData(){
         
         // Creates a new record and stores appropriate fields.
