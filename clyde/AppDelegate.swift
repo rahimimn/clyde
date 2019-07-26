@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AuthHelper.loginIfRequired { [weak self] in
             self?.setupRootViewController()
-            SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
+            SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
 
         }
         

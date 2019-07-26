@@ -103,7 +103,7 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
-               
+               print(results)
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")

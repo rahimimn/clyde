@@ -140,7 +140,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.ethnicText.text = ethnicity
                 if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
                 else{ self.mobileOptInText.text = "Opt-in"}
-                if honors == "Hot Prospect"{
+                if honors == "Hot prospect"{
                     self.honorsCollegeInterestText.text = "Yes"
                 }else{ self.honorsCollegeInterestText.text = "No"}
 
@@ -210,7 +210,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self?.studentTypeText.text = studentType
                     if mobileOptIn == "false"{ self?.mobileOptInText.text = "Opt-out"}
                     else{ self?.mobileOptInText.text = "Opt-in"}
-                    if honorsCollegeInterest == "false"{self?.honorsCollegeInterestText.text = "Yes"}
+                    if honorsCollegeInterest == "Honors prospect"{self?.honorsCollegeInterestText.text = "Yes"}
                     else{self?.honorsCollegeInterestText.text = "No"}
                     self?.userId = userAccountID
                 }
@@ -329,13 +329,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var studentTypeTextField: UITextField!
     @IBOutlet weak var userName: UILabel!
     
-    private var honorsCollegeInterestText = "false"
+    private var honorsCollegeInterestText = "--None--"
     @IBOutlet weak var honorsSwitch: UISwitch!
     @IBAction func honorsAction(_ sender: UISwitch) {
         if sender.isOn == true{
-            honorsCollegeInterestText = "Hot Prospect"
+            honorsCollegeInterestText = "Hot prospect"
         }else{
-            honorsCollegeInterestText = "false"
+            honorsCollegeInterestText = "--None--"
         }
     }
     
@@ -574,11 +574,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 else{ self.mobileOptInText = "false"
                     self.mobileSwitch.setOn(false, animated: true)
                 }
-                if honors == "Hot Prospect"{
+                if honors == "Hot prospect"{
                     self.honorsCollegeInterestText = "true"
                     self.honorsSwitch.setOn(true, animated: true)
                 }else{
-                    self.honorsCollegeInterestText = "false"
+                    self.honorsCollegeInterestText = "--None--"
                     self.honorsSwitch.setOn(false, animated: true)
                 }
                 
@@ -655,10 +655,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                         else{ self?.mobileOptInText = "false"
                             self?.mobileSwitch.setOn(false, animated: true)
                         }
-                        if honorsCollegeInterest == "Hot Prospect"{self?.honorsCollegeInterestText = "Hot Prospect"
+                        if honorsCollegeInterest == "Hot prospect"{self?.honorsCollegeInterestText = "Hot prospect"
                             self?.honorsSwitch.setOn(true, animated: true)
                         }
-                        else{self?.honorsCollegeInterestText = "false"
+                        else{self?.honorsCollegeInterestText = "--None--"
                             self?.honorsSwitch.setOn(false, animated: true)
                         }
                     }
