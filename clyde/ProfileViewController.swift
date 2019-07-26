@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var mobileOptInText: UILabel!
     
     //offline management
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
    
     
@@ -62,7 +62,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func loadView() {
         super.loadView()
-        self.loadDataFromStore()
+        
+        if let smartStore = self.store,
+            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+            do {
+                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
+                    if syncState.isDone() {
+                        self?.loadFromStore()
+                    }
+                }
+            } catch {
+                print("Unexpected sync error: \(error).")
+            }
+        }
+        
+       // self.loadDataFromStore()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -106,7 +120,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 
         do {
-            let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
@@ -154,7 +168,43 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
   
 
-    
+    func loadFromStore(){
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest__c} from {Contact}", pageSize: 1),
+            let smartStore = self.store,
+            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
+            let name = (record[0][0])
+            let phone = record[0][1]
+            let address = record[0][2]
+            let genderId = record[0][6]
+            let email = record[0][7]
+            let birthday = record[0][8]
+            let birthsex = record[0][9]
+            let studentType = record[0][10]
+            let graduationYear = record[0][11]
+            let ethnicity = record[0][12]
+            let mobileOpt = record[0][13]
+            let honors = record[0][14]
+            
+            DispatchQueue.main.async {
+                self.userName.text = name
+                self.userName.textColor = UIColor.black
+                self.mobileText.text = phone
+                self.addressText.text = address
+                self.emailText.text = email
+                self.birthdateText.text = birthday
+                self.genderIdentityText.text = genderId
+                self.genderText.text = birthsex
+                self.studentTypeText.text = studentType
+                self.anticipatedStartText.text = graduationYear
+                self.ethnicText.text = ethnicity
+                if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
+                else{ self.mobileOptInText.text = "Opt-in"}
+                if honors == "Hot prospect"{
+                    self.honorsCollegeInterestText.text = "Yes"
+                }else{ self.honorsCollegeInterestText.text = "No"}
+                
+            }
+        }    }
     
      /// Loads the profile data directly from Salesforce
      func loadDataFromSalesforce() {
