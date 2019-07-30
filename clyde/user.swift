@@ -38,7 +38,7 @@ struct User : Decodable{
         case phone = "Phone"
         case email = "Email"
         case gender = "TargetX_SRMb__Gender__c"
-        case honorsCollegeInterest = "Honors_College_Interest__c"
+        case honorsCollegeInterest = "Honors_College_Interest_Check__c"
         case mobileOpt = "Text_Message_Consent__c"
         case genderId = "Gender_Identity__c"
         case ethnicity = "Ethnicity_Non_Applicants__c"
