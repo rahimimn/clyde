@@ -385,7 +385,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
     var reach: Reachability?
     var internetConnection = false
-    
+    var studentStatus = true
     //Picker options
     var birthSexOptions = ["Female","Male"]
     var genderOptions = ["Female","Male","Other"]
@@ -505,15 +505,18 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        // Call to push data into Salesforce
-       // updateSalesforceData()
-        self.insertIntoSoup()
-        self.syncUp()
-        sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
-              // if internetConnection == true{
-         //   updateSalesforceData()}
-        
-        
+        if self.studentStatus == true{
+            self.insertIntoSoup()
+            self.syncUp()
+            sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
+        }else{
+            sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
+            let alert = UIAlertController(title: "Cannot Save Information", message: "Clyde Club is not allowed to edit your information at this time.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)        }
+
     }
     
     /// UIPickerView Functions
@@ -574,6 +577,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
                     if syncState.isDone() {
                         self?.loadFromStore()
+                        
                     }
                 }
             } catch {
@@ -590,7 +594,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             do {
                 try syncMgr.reSync(named: "syncUpContact") { [weak self] syncState in
                     if syncState.isDone() {
-                        //self?.updateSalesforceData()
+                        let alert = UIAlertController(title: "Information Saved", message: "Clyde Club saved your information.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        
+                        self?.present(alert, animated: true)
                     }
                 }
             } catch {
@@ -730,7 +738,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }else{ self.honorsCollegeInterestText = "1"
                     self.honorsSwitch.setOn(true, animated: true)
                 }
-                
+                if status == "Prospect" || status == "Suspect"{
+                    self.studentStatus = true
+                }else{
+                    self.studentStatus = false
+                }
             }
         }    }
     
@@ -852,6 +864,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.textColor = UIColor.black
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.isEnabled = self.studentStatus
+        self.mobileSwitch.isEnabled = false
+        self.honorsSwitch.isEnabled = self.studentStatus
+        return self.studentStatus
+        }
+    
     /// Method that creates the camera and photo library action
     @objc func tappedView(){
         let alert = UIAlertController(title: "Select Image From", message: "", preferredStyle: .actionSheet)
@@ -902,19 +922,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
       //  pullImage()
     }
     
-    func pushImage(){
-        let imageRequest = RestClient.shared.request(forOwnedFilesList: nil, page: 0)
-        RestClient.shared.send(request: imageRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on contact id request: \(imageRequest)")
-        }) { [weak self] (response, urlResponse) in
-            let contactAccountJSON = JSON(response!)
-            
-        }}
-    
-    
-
-    
-    
     func saveImage(){
         let imageData = self.profileImage.pngData()!
         let imageRequest = RestClient.shared.request(forUploadFile: imageData, name: "ProfileImage", description: "This is the user's profile picture.", mimeType: "image/png")
@@ -932,6 +939,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             os_log("\nSuccessful response received")
         print(self.profileImage.jpegData(compressionQuality: 0.0))
         }}
+    func imageSaved
+    
+    
+    
     
     /// Error handler for the image picker
     @objc func imageError(image: UIImage, didFinishSavingwithError error: NSErrorPointer, contextInfo: UnsafeRawPointer){
