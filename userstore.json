@@ -28,9 +28,9 @@
             { "path": "TargetX_SRMb__Graduation_Year__c", "type": "string"},
             { "path": "Ethnicity_Non_Applicants__c", "type": "string"},
             { "path": "Text_Message_Consent__c", "type": "string"},
-            { "path": "OwnerId", "type": "string",
+            { "path": "OwnerId", "type": "string"},
             { "path": "Status_Category__c", "type": "string"}
-            }
+            
         ]
     },
     {

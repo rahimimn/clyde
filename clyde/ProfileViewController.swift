@@ -684,7 +684,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Loads data from store and presents on edit profile
     func loadFromStore(){
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c} from {Contact}", pageSize: 1),
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c},{Contact:Status_Category__c} from {Contact}", pageSize: 1),
             let smartStore = self.store,
             let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
             let name = (record[0][0])
@@ -702,6 +702,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
             let honors = record[0][14]
+            let status = record[0][15]
             DispatchQueue.main.async {
                 self.userName.text = name
                 self.userName.textColor = UIColor.black
