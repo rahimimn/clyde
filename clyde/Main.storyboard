@@ -405,7 +405,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="962.66666666666663"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2U-qA-hfI">
                                                 <rect key="frame" x="0.0" y="314" width="414" height="35"/>
@@ -3012,6 +3012,7 @@
                         <outlet property="mobileSwitch" destination="EEq-01-xev" id="Txx-rf-31I"/>
                         <outlet property="mobileTextField" destination="RId-6X-vfp" id="V0h-aX-HP1"/>
                         <outlet property="profileImageView" destination="bow-PJ-Amv" id="IrG-EG-6F3"/>
+                        <outlet property="scrollView" destination="hG9-KD-aDf" id="QFz-9o-t4H"/>
                         <outlet property="stateTextField" destination="2bg-Ic-E5j" id="cir-hf-xVq"/>
                         <outlet property="studentTypeTextField" destination="DZD-GE-tr3" id="kFD-qF-Oxo"/>
                         <outlet property="userName" destination="kBu-YU-7SX" id="XDM-g8-DX1"/>

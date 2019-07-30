@@ -33,7 +33,6 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         var record = [String: Any]()
         record["Test_Input__c"] = textInput.text
         let userRequest = RestClient.shared.requestForUpsert(withObjectType: "Test__c", externalIdField: "Id", externalId: "a3m540000006nvzAAA", fields: record)
-        print(record)
         RestClient.shared.send(request: userRequest, onFailure: { (error, URLResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(userRequest)")
             //Creates a save alert to be presented whenever the user saves their information
@@ -70,7 +69,6 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
             SalesforceLogger.d(type(of:self), message:"Error invoking on contact id request: \(testRequest), \(error) ")
         }) { [weak self] (response, urlResponse) in
             let testJson = JSON(response!)
-            print(testJson)
             let name = testJson["records"][0]["Name"].stringValue
             let input = testJson["records"][0]["Test_Input__c"].stringValue
             DispatchQueue.main.async {

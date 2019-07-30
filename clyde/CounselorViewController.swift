@@ -170,6 +170,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     loadingIndicator.stopAnimating()
                     self!.present(alert, animated:true)
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor ID Request: \(counselorIDRequest)")
+                    
                 }) { [weak self] (response, urlResponse) in
                     let counselorAccountJSON = JSON(response!)
                     let counselorId = counselorAccountJSON["records"][0]["OwnerId"]
@@ -182,6 +183,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                         loadingIndicator.stopAnimating()
                         self!.present(alert, animated:true)
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
+                        
                     }) { [weak self] (response, urlResponse) in
                         let counselorInfoJSON = JSON(response!)
                         let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue

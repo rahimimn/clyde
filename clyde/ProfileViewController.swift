@@ -93,18 +93,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
-        
-        
-//            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.FileDownload?file=01554000000dtUX")!
-//
-//            let task = URLSession.shared.dataTask(with: url){ data,response, error in
-//                guard let data = data, error == nil else {return}
-//                DispatchQueue.main.async {
-//                    self.profileImageView.image = UIImage(data:data)
-//
-//                }
-//            }
-//            task.resume()
+
+            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")!
+
+            let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                guard let data = data, error == nil else {return}
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data:data)
+
+                }
+            }
+            task.resume()
     }
     
     /// Function that updates the location constantly.
@@ -117,7 +116,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     }
 
-    
+
+
     func loadDataIntoStore(){
         let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c FROM Contact")
         RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
@@ -129,7 +129,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     print("\nWeak or absent connection.")
                     return
             }
-            print(results)
             let jsonContact = JSON(response)
             let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
             SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
@@ -156,7 +155,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c} from {Contact}",
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c}, {Contact Status_Category__c} from {Contact}",
             pageSize: 10)
 
 
@@ -182,8 +181,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let honors = record[0][14]
            
             DispatchQueue.main.async {
-                 print(record)
-                 print("Honors are \(honors)")
                 self.userName.text = name
                 self.userName.textColor = UIColor.black
                 self.mobileText.text = phone
@@ -273,7 +270,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactInformationRequest)")
                     }) { [weak self] (response, urlResponse) in
                         let contactInfoJSON = JSON(response!)
-                        print(contactInfoJSON)
                         let contactGradYear = contactInfoJSON["records"][0]["TargetX_SRMb__Graduation_Year__c"].string
                         let contactEmail = contactInfoJSON["records"][0]["Email"].string
                         let contactEthnic = contactInfoJSON["records"][0][ "Ethnicity_Non_Applicants__c"].string
@@ -377,6 +373,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 }
 
+///////////////////////////////////////////////////////////////////////////
 
 /// Class for the Edit Profile View
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -406,6 +403,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     // Outlet for user's profile photo image view
     @IBOutlet weak var profileImageView: UIImageView!
  
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // Outlets for the UI Textfields
     @IBOutlet weak var addressTextField: UITextField!
@@ -422,6 +420,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var genderIdentityTextField: UITextField!
     @IBOutlet weak var studentTypeTextField: UITextField!
     @IBOutlet weak var userName: UILabel!
+    
     
     private var honorsCollegeInterestText = ""
     @IBOutlet weak var honorsSwitch: UISwitch!
@@ -592,7 +591,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 try syncMgr.reSync(named: "syncUpContact") { [weak self] syncState in
                     if syncState.isDone() {
                         //self?.updateSalesforceData()
-                        print("this done")
                     }
                 }
             } catch {
@@ -663,9 +661,25 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         mobileTextField.inputAccessoryView = toolbar
         graduationYearTextField.inputAccessoryView = toolbar
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
+    @objc func keyboardWillShow(notification:NSNotification) {
+        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
+        scrollView.contentOffset = CGPoint(x:0, y:keyboardFrame.size.height/2)
+    }
     
+    @objc func keyboardWillHide(notification:NSNotification) {
+        scrollView.contentOffset = .zero
+    }
     
     
     /// Loads data from store and presents on edit profile
@@ -688,7 +702,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
             let honors = record[0][14]
-            print(record)
             DispatchQueue.main.async {
                 self.userName.text = name
                 self.userName.textColor = UIColor.black
@@ -744,7 +757,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                                        "__locally_updated__": true,
                                        "__locally_created__": false,
                                        "__local__": true,]
-        print(JSONData)
+       
             if (((self.store?.soupExists(forName: "Contact"))!)){
                 self.store?.clearSoup("Contact")
                 self.store?.upsert(entries: [JSONData], forSoupNamed: "Contact")
@@ -773,7 +786,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
         record["Honors_College_Interest_Check__c"] = self.honorsCollegeInterestText
         record["Text_Message_Consent__c"] = self.mobileOptInText
-        print(record)
         // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
         // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
         let userRequest = RestClient.shared.requestForUserInfo()
@@ -834,8 +846,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black
-    }
+        textField.textColor = UIColor.black    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.textColor = UIColor.black
@@ -880,7 +891,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
             self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-          //  profileImageView.image = profileImage
+           profileImageView.image = profileImage
             if newPic == true{
                 UIImageWriteToSavedPhotosAlbum(profileImage, self, #selector(imageError), nil)
             }
@@ -890,26 +901,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
       //  pullImage()
     }
     
-    func pullImage(){
+    func pushImage(){
         let imageRequest = RestClient.shared.request(forOwnedFilesList: nil, page: 0)
         RestClient.shared.send(request: imageRequest, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking on contact id request: \(imageRequest)")
-            print("this did not work clearlY")
         }) { [weak self] (response, urlResponse) in
             let contactAccountJSON = JSON(response!)
-            print("PRETTY PRETTY PRETTY")
-            print(contactAccountJSON)
             
         }}
     
     
-    
-    
+
     
     
     func saveImage(){
         let imageData = self.profileImage.pngData()!
-        print(imageData)
         let imageRequest = RestClient.shared.request(forUploadFile: imageData, name: "ProfileImage", description: "This is the user's profile picture.", mimeType: "image/png")
         RestClient.shared.send(request: imageRequest, onFailure: { (error, URLResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking while sending image request: \(imageRequest), error: \(error)")
@@ -923,11 +929,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(saveAlert, animated: true)
             os_log("\nSuccessful response received")
-        }
-        
-        print("911 what's your emergency?")
         print(self.profileImage.jpegData(compressionQuality: 0.0))
-    }
+        }}
     
     /// Error handler for the image picker
     @objc func imageError(image: UIImage, didFinishSavingwithError error: NSErrorPointer, contextInfo: UnsafeRawPointer){
