@@ -37,10 +37,10 @@
         "soupName": "Counselor",
         "indexes": [
             { "path": "AboutMe", "type": "string"},
-            { "path": "Email", "type": "string"},
-            { "path": "Phone", "type": "string"},
+            { "path": "Email", "type": "full_text"},
+            { "path": "Phone", "type": "full_text"},
             { "path": "Name", "type": "string"},
-            { "path": "MediumPhotoUrl", "type": "stting"}
+            { "path": "Image_Url__c", "type": "full_text"}
         ]
     }
     

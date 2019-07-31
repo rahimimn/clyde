@@ -23,6 +23,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     var id: String = ""
     var studentID: String = ""
     
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
+    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    
    //Outlets for the view controller
     @IBOutlet var counselorView: UIView!
     @IBOutlet weak var counselorImage: UIImageView!
@@ -37,7 +40,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     @IBOutlet weak var phoneText: UIButton!
     
     
-    /// When button is pressed, will take in the counselor's phone number, remove the - and (), and then call the number.
+    /// When button is pressed, will take in the counselor's phone number, remove the - and (), and then calls the number.
+    /// This will not work in the simulator.
     /// - Parameter sender: action button
     @IBAction func phone(_ sender: UIButton) {
         if  let phone = phoneText.titleLabel?.text{
@@ -56,13 +60,15 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     
     
     /// When button is tapped, will email the counselor.
-    ///
+    ///This will not work in the simulator.
     /// - Parameter sender: action button
     @IBAction func email(_ sender: UIButton) {
         if let email = counselorEmail.titleLabel?.text{
+            //Email "settings", these can be changed to anything.
             let subject = "Question Sent From Clyde Club"
             let body = "Hi!"
             let to = [email]
+            //Creates the mail view, allows user to write an email to the counselor.
             let mailView: MFMailComposeViewController = MFMailComposeViewController()
             mailView.mailComposeDelegate = self
             mailView.setSubject(subject)
@@ -86,8 +92,12 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     /// ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pullInformation()
+       //self.pullInformation()
+       // self.hardCode()
+        self.loadDataFromStore()
         self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
+       
         
         
     }
@@ -114,6 +124,64 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         }
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    func loadDataFromStore(){
+        // Loading Indicator is created, starts animated before user's information request is sent
+        var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
+        loadingIndicator.center = counselorView.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
+        counselorView.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Counselor:Name}, {Counselor:Phone}, {Counselor:AboutMe},{Counselor:Email}, {Counselor:Image_Url__c} from {Counselor}", pageSize: 1)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else{
+                print(records)
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return
+            }
+            
+            print(record)
+        }catch let e as Error?{
+            print(e as Any)
+        }
+    }
+    
+    
+    
+    func hardCode(){
+        self.aboutMeText.text = "Hannah is a New Jersey native and recent graduate from the College. She's excited to hit the road and find the newest class of Cougars! (Hannah's the best. We know you'll love her, too!)"
+        self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+        self.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+        self.name = "Hannah Fralinger"
+        self.counselorName.text = "Hannah Fralinger"
+        self.counselorEmail.setTitle("Email: \("fralingerhe@cofc.edu")", for: .normal)
+        self.phoneText.setTitle("Phone: \("6095014811")", for: .normal)
+        self.contactLabel.text = "Contact Information"
+        self.aboutLabel.text = "About"
+        self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+        self.instagramButton.setTitle("@cofcadmissions", for: .normal)
+        self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
+        
+        
+        let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dxMH&oid=00D540000001Vbx&lastMod=1564580991000")!
+        
+        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+            guard let data = data, error == nil else {return}
+            DispatchQueue.main.async {
+                self.counselorImage.image = UIImage(data:data)
+                
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
     
     
     /// Pulls counselor infomation from Salesforce and then presents it.
@@ -167,6 +235,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 // Creates a request for the user's counselor id, sends it, and saves json into response, uses SWIFTYJSON to convert needed data
                 let counselorIDRequest = RestClient.shared.request(forQuery: "SELECT OwnerId FROM Contact WHERE Id = '\(contactAccountID)'")
                 RestClient.shared.send(request: counselorIDRequest, onFailure: { (error, urlResponse) in
+                    print(error!)
                     loadingIndicator.stopAnimating()
                     self!.present(alert, animated:true)
                     SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor ID Request: \(counselorIDRequest)")
@@ -177,7 +246,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     
                     
                     //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,image_url__c FROM User WHERE Id = '\(counselorId)'")
+                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
                         loadingIndicator.stopAnimating()
@@ -190,19 +259,10 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
                         let counselorPhone = counselorInfoJSON["records"][0]["Phone"].stringValue
-                        var counselorImageUrl = counselorInfoJSON["records"][0]["image_url__c"].stringValue
+                        let counselorImageUrl = counselorInfoJSON["records"][0]["Image_Url__c"].stringValue
                 
                 DispatchQueue.main.async {
-                    let url = URL(string: counselorImageUrl)!
-                    
-                    let task = URLSession.shared.dataTask(with: url){ data,response, error in
-                        guard let data = data, error == nil else {return}
-                        DispatchQueue.main.async {
-                            self!.counselorImage.image = UIImage(data:data)
-                            
-                        }
-                    }
-                    task.resume()
+                   
                     self!.aboutMeText.text = counselorAbout
                     self!.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                     self!.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)

@@ -43,16 +43,6 @@
 	<array>
 		<string>MKDirectionsModeCar</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) requests access to your camera.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(PRODUCT_NAME) requests access to your location.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) requests access to photos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
-	<key>SFDCOAuthLoginHost</key>
-	<string>partial-cofcharleston.cs40.force.com/portal</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -65,6 +55,16 @@
 			<string></string>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) requests access to your camera.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) requests access to your location.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) requests access to photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
+	<key>SFDCOAuthLoginHost</key>
+	<string>partial-cofcharleston.cs40.force.com/portal</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>
@@ -80,6 +80,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

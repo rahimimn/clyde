@@ -31,6 +31,21 @@ extension UIViewController{
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
+    
+     var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    /// Adds the cofc logo to the views
+    func addLogoToNav(){
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds =  false
+        let logo = UIImage(named: "whiteLogo.png")
+        imageView.image = logo
+        self.navigationItem.titleView = imageView
+
+    }
 }
 
 // MARK: - String extension

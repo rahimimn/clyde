@@ -15,7 +15,7 @@ class ResourcesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.addLogoToNav()
         self.menuBar(menuBarItem: menuBarButton)
     }
     

@@ -405,7 +405,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="962.66666666666663"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2U-qA-hfI">
                                                 <rect key="frame" x="0.0" y="314" width="414" height="35"/>
@@ -702,6 +702,9 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="t6i-CK-D9e">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="gdl-Y0-bWi">
+                            <color key="tintColor" red="0.5" green="0.18137254901960786" blue="0.18137254901960786" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="menuBarItem" destination="t6i-CK-D9e" id="cLc-Si-Qts"/>
@@ -725,6 +728,10 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="25"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="cAJ-Ob-QrU" kind="relationship" relationship="rootViewController" id="JP9-Jg-H5x"/>
@@ -850,7 +857,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
@@ -867,7 +874,7 @@
                                 </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfq-am-jhO">
-                                <rect key="frame" x="0.0" y="854" width="414" height="37"/>
+                                <rect key="frame" x="0.0" y="850" width="414" height="37"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -882,7 +889,7 @@
                             <constraint firstItem="kSJ-OY-UZQ" firstAttribute="leading" secondItem="4CH-XB-SzE" secondAttribute="leading" id="0Ci-AD-xhc"/>
                             <constraint firstItem="HWV-nf-HfB" firstAttribute="trailing" secondItem="4CH-XB-SzE" secondAttribute="trailing" constant="8" id="1HX-JJ-KlV"/>
                             <constraint firstItem="31z-kT-uu3" firstAttribute="top" secondItem="4CH-XB-SzE" secondAttribute="top" id="24v-EM-68Q"/>
-                            <constraint firstAttribute="bottom" secondItem="pfq-am-jhO" secondAttribute="bottom" constant="5" id="7Wq-W4-VlR"/>
+                            <constraint firstAttribute="bottom" secondItem="pfq-am-jhO" secondAttribute="bottom" constant="9" id="7Wq-W4-VlR"/>
                             <constraint firstItem="HWV-nf-HfB" firstAttribute="leading" secondItem="kSJ-OY-UZQ" secondAttribute="trailing" constant="8" id="8mq-6Q-IYQ"/>
                             <constraint firstItem="8t3-Wg-M7V" firstAttribute="leading" secondItem="kSJ-OY-UZQ" secondAttribute="trailing" constant="8" id="9h2-4N-CGy"/>
                             <constraint firstItem="42h-1k-diD" firstAttribute="height" secondItem="AZn-sg-XT2" secondAttribute="height" id="Axj-3w-xU9"/>
@@ -904,7 +911,7 @@
                             <constraint firstItem="6yx-Yx-S2X" firstAttribute="centerX" secondItem="kSJ-OY-UZQ" secondAttribute="centerX" id="ZvE-Mb-Wwv"/>
                             <constraint firstItem="31z-kT-uu3" firstAttribute="leading" secondItem="Cxo-xV-TBE" secondAttribute="leading" id="b2Z-za-CVm"/>
                             <constraint firstItem="HWV-nf-HfB" firstAttribute="top" secondItem="6yx-Yx-S2X" secondAttribute="bottom" constant="8" id="boi-E4-Rxy"/>
-                            <constraint firstItem="pfq-am-jhO" firstAttribute="top" secondItem="8t3-Wg-M7V" secondAttribute="bottom" constant="12" id="eRd-Bh-QcJ"/>
+                            <constraint firstItem="pfq-am-jhO" firstAttribute="top" secondItem="8t3-Wg-M7V" secondAttribute="bottom" constant="8" id="eRd-Bh-QcJ"/>
                             <constraint firstItem="4CH-XB-SzE" firstAttribute="bottom" secondItem="8t3-Wg-M7V" secondAttribute="bottom" constant="20" id="hSH-1c-gvu"/>
                             <constraint firstItem="4CH-XB-SzE" firstAttribute="trailing" secondItem="8t3-Wg-M7V" secondAttribute="trailing" id="jiV-cC-pxe"/>
                             <constraint firstItem="4CH-XB-SzE" firstAttribute="trailing" secondItem="kSJ-OY-UZQ" secondAttribute="trailing" constant="20" id="oZd-Xp-cFq"/>
@@ -968,6 +975,9 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="xrd-DV-i6Q">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="3844408-48.png" id="ILH-5c-h2Z">
+                            <color key="tintColor" red="0.5" green="0.18137254901960786" blue="0.18137254901960786" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="aboutLabel" destination="AZn-sg-XT2" id="lwh-vg-jKA"/>
@@ -1027,10 +1037,10 @@
                                 </variation>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HZT-Jw-ZhC">
-                                <rect key="frame" x="8" y="198" width="398" height="634"/>
+                                <rect key="frame" x="8" y="198" width="398" height="585"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFq-Eb-skZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="143.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="131.33333333333334"/>
                                         <color key="backgroundColor" red="0.92941176469999998" green="0.16078431369999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Randolph Hall Puzzle">
@@ -1043,7 +1053,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdw-X4-hLt">
-                                        <rect key="frame" x="0.0" y="163.66666666666669" width="398" height="143.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="151.33333333333331" width="398" height="131.33333333333331"/>
                                         <color key="backgroundColor" red="0.71372549019607845" green="0.20392156862745098" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Interactive Map">
@@ -1056,7 +1066,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWO-up-nIt">
-                                        <rect key="frame" x="0.0" y="327" width="398" height="143.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="302.66666666666669" width="398" height="131"/>
                                         <color key="backgroundColor" red="0.0" green="0.51372549019607838" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Student Bingo">
@@ -1069,7 +1079,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwS-tD-QNw">
-                                        <rect key="frame" x="0.0" y="490.66666666666657" width="398" height="143.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="453.66666666666657" width="398" height="131.33333333333331"/>
                                         <color key="backgroundColor" red="0.85098039219999999" green="0.36862745099999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Campus Scavenger Hunt">
@@ -1096,11 +1106,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pJc-Lq-P6F"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Crj-RR-yZN">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="3844408-48.png" id="c9B-c2-EfC">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="gO8-3v-HvQ">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="menuBarButton" destination="c9B-c2-EfC" id="OCl-vh-6LF"/>
                     </connections>
@@ -1407,13 +1422,13 @@
                                                         <rect key="frame" x="0.0" y="348.33333333333337" width="384" height="29.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="286.66666666666669" height="29.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="274.66666666666669" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="266.66666666666669" y="0.0" width="117.33333333333331" height="29.666666666666668"/>
+                                                                <rect key="frame" x="254.66666666666669" y="0.0" width="129.33333333333331" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1550,7 +1565,7 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="1jU-dj-GmD">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="rSo-gr-fyV">
+                        <barButtonItem key="rightBarButtonItem" title="    Edit   " id="rSo-gr-fyV">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="editProfile:" destination="4sP-jn-ixw" id="X8t-5v-JJg"/>
@@ -1812,6 +1827,9 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" id="U3j-aa-ayi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="yTs-S5-4yv">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="majorDescription" destination="dVe-26-qf6" id="bay-zT-6LR"/>
@@ -1902,6 +1920,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="da8-j6-QIX"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="iro-mN-zrw">
                         <barButtonItem key="backBarButtonItem" title="Back" id="2xM-C3-Ppo">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1909,7 +1928,11 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" id="G1n-EZ-sjX">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="96C-Hz-TZM">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="label" destination="RIv-GZ-lSe" id="2By-hR-u8J"/>
                         <outlet property="menuBarButton" destination="G1n-EZ-sjX" id="hCQ-x4-KSN"/>
@@ -2063,6 +2086,7 @@
                             <outlet property="delegate" destination="dCn-xS-vBF" id="quV-7O-8yb"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="5F6-Tu-CPu">
                         <barButtonItem key="backBarButtonItem" title="Back" image="3844408-48.png" id="6bv-QD-RDJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2073,7 +2097,11 @@
                                 <action selector="menuBarButton:" destination="O02-p3-zUN" id="c22-Ug-UZ8"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="hgX-SC-uft">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="menuBarButton" destination="aAm-A7-Nm6" id="tho-sx-4Ci"/>
                     </connections>
@@ -2332,7 +2360,7 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="VLW-k3-tS4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Back" id="lAt-sU-Luf">
+                        <barButtonItem key="rightBarButtonItem" title="    Back" id="lAt-sU-Luf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="aEQ-w5-Unh" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LCQ-5E-sfJ"/>
@@ -2484,11 +2512,16 @@
                             <outlet property="delegate" destination="QJy-N0-gf7" id="lJd-Lw-FwK"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="Ibc-Hm-tCi">
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" id="Jz7-T0-P4l">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="L6V-hv-pIc">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="GJ5-vV-fRw">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2990,7 +3023,7 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="R4y-NJ-0Qi">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Back" id="B8k-Yt-taw">
+                        <barButtonItem key="rightBarButtonItem" title="     Back" id="B8k-Yt-taw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="ZQB-ku-MMU" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="1iM-Yc-Rlk"/>
@@ -3479,6 +3512,7 @@
                             <outlet property="delegate" destination="mn8-Mi-wMg" id="BWa-RO-NWu"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="NkO-wv-sL7">
                         <barButtonItem key="backBarButtonItem" title="Back" image="3844408-48.png" id="ZU2-KD-ksw">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3489,7 +3523,11 @@
                                 <action selector="menuBarButton:" destination="rEN-1Y-8ax" id="Kj6-Sr-haB"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="3844408-48.png" id="RUk-5C-TZt">
+                            <color key="tintColor" red="0.5" green="0.18137254899999999" blue="0.18137254899999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="menuBarButton" destination="mvo-Oe-J1l" id="oCf-Dh-Z7h"/>
                     </connections>

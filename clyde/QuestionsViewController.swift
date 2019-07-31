@@ -22,6 +22,7 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         textInput.delegate = self
         //reveals menu
        self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
     }
 
 

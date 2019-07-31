@@ -29,6 +29,7 @@ class MajorsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
     }
     
 

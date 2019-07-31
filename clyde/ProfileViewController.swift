@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var honorsCollegeInterestText: UILabel!
     @IBOutlet weak var mobileOptInText: UILabel!
     
-   
+   //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
     
@@ -54,14 +54,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Outlet for map view
     @IBOutlet weak var profileMap: MKMapView!
     
-    
+    /// Sent to the view controller when the app recieves a memory warning. This is where variables can be taken out of memory to offload storage.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    /// Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
-        //self.loadDataIntoStore()
         if let smartStore = self.store,
             let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
             do {
@@ -75,7 +75,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         
-       // self.loadDataFromStore()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -84,40 +83,45 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImageView.layer.cornerRadius = 10
     }
     
+    /// Notifies that the view controller is about to be added to memory
     override func viewWillAppear(_ animated: Bool) {
         self.createMap()
         
       }
     
-    /// Loads the profile view
+    /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
 
-            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")!
-
-            let task = URLSession.shared.dataTask(with: url){ data,response, error in
-                guard let data = data, error == nil else {return}
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data:data)
-
-                }
-            }
-            task.resume()
+//            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")!
+//
+//            let task = URLSession.shared.dataTask(with: url){ data,response, error in
+//                guard let data = data, error == nil else {return}
+//                DispatchQueue.main.async {
+//                    self.profileImageView.image = UIImage(data:data)
+//
+//                }
+//            }
+//            task.resume()
     }
     
-    /// Function that updates the location constantly.
+    /// Updates the location constantly.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         self.currentLocation = locations.last as CLLocation?
         //createMap()
     }
-    
+
+   // Doing something with this eventually
   func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
     
     }
 
 
-
+    /// Loads data from Salesforce into the "Contact" soup.
+    ///
+    /// Not in use
     func loadDataIntoStore(){
         let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c, TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c FROM Contact")
         RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
@@ -141,7 +145,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    
+    /// Asks the delegate for a renderer object to use when drawing the specified overlay.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
@@ -149,9 +153,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-//{Contact:Honors_College_Interest__c},
-    
     /// Loads the profile data from the SmartStore soup
+    ///
+    /// Places Name, Mobile number, mailing address, birth sex and gender identity, student type, graduation year, ethnicity, message consent, and honors interest onto the view
     func loadDataFromStore(){
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
@@ -207,7 +211,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
   
-
+    /// Loads data from store
+    ///
+    /// Not in use
     func loadFromStore(){
         if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c} from {Contact}", pageSize: 1),
             let smartStore = self.store,
@@ -246,7 +252,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }    }
     
-     /// Loads the profile data directly from Salesforce
+    /// Loads the profile data directly from Salesforce
+    ///
+    /// Not in use
      func loadDataFromSalesforce() {
         //-----------------------------------------------
         // USER INFORMATION
@@ -386,6 +394,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var reach: Reachability?
     var internetConnection = false
     var studentStatus = true
+    var userId = ""
     //Picker options
     var birthSexOptions = ["Female","Male"]
     var genderOptions = ["Female","Male","Other"]
@@ -490,13 +499,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         birthDateTextField.inputView = datePicker
     }
     
-    // Determines when the user stops editing the date picker
+    /// Called when the user picks a date
+    ///
+    /// Formats the date correctly so that it will not cause an error once it is pushed into Salesforce
     @objc func doneDatePicker(){
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         birthDateTextField.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
+    
     
     @objc func cancelPicker(){
         self.view.endEditing(true)
@@ -511,7 +523,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
-            let alert = UIAlertController(title: "Cannot Save Information", message: "Clyde Club is not allowed to edit your information at this time.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Cannot Save Information", message: "Clyde Club is not allowed to edit your information at this time. Please contact (email goes here)", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             
@@ -639,6 +651,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         // Calls showDatePicker
         showDatePicker()
         menuBar(menuBarItem: menuBarButton)
+        addLogoToNav()
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
         
@@ -675,7 +688,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
-    }
+        
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:Id} from {User}", pageSize: 1),
+            let smartStore = self.store,
+            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
+            let id = record[0][0]
+            DispatchQueue.main.async{
+                print(id)
+                self.userId = id
+            }
+        
+        }}
     
     @objc func keyboardWillShow(notification:NSNotification) {
         guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
@@ -751,19 +774,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Pulls data from the user form and upserts it into the "Contact" soup
     func insertIntoSoup(){
-        let JSONData : [String:Any] = ["Name": self.userName.text,
-                                       "MobilePhone": self.mobileTextField.text,
-                                       "MailingStreet": self.addressTextField.text,
-                                       "MailingCity": self.cityTextField.text,
-                                       "MailingState": self.stateTextField.text,
-                                       "MailingPostalCode": self.zipTextField.text,
-                                       "Gender_Identity__c": self.genderIdentityTextField.text,
-                                       "Email": emailTextField.text,
-                                       "Birthdate": birthDateTextField.text,
-                                       "TargetX_SRMb__Gender__c": genderTextField.text,
-                                       "TargetX_SRMb__Student_Type__c": studentTypeTextField.text,
-                                       "TargetX_SRMb__Graduation_Year__c": graduationYearTextField.text,
-                                       "Ethnicity_Non_Applicants__c": ethnicOriginTextField.text,
+        let JSONData : [String:Any] = ["Name": self.userName.text!,
+                                       "MobilePhone": self.mobileTextField.text!,
+                                       "MailingStreet": self.addressTextField.text!,
+                                       "MailingCity": self.cityTextField.text!,
+                                       "MailingState": self.stateTextField.text!,
+                                       "MailingPostalCode": self.zipTextField.text!,
+                                       "Gender_Identity__c": self.genderIdentityTextField.text!,
+                                       "Email": emailTextField.text!,
+                                       "Birthdate": birthDateTextField.text!,
+                                       "TargetX_SRMb__Gender__c": genderTextField.text!,
+                                       "TargetX_SRMb__Student_Type__c": studentTypeTextField.text!,
+                                       "TargetX_SRMb__Graduation_Year__c": graduationYearTextField.text!,
+                                       "Ethnicity_Non_Applicants__c": ethnicOriginTextField.text!,
                                        "Text_Message_Consent__c": mobileOptInText,
                                        "Honors_College_Interest_Check__c": honorsCollegeInterestText,
                                        "__locally_deleted__": false,
@@ -918,8 +941,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
         self.dismiss(animated: true, completion: nil)
-       // saveImage()
-      //  pullImage()
+        imageSaved()
     }
     
     func saveImage(){
@@ -937,9 +959,39 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(saveAlert, animated: true)
             os_log("\nSuccessful response received")
-        print(self.profileImage.jpegData(compressionQuality: 0.0))
+            print(self.profileImage.jpegData(compressionQuality: 0.0)!)
         }}
-    func imageSaved
+    func imageSaved(){
+        let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
+        //let base64 = imageData.base64EncodedString(options: )
+        let name = userName.text
+        let JSONData : [String:Any] = ["Name": self.userId,
+                                       "Body": imageData,
+                                       "Description": ("\(name!)'s profile photo"),
+                                       "IsPublic": true,
+                                       "IsInternalUseOnly": false,
+                                       "Type": "jpeg",
+                                       "FolderId": "00l54000000G1kiAAC",
+                                       "ContentType": "image/png"
+            
+                                       ]
+        
+        
+        let documentRequest = RestClient.shared.requestForUpsert(withObjectType: "Document", externalIdField: "Id", externalId: nil, fields:JSONData)
+        RestClient.shared.send(request: documentRequest, onFailure: { (error, urlResponse) in
+            print(error)
+            print("URLResponse\(documentRequest)")
+            print(JSONData)
+            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(errorAlert, animated: true)
+            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(documentRequest)")
+        }) { [weak self] (response, urlResponse) in
+            print("yay!!")
+            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
+            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self?.present(saveAlert, animated: true)
+        }}
     
     
     
@@ -953,7 +1005,5 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    
 
 }

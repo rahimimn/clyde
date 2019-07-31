@@ -52,5 +52,6 @@ class CheckInViewController: UIViewController {
         qrView.image = image
         
        self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
     }
 }

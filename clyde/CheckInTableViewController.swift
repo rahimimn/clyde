@@ -18,6 +18,7 @@ class CheckInTableViewController: UITableViewController {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
         self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
     }
 
     // MARK: - Table view data source

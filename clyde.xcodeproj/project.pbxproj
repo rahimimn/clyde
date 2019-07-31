@@ -10,6 +10,7 @@
 		4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F393A281C3C8BCD00B3EA13 /* main.swift */; };
 		4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */; };
 		78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_clyde.framework */; };
+		B2211D3B22F2018B00D127DB /* whiteLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3A22F2018B00D127DB /* whiteLogo.png */; };
 		B227D07522BBD80900AA0634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227D07422BBD80900AA0634 /* Main.storyboard */; };
 		B227D08422BBD87600AA0634 /* white-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D07B22BBD87600AA0634 /* white-logo.png */; };
 		B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */; };
@@ -88,6 +89,7 @@
 		4FF12F8A1DCA91F5004D9EF9 /* clyde.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clyde.entitlements; sourceTree = "<group>"; };
 		762732C14CFE40A989C3AD70 /* Pods-clyde.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clyde.debug.xcconfig"; path = "Pods/Target Support Files/Pods-clyde/Pods-clyde.debug.xcconfig"; sourceTree = "<group>"; };
 		82A29C75280BDF73123F14B4 /* Pods_clyde.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_clyde.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2211D3A22F2018B00D127DB /* whiteLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLogo.png; sourceTree = "<group>"; };
 		B227D07422BBD80900AA0634 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B227D07B22BBD87600AA0634 /* white-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-logo.png"; sourceTree = "<group>"; };
 		B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Thumbnails.png"; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C1A02922C27C4200C5634C /* red-symbol.jpg */,
+				B2211D3A22F2018B00D127DB /* whiteLogo.png */,
 				B2C1A02722C27BAE00C5634C /* full-logo.jpg */,
 				B227D07E22BBD87600AA0634 /* cofc-red.jpg */,
 				B227D07B22BBD87600AA0634 /* white-logo.png */,
@@ -530,6 +533,7 @@
 				B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */,
 				B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */,
 				B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */,
+				B2211D3B22F2018B00D127DB /* whiteLogo.png in Resources */,
 				B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */,
 				B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */,
 				B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */,

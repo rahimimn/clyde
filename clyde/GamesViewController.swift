@@ -14,6 +14,7 @@ class GamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
         // Do any additional setup after loading the view.
     }
     

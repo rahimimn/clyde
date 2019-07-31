@@ -27,6 +27,7 @@ class EventsTableViewController: UITableViewController {
         super.viewDidLoad()
         
        self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
     }
 
     // MARK: - Table view data source
