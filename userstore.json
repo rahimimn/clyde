@@ -29,6 +29,7 @@
             { "path": "Ethnicity_Non_Applicants__c", "type": "string"},
             { "path": "Text_Message_Consent__c", "type": "string"},
             { "path": "OwnerId", "type": "string"},
+            { "path": "First_Login__c", "type": "string"},
             { "path": "Status_Category__c", "type": "string"}
             
         ]
@@ -38,7 +39,7 @@
         "indexes": [
             { "path": "AboutMe", "type": "string"},
             { "path": "Email", "type": "full_text"},
-            { "path": "Phone", "type": "full_text"},
+            { "path": "MobilePhone", "type": "full_text"},
             { "path": "Name", "type": "string"},
             { "path": "Image_Url__c", "type": "full_text"}
         ]

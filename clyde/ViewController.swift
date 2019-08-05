@@ -27,6 +27,12 @@ class HomeViewController: UIViewController{
         self.addLogoToNav()
         
     }
+    @IBAction func click(_ sender: UIButton) {
+        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
+        popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+       self.present(popUp, animated: true)
+        
+    }
     
     override func loadView() {
         super.loadView()
@@ -96,7 +102,7 @@ class HomeViewController: UIViewController{
             }
             
             //Loads contactData into store
-            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c FROM Contact")
+            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c  FROM Contact")
             RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
@@ -116,7 +122,7 @@ class HomeViewController: UIViewController{
                 }
                 
                 //Loads counselor data into the store
-                let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,Phone,MediumPhotoUrl FROM User WHERE Id = '\(counselorId)'")
+                let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                 RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
                 }) { [weak self] (response, urlResponse) in
                     guard let strongSelf = self,

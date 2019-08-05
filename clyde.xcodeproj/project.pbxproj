@@ -11,6 +11,10 @@
 		4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */; };
 		78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_clyde.framework */; };
 		B2211D3B22F2018B00D127DB /* whiteLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3A22F2018B00D127DB /* whiteLogo.png */; };
+		B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */; };
+		B2211D3F22F868D700D127DB /* clyde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3E22F868D700D127DB /* clyde.jpg */; };
+		B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */; };
+		B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2211D4322F872F800D127DB /* InfoPopUpViewController.swift */; };
 		B227D07522BBD80900AA0634 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B227D07422BBD80900AA0634 /* Main.storyboard */; };
 		B227D08422BBD87600AA0634 /* white-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D07B22BBD87600AA0634 /* white-logo.png */; };
 		B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */ = {isa = PBXBuildFile; fileRef = B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */; };
@@ -90,6 +94,10 @@
 		762732C14CFE40A989C3AD70 /* Pods-clyde.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-clyde.debug.xcconfig"; path = "Pods/Target Support Files/Pods-clyde/Pods-clyde.debug.xcconfig"; sourceTree = "<group>"; };
 		82A29C75280BDF73123F14B4 /* Pods_clyde.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_clyde.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2211D3A22F2018B00D127DB /* whiteLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLogo.png; sourceTree = "<group>"; };
+		B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clydeWantsToKnow.png; sourceTree = "<group>"; };
+		B2211D3E22F868D700D127DB /* clyde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clyde.jpg; sourceTree = "<group>"; };
+		B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "clyde-pineapples.jpg"; sourceTree = "<group>"; };
+		B2211D4322F872F800D127DB /* InfoPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopUpViewController.swift; sourceTree = "<group>"; };
 		B227D07422BBD80900AA0634 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B227D07B22BBD87600AA0634 /* white-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-logo.png"; sourceTree = "<group>"; };
 		B227D07C22BBD87600AA0634 /* icons8-Thumbnails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Thumbnails.png"; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
+				B2211D4222F872C000D127DB /* Pop Up */,
 				B2C1A01522C24FF700C5634C /* Homepage */,
 				B227D0B022BBEAF200AA0634 /* Profile */,
 				B227D0B322BBEB8200AA0634 /* Majors */,
@@ -242,6 +251,14 @@
 				82A29C75280BDF73123F14B4 /* Pods_clyde.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2211D4222F872C000D127DB /* Pop Up */ = {
+			isa = PBXGroup;
+			children = (
+				B2211D4322F872F800D127DB /* InfoPopUpViewController.swift */,
+			);
+			name = "Pop Up";
 			sourceTree = "<group>";
 		};
 		B227D07822BBD84C00AA0634 /* Assets */ = {
@@ -356,6 +373,9 @@
 			isa = PBXGroup;
 			children = (
 				B23C492422D3D9F800A88C48 /* cistern.jpg */,
+				B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */,
+				B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */,
+				B2211D3E22F868D700D127DB /* clyde.jpg */,
 				B2D8013522D78D0D0050E376 /* F.png */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
 				B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */,
@@ -516,7 +536,9 @@
 				B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
+				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
+				B2211D3F22F868D700D127DB /* clyde.jpg in Resources */,
 				B2D8013F22D8FC430050E376 /* instagram.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
@@ -526,6 +548,7 @@
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
 				B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */,
+				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
 				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
@@ -619,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B27609FF22CA4FD400A122F7 /* user.swift in Sources */,
+				B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
 				B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */,
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,

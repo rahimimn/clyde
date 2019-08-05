@@ -92,7 +92,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     /// ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-       //self.pullInformation()
+    //self.pullInformation()
        // self.hardCode()
         self.loadDataFromStore()
         self.menuBar(menuBarItem: menuBarButton)
@@ -135,7 +135,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
         counselorView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Counselor:Name}, {Counselor:Phone}, {Counselor:AboutMe},{Counselor:Email}, {Counselor:Image_Url__c} from {Counselor}", pageSize: 1)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Counselor:Name}, {Counselor:MobilePhone}, {Counselor:AboutMe},{Counselor:Email}, {Counselor:Image_Url__c} from {Counselor}", pageSize: 1)
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
@@ -246,7 +246,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     
                     
                     //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,Phone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
+                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                     
                     RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
                         loadingIndicator.stopAnimating()
@@ -258,9 +258,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                         let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue
                         let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
                         let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
-                        let counselorPhone = counselorInfoJSON["records"][0]["Phone"].stringValue
+                        let counselorPhone = counselorInfoJSON["records"][0]["MobilePhone"].stringValue
                         let counselorImageUrl = counselorInfoJSON["records"][0]["Image_Url__c"].stringValue
-                
+                        print(counselorInfoJSON)
                 DispatchQueue.main.async {
                    
                     self!.aboutMeText.text = counselorAbout

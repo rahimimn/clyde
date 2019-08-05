@@ -934,7 +934,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
-            self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
            profileImageView.image = profileImage
             if newPic == true{
                 UIImageWriteToSavedPhotosAlbum(profileImage, self, #selector(imageError), nil)
@@ -950,7 +950,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         RestClient.shared.send(request: imageRequest, onFailure: { (error, URLResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking while sending image request: \(imageRequest), error: \(error)")
             //Creates a save alert to be presented whenever the user saves their information
-            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            let errorAlert = UIAlertController(title: "Error", message: "\(error)" , preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(errorAlert, animated: true)
         }){(response, URLResponse) in
@@ -963,37 +963,53 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }}
     func imageSaved(){
         let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
-        //let base64 = imageData.base64EncodedString(options: )
+        let base64 = imageData.base64EncodedString(options: .endLineWithLineFeed)
+        
         let name = userName.text
-        let JSONData : [String:Any] = ["Name": self.userId,
-                                       "Body": imageData,
-                                       "Description": ("\(name!)'s profile photo"),
-                                       "IsPublic": true,
-                                       "IsInternalUseOnly": false,
-                                       "Type": "jpeg",
-                                       "FolderId": "00l54000000G1kiAAC",
-                                       "ContentType": "image/png"
+        let data = [
+            "Name": "user's pic",
+            "Body": base64,
+            "ParentId":"0035400000GV18bAAD"
+        ]
+       
+        RestClient.shared.create("Attachment", fields: data, onFailure: { (error, urlResponse) in
+            print(error!)
             
-                                       ]
+                        let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(errorAlert, animated: true)
+            
+                    }) { [weak self] (response, urlResponse) in
+                        print("yay!!")
+                        let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
+                        saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self?.present(saveAlert, animated: true)
+                    }
         
         
-        let documentRequest = RestClient.shared.requestForUpsert(withObjectType: "Document", externalIdField: "Id", externalId: nil, fields:JSONData)
-        RestClient.shared.send(request: documentRequest, onFailure: { (error, urlResponse) in
-            print(error)
-            print("URLResponse\(documentRequest)")
-            print(JSONData)
-            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(errorAlert, animated: true)
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(documentRequest)")
-        }) { [weak self] (response, urlResponse) in
-            print("yay!!")
-            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self?.present(saveAlert, animated: true)
-        }}
+//        let documentRequest = RestClient.shared.requestForUpsert(withObjectType: "Document", externalIdField: "Id", externalId: nil, fields:JSONData)
+//        RestClient.shared.send(request: documentRequest, onFailure: { (error, urlResponse) in
+//            print(error)
+//            print("URLResponse\(documentRequest)")
+//            print(JSONData)
+//            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+//            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self.present(errorAlert, animated: true)
+//            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(documentRequest)")
+//        }) { [weak self] (response, urlResponse) in
+//            print("yay!!")
+//            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
+//            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self?.present(saveAlert, animated: true)
+//        }
+        
+    }
     
     
+    
+    func pullImage(){
+        
+    }
     
     
     /// Error handler for the image picker
