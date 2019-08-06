@@ -24,7 +24,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     var studentID: String = ""
     
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
     
    //Outlets for the view controller
     @IBOutlet var counselorView: UIView!
@@ -145,39 +145,41 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 return
             }
             
+            let counselorName = record[0][0]
+            let counselorPhone = record[0][1]
+            let counselorAbout = record[0][2]
+            let counselorEmail = record[0][3]
+            let counserlorImage = record[0][4]
+            DispatchQueue.main.async {
+                self.aboutMeText.text = counselorAbout
+                self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                self.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                self.name = counselorName
+                self.counselorName.text = counselorName
+                self.counselorEmail.setTitle("Email: \(counselorEmail)", for: .normal)
+                self.phoneText.setTitle("Phone: \(counselorPhone)", for: .normal)
+                self.contactLabel.text = "Contact Information"
+                self.aboutLabel.text = "About"
+                self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                self.instagramButton.setTitle("@cofcadmissions", for: .normal)
+                self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
+                loadingIndicator.stopAnimating()
+                
+                let url = URL(string: counserlorImage)!
+                
+                let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                    guard let data = data, error == nil else {return}
+                    DispatchQueue.main.async {
+                        self.counselorImage.image = UIImage(data:data)
+                        
+                    }
+                }
+                task.resume()
+            }
             print(record)
         }catch let e as Error?{
             print(e as Any)
         }
-    }
-    
-    
-    
-    func hardCode(){
-        self.aboutMeText.text = "Hannah is a New Jersey native and recent graduate from the College. She's excited to hit the road and find the newest class of Cougars! (Hannah's the best. We know you'll love her, too!)"
-        self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-        self.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-        self.name = "Hannah Fralinger"
-        self.counselorName.text = "Hannah Fralinger"
-        self.counselorEmail.setTitle("Email: \("fralingerhe@cofc.edu")", for: .normal)
-        self.phoneText.setTitle("Phone: \("6095014811")", for: .normal)
-        self.contactLabel.text = "Contact Information"
-        self.aboutLabel.text = "About"
-        self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-        self.instagramButton.setTitle("@cofcadmissions", for: .normal)
-        self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
-        
-        
-        let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dxMH&oid=00D540000001Vbx&lastMod=1564580991000")!
-        
-        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-            guard let data = data, error == nil else {return}
-            DispatchQueue.main.async {
-                self.counselorImage.image = UIImage(data:data)
-                
-            }
-        }
-        task.resume()
     }
     
     

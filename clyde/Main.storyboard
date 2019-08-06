@@ -393,7 +393,7 @@
         <!--Homepage-->
         <scene sceneID="3oL-wm-vs5">
             <objects>
-                <viewController title="Homepage" id="tkJ-xS-pVa" customClass="HomeViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Homepage" title="Homepage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tkJ-xS-pVa" customClass="HomeViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQp-r6-RJd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -551,7 +551,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                         <rect key="frame" x="5" y="5.0000000000001137" width="404" height="19"/>
                                                         <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="19"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                                     </label>
@@ -564,14 +564,6 @@
                                                     <constraint firstItem="byQ-Ag-Azy" firstAttribute="top" secondItem="SoR-Yk-gaN" secondAttribute="top" constant="5" id="x6n-7I-4eA"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZ9-0a-cA3">
-                                                <rect key="frame" x="184" y="654" width="46" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="click:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="Guo-DQ-Pco"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1452,13 +1444,13 @@
                                                         <rect key="frame" x="0.0" y="348.33333333333337" width="384" height="29.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="274.66666666666669" height="29.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="252.66666666666666" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="254.66666666666669" y="0.0" width="129.33333333333331" height="29.666666666666668"/>
+                                                                <rect key="frame" x="232.66666666666663" y="0.0" width="151.33333333333337" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -3094,57 +3086,181 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYx-tf-jIe">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYx-tf-jIe">
                                 <rect key="frame" x="60" y="252" width="294" height="393"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clydeWantsToKnow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y34-rC-8KP">
-                                        <rect key="frame" x="123" y="185" width="234" height="208"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="clydeWantsToKnow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y34-rC-8KP">
+                                        <rect key="frame" x="123" y="212" width="234" height="181"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pn-Z2-nuD">
-                                        <rect key="frame" x="8" y="8" width="278" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pn-Z2-nuD">
+                                        <rect key="frame" x="8" y="12" width="278" height="35"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                         <color key="textColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yru-sR-yCg">
-                                        <rect key="frame" x="18" y="96" width="258" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yru-sR-yCg">
+                                        <rect key="frame" x="18" y="117" width="258" height="24"/>
                                         <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7py-cP-OWL">
-                                        <rect key="frame" x="85" y="134" width="125" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7py-cP-OWL">
+                                        <rect key="frame" x="85" y="149" width="125" height="34"/>
+                                        <color key="backgroundColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <state key="normal" title="Next">
-                                            <color key="titleColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="nextQuestion:" destination="Kso-ch-H4J" eventType="touchUpInside" id="WlO-6Y-2eo"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Thank you for joining Clyde Club!" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE0-03-717">
-                                        <rect key="frame" x="18" y="47" width="258" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Thank you for joining Clyde Club!" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE0-03-717">
+                                        <rect key="frame" x="18" y="59" width="258" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="pzG-K3-NVp"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="ACaslonPro-Bold" family="Adobe Caslon Pro" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="yru-sR-yCg" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="18" id="23P-4u-Y5R"/>
+                                    <constraint firstItem="Y34-rC-8KP" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="123" id="4nE-EY-fjl"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y34-rC-8KP" secondAttribute="bottom" id="6FQ-O3-GdV"/>
+                                    <constraint firstItem="7py-cP-OWL" firstAttribute="top" secondItem="yru-sR-yCg" secondAttribute="bottom" constant="8" id="9Jm-Os-HVr"/>
+                                    <constraint firstItem="4Pn-Z2-nuD" firstAttribute="top" secondItem="ZYx-tf-jIe" secondAttribute="top" constant="12" id="CgZ-7L-vQx"/>
+                                    <constraint firstItem="Y34-rC-8KP" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="123" id="Eqs-Vr-Vfb"/>
+                                    <constraint firstAttribute="trailing" secondItem="WE0-03-717" secondAttribute="trailing" constant="18" id="H6q-zo-jhQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="7py-cP-OWL" secondAttribute="trailing" constant="84" id="Jmt-kz-BXw"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Pn-Z2-nuD" secondAttribute="trailing" constant="8" id="KEJ-oF-bUv"/>
+                                    <constraint firstItem="7py-cP-OWL" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="85" id="M3P-JV-t35"/>
+                                    <constraint firstAttribute="trailing" secondItem="yru-sR-yCg" secondAttribute="trailing" constant="18" id="QVj-06-1t8"/>
+                                    <constraint firstItem="7py-cP-OWL" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="85" id="Qzs-Nj-AGY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y34-rC-8KP" secondAttribute="trailing" constant="-63" id="R6k-x4-Ycu"/>
+                                    <constraint firstItem="4Pn-Z2-nuD" firstAttribute="top" secondItem="ZYx-tf-jIe" secondAttribute="top" constant="12" id="S8q-eW-6X9"/>
+                                    <constraint firstItem="WE0-03-717" firstAttribute="top" secondItem="4Pn-Z2-nuD" secondAttribute="bottom" constant="12" id="V1Z-gm-iEO"/>
+                                    <constraint firstItem="7py-cP-OWL" firstAttribute="top" secondItem="yru-sR-yCg" secondAttribute="bottom" constant="8" id="VQQ-F5-TAH"/>
+                                    <constraint firstItem="WE0-03-717" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="18" id="Wdf-4M-4GN"/>
+                                    <constraint firstItem="yru-sR-yCg" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="18" id="aRq-3E-vYY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y34-rC-8KP" secondAttribute="trailing" constant="-63" id="egm-yg-LeS"/>
+                                    <constraint firstItem="Y34-rC-8KP" firstAttribute="top" secondItem="7py-cP-OWL" secondAttribute="bottom" constant="29" id="hR4-1k-4dE"/>
+                                    <constraint firstAttribute="trailing" secondItem="yru-sR-yCg" secondAttribute="trailing" constant="18" id="kRD-se-Fxk"/>
+                                    <constraint firstItem="yru-sR-yCg" firstAttribute="top" secondItem="WE0-03-717" secondAttribute="bottom" constant="8" id="lBJ-h9-Lg1"/>
+                                    <constraint firstAttribute="trailing" secondItem="WE0-03-717" secondAttribute="trailing" constant="18" id="lo9-5W-D84"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y34-rC-8KP" secondAttribute="bottom" id="nA5-Mp-uDf"/>
+                                    <constraint firstItem="Y34-rC-8KP" firstAttribute="top" secondItem="7py-cP-OWL" secondAttribute="bottom" constant="29" id="nAA-I0-ouX"/>
+                                    <constraint firstItem="4Pn-Z2-nuD" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="8" id="oQO-rI-hho"/>
+                                    <constraint firstItem="WE0-03-717" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="18" id="p8j-A9-fDB"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Pn-Z2-nuD" secondAttribute="trailing" constant="8" id="pxm-MF-PI2"/>
+                                    <constraint firstItem="4Pn-Z2-nuD" firstAttribute="leading" secondItem="ZYx-tf-jIe" secondAttribute="leading" constant="8" id="pzd-7V-nkw"/>
+                                    <constraint firstItem="WE0-03-717" firstAttribute="top" secondItem="4Pn-Z2-nuD" secondAttribute="bottom" constant="8" id="slp-fi-lUV"/>
+                                    <constraint firstItem="yru-sR-yCg" firstAttribute="top" secondItem="WE0-03-717" secondAttribute="bottom" constant="8" id="tCt-pG-dkp"/>
+                                    <constraint firstAttribute="trailing" secondItem="7py-cP-OWL" secondAttribute="trailing" constant="84" id="v8U-7Q-P9z"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="S8q-eW-6X9"/>
+                                        <exclude reference="pxm-MF-PI2"/>
+                                        <exclude reference="pzd-7V-nkw"/>
+                                        <exclude reference="H6q-zo-jhQ"/>
+                                        <exclude reference="Wdf-4M-4GN"/>
+                                        <exclude reference="slp-fi-lUV"/>
+                                        <exclude reference="QVj-06-1t8"/>
+                                        <exclude reference="aRq-3E-vYY"/>
+                                        <exclude reference="tCt-pG-dkp"/>
+                                        <exclude reference="Jmt-kz-BXw"/>
+                                        <exclude reference="Qzs-Nj-AGY"/>
+                                        <exclude reference="VQQ-F5-TAH"/>
+                                        <exclude reference="Eqs-Vr-Vfb"/>
+                                        <exclude reference="egm-yg-LeS"/>
+                                        <exclude reference="hR4-1k-4dE"/>
+                                        <exclude reference="nA5-Mp-uDf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <exclude reference="CgZ-7L-vQx"/>
+                                        <exclude reference="KEJ-oF-bUv"/>
+                                        <include reference="S8q-eW-6X9"/>
+                                        <exclude reference="oQO-rI-hho"/>
+                                        <include reference="pxm-MF-PI2"/>
+                                        <include reference="pzd-7V-nkw"/>
+                                        <include reference="H6q-zo-jhQ"/>
+                                        <exclude reference="V1Z-gm-iEO"/>
+                                        <include reference="Wdf-4M-4GN"/>
+                                        <exclude reference="lo9-5W-D84"/>
+                                        <exclude reference="p8j-A9-fDB"/>
+                                        <include reference="slp-fi-lUV"/>
+                                        <exclude reference="23P-4u-Y5R"/>
+                                        <include reference="QVj-06-1t8"/>
+                                        <include reference="aRq-3E-vYY"/>
+                                        <exclude reference="kRD-se-Fxk"/>
+                                        <exclude reference="lBJ-h9-Lg1"/>
+                                        <include reference="tCt-pG-dkp"/>
+                                        <exclude reference="9Jm-Os-HVr"/>
+                                        <include reference="Jmt-kz-BXw"/>
+                                        <exclude reference="M3P-JV-t35"/>
+                                        <include reference="Qzs-Nj-AGY"/>
+                                        <include reference="VQQ-F5-TAH"/>
+                                        <exclude reference="v8U-7Q-P9z"/>
+                                        <exclude reference="4nE-EY-fjl"/>
+                                        <exclude reference="6FQ-O3-GdV"/>
+                                        <include reference="Eqs-Vr-Vfb"/>
+                                        <exclude reference="R6k-x4-Ycu"/>
+                                        <include reference="egm-yg-LeS"/>
+                                        <include reference="hR4-1k-4dE"/>
+                                        <include reference="nA5-Mp-uDf"/>
+                                        <exclude reference="nAA-I0-ouX"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="zsv-uA-Xon" firstAttribute="bottom" secondItem="ZYx-tf-jIe" secondAttribute="bottom" constant="217" id="4Fz-UM-Ht7"/>
+                            <constraint firstItem="zsv-uA-Xon" firstAttribute="trailing" secondItem="ZYx-tf-jIe" secondAttribute="trailing" constant="60" id="F3C-zN-Pn3"/>
+                            <constraint firstAttribute="bottom" secondItem="ZYx-tf-jIe" secondAttribute="bottom" constant="10" id="HSw-aO-sfp"/>
+                            <constraint firstItem="ZYx-tf-jIe" firstAttribute="leading" secondItem="zsv-uA-Xon" secondAttribute="leading" constant="278" id="emA-HT-au5"/>
+                            <constraint firstItem="ZYx-tf-jIe" firstAttribute="top" secondItem="zsv-uA-Xon" secondAttribute="top" constant="208" id="ga5-14-byz"/>
+                            <constraint firstItem="ZYx-tf-jIe" firstAttribute="leading" secondItem="zsv-uA-Xon" secondAttribute="leading" constant="60" id="hxS-Ec-E5m"/>
+                            <constraint firstItem="ZYx-tf-jIe" firstAttribute="top" secondItem="zsv-uA-Xon" secondAttribute="top" constant="11" id="iIA-mj-tex"/>
+                            <constraint firstItem="zsv-uA-Xon" firstAttribute="trailing" secondItem="ZYx-tf-jIe" secondAttribute="trailing" constant="236" id="waO-RJ-lrC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="zsv-uA-Xon"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="waO-RJ-lrC"/>
+                                <exclude reference="HSw-aO-sfp"/>
+                                <exclude reference="emA-HT-au5"/>
+                                <exclude reference="iIA-mj-tex"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="4Fz-UM-Ht7"/>
+                                <exclude reference="F3C-zN-Pn3"/>
+                                <include reference="waO-RJ-lrC"/>
+                                <include reference="HSw-aO-sfp"/>
+                                <include reference="emA-HT-au5"/>
+                                <exclude reference="ga5-14-byz"/>
+                                <exclude reference="hxS-Ec-E5m"/>
+                                <include reference="iIA-mj-tex"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="answer" destination="yru-sR-yCg" id="qCG-WM-7nc"/>
@@ -3569,7 +3685,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Scholarships" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-fl-ALR">
-                                                    <rect key="frame" x="20" y="10.000000000000002" width="374" height="23.666666666666671"/>
+                                                    <rect key="frame" x="20" y="10.000000000000002" width="856" height="23.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3591,7 +3707,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Housing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hg5-vC-uOO">
-                                                    <rect key="frame" x="20" y="12.666666666666664" width="374" height="21"/>
+                                                    <rect key="frame" x="20" y="12.666666666666664" width="856" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

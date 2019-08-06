@@ -15,9 +15,9 @@ import SmartStore
 
 
 class HomeViewController: UIViewController{
-
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
-    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
 
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     
@@ -28,17 +28,30 @@ class HomeViewController: UIViewController{
         
     }
     @IBAction func click(_ sender: UIButton) {
+        
         let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
         popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-       self.present(popUp, animated: true)
-        
-    }
+        self.present(popUp, animated: true)    }
     
+    func showInformationPopUp(){
+        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
+        popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        self.present(popUp, animated: true)    }
+
+
     override func loadView() {
         super.loadView()
-        self.loadDataIntoStore()
+        self.loadFromStore()
+         self.loadDataIntoStore()
+
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.loadDataIntoStore()
+        
+    }
     /// Will present the article webpage when tapped
     ///
     /// - Parameter sender: the UIButton tapped
@@ -102,7 +115,7 @@ class HomeViewController: UIViewController{
             }
             
             //Loads contactData into store
-            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c  FROM Contact")
+            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c  FROM Contact")
             RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
@@ -112,6 +125,7 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
+                print(results)
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
@@ -146,6 +160,19 @@ class HomeViewController: UIViewController{
     
 
 
+    /// Loads data from store and presents on edit profile
+    func loadFromStore(){
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:First_Login__c} from {Contact}", pageSize: 1),
+            let smartStore = self.storeO,
+            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
+            let firstTime = (record[0][0])
+            DispatchQueue.main.async {
+                if firstTime == "0"{
+                    self.showInformationPopUp()
+                }
+            }
+        }
+        }
 
 
 

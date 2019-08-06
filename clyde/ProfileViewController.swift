@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
    //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
     
     // Private variables for map
     private var locationManager = CLLocationManager()
@@ -390,7 +390,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
      // Variables
     var profileImage: UIImage!
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.club.clyde", category: "profile")
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
     var reach: Reachability?
     var internetConnection = false
     var studentStatus = true
