@@ -31,7 +31,11 @@
             { "path": "TargetX_SRMb__Anticipated_Major__c", "type": "string"},
             { "path": "OwnerId", "type": "string"},
             { "path": "First_Login__c", "type": "string"},
-            { "path": "Status_Category__c", "type": "string"}
+            { "path": "Status_Category__c", "type": "string"},
+            { "path": "__locally_deleted__", "type": "string"},
+            { "path": "__locally_updated__", "type": "string"},
+            { "path": "__locally_created__", "type": "string"},
+            { "path": "__local__", "type": "string"}
             
         ]
     },

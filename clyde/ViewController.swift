@@ -27,11 +27,6 @@ class HomeViewController: UIViewController{
         self.addLogoToNav()
         
     }
-    @IBAction func click(_ sender: UIButton) {
-        
-        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
-        popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(popUp, animated: true)    }
     
     func showInformationPopUp(){
         let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
@@ -49,6 +44,7 @@ class HomeViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.loadView()
         self.loadDataIntoStore()
         
     }
