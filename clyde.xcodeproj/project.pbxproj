@@ -778,11 +778,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
-				DEVELOPMENT_TEAM = 39Z2QRTVV2;
+				DEVELOPMENT_TEAM = 947MFRS7RN;
 				INFOPLIST_FILE = clyde/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.cofc.club.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cofc.clyde;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "clyde/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -795,11 +795,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
-				DEVELOPMENT_TEAM = 39Z2QRTVV2;
+				DEVELOPMENT_TEAM = 947MFRS7RN;
 				INFOPLIST_FILE = clyde/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.cofc.club.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cofc.clyde;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "clyde/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
