@@ -24,98 +24,116 @@
 
 import Foundation
 import UIKit
-import SalesforceSDKCore
 import SmartSync
-import SwiftyJSON
-import SmartStore
 
-
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate : UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var reach: Reachability?
-
-    let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR" //"3MVG98dostKihXN65VZ3l_hz2l9ebnWvKhci5zVujmy0BPLS67Tj_nbpgqgviv8MTpxR4riiQHsfAcLPCRWA5"
+    
+    let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR"
     let OAuthRedirectURI = "cofcapppartial://oauth/done"
     let scopes = ["full"]
     
-    //Initializes the Mobile SDK and registers a block to handle user change notifications.
     override init() {
         super.init()
         SmartSyncSDKManager.initializeSDK()
-        AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
-            self?.resetViewState {
-                self?.setupRootViewController()
+        
+        AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
+            self.resetViewState {
+                self.setupRootViewController()
             }
         })
+        
     }
     
     // MARK: - App delegate lifecycle
-    //After iOS finishes launching the app, this method is called.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        //SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
-        //Uncomment the code below to see how you can customize the color, textcolor, font and fontsize of the navigation bar
+        self.initializeAppViewState()
+        
+        // If you wish to register for push notifications, uncomment the line below.  Note that,
+        // if you want to receive push notifications from Salesforce, you will also need to
+        // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
+        //
+        // SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
+        
+        //Uncomment the code below to see how you can customize the color, textcolor,
+        //font and fontsize of the navigation bar
         let loginViewConfig = SalesforceLoginViewControllerConfig()
-
-        //Set showSettingsIcon to NO if you want to hide the settings icon on the nav bar
+        
+        //Set showSettingsIcon to false if you want to hide the settings
+        //icon on the nav bar
         loginViewConfig.showsSettingsIcon = false
-
-        //Set showNavBar to NO if you want to hide the top bar
+        
+        //Set showNavBar to false if you want to hide the top bar
         loginViewConfig.showsNavigationBar = false
-
-        //loginViewConfig.navBarColor = UIColor(red: 0.051, green: 0.765, blue: 0.733, alpha: 1.0)
-        //loginViewConfig.navBarTextColor = UIColor.white
-        //loginViewConfig.navBarFont = UIFont(name: "Helvetica", size: 16.0)
-
+        //loginViewConfig.navigationBarColor = UIColor(red: 0.051, green: 0.765, blue: 0.733, alpha: 1.0)
+        //loginViewConfig.navigationBarTextColor = UIColor.white
+        //loginViewConfig.navigationBarFont = UIFont(name: "Helvetica", size: 16.0)
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
-
-        AuthHelper.loginIfRequired { [weak self] in
-            self?.setupRootViewController()
+        AuthHelper.loginIfRequired {
+            self.setupRootViewController()
             SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
             SmartStoreSDKManager.shared.setupUserStoreFromDefaultConfig()
-
-
         }
-        
-       
-        
-       self.reach = Reachability.forInternetConnection()
+        self.reach = Reachability.forInternetConnection()
         self.reach!.reachableOnWWAN = false
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: NSNotification.Name.reachabilityChanged, object: nil)
         self.reach!.startNotifier()
-
+        
         return true
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
-        SFPushNotificationManager.sharedInstance().didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
-        if (UserAccountManager.shared.currentUserAccount?.credentials.accessToken != nil) {
-            SFPushNotificationManager.sharedInstance().registerSalesforceNotifications(completionBlock: nil, fail: nil)
-        }
+        //
+        // Uncomment the code below to register your device token with the push notification manager
+        //
+        //
+        // SFPushNotificationManager.sharedInstance().didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+        // if (UserAccountManager.shared.currentUserAccount?.credentials.accessToken != nil)
+        // {
+        //     SFPushNotificationManager.sharedInstance().registerSalesforceNotifications(completionBlock: nil, fail: nil)
+        // }
     }
+    
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error ) {
         // Respond to any push notification registration errors here.
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey
+        : Any] = [:]) -> Bool {
         // Uncomment following block to enable IDP Login flow
-        //return  UserAccountManager.sharedInstance().handleIDPAuthenticationResponse(url, options: options)
-        return false
+        // return  UserAccountManager.shared.handleIdentityProviderResponse(from: url, with: options)
+        return false;
     }
     
-    //Sets up the root view controller after launch
+    // MARK: - Private methods
+    func initializeAppViewState() {
+        if (!Thread.isMainThread) {
+            DispatchQueue.main.async {
+                self.initializeAppViewState()
+            }
+            return
+        }
+        
+        self.window!.rootViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateInitialViewController()
+        self.window?.makeKeyAndVisible()
+    }
+    
     func setupRootViewController() {
         self.window!.rootViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateInitialViewController()
-        self.window!.makeKeyAndVisible()
+        
+//      let rootVC = SWRevealViewController(nibName: nil, bundle: nil)
+//       let navVC = UINavigationController(rootViewController: rootVC)
+//        self.window?.rootViewController = navVC
     }
     
-    
-    func resetViewState(_ postResetBlock: @escaping () -> Void) {
-        if let rootViewController = self.window!.rootViewController {
+    func resetViewState(_ postResetBlock: @escaping () -> ()) {
+        if let rootViewController = self.window?.rootViewController {
             if let _ = rootViewController.presentedViewController {
                 rootViewController.dismiss(animated: false, completion: postResetBlock)
                 return
@@ -125,17 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    
-    
-   
-    
     @objc func reachabilityChanged(notification: NSNotification){
         if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN(){
             print("\nService available")
         }else{
             print("\nNo Service")
         }
-    }
-    
-   
-}
+    }}

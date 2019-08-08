@@ -520,6 +520,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         if self.studentStatus == true{
             self.insertIntoSoup()
             self.syncUp()
+            //self.updateSalesforceData()
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
@@ -576,7 +577,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.loadView()
         self.syncDown()
         
-        //self.loadDataFromStore()
+        //self.loadFromStore()
     }
     
     
@@ -750,10 +751,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 self.graduationYearTextField.text = graduationYear
                 self.ethnicOriginTextField.text = ethnicity
                 if mobileOpt == "0"{ self.mobileText = "Opt-out"
+                    self.mobileOptInText = "0"
                     self.mobileSwitch.setOn(false, animated: true)
                 }
                 else{ self.mobileText = "Opt-in"
                     self.mobileSwitch.setOn(true, animated: true)
+                    self.mobileOptInText = "1"
                 }
                 if honors == "0"{
                     self.honorsCollegeInterestText = "0"
@@ -787,7 +790,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                                        "TargetX_SRMb__Student_Type__c": studentTypeTextField.text!,
                                        "TargetX_SRMb__Graduation_Year__c": graduationYearTextField.text!,
                                        "Ethnicity_Non_Applicants__c": ethnicOriginTextField.text!,
-                                       "Text_Message_Consent__c": mobileOptInText,
+                                       "Text_Message_Consent__c": self.mobileOptInText,
                                        "Honors_College_Interest_Check__c": honorsCollegeInterestText,
                                        "__locally_deleted__": false,
                                        "__locally_updated__": true,
@@ -796,7 +799,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
        
             if (((self.store?.soupExists(forName: "Contact"))!)){
                 self.store?.clearSoup("Contact")
-                self.store?.upsert(entries: [JSONData], forSoupNamed: "Contact")
+                self.store?.upsert(entries: [JSONData], forSoupNamed: "Contact")
                 os_log("\n\nSmartStore loaded records for contact.", log: self.mylog, type: .debug)
             }
     }
@@ -820,8 +823,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         record["TargetX_SRMb__Gender__c"] = self.genderTextField.text
         record["Gender_Identity__c"] = self.genderIdentityTextField.text
         record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
-        record["Honors_College_Interest_Check__c"] = self.honorsCollegeInterestText
-        record["Text_Message_Consent__c"] = self.mobileOptInText
+       // record["Honors_College_Interest_Check__c"] = self.honorsCollegeInterestText
+        if self.mobileOptInText == "0"{
+            record["Text_Message_Consent__c"] = "false"
+        }else{
+            record["Text_Message_Consent__c"] = "true"
+
+        }
+      //  record["Text_Message_Consent__c"] = self.mobileOptInText
         // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
         // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
         let userRequest = RestClient.shared.requestForUserInfo()

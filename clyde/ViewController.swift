@@ -15,7 +15,7 @@ import SmartStore
 
 
 class HomeViewController: UIViewController{
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
 
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController{
 
     override func loadView() {
         super.loadView()
-        self.loadFromStore()
+       // self.loadFromStore()
          self.loadDataIntoStore()
 
     }
@@ -104,9 +104,9 @@ class HomeViewController: UIViewController{
                     return
             }
             SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-            if (((strongSelf.store.soupExists(forName: "User")))) {
-                strongSelf.store.clearSoup("User")
-                strongSelf.store.upsert(entries: results, forSoupNamed: "User")
+            if (((strongSelf.store!.soupExists(forName: "User")))) {
+                strongSelf.store!.clearSoup("User")
+                strongSelf.store!.upsert(entries: results, forSoupNamed: "User")
                 os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
             }
             
@@ -125,9 +125,9 @@ class HomeViewController: UIViewController{
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
-                if (((strongSelf.store.soupExists(forName: "Contact")))){
-                    strongSelf.store.clearSoup("Contact")
-                    strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
+                if (((strongSelf.store!.soupExists(forName: "Contact")))){
+                    strongSelf.store!.clearSoup("Contact")
+                    strongSelf.store!.upsert(entries: results, forSoupNamed: "Contact")
                     os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
                 }
                 
@@ -143,9 +143,9 @@ class HomeViewController: UIViewController{
                             return
                     }
                     SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
-                    if (((strongSelf.store.soupExists(forName: "Counselor")))){
-                        strongSelf.store.clearSoup("Counselor")
-                        strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
+                    if (((strongSelf.store!.soupExists(forName: "Counselor")))){
+                        strongSelf.store!.clearSoup("Counselor")
+                        strongSelf.store!.upsert(entries: results, forSoupNamed: "Counselor")
                         os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
                     }
                 }

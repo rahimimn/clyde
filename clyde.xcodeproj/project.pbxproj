@@ -780,7 +780,7 @@
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
 				DEVELOPMENT_TEAM = 39Z2QRTVV2;
 				INFOPLIST_FILE = clyde/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cofc.club.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -797,7 +797,7 @@
 				CODE_SIGN_ENTITLEMENTS = clyde/clyde.entitlements;
 				DEVELOPMENT_TEAM = 39Z2QRTVV2;
 				INFOPLIST_FILE = clyde/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.cofc.club.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

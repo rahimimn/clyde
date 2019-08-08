@@ -6,7 +6,7 @@
             { "path": "Id", "type": "string"},
             { "path": "Name", "type": "string"},
             { "path": "Email", "type": "string"},
-            { "path": "ContactId"}
+            { "path": "ContactId", "type": "string"}
             
         ]
     },
@@ -14,6 +14,7 @@
         "soupName": "Contact",
         "indexes": [
             { "path": "Name", "type": "string"},
+            { "path": "Id", "type": "string"},
             { "path": "MobilePhone", "type": "string"},
             { "path": "MailingStreet", "type": "string"},
             { "path": "MailingCity", "type": "string"},
@@ -36,6 +37,17 @@
             { "path": "__locally_updated__", "type": "string"},
             { "path": "__locally_created__", "type": "string"},
             { "path": "__local__", "type": "string"}
+            
+        ]
+    },
+    {
+        "soupName": "Majors",
+        "indexes": [
+            { "path": "Name", "type": "string"},
+            { "path": "Contact_Email__c", "type": "string"},
+            { "path": "Description__c", "type": "string"},
+            { "path": "Image_Url__c", "type": "string"},
+            { "path": "Website__c", "type": "string"}
             
         ]
     },

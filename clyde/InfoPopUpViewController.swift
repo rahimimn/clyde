@@ -89,10 +89,14 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
                                        "TargetX_SRMb__Gender__c": answers[8],
                                        "Honors_College_Interest_Check_c": answers[9],
                                        "Status_Category__c": answers[10],
-                                       "First_Login__c": 1,]
+                                       "First_Login__c": 1,
+                                       "__locally_deleted__": false,
+                                       "__locally_updated__": true,
+                                       "__locally_created__": false,
+                                       "__local__": true,]
         print(JSONData)
        if (((self.store?.soupExists(forName: "Contact"))!)){
-            self.store?.clearSoup("Contact")
+           // self.store?.clearSoup("Contact")
             self.store?.upsert(entries: [JSONData], forSoupNamed: "Contact")
            os_log("\n\nSmartStore loaded records for contact.", log: self.mylog, type: .debug)
        }
