@@ -40,17 +40,7 @@
             
         ]
     },
-    {
-        "soupName": "Majors",
-        "indexes": [
-            { "path": "Name", "type": "string"},
-            { "path": "Contact_Email__c", "type": "string"},
-            { "path": "Description__c", "type": "string"},
-            { "path": "Image_Url__c", "type": "string"},
-            { "path": "Website__c", "type": "string"}
-            
-        ]
-    },
+    
     {
         "soupName": "Counselor",
         "indexes": [
@@ -59,6 +49,18 @@
             { "path": "MobilePhone", "type": "full_text"},
             { "path": "Name", "type": "string"},
             { "path": "Image_Url__c", "type": "full_text"}
+        ]
+    },
+    
+    {
+        "soupName": "Major",
+        "indexes": [
+            { "path": "Contact_Email__c", "type": "string"},
+            { "path": "Email__c", "type": "full_text"},
+            { "path": "Description__c", "type": "full_text"},
+            { "path": "Image_Url__c", "type": "string"},
+            { "path": "Name", "type": "full_text"},
+            { "path": "Website__c", "type": "full_text"}
         ]
     }
     

@@ -15,9 +15,10 @@ import SmartStore
 
 
 class HomeViewController: UIViewController{
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    
     var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
 
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     
@@ -37,14 +38,14 @@ class HomeViewController: UIViewController{
     override func loadView() {
         super.loadView()
        // self.loadFromStore()
-         self.loadDataIntoStore()
+         //self.loadDataIntoStore()
 
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.loadView()
+        //self.loadView()
         self.loadDataIntoStore()
         
     }
@@ -104,12 +105,12 @@ class HomeViewController: UIViewController{
                     return
             }
             SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-            if (((strongSelf.store!.soupExists(forName: "User")))) {
-                strongSelf.store!.clearSoup("User")
-                strongSelf.store!.upsert(entries: results, forSoupNamed: "User")
+            if ((((strongSelf.store.soupExists(forName: "User"))))) {
+                strongSelf.store.clearSoup("User")
+                strongSelf.store.upsert(entries: results, forSoupNamed: "User")
                 os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
             }
-            
+
             //Loads contactData into store
             let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c  FROM Contact")
             RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
@@ -125,12 +126,12 @@ class HomeViewController: UIViewController{
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
-                if (((strongSelf.store!.soupExists(forName: "Contact")))){
-                    strongSelf.store!.clearSoup("Contact")
-                    strongSelf.store!.upsert(entries: results, forSoupNamed: "Contact")
+                if (((strongSelf.store.soupExists(forName: "Contact")))){
+                    strongSelf.store.clearSoup("Contact")
+                    strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
                     os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
                 }
-                
+
                 //Loads counselor data into the store
                 let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                 RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
@@ -143,15 +144,33 @@ class HomeViewController: UIViewController{
                             return
                     }
                     SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
-                    if (((strongSelf.store!.soupExists(forName: "Counselor")))){
-                        strongSelf.store!.clearSoup("Counselor")
-                        strongSelf.store!.upsert(entries: results, forSoupNamed: "Counselor")
+                    if (((strongSelf.store.soupExists(forName: "Counselor")))){
+                        strongSelf.store.clearSoup("Counselor")
+                        strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
                         os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
                     }
                 }
             }
         }
-    }
+        
+        let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c FROM Possible_Interests__c WHERE Type__c = 'Major'")
+        RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
+            print(error)
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+            if (((strongSelf.store.soupExists(forName: "Major")))) {
+                strongSelf.store.clearSoup("Major")
+                strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
+                os_log("\n\nSmartStore loaded records for majors.", log: strongSelf.mylog, type: .debug)
+            }
+        }    }
     
     
 

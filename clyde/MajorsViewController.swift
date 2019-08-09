@@ -19,6 +19,8 @@ class MajorsViewController: UIViewController {
 
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
+    var majorCounter: Int = 0
+    
     
     @IBOutlet weak var majorImage: UIImageView!
     @IBOutlet weak var majorLabel: UILabel!
@@ -37,36 +39,9 @@ class MajorsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        loadDataIntoStore()
     }
     
-    /// Loads important data into the offline storage
-    func loadDataIntoStore(){
-        print("In function")
-        //Loads user id into store
-        let userIdRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c FROM Possible_Interests__c")
-        print("creare")
-        RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
-            print(error)
-        }) { [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
-                let jsonResponse = response as? Dictionary<String, Any>,
-                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                else{
-                    print("\nWeak or absent connection.")
-                    return
-            }
-            print("here")
-            print(results)
-            SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-            if (((strongSelf.store.soupExists(forName: "Majors")))) {
-                strongSelf.store.clearSoup("Majors")
-                strongSelf.store.upsert(entries: results, forSoupNamed: "Majors")
-                os_log("\n\nSmartStore loaded records for majors.", log: strongSelf.mylog, type: .debug)
-            }
-        }
-        print("out of function")
-    }
+
     
     
     

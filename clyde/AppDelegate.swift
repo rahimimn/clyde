@@ -25,19 +25,14 @@
 import Foundation
 import UIKit
 import SmartSync
+import SwiftyJSON
 
 class AppDelegate : UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var reach: Reachability?
-    
-    let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR"
-    let OAuthRedirectURI = "cofcapppartial://oauth/done"
-    let scopes = ["full"]
     
     override init() {
         super.init()
         SmartSyncSDKManager.initializeSDK()
-        
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
             self.resetViewState {
                 self.setupRootViewController()
@@ -72,15 +67,11 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         //loginViewConfig.navigationBarFont = UIFont(name: "Helvetica", size: 16.0)
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
         AuthHelper.loginIfRequired {
-            self.setupRootViewController()
-            SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
             SmartStoreSDKManager.shared.setupUserStoreFromDefaultConfig()
+            SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
+            self.setupRootViewController()
+            
         }
-        self.reach = Reachability.forInternetConnection()
-        self.reach!.reachableOnWWAN = false
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: NSNotification.Name.reachabilityChanged, object: nil)
-        self.reach!.startNotifier()
         
         return true
     }
@@ -143,10 +134,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     }
     
     
-    @objc func reachabilityChanged(notification: NSNotification){
-        if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN(){
-            print("\nService available")
-        }else{
-            print("\nNo Service")
-        }
-    }}
+    func loadDataFromStore(){
+        
+    }
+    
+    
+}

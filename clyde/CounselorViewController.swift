@@ -162,7 +162,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                 self.instagramButton.setTitle("@cofcadmissions", for: .normal)
                 self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
-                loadingIndicator.stopAnimating()
+              
                 
                 let url = URL(string: counserlorImage)!
                 
@@ -174,8 +174,8 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     }
                 }
                 task.resume()
+                  loadingIndicator.stopAnimating()
             }
-            print(record)
         }catch let e as Error?{
             print(e as Any)
         }
@@ -187,6 +187,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     
     /// Pulls counselor infomation from Salesforce and then presents it.
     /// Information pulled: Image, Name, About, Email, Phone
+    /// No longer in use
     func pullInformation(){
         
         // Loading Indicator is created, starts animated before user's information request is sent
@@ -218,9 +219,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         
        }) { [weak self] (response, urlResponse) in
         let userAccountJSON = JSON(response!);           let userAccountID = userAccountJSON["user_id"].stringValue
-        
-            
-        
         
         //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
             let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
@@ -283,9 +281,10 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 }//counselor id
         }//contact
     }//user
-    }
-            
+}
 
+    
+    
     /// Displays the URL within Safari
     ///
     /// - Parameter url: the url to be displayed
@@ -298,8 +297,4 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             present(vc, animated: true)
         }
     }
-
-
-
-
 }
