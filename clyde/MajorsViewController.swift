@@ -18,10 +18,10 @@ import SmartSync
 class MajorsViewController: UIViewController {
 
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
-    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Majors")
     var majorCounter: Int = 0
     
-    
+    var websiteUrl = ""
     @IBOutlet weak var majorImage: UIImageView!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var majorDescription: UITextView!
@@ -39,10 +39,52 @@ class MajorsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.loadFromStore()
     }
     
 
-    
+    func loadFromStore(){
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c} from {Major}", pageSize: 60)
+        do{
+            let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else{
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+
+                return
+            }
+            
+            if majorCounter == record.count{
+                majorCounter = 0
+            }
+            
+            let name = record[self.majorCounter][0]
+            let website = record[self.majorCounter][1]
+            let description = record[self.majorCounter][2]
+            let image = record[self.majorCounter][3]
+
+            
+            
+            DispatchQueue.main.async {
+                
+                let url = URL(string: image)!
+                let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                    guard let data = data, error == nil else {return}
+                    DispatchQueue.main.async {
+                        self.majorImage.image = UIImage(data:data)
+                        self.majorCounter = self.majorCounter + 1
+                        self.majorLabel.text = name
+                        self.majorDescription.text = description
+                        self.websiteUrl = website
+                        
+
+                    }
+                }
+                task.resume()
+            }
+        }catch let e as Error?{
+            print(e as Any)
+        }
+    }
     
     
     @IBAction func WebsiteButton(_ sender: UIButton) {
@@ -51,5 +93,12 @@ class MajorsViewController: UIViewController {
     @IBAction func ContactButton(_ sender: UIButton) {
     }
     
-
+    @IBAction func likeButton(_ sender: UIButton) {
+        loadFromStore()
+    }
+    @IBAction func dislikeButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func maybeButton(_ sender: UIButton) {
+    }
 }
