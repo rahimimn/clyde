@@ -140,6 +140,24 @@ class MajorsViewController: UIViewController {
        
         print(record)
        
+        
+//        var event = [String : Any]()
+//        event["TargetX_Eventsb__Contact__c"] = contactId
+//        event["TargetX_Eventsb__OrgEvent__c"] = "a0JG000000VTLttMAH"
+//        event["TargetX_Eventsb__Confirmed__c"] = true
+//        
+//        
+//        let eventRequest = RestClient.shared.requestForUpsert(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", externalIdField: "Id", externalId: nil, fields: event)
+//        //let selectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: record)
+//        RestClient.shared.send(request: eventRequest, onFailure: { (error, URLResponse) in
+//            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(eventRequest), error: \(error)")
+//            
+//        }){(response, URLResponse) in
+//            //Creates a save alert to be presented whenever the user saves their information
+//            os_log("\nSuccessful response received")
+//        }
+//        
+        
         let selectedInterestRequest = RestClient.shared.requestForUpsert(withObjectType: "Selected_Interest__c", externalIdField: "Id", externalId: nil, fields: record)
        //let selectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: record)
         RestClient.shared.send(request: selectedInterestRequest, onFailure: { (error, URLResponse) in
