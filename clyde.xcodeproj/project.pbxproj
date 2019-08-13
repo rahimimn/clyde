@@ -42,6 +42,9 @@
 		B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B23C492422D3D9F800A88C48 /* cistern.jpg */; };
 		B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */; };
 		B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */; };
+		B26924872301E39500C480EF /* icons8-thumbs-up-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B26924862301E39500C480EF /* icons8-thumbs-up-100.png */; };
+		B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248A2301E4DB00C480EF /* thumbsDown.png */; };
+		B269248D2301E51400C480EF /* sideThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248C2301E51300C480EF /* sideThumb.png */; };
 		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
 		B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */; };
 		B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */; };
@@ -133,6 +136,9 @@
 		B23C492422D3D9F800A88C48 /* cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cistern.jpg; sourceTree = "<group>"; };
 		B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableViewController.swift; sourceTree = "<group>"; };
 		B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
+		B26924862301E39500C480EF /* icons8-thumbs-up-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-thumbs-up-100.png"; sourceTree = "<group>"; };
+		B269248A2301E4DB00C480EF /* thumbsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbsDown.png; sourceTree = "<group>"; };
+		B269248C2301E51300C480EF /* sideThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideThumb.png; sourceTree = "<group>"; };
 		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Org Unit.png"; sourceTree = "<group>"; };
 		B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
@@ -417,7 +423,10 @@
 				B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */,
 				B227D08122BBD87600AA0634 /* icons8-FAQ.png */,
 				B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */,
+				B26924862301E39500C480EF /* icons8-thumbs-up-100.png */,
 				B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */,
+				B269248C2301E51300C480EF /* sideThumb.png */,
+				B269248A2301E4DB00C480EF /* thumbsDown.png */,
 				B28E066322C3A0FE0035A40F /* icons8-tick-box-100.png */,
 				B227D07F22BBD87600AA0634 /* icons8-Mind Map.png */,
 				B227D08322BBD87600AA0634 /* icons8-Online Support.png */,
@@ -539,6 +548,7 @@
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
+				B269248D2301E51400C480EF /* sideThumb.png in Resources */,
 				B2211D3F22F868D700D127DB /* clyde.jpg in Resources */,
 				B2D8013F22D8FC430050E376 /* instagram.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
@@ -552,11 +562,13 @@
 				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
 				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
+				B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
 				B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */,
 				B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */,
 				B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */,
 				B2C1A02822C27BAE00C5634C /* full-logo.jpg in Resources */,
+				B26924872301E39500C480EF /* icons8-thumbs-up-100.png in Resources */,
 				B2211D3B22F2018B00D127DB /* whiteLogo.png in Resources */,
 				B227D08522BBD87600AA0634 /* icons8-Thumbnails.png in Resources */,
 				B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */,

@@ -62,18 +62,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /// Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
-        if let smartStore = self.store,
-            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-            do {
-                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
-                    if syncState.isDone() {
-                        self?.loadDataFromStore()
-                    }
-                }
-            } catch {
-                print("Unexpected sync error: \(error).")
-            }
-        }
+        self.loadDataFromStore()
+//        if let smartStore = self.store,
+//            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+//            do {
+//                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
+//                    if syncState.isDone() {
+//                        self?.loadDataFromStore()
+//                    }
+//                }
+//            } catch {
+//                print("Unexpected sync error: \(error).")
+//            }
+//        }
         
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2

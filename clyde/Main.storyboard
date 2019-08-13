@@ -1444,13 +1444,13 @@
                                                         <rect key="frame" x="0.0" y="348.33333333333337" width="384" height="29.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="248" height="29.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="267" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="228" y="0.0" width="156" height="29.666666666666668"/>
+                                                                <rect key="frame" x="247" y="0.0" width="137" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1675,18 +1675,23 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-26-qf6">
-                                <rect key="frame" x="420" y="92" width="446" height="142"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-26-qf6">
+                                <rect key="frame" x="8" y="446" width="398" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Our faculty maintain close working relationships with businesses throughout the southeast, meaning students experience active recruitment for internships and jobs. Our curriculum includes financial accounting, managerial accounting, taxation, accounting information systems, auditing as well as management, marketing and finance.</string>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="LDS-H2-KdY"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=compact-widthClass=regular">
                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                    <mask key="constraints">
+                                        <exclude reference="LDS-H2-KdY"/>
+                                    </mask>
                                 </variation>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accounting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZV-of-Faz">
-                                <rect key="frame" x="0.0" y="454" width="414" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZV-of-Faz">
+                                <rect key="frame" x="5" y="454" width="404" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="334" id="LDj-rl-JUc"/>
                                 </constraints>
@@ -1704,7 +1709,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accounting.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XoQ-SH-hMs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XoQ-SH-hMs">
                                 <rect key="frame" x="0.0" y="168" width="414" height="278"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="334" id="ubD-xz-fTw"/>
@@ -1728,35 +1733,35 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="OLg-4Z-wfj">
                                 <rect key="frame" x="52" y="807" width="310" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOU-jH-1Cu">
+                                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="Dislike" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOU-jH-1Cu">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="GrO-3p-uVV"/>
                                             <constraint firstAttribute="height" constant="70" id="eN0-ux-i9o"/>
                                         </constraints>
-                                        <state key="normal" image="icons8-close-window-100.png"/>
+                                        <state key="normal" image="thumbsDown.png"/>
                                         <connections>
                                             <action selector="dislikeButton:" destination="FVz-8F-UYx" eventType="touchUpInside" id="0vT-cY-TK3"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ew-P3-Pe8">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" restorationIdentifier="Maybe" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ew-P3-Pe8">
                                         <rect key="frame" x="120" y="0.0" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="6oV-oX-jyg"/>
                                             <constraint firstAttribute="height" constant="70" id="pX1-Vu-eoN"/>
                                         </constraints>
-                                        <state key="normal" image="icons8-help-100.png"/>
+                                        <state key="normal" image="sideThumb.png"/>
                                         <connections>
                                             <action selector="maybeButton:" destination="FVz-8F-UYx" eventType="touchUpInside" id="0cP-EC-FgR"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6p-cA-ILE">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" restorationIdentifier="Like" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6p-cA-ILE">
                                         <rect key="frame" x="240" y="0.0" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="AFL-Yc-YWD"/>
                                             <constraint firstAttribute="width" constant="70" id="xWF-IJ-0d2"/>
                                         </constraints>
-                                        <state key="normal" image="icons8-tick-box-100.png"/>
+                                        <state key="normal" image="icons8-thumbs-up-100.png"/>
                                         <connections>
                                             <action selector="likeButton:" destination="FVz-8F-UYx" eventType="touchUpInside" id="FNQ-Cb-SPf"/>
                                         </connections>
@@ -1779,9 +1784,22 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0l-lI-YVH">
                                 <rect key="frame" x="40" y="724" width="334" height="30"/>
                                 <color key="backgroundColor" red="0.44705882352941173" green="0.7803921568627451" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ouH-mv-fTT"/>
+                                </constraints>
                                 <state key="normal" title="Website">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ouH-mv-fTT"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="ouH-mv-fTT"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="WebsiteButton:" destination="FVz-8F-UYx" eventType="touchUpInside" id="FXV-1l-Tqa"/>
                                 </connections>
@@ -1789,9 +1807,22 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9q-Ri-eTU">
                                 <rect key="frame" x="40" y="762" width="334" height="30"/>
                                 <color key="backgroundColor" red="0.44705882349999998" green="0.78039215689999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="16b-74-ng6"/>
+                                </constraints>
                                 <state key="normal" title="Contact">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="16b-74-ng6"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="16b-74-ng6"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="ContactButton:" destination="FVz-8F-UYx" eventType="touchUpInside" id="kXm-dq-xAJ"/>
                                 </connections>
@@ -1800,7 +1831,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GYS-pn-WA2" firstAttribute="trailing" secondItem="OLg-4Z-wfj" secondAttribute="trailing" constant="52" id="7eA-aS-oYf"/>
-                            <constraint firstItem="GYS-pn-WA2" firstAttribute="trailing" secondItem="jZV-of-Faz" secondAttribute="trailing" id="8cV-DM-b07"/>
+                            <constraint firstItem="GYS-pn-WA2" firstAttribute="trailing" secondItem="jZV-of-Faz" secondAttribute="trailing" constant="5" id="8cV-DM-b07"/>
                             <constraint firstItem="GYS-pn-WA2" firstAttribute="trailing" secondItem="G9q-Ri-eTU" secondAttribute="trailing" constant="40" id="9Bj-fm-85r"/>
                             <constraint firstItem="GYS-pn-WA2" firstAttribute="trailing" secondItem="n0l-lI-YVH" secondAttribute="trailing" constant="42" id="AtY-lH-4QF"/>
                             <constraint firstItem="G9q-Ri-eTU" firstAttribute="leading" secondItem="GYS-pn-WA2" secondAttribute="leading" constant="40" id="CWH-rp-eJo"/>
@@ -1817,8 +1848,8 @@
                             <constraint firstAttribute="trailing" secondItem="XoQ-SH-hMs" secondAttribute="trailing" id="Mee-1F-g1w"/>
                             <constraint firstItem="G9q-Ri-eTU" firstAttribute="top" secondItem="n0l-lI-YVH" secondAttribute="bottom" constant="8" id="PYS-OG-Wem"/>
                             <constraint firstItem="OLg-4Z-wfj" firstAttribute="leading" secondItem="GYS-pn-WA2" secondAttribute="leading" constant="52" id="RAY-Ye-tSC"/>
-                            <constraint firstItem="dVe-26-qf6" firstAttribute="bottom" secondItem="n0l-lI-YVH" secondAttribute="top" constant="20" id="SaD-qd-zC7"/>
-                            <constraint firstItem="jZV-of-Faz" firstAttribute="leading" secondItem="GYS-pn-WA2" secondAttribute="leading" id="Snc-Tf-Uh6"/>
+                            <constraint firstItem="dVe-26-qf6" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="n0l-lI-YVH" secondAttribute="top" constant="20" id="SaD-qd-zC7"/>
+                            <constraint firstItem="jZV-of-Faz" firstAttribute="leading" secondItem="GYS-pn-WA2" secondAttribute="leading" constant="5" id="Snc-Tf-Uh6"/>
                             <constraint firstAttribute="trailing" secondItem="dVe-26-qf6" secondAttribute="trailing" constant="8" id="VBY-wZ-56s"/>
                             <constraint firstItem="jZV-of-Faz" firstAttribute="top" secondItem="XoQ-SH-hMs" secondAttribute="bottom" constant="8" id="Wln-EN-m6X"/>
                             <constraint firstItem="XoQ-SH-hMs" firstAttribute="leading" secondItem="2Be-3H-e9O" secondAttribute="leading" id="Yhr-MA-A0d"/>
@@ -2412,11 +2443,11 @@
                                 <exclude reference="d3v-10-Ntd"/>
                                 <exclude reference="OuI-Uq-xPQ"/>
                                 <exclude reference="e3z-Dj-tFA"/>
-                                <exclude reference="8pp-Bm-3hh"/>
-                                <exclude reference="GN9-p2-Xbn"/>
                                 <exclude reference="33x-Ln-rau"/>
                                 <exclude reference="MVe-R9-haf"/>
                                 <exclude reference="PJv-gt-ozn"/>
+                                <exclude reference="8pp-Bm-3hh"/>
+                                <exclude reference="GN9-p2-Xbn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -2436,17 +2467,17 @@
                                 <exclude reference="PN3-k4-R1t"/>
                                 <include reference="e3z-Dj-tFA"/>
                                 <exclude reference="rQB-sN-RvQ"/>
-                                <exclude reference="2c1-ux-wfW"/>
-                                <include reference="8pp-Bm-3hh"/>
-                                <include reference="GN9-p2-Xbn"/>
-                                <exclude reference="nsl-au-BxP"/>
-                                <exclude reference="q8n-pb-ba9"/>
                                 <include reference="33x-Ln-rau"/>
                                 <include reference="MVe-R9-haf"/>
                                 <include reference="PJv-gt-ozn"/>
                                 <exclude reference="hVl-pe-VDX"/>
                                 <exclude reference="t5k-JZ-NOV"/>
                                 <exclude reference="zba-i1-8bg"/>
+                                <exclude reference="2c1-ux-wfW"/>
+                                <include reference="8pp-Bm-3hh"/>
+                                <include reference="GN9-p2-Xbn"/>
+                                <exclude reference="nsl-au-BxP"/>
+                                <exclude reference="q8n-pb-ba9"/>
                             </mask>
                         </variation>
                     </view>
@@ -3561,7 +3592,7 @@
                                         <rect key="frame" x="0.0" y="843" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z8c-db-Dap" id="ztG-G4-dTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="896" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Scholarships" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-fl-ALR">
@@ -3583,7 +3614,7 @@
                                         <rect key="frame" x="0.0" y="887" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qEq-un-98D" id="IVE-MI-fsr">
-                                            <rect key="frame" x="0.0" y="0.0" width="896" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Housing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hg5-vC-uOO">
@@ -3913,7 +3944,6 @@
         <image name="Clyde-Campus-Tour.jpg" width="192" height="127.91999816894531"/>
         <image name="Clyde-Cistern-profile.jpg" width="231" height="163"/>
         <image name="Clyde-Cistern.jpg" width="630" height="315"/>
-        <image name="accounting.jpg" width="640" height="426"/>
         <image name="banner037.jpg" width="2000" height="585"/>
         <image name="basketball.jpg" width="562.5" height="374.25"/>
         <image name="cal.png" width="320" height="314"/>
@@ -3928,10 +3958,8 @@
         <image name="icons8-Online Support.png" width="64" height="64"/>
         <image name="icons8-Org Unit.png" width="64" height="64"/>
         <image name="icons8-Thumbnails.png" width="64" height="64"/>
-        <image name="icons8-close-window-100.png" width="75" height="75"/>
-        <image name="icons8-help-100.png" width="75" height="75"/>
         <image name="icons8-iOS Photos.png" width="64" height="64"/>
-        <image name="icons8-tick-box-100.png" width="75" height="75"/>
+        <image name="icons8-thumbs-up-100.png" width="100" height="100"/>
         <image name="imageView:bow-PJ-Amv:image" width="231" height="163">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGU1RYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEQcI
@@ -4025,8 +4053,11 @@ AakBtgHDAdgB3QHhAeMB5QHnAfAB9QH7AgMCBQIHAgkCCwIQAhgThBOGE4sTmROdE6QTqRO2E7kTxhPL
 E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
 </mutableData>
         </image>
+        <image name="sideThumb.png" width="100" height="100"/>
+        <image name="thumbsDown.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="GE5-aK-Ozv"/>
         <segue reference="GMS-AL-n0r"/>
         <segue reference="1iM-Yc-Rlk"/>
         <segue reference="DYY-bQ-oG7"/>

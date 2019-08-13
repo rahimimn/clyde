@@ -60,7 +60,8 @@
             { "path": "Description__c", "type": "full_text"},
             { "path": "Image_Url__c", "type": "string"},
             { "path": "Name", "type": "full_text"},
-            { "path": "Website__c", "type": "full_text"}
+            { "path": "Website__c", "type": "full_text"},
+            { "path": "Id", "type": "full_text"}
         ]
     }
     

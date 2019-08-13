@@ -19,7 +19,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     //Variable names
     var name: String = ""
     var about: String = ""
-    var email: String = ""
+    var email: String? = ""
     var id: String = ""
     var studentID: String = ""
     
@@ -63,7 +63,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     ///This will not work in the simulator.
     /// - Parameter sender: action button
     @IBAction func email(_ sender: UIButton) {
-        if let email = counselorEmail.titleLabel?.text{
+        if let email = email{
             //Email "settings", these can be changed to anything.
             let subject = "Question Sent From Clyde Club"
             let body = "Hi!"
@@ -170,7 +170,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     guard let data = data, error == nil else {return}
                     DispatchQueue.main.async {
                         self.counselorImage.image = UIImage(data:data)
-                        
+                        self.email = counselorEmail
                     }
                 }
                 task.resume()

@@ -20,8 +20,12 @@ class MajorsViewController: UIViewController {
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Majors")
     var majorCounter: Int = 0
-    
+    var contactId = ""
+    var interestName = ""
     var websiteUrl = ""
+    var interestId = ""
+    var preference = ""
+    var selectedId =  ""
     @IBOutlet weak var majorImage: UIImageView!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var majorDescription: UITextView!
@@ -29,22 +33,26 @@ class MajorsViewController: UIViewController {
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     
-    var majorsDictionary = ["Accounting", "African American Studies", "Anthropology", "Archaeology", "ArtHistory", "Arts Management", "Astronomy", "Astrophysics", "Biochemistry", "Biology", "Business Administration", "Chemistry", "Classics" , "Communicaion", "Commercial Real Estate", "Computer Information Systems", "Computer Science", "Computing in the Arts", "Dance", "Data Science", "Early Childhood Education", "Economics", "Elementary Education", "English", "Exercise Science", "Finance", "Foreign Language Education", "French", "Geology", "General Studies","German", "Historic Preservation and Community Planning","History","Hospitality and Tourism Management", "International Business", "International Studies", "Jewish Studies", "Latin American and Caribbean Studies", "Marine Biology", "Marketing","Mathematics", "Meteorology", "Middle Grades Education", "Music", "Philosophy", "Physical Education", "Physics", "Political Science", "Psychology", "Public Health, B.A.", "Public Health, B.S.", "Religious Studies", "Secondary Education", "Sociology", "Spanish", "Special Education", "Studio Art", "Supply Chain Management", "Theatre", "Urban Studies", "Women's and Gender Studies"]
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
+        self.majorLabel.adjustsFontSizeToFitWidth = true
+        self.majorDescription.adjustsFontForContentSizeCategory = true
     }
     
     override func loadView() {
         super.loadView()
         self.loadFromStore()
+        self.getContactId()
+
     }
     
 
     func loadFromStore(){
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c} from {Major}", pageSize: 60)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c}, {Major:Id} from {Major}", pageSize: 60)
         do{
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
@@ -52,7 +60,6 @@ class MajorsViewController: UIViewController {
 
                 return
             }
-            
             if majorCounter == record.count{
                 majorCounter = 0
             }
@@ -61,7 +68,7 @@ class MajorsViewController: UIViewController {
             let website = record[self.majorCounter][1]
             let description = record[self.majorCounter][2]
             let image = record[self.majorCounter][3]
-
+            let id = record[self.majorCounter][4]
             
             
             DispatchQueue.main.async {
@@ -75,7 +82,8 @@ class MajorsViewController: UIViewController {
                         self.majorLabel.text = name
                         self.majorDescription.text = description
                         self.websiteUrl = website
-                        
+                        self.interestName = name
+                        self.interestId = id
 
                     }
                 }
@@ -84,10 +92,67 @@ class MajorsViewController: UIViewController {
         }catch let e as Error?{
             print(e as Any)
         }
+        
+    }
+    
+    func getContactId(){
+        let userQuery = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Id} from {Contact}", pageSize: 1)
+        do{
+            let records = try self.store.query(using: userQuery!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else{
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                print(records)
+                return
+            }
+            
+            let id = record[self.majorCounter][0]
+            print("This is the contactId within the request \(id)")
+            
+            DispatchQueue.main.async {
+                
+                
+                    DispatchQueue.main.async {
+                        self.contactId = id
+                        
+                    }
+                }
+            
+        }catch let e as Error?{
+            print(e as Any)
+        }
     }
     
     
+    func pushUsingSalesforce(_ button: Int){
+        var record = [String : Any]()
+        if button == 0{
+            preference = "Dislike"
+        } else if button == 1{
+            preference = "Maybe"
+        } else{
+            preference = "Like"
+        }
+        
+        
+        record["Preference__c"] = preference
+        record["Possible_Interest__c"] = interestId
+        record["Student__c"] = contactId
+       
+        print(record)
+       
+        let selectedInterestRequest = RestClient.shared.requestForUpsert(withObjectType: "Selected_Interest__c", externalIdField: "Id", externalId: nil, fields: record)
+       //let selectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: record)
+        RestClient.shared.send(request: selectedInterestRequest, onFailure: { (error, URLResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(selectedInterestRequest), error: \(error)")
+            
+        }){(response, URLResponse) in
+            //Creates a save alert to be presented whenever the user saves their information
+            os_log("\nSuccessful response received")
+        }
+    }
+    
     @IBAction func WebsiteButton(_ sender: UIButton) {
+        self.show(websiteUrl)
     }
     
     @IBAction func ContactButton(_ sender: UIButton) {
@@ -95,10 +160,33 @@ class MajorsViewController: UIViewController {
     
     @IBAction func likeButton(_ sender: UIButton) {
         loadFromStore()
+        
+        let button = sender.tag
+        pushUsingSalesforce(button)
+        
     }
     @IBAction func dislikeButton(_ sender: UIButton) {
+        loadFromStore()
+        let button = sender.tag
+        pushUsingSalesforce(button)
+        
     }
     
     @IBAction func maybeButton(_ sender: UIButton) {
+        loadFromStore()
+        let button = sender.tag
+        pushUsingSalesforce(button)
+    }
+    
+    
+    //Takes a url as a parameter, and then makes it appear with an internal safari page.
+    func show(_ url: String) {
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
     }
 }

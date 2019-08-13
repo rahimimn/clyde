@@ -21,7 +21,7 @@ class HomeViewController: UIViewController{
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
 
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
-    
+    var userId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarItem)
@@ -38,7 +38,8 @@ class HomeViewController: UIViewController{
     override func loadView() {
         super.loadView()
        // self.loadFromStore()
-         //self.loadDataIntoStore()
+        //self.loadDataIntoStore()
+        self.loadData()
 
     }
     
@@ -46,7 +47,7 @@ class HomeViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //self.loadView()
-        self.loadDataIntoStore()
+      // self.loadDataIntoStore()
         
     }
     /// Will present the article webpage when tapped
@@ -88,13 +89,116 @@ class HomeViewController: UIViewController{
     }
     
     
-//adding a comment for commit
+    func loadData(){
+       
+        
+        
+        
+        let userIdRequest = RestClient.shared.requestForUserInfo()
+        RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
+        }) { [weak self] (response, urlResponse) in
+            let jsonResponse = JSON(response)
+            print(jsonResponse)
+            let id = jsonResponse["user_id"].stringValue
+            let email = jsonResponse["email"].stringValue
+            print(id)
+            DispatchQueue.main.async {
+                self?.userId = id
+            }
+            let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User WHERE Id = '\(id)'")
+            
+            RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
+            }) { [weak self] (response, urlResponse) in
+                guard let strongSelf = self,
+                    let jsonResponse = response as? Dictionary<String, Any>,
+                    let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                    else{
+                        print("\nWeak or absent connection.")
+                        return
+                }
+                
+                SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+                if ((((strongSelf.store.soupExists(forName: "User"))))) {
+                    strongSelf.store.clearSoup("User")
+                    strongSelf.store.upsert(entries: results, forSoupNamed: "User")
+                    os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
+                }
+                
+                //Loads contactData into store
+                let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id  FROM Contact WHERE Email = '\(email)'")
+                RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+                }) { [weak self] (response, urlResponse) in
+                    guard let strongSelf = self,
+                        let jsonResponse = response as? Dictionary<String, Any>,
+                        let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                        else{
+                            print("\nWeak or absent connection.")
+                            return
+                    }
+                    print(results)
+                    let jsonContact = JSON(response)
+                    let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+                    
+                    SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+                    if (((strongSelf.store.soupExists(forName: "Contact")))){
+                        strongSelf.store.clearSoup("Contact")
+                        strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
+                        os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
+                    }
+                    
+                    //Loads counselor data into the store
+                    let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
+                    RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
+                    }) { [weak self] (response, urlResponse) in
+                        guard let strongSelf = self,
+                            let jsonResponse = response as? Dictionary<String, Any>,
+                            let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                            else{
+                                print("\nWeak or absent connection.")
+                                return
+                        }
+                        SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
+                        if (((strongSelf.store.soupExists(forName: "Counselor")))){
+                            strongSelf.store.clearSoup("Counselor")
+                            strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
+                            os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
+                        }
+                    }
+                }
+            }
+            
+            let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
+            RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
+                print(error)
+            }) { [weak self] (response, urlResponse) in
+                guard let strongSelf = self,
+                    let jsonResponse = response as? Dictionary<String, Any>,
+                    let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                    else{
+                        print("\nWeak or absent connection.")
+                        return
+                }
+                SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+                if (((strongSelf.store.soupExists(forName: "Major")))) {
+                    strongSelf.store.clearSoup("Major")
+                    strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
+                    os_log("\n\nSmartStore loaded records for majors.", log: strongSelf.mylog, type: .debug)
+                }
+        
+            }
+        }//completion
+        
+    }//func
+        
+    
 
     
     /// Loads important data into the offline storage
     func loadDataIntoStore(){
         //Loads user id into store
+        print(self.userId)
         let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User")
+        //let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
             guard let strongSelf = self,
@@ -104,6 +208,7 @@ class HomeViewController: UIViewController{
                     print("\nWeak or absent connection.")
                     return
             }
+
             SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
             if ((((strongSelf.store.soupExists(forName: "User"))))) {
                 strongSelf.store.clearSoup("User")
@@ -112,7 +217,7 @@ class HomeViewController: UIViewController{
             }
 
             //Loads contactData into store
-            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c  FROM Contact")
+            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id  FROM Contact")
             RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
@@ -125,6 +230,7 @@ class HomeViewController: UIViewController{
                 print(results)
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+              
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
                 if (((strongSelf.store.soupExists(forName: "Contact")))){
                     strongSelf.store.clearSoup("Contact")
@@ -153,7 +259,7 @@ class HomeViewController: UIViewController{
             }
         }
         
-        let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c FROM Possible_Interests__c WHERE Type__c = 'Major'")
+        let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
         RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
             print(error)
         }) { [weak self] (response, urlResponse) in
