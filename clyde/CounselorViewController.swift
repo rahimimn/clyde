@@ -63,7 +63,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     ///This will not work in the simulator.
     /// - Parameter sender: action button
     @IBAction func email(_ sender: UIButton) {
-        if let email = email{
+        let email = self.email
             //Email "settings", these can be changed to anything.
             let subject = "Question Sent From Clyde Club"
             let body = "Hi!"
@@ -73,11 +73,11 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             mailView.mailComposeDelegate = self
             mailView.setSubject(subject)
             mailView.setMessageBody(body, isHTML: false)
-            mailView.setToRecipients(to)
+        mailView.setToRecipients(to as! [String])
             
             self.present(mailView, animated: true, completion: nil)
 
-        }
+        
         
     }
     
