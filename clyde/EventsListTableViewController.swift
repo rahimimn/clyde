@@ -1,8 +1,8 @@
 //
-//  CheckInTableViewController.swift
+//  EventsListTableViewController.swift
 //  clyde
 //
-//  Created by Rahimi, Meena Nichole (Student) on 7/10/19.
+//  Created by Rahimi, Meena Nichole (Student) on 8/23/19.
 //  Copyright © 2019 Salesforce. All rights reserved.
 //
 
@@ -10,48 +10,66 @@ import UIKit
 import SalesforceSDKCore
 import SmartSync
 
-class CheckInTableViewController: UITableViewController {
-    var events : [Dictionary<String,Any>] = []
+class EventsListTableViewController: UITableViewController {
+
     var contactId = ""
+    var events : [Dictionary<String,Any>] = []
+    var dataRows = [Dictionary<String, Any>]()
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Registered Events")
     
-    @IBOutlet weak var menuBarButton: UIBarButtonItem!
-   
-   
     
-    
-    
-    private let dataSource = EventsDataSource(soqlQuery: "SELECT TargetX_Eventsb__OrgEvent__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '0035400000GV18bAAD'", cellReuseIdentifier: "sampleEvent") { record, cell in
-        let eventName = record["TargetX_Eventsb__OrgEvent__c"] as? String ?? ""
-       
-        cell.textLabel?.text = eventName
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.rowHeight = 40
-        self.clearsSelectionOnViewWillAppear = false
-        self.menuBar(menuBarItem: menuBarButton)
-        self.addLogoToNav()
-        self.contactId = getContactId()
-        self.dataSource.delegate = self as! EventsDataSourceDelegate
-        self.tableView.delegate = self
-        self.tableView.dataSource = self.dataSource
-        self.refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self.dataSource, action: #selector(self.dataSource.fetchData), for: UIControl.Event.valueChanged)
-        self.tableView.addSubview(refreshControl!)
-        self.dataSource.fetchData()
-    }
     
     override func loadView() {
         super.loadView()
-       
-        self.requestListOfRegisteredEvents()
-   
+        self.title = "Your Registered Events"
+       self.requestListOfRegisteredEvents()
+        print(dataRows)
     }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.menuBar(menuBarItem: menuBarButton)
+        self.addLogoToNav()
+        
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return self.dataRows.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "CellIdentifier"
+        
+        // Dequeue or create a cell of the appropriate type.
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier:cellIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+        
+        // If you want to add an image to your cell, here's how.
+        let image = UIImage(named: "icon.png")
+        cell.imageView?.image = image
+        
+        // Configure the cell to show the data.
+        let obj = dataRows[indexPath.row]
+        cell.textLabel?.text = obj["Name"] as? String
+        
+        // This adds the arrow to the right hand side.
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        return cell
+    }
+    
+    
     private func requestListOfRegisteredEvents(){
-         var id = self.getContactId()
+        var id = self.getContactId()
         let request = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(id)'")
         RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking: \(error)")
@@ -62,34 +80,14 @@ class CheckInTableViewController: UITableViewController {
                 let result = jsonResponse ["records"] as? [Dictionary<String,Any>]  else {
                     return
             }
-           print(result)
-           
+            print(result)
+            
             DispatchQueue.main.async {
                 self!.events = result
-                
+                strongSelf.dataRows = result
             }
         }    }
-    
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 4
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
-    
-
-    
-    
     func getContactId() -> String{
         
         var id = ""
@@ -105,7 +103,7 @@ class CheckInTableViewController: UITableViewController {
             id = record[0][0] as! String
             print("This is the contactId within the request \(id)")
             return id
-
+            
             DispatchQueue.main.async {
                 
                 DispatchQueue.main.async {
@@ -118,13 +116,5 @@ class CheckInTableViewController: UITableViewController {
             print(e as Any)
         }
         return id
-    }
-}
-extension CheckInTableViewController: EventsDataSourceDelegate {
-    func EventsDataSourceDidUpdateRecords(_ dataSource: EventsDataSource) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
-        }
     }
 }

@@ -54,12 +54,13 @@
 		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
 		B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */; };
 		B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E066B22C3AC270035A40F /* EventsTableViewController.swift */; };
-		B2B44D84230DC59A00FC1498 /* CheckInTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D83230DC59A00FC1498 /* CheckInTableDataSource.swift */; };
+		B2B44D8623101FD700FC1498 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8523101FD700FC1498 /* EventListViewController.swift */; };
+		B2B44D8A23102AFB00FC1498 /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */; };
+		B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */; };
 		B2C19FF422BC17E400C5634C /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF322BC17E300C5634C /* images.png */; };
 		B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */; };
 		B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */; };
 		B2C19FFA22BD36AC00C5634C /* icons8-iOS Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */; };
-		B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19FFC22BD411200C5634C /* CheckInViewController.swift */; };
 		B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09122BBD8BB00AA0634 /* acaslonpro-bold.otf */; };
 		B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09222BBD8BB00AA0634 /* acaslonpro-bolditalic.otf */; };
 		B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B227D09022BBD8BB00AA0634 /* acaslonpro-italic.otf */; };
@@ -149,12 +150,13 @@
 		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
 		B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2016-Orientation-750x499.jpg"; sourceTree = "<group>"; };
 		B28E066B22C3AC270035A40F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
-		B2B44D83230DC59A00FC1498 /* CheckInTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableDataSource.swift; sourceTree = "<group>"; };
+		B2B44D8523101FD700FC1498 /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListTableViewController.swift; sourceTree = "<group>"; };
+		B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
 		B2C19FF322BC17E300C5634C /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Details Popup.png"; sourceTree = "<group>"; };
 		B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Maintenance.png"; sourceTree = "<group>"; };
 		B2C19FF922BD36AC00C5634C /* icons8-iOS Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-iOS Photos.png"; sourceTree = "<group>"; };
-		B2C19FFC22BD411200C5634C /* CheckInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInViewController.swift; sourceTree = "<group>"; };
 		B2C1A01322C15E8200C5634C /* Clyde-Cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern.jpg"; sourceTree = "<group>"; };
 		B2C1A01A22C25B9B00C5634C /* charleston.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = charleston.jpg; sourceTree = "<group>"; };
 		B2C1A01C22C2682200C5634C /* basketball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = basketball.jpg; sourceTree = "<group>"; };
@@ -363,9 +365,10 @@
 		B2C19FFB22BD40DF00C5634C /* Check-In */ = {
 			isa = PBXGroup;
 			children = (
-				B2C19FFC22BD411200C5634C /* CheckInViewController.swift */,
 				B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */,
-				B2B44D83230DC59A00FC1498 /* CheckInTableDataSource.swift */,
+				B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */,
+				B2B44D8523101FD700FC1498 /* EventListViewController.swift */,
+				B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */,
 			);
 			name = "Check-In";
 			sourceTree = "<group>";
@@ -660,12 +663,13 @@
 				B27609FF22CA4FD400A122F7 /* user.swift in Sources */,
 				B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
-				B2C19FFD22BD411200C5634C /* CheckInViewController.swift in Sources */,
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,
+				B2B44D8623101FD700FC1498 /* EventListViewController.swift in Sources */,
 				B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
 				B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */,
+				B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */,
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
@@ -674,8 +678,8 @@
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
+				B2B44D8A23102AFB00FC1498 /* EventsListTableViewController.swift in Sources */,
 				B230DD4522EA04E7005674B4 /* Reachability.m in Sources */,
-				B2B44D84230DC59A00FC1498 /* CheckInTableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckInTableView: UIViewController {
+class CheckInViewController: UIViewController {
 
     // TO-DO: Retrieve user's event list from salesforce, present as a table. When a cell in the table is clicked, present a view that has a QR code specific to that event. And 
     
