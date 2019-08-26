@@ -59,7 +59,7 @@ class EventsDataSource: NSObject {
     init(cellReuseIdentifier: String, cellConfigurator: @escaping CellConfigurator) {
        
         let contactId = defaults.string(forKey: "ContactId")
-        self.soqlQuery = "SELECT TargetX_Eventsb__OrgEvent__c, Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId ?? "")'"
+        self.soqlQuery = "SELECT TargetX_Eventsb__OrgEvent__c, Id, Event_Name__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId ?? "")'"
         self.cellReuseIdentifier = cellReuseIdentifier
         self.cellConfigurator = cellConfigurator
         super.init()
@@ -90,7 +90,7 @@ class EventsDataSource: NSObject {
     ///
     /// When it successfully completes, the `records` property is set to the
     /// results, and the delegate is notified of the update.
-    @objc func fetchData() {
+    @objc func fetchData(){
         guard !soqlQuery.isEmpty else { return }
         let request = RestClient.shared.request(forQuery: soqlQuery)
         RestClient.shared.send(request: request, onFailure: handleError) { [weak self] response, _ in
@@ -102,10 +102,16 @@ class EventsDataSource: NSObject {
             }
             DispatchQueue.main.async {
                 self.records = resultsToReturn
+                print(self.records)
                 self.delegate?.EventsDataSourceDidUpdateRecords(self)
             }
         }
     }
+    
+    @objc func returnEventName() -> String{
+
+       let eventId = "hi"
+        return eventId}
 }
 
 extension EventsDataSource: UITableViewDataSource {

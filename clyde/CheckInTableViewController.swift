@@ -25,15 +25,18 @@ class CheckInTableViewController: UITableViewController {
     /// Init for the events list data source
     /// Displays the student's registered events on the table view.
     private let dataSource = EventsDataSource(cellReuseIdentifier: "sampleEvent") { record, cell in
-        let eventName = record["TargetX_Eventsb__OrgEvent__c"] as? String ?? ""
-        cell.textLabel?.text = eventName
+        let eventName = record["Event_Name__c"] as? String ?? ""
+         let eventId = record["Id"] as? String ?? ""
+        cell.textLabel?.text = eventName.capitalized
+        cell.detailTextLabel?.text = "Id: \(eventId)"
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Determines the height of each row
-        tableView.rowHeight = 40
+        tableView.rowHeight = 50
         // Indicated whether the controller will clear the selection when the table appears
         self.clearsSelectionOnViewWillAppear = false
         // Adds the menu bar
@@ -53,6 +56,7 @@ class CheckInTableViewController: UITableViewController {
         self.tableView.addSubview(refreshControl!)
         // Executes the soqlQuery
         self.dataSource.fetchData()
+        var hi = self.dataSource.returnEventName()
     }
     
     override func loadView() {super.loadView()}
@@ -62,7 +66,7 @@ class CheckInTableViewController: UITableViewController {
     /// Deprecated
     private func requestListOfRegisteredEvents(){
          var id = self.getContactId()
-        let request = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c,Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(id)'")
+        let request = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c,Id,Event_Name__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(id)'")
         RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
             SalesforceLogger.d(type(of:self), message:"Error invoking: \(error)")
         }) { [weak self] (response, urlResponse) in
@@ -72,7 +76,6 @@ class CheckInTableViewController: UITableViewController {
                 let result = jsonResponse ["records"] as? [Dictionary<String,Any>]  else {
                     return
             }
-           print(result)
             DispatchQueue.main.async {
                 self!.events = result
             }
@@ -92,12 +95,11 @@ class CheckInTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("you selected \(indexPath.row)")
         
         // Get the cell label
         let indexPath = tableView.indexPathForSelectedRow!
         let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
-        eventId = currentCell.textLabel?.text
+        eventId = currentCell.detailTextLabel?.text
         performSegue(withIdentifier: "ViewEventDetails", sender: self)
     }
     
@@ -150,7 +152,7 @@ class CheckInTableViewController: UITableViewController {
         if (segue.identifier == "ViewEventDetails"){
             var detailsViewController = segue.destination as! EventDetailViewController
             detailsViewController.capturedEventId = eventId
-            print("event id is \(eventId)")
+           
         }
         
         
@@ -169,7 +171,6 @@ class CheckInTableViewController: UITableViewController {
             let records = try self.store.query(using: userQuery!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                print(records)
                 return "no"
             }
             
