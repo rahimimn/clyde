@@ -9,7 +9,7 @@
 import Foundation
 import SalesforceSDKCore
 
-/// Protocol adopted by classes that wish to be informed when an `ObjectListDataSource`
+/// Protocol adopted by classes that wish to be informed when an `EventsDataSource`
 /// instance is updated.
 protocol EventsDataSourceDelegate: AnyObject {
     
@@ -19,10 +19,11 @@ protocol EventsDataSourceDelegate: AnyObject {
     func EventsDataSourceDidUpdateRecords(_ dataSource: EventsDataSource)
 }
 
-/// Supplies data to a `UITableView` for a list of objects returned by a SOQL query.
+/// Supplies data to a `UITableView` for a list of events returned by a SOQL query.
 /// An instance of this class can be used as a table view's `dataSource`.
 class EventsDataSource: NSObject {
-    
+    let defaults = UserDefaults.standard
+
     /// A dictionary with string keys.
     typealias SFRecord = [String: Any]
     
@@ -55,8 +56,10 @@ class EventsDataSource: NSObject {
     ///     from the table view.
     ///   - cellConfigurator: The closure to call for each cell being provided
     ///     by the data source.
-    init(soqlQuery: String, cellReuseIdentifier: String, cellConfigurator: @escaping CellConfigurator) {
-        self.soqlQuery = soqlQuery
+    init(cellReuseIdentifier: String, cellConfigurator: @escaping CellConfigurator) {
+       
+        let contactId = defaults.string(forKey: "ContactId")
+        self.soqlQuery = "SELECT TargetX_Eventsb__OrgEvent__c, Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId ?? "")'"
         self.cellReuseIdentifier = cellReuseIdentifier
         self.cellConfigurator = cellConfigurator
         super.init()

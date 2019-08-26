@@ -41,7 +41,6 @@
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
 		B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B23C492422D3D9F800A88C48 /* cistern.jpg */; };
 		B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */; };
-		B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */; };
 		B26924872301E39500C480EF /* icons8-thumbs-up-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B26924862301E39500C480EF /* icons8-thumbs-up-100.png */; };
 		B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248A2301E4DB00C480EF /* thumbsDown.png */; };
 		B269248D2301E51400C480EF /* sideThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248C2301E51300C480EF /* sideThumb.png */; };
@@ -54,9 +53,9 @@
 		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
 		B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */; };
 		B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E066B22C3AC270035A40F /* EventsTableViewController.swift */; };
-		B2B44D8623101FD700FC1498 /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8523101FD700FC1498 /* EventListViewController.swift */; };
-		B2B44D8A23102AFB00FC1498 /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */; };
 		B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */; };
+		B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */; };
+		B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */; };
 		B2C19FF422BC17E400C5634C /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF322BC17E300C5634C /* images.png */; };
 		B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */; };
 		B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */; };
@@ -137,7 +136,6 @@
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		B23C492422D3D9F800A88C48 /* cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cistern.jpg; sourceTree = "<group>"; };
 		B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableViewController.swift; sourceTree = "<group>"; };
-		B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
 		B26924862301E39500C480EF /* icons8-thumbs-up-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-thumbs-up-100.png"; sourceTree = "<group>"; };
 		B269248A2301E4DB00C480EF /* thumbsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbsDown.png; sourceTree = "<group>"; };
 		B269248C2301E51300C480EF /* sideThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideThumb.png; sourceTree = "<group>"; };
@@ -150,9 +148,9 @@
 		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
 		B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2016-Orientation-750x499.jpg"; sourceTree = "<group>"; };
 		B28E066B22C3AC270035A40F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
-		B2B44D8523101FD700FC1498 /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
-		B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListTableViewController.swift; sourceTree = "<group>"; };
 		B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
+		B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Clyde-Campus-Tour.jpg"; path = "../../Desktop/College of Charleston/Images/Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
 		B2C19FF322BC17E300C5634C /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Details Popup.png"; sourceTree = "<group>"; };
 		B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Maintenance.png"; sourceTree = "<group>"; };
@@ -366,8 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */,
-				B2B44D8923102AFB00FC1498 /* EventsListTableViewController.swift */,
-				B2B44D8523101FD700FC1498 /* EventListViewController.swift */,
+				B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */,
 				B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */,
 			);
 			name = "Check-In";
@@ -389,8 +386,8 @@
 				B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */,
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
 				B2D8013522D78D0D0050E376 /* F.png */,
+				B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
-				B2679ABA22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg */,
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
 				B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */,
@@ -549,7 +546,6 @@
 				B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */,
 				B227D08622BBD87600AA0634 /* 3844408-48.png in Resources */,
 				B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */,
-				B2679ABB22D63E5B003CCA27 /* Clyde-Campus-Tour.jpg in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
@@ -568,6 +564,7 @@
 				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
 				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
+				B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */,
 				B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
 				B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */,
@@ -664,7 +661,6 @@
 				B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,
-				B2B44D8623101FD700FC1498 /* EventListViewController.swift in Sources */,
 				B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */,
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
@@ -673,12 +669,12 @@
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
+				B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */,
 				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
-				B2B44D8A23102AFB00FC1498 /* EventsListTableViewController.swift in Sources */,
 				B230DD4522EA04E7005674B4 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

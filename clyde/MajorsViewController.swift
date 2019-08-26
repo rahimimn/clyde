@@ -106,12 +106,10 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
             let records = try self.store.query(using: userQuery!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                print(records)
                 return
             }
             
             let id = record[self.majorCounter][0]
-            print("This is the contactId within the request \(id)")
             
             DispatchQueue.main.async {
                 
@@ -150,7 +148,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         let checkForExistingSelectedInterestRequest = RestClient.shared.request(forQuery: "SELECT Preference__c, Id FROM Selected_Interest__c WHERE Student__c = '\(contactId)' AND Possible_Interest__c = '\(interestId)'")
         RestClient.shared.send(request: checkForExistingSelectedInterestRequest, onFailure: {(error, urlResponse) in
         
-            print(error!)
+            
             
             
         }) { [weak self] (response, urlResponse) in

@@ -2341,7 +2341,7 @@
         <!--Event Check In-->
         <scene sceneID="O0U-gF-Bf8">
             <objects>
-                <viewController storyboardIdentifier="EventsCheckInView" title="Event Check In" id="uEY-Yj-Mvz" customClass="CheckInViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsCheckInView" title="Event Check In" id="uEY-Yj-Mvz" customClass="EventDetailViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Vuq-yw-RXW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2349,8 +2349,8 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gr-8q-wEP">
                                 <rect key="frame" x="0.0" y="554" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Scan this QR code at check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USH-88-KA1">
-                                        <rect key="frame" x="35.333333333333343" y="13" width="343.66666666666663" height="34.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan this QR code at check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USH-88-KA1">
+                                        <rect key="frame" x="35" y="12.999999999999943" width="344" height="34"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2366,14 +2366,14 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="diL-vh-mLt">
                                 <rect key="frame" x="0.0" y="164" width="414" height="382"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="382" id="AXQ-EA-DwI"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="382" id="AXQ-EA-DwI"/>
                                 </constraints>
                             </mapView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLo-ya-Yuh">
-                                <rect key="frame" x="0.0" y="96" width="414" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLo-ya-Yuh">
+                                <rect key="frame" x="0.0" y="96.333333333333343" width="414" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Directions to check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv1-wP-GuG">
-                                        <rect key="frame" x="80" y="13" width="254.33333333333337" height="34.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions to check-in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv1-wP-GuG">
+                                        <rect key="frame" x="80" y="13" width="254" height="34"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2400,6 +2400,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYs-Jc-HTG">
                                 <rect key="frame" x="87" y="622" width="240" height="240"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="240" id="6VC-P1-cU6"/>
                                     <constraint firstAttribute="width" secondItem="eYs-Jc-HTG" secondAttribute="height" multiplier="1:1" id="jyF-E8-pjm"/>
                                 </constraints>
                             </imageView>
@@ -2491,12 +2492,13 @@
                         <barButtonItem key="rightBarButtonItem" title="    Back" id="lAt-sU-Luf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="aEQ-w5-Unh" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LCQ-5E-sfJ"/>
+                                <action selector="backButton:" destination="uEY-Yj-Mvz" id="UxT-dU-yTz"/>
+                                <segue destination="aEQ-w5-Unh" kind="show" identifier="back" id="F4T-Z2-p6E"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="menuBarButton" destination="VLW-k3-tS4" id="Cal-Qp-9wm"/>
+                        <outlet property="menuBarButton" destination="VLW-k3-tS4" id="Fci-Ka-dB7"/>
                         <outlet property="qrView" destination="eYs-Jc-HTG" id="W3g-Hq-hhu"/>
                     </connections>
                 </viewController>
@@ -2510,7 +2512,7 @@
                     </barButtonItem>
                 </navigationItem>
             </objects>
-            <point key="canvasLocation" x="8582.608695652174" y="2137.5"/>
+            <point key="canvasLocation" x="7729" y="2138"/>
         </scene>
         <!--Event Check In Nav-->
         <scene sceneID="xTd-r2-2S0">
@@ -2548,8 +2550,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="142.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Campus-Tour.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-xg-f0p">
-                                            <rect key="frame" x="-44" y="0.0" width="504" height="142.66666666666666"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Clyde-Campus-Tour.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-xg-f0p">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
@@ -2563,12 +2565,12 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="title" rowHeight="40" id="xPD-Wx-aLZ">
                                 <rect key="frame" x="0.0" y="171" width="414" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xPD-Wx-aLZ" id="MsI-ri-3da">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xPD-Wx-aLZ" id="MsI-ri-3da">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="39.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Registered Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvf-zM-YIe">
-                                            <rect key="frame" x="-30" y="0.0" width="488" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40.333333333333336"/>
                                             <color key="backgroundColor" red="0.92941176469999998" green="0.16078431369999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="wLi-pI-BlE"/>
@@ -2584,9 +2586,10 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Dvf-zM-YIe" secondAttribute="trailing" constant="-44" id="IUb-qZ-n4L"/>
-                                        <constraint firstItem="Dvf-zM-YIe" firstAttribute="leading" secondItem="MsI-ri-3da" secondAttribute="leading" constant="-30" id="lSe-uB-xMW"/>
-                                        <constraint firstItem="Dvf-zM-YIe" firstAttribute="top" secondItem="MsI-ri-3da" secondAttribute="top" id="ru0-PT-qhh"/>
+                                        <constraint firstAttribute="trailing" secondItem="Dvf-zM-YIe" secondAttribute="trailing" id="AF1-BL-zJW"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dvf-zM-YIe" secondAttribute="bottom" id="FYr-3Z-lc3"/>
+                                        <constraint firstItem="Dvf-zM-YIe" firstAttribute="leading" secondItem="MsI-ri-3da" secondAttribute="leading" id="Gea-eh-aAI"/>
+                                        <constraint firstItem="Dvf-zM-YIe" firstAttribute="top" secondItem="MsI-ri-3da" secondAttribute="top" id="oTg-Aq-Uls"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2597,8 +2600,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLm-cR-uC0">
-                                            <rect key="frame" x="20" y="11" width="348" height="500"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLm-cR-uC0">
+                                            <rect key="frame" x="20" y="11" width="348" height="22"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -2611,11 +2614,8 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="NLm-cR-uC0" secondAttribute="trailing" id="duu-jU-A7w"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="ZLm-sy-L0N" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="XRw-kg-QOh"/>
-                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="471" id="PrB-mn-6XT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="11" rowHeight="471" id="PrB-mn-6XT">
                                 <rect key="frame" x="0.0" y="255" width="414" height="471"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PrB-mn-6XT" id="gCl-2O-nmL">
@@ -2656,6 +2656,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="menuBarButton" destination="Jz7-T0-P4l" id="E3B-5l-eRB"/>
+                        <segue destination="uEY-Yj-Mvz" kind="show" identifier="ViewEventDetails" id="zSV-ap-Eip"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -3684,25 +3685,6 @@
             </objects>
             <point key="canvasLocation" x="5877" y="2924"/>
         </scene>
-        <!--Event CheckIn List Nav-->
-        <scene sceneID="t0k-bk-ebk">
-            <objects>
-                <navigationController storyboardIdentifier="EventsCheckInNav" title="Event CheckIn List Nav" automaticallyAdjustsScrollViewInsets="NO" id="ZLm-sy-L0N" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eii-wB-915">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="uEY-Yj-Mvz" kind="relationship" relationship="rootViewController" id="6ry-ww-cbv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EjK-Fy-bg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7783" y="2138"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rq1-uP-MBL">
             <objects>
@@ -3940,7 +3922,7 @@
     <resources>
         <image name="2016-Orientation-750x499.jpg" width="562.5" height="374.25"/>
         <image name="3844408-48.png" width="48" height="48"/>
-        <image name="Clyde-Campus-Tour.jpg" width="192" height="127.91999816894531"/>
+        <image name="Clyde-Campus-Tour.jpg" width="101.27999877929688" height="36"/>
         <image name="Clyde-Cistern-profile.jpg" width="231" height="163"/>
         <image name="Clyde-Cistern.jpg" width="630" height="315"/>
         <image name="banner037.jpg" width="2000" height="585"/>
@@ -4056,8 +4038,7 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
         <image name="thumbsDown.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XRw-kg-QOh"/>
-        <segue reference="LCQ-5E-sfJ"/>
+        <segue reference="F4T-Z2-p6E"/>
         <segue reference="1iM-Yc-Rlk"/>
         <segue reference="DYY-bQ-oG7"/>
     </inferredMetricsTieBreakers>

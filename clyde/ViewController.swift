@@ -15,6 +15,8 @@ import SmartStore
 
 
 class HomeViewController: UIViewController{
+    let defaults = UserDefaults.standard
+    
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     
     var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -98,10 +100,8 @@ class HomeViewController: UIViewController{
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
             let jsonResponse = JSON(response)
-            print(jsonResponse)
             let id = jsonResponse["user_id"].stringValue
             let email = jsonResponse["email"].stringValue
-            print(id)
             DispatchQueue.main.async {
                 self?.userId = id
             }
@@ -115,6 +115,13 @@ class HomeViewController: UIViewController{
                     else{
                         print("\nWeak or absent connection.")
                         return
+                }
+                let jsonContact = JSON(response)
+                let contactId = jsonContact["records"][0]["ContactId"].stringValue
+                self!.defaults.set(contactId, forKey: "ContactId")
+                DispatchQueue.main.async {
+                    print("-------------------------------------")
+                    print(contactId)
                 }
                 
                 SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
@@ -135,7 +142,6 @@ class HomeViewController: UIViewController{
                             print("\nWeak or absent connection.")
                             return
                     }
-                    print(results)
                     let jsonContact = JSON(response)
                     let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                     
@@ -169,7 +175,6 @@ class HomeViewController: UIViewController{
             
             let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
             RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
-                print(error)
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
                     let jsonResponse = response as? Dictionary<String, Any>,
@@ -196,7 +201,6 @@ class HomeViewController: UIViewController{
     /// Loads important data into the offline storage
     func loadDataIntoStore(){
         //Loads user id into store
-        print(self.userId)
         let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User")
         //let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
@@ -208,6 +212,8 @@ class HomeViewController: UIViewController{
                     print("\nWeak or absent connection.")
                     return
             }
+            
+            
 
             SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
             if ((((strongSelf.store.soupExists(forName: "User"))))) {
@@ -227,7 +233,6 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
-                print(results)
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
               
