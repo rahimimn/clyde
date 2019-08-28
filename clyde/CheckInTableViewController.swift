@@ -47,7 +47,7 @@ class CheckInTableViewController: UITableViewController {
         self.contactId = getContactId()
         
         // Sets the table data source
-        self.dataSource.delegate = self as! EventsDataSourceDelegate
+        self.dataSource.delegate = self as EventsDataSourceDelegate
         self.tableView.delegate = self
         self.tableView.dataSource = self.dataSource
         // Inits a UIRefreshControl and adds the target
@@ -56,22 +56,20 @@ class CheckInTableViewController: UITableViewController {
         self.tableView.addSubview(refreshControl!)
         // Executes the soqlQuery
         self.dataSource.fetchData()
-        var hi = self.dataSource.returnEventName()
+        _ = self.dataSource.returnEventName()
     }
-    
-    override func loadView() {super.loadView()}
     
     
     /// Pulls the student's registered events
     /// Deprecated
     private func requestListOfRegisteredEvents(){
-         var id = self.getContactId()
+        let id = self.getContactId()
         let request = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c,Id,Event_Name__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(id)'")
         RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking: \(error)")
+            SalesforceLogger.d(type(of:self), message:"Error invoking: \(String(describing: error))")
         }) { [weak self] (response, urlResponse) in
             
-            guard let strongSelf = self,
+            guard let _ = self,
                 let jsonResponse = response as? Dictionary<String,Any>,
                 let result = jsonResponse ["records"] as? [Dictionary<String,Any>]  else {
                     return
@@ -135,6 +133,7 @@ class CheckInTableViewController: UITableViewController {
         // Sets label text color and alignment
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.textAlignment = .center
+        label.font = label.font.withSize(25)
         //
         label.frame = CGRect(x: 0, y: 142.67, width:414, height: 40)
         view.addSubview(label)
@@ -150,7 +149,7 @@ class CheckInTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "ViewEventDetails"){
-            var detailsViewController = segue.destination as! EventDetailViewController
+            let detailsViewController = segue.destination as! EventDetailViewController
             detailsViewController.capturedEventId = eventId
            
         }
@@ -174,7 +173,7 @@ class CheckInTableViewController: UITableViewController {
                 return "no"
             }
             
-            id = record[0][0] as! String
+            id = record[0][0]
             return id
 
             DispatchQueue.main.async {

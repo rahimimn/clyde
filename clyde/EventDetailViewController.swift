@@ -10,18 +10,28 @@ import UIKit
 import SalesforceSDKCore
 import SwiftyJSON
 import Foundation
+import CoreLocation
+import MapKit
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     
     var capturedEventId : String?
 
+
+   
+
+    @IBOutlet weak var map: MKMapView!
+    private var locationManager = CLLocationManager()
+    private var currentLocation: CLLocation?
+    
+    @IBOutlet weak var details: UITextView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var qrView: UIImageView!
     
     /// Action Button that performs a segue back to the orignial page
     @IBAction func backButton(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "back", sender: self)
+        
     }
     
     //Create an instance of CoreImage filter with the name "CIQRCodeGenerator", which lets us reference Swift's built-in QR code generation through the Core Image framework.
@@ -53,10 +63,22 @@ class EventDetailViewController: UIViewController {
         self.addLogoToNav()
         
         
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]
-        var imageUrl = "https://chart.googleapis.com/chart?chs=325x325&cht=qr&chl=https://cofc.tfaforms.net/217890?tfa_1="
-        var url = imageUrl + id
+        let imageUrl = "https://chart.googleapis.com/chart?chs=325x325&cht=qr&chl=https://cofc.tfaforms.net/217890?tfa_1="
+        let url = imageUrl + id
            
         DispatchQueue.main.async {
                 
@@ -77,35 +99,179 @@ class EventDetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        //self.pullAddress()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.loadView()
         self.pullAddress()
+        
     }
     
     func pullAddress(){
-        let eventIdRequest = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c From TargetX_Eventsb__ContactScheduleItem__c WHERE Id = '\(capturedEventId)'")
+        let idSplit = capturedEventId?.split(separator: " ")
+        let id = idSplit![1]
+        let eventIdRequest = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c From TargetX_Eventsb__ContactScheduleItem__c WHERE Id = '\(id)'")
         RestClient.shared.send(request: eventIdRequest, onFailure: {(error, urlResponse) in
+       
+        print(error)
+            
         }) { [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
+            guard let _ = self,
                 let jsonResponse = response as? Dictionary<String, Any>,
-                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                let _ = jsonResponse["records"] as? [Dictionary<String, Any>]
                 else{
                     print("\nWeak or absent connection.")
                     return
             }
-            let jsonContact = JSON(response)
+            let jsonContact = JSON(response!)
             let eventOrgId = jsonContact["records"][0]["TargetX_Eventsb__OrgEvent__c"].stringValue
-            DispatchQueue.main.async {
-                print("--------------------------------------------------------------")
-                print("here lies the event org id\(eventOrgId)")
-
+          
+            let addressRequest = RestClient.shared.request(forQuery: "SELECT Name, Event_City__c,Event_State__c,Event_Street__c,Event_Zip__c, TargetX_Eventsb__Start_Time_TZ_Adjusted__c  FROM TargetX_Eventsb__OrgEvent__c WHERE Id = '\(eventOrgId)'")
+            RestClient.shared.send(request: addressRequest, onFailure: {(error, urlResponse) in
+                
+                print(error)
+                
+            }) { [weak self] (response, urlResponse) in
+                guard let _ = self,
+                    let jsonResponse = response as? Dictionary<String, Any>,
+                    let _ = jsonResponse["records"] as? [Dictionary<String, Any>]
+                    else{
+                        print("\nWeak or absent connection.")
+                        return
+                }
+                let jsonContact = JSON(response!)
+                let name = jsonContact["records"][0]["Name"].stringValue
+                let street = jsonContact["records"][0]["Event_Street__c"].stringValue
+                let city = jsonContact["records"][0]["Event_City__c"].stringValue
+                let state = jsonContact["records"][0]["Event_State__c"].stringValue
+                let zip = jsonContact["records"][0]["Event_Zip__c"].stringValue
+                let date = jsonContact["records"][0]["TargetX_Eventsb__Start_Time_TZ_Adjusted__c"].stringValue
+                DispatchQueue.main.async {
+                    self!.details.text = "\(name.capitalized)\n\(date)\n\(street), \(city) \n\(state), \(zip)"
             }
+                self!.getCoordinates(address: "\(street), \(city), \(zip)")
+            
+            
+            
+        }
+        
         }
         
     }//func
     
     
     
-    func createMap(){
+    /// Given a string address, will return the coordinates of that address.
+    ///
+    /// - Parameter address: address
+    func getCoordinates(address: String) -> [Double]{
+        
+        var latitude: Double?
+        var longitude: Double?
+        CLGeocoder().geocodeAddressString(address, completionHandler: { placemarks, error in
+            if (error != nil) {
+                return
+            }
+            
+            if let placemark = placemarks?[0]  {
+                let latitudeS = String(format: "%.04f", (placemark.location?.coordinate.longitude ?? 0.0)!)
+                let longitudeS = String(format: "%.04f", (placemark.location?.coordinate.latitude ?? 0.0)!)
+                latitude = (latitudeS as NSString).doubleValue
+                longitude = (longitudeS as NSString).doubleValue
+                print(latitude)
+                print(longitude)
+                //self.pushMap(latitude: latitude, longitude: longitude)
+                
+            }
+        })
+        return [latitude!, longitude!]
+    }
+    
+    /// Updates the location constantly.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        self.currentLocation = locations.last as CLLocation?
+
+    }
+    
+    // Doing something with this eventually
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
         
     }
     
-}
+    
+    
+    
+    /// Asks the delegate for a renderer object to use when drawing the specified overlay.
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
+        return polylineRenderer
+    }
+    
+    func pushMap(latitude: Double, longitude: Double){
+        // MAP
+        map.delegate = self
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+       locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+       map.showsUserLocation = false
+       map.layoutMargins = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
+        
+        
+        guard let currentLocation = locationManager.location else{
+            print("Stop here")
+            return
+        }
+        
+        print("the coords are \(longitude) and \(latitude)")
+        let destinationLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
+        
+        let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+        
+        let currentMapItem = MKMapItem(placemark: currentPlacemark)
+        let cofcMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let currentPointAnnotation = MKPointAnnotation()
+        currentPointAnnotation.title = "You"
+        currentPointAnnotation.subtitle = "This is your location."
+        if let location = currentPlacemark.location {
+            currentPointAnnotation.coordinate = location.coordinate
+        }
+        
+        
+        let destinationPointAnnotation = MKPointAnnotation()
+        destinationPointAnnotation.title = "Destination"
+        
+        if let location = destinationPlacemark.location {
+            destinationPointAnnotation.coordinate = location.coordinate
+        }
+        self.map.showAnnotations([currentPointAnnotation, destinationPointAnnotation], animated: true)
+        
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.source = currentMapItem
+        directionsRequest.destination = cofcMapItem
+        directionsRequest.transportType = .automobile
+        
+        let calculateDirections = MKDirections(request: directionsRequest)
+        
+        calculateDirections.calculate { [weak self] response, error in
+            guard let unwrappedResponse = response else { return }
+            
+            for route in unwrappedResponse.routes {
+                self?.map.addOverlay(route.polyline)
+                self?.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+        let destination = CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
+        let distanceInMeters = currentLocation.distance(from:destination)
+        
+      print( "\((distanceInMeters/1609.344).rounded().formatForProfile) miles")
+    }
+    
+    }
+    
+
