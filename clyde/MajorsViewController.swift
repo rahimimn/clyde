@@ -49,7 +49,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     override func loadView() {
         super.loadView()
         self.loadFromStore()
-        self.getContactId()
 
     }
     
@@ -100,30 +99,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         
     }
     
-    func getContactId(){
-        let userQuery = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Id} from {Contact}", pageSize: 1)
-        do{
-            let records = try self.store.query(using: userQuery!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else{
-                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                return
-            }
-            
-            let id = record[self.majorCounter][0]
-            
-            DispatchQueue.main.async {
-                
-                
-                    DispatchQueue.main.async {
-                        self.contactId = id
-                        
-                    }
-                }
-            
-        }catch let e as Error?{
-            print(e as Any)
-        }
-    }
+    
     
     
     func pushUsingSalesforce(_ button: Int){

@@ -89,13 +89,10 @@ class HomeViewController: UIViewController{
             present(vc, animated: true)
         }
     }
-    
+ 
     
     func loadData(){
        
-        
-        
-        
         let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
@@ -120,7 +117,7 @@ class HomeViewController: UIViewController{
                 let contactId = jsonContact["records"][0]["ContactId"].stringValue
                 self!.defaults.set(contactId, forKey: "ContactId")
                 DispatchQueue.main.async {
-                    print("-------------------------------------")
+                    print("---------------This is within the user id request----------------------")
                     print(contactId)
                 }
                 

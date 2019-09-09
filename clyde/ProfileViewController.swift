@@ -47,6 +47,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
    //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Profile")
+    let defaults = UserDefaults.standard
     
     // Private variables for map
     private var locationManager = CLLocationManager()
@@ -57,7 +58,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Private variables for id
      private var userId = ""
-     private var contactId = ""
+      var contactId = ""
     
     /// Sent to the view controller when the app recieves a memory warning. This is where variables can be taken out of memory to offload storage.
     override func didReceiveMemoryWarning() {
@@ -68,19 +69,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func loadView() {
         super.loadView()
         self.loadDataFromStore()
-//        if let smartStore = self.store,
-//            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-//            do {
-//                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
-//                    if syncState.isDone() {
-//                        self?.loadDataFromStore()
-//                    }
-//                }
-//            } catch {
-//                print("Unexpected sync error: \(error).")
-//            }
-//        }
-        
+        self.createMap()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -92,6 +81,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /// Notifies that the view controller is about to be added to memory
     override func viewWillAppear(_ animated: Bool) {
         self.createMap()
+
         
       }
     
@@ -100,7 +90,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-
+       self.createMap()
+        
+        
 //            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")!
 //
 //            let task = URLSession.shared.dataTask(with: url){ data,response, error in
@@ -116,12 +108,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /// Updates the location constantly.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         self.currentLocation = locations.last as CLLocation?
-        //createMap()
-    }
 
-   // Doing something with this eventually
-  func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-    
     }
 
     
@@ -133,39 +120,28 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return polylineRenderer
     }
     
-    func getContactId(){
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:ContactId} from {User}", pageSize: 1),
-            let smartStore = self.store,
-            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
-            let id = (record[0][0])
-            
-            DispatchQueue.main.async {
-                self.contactId = id
-                
-            }
-        }
-        
-    }
+    
     
     /// Loads the profile data from the SmartStore soup
     ///
     /// Displays Name, Mobile number, mailing address, birth sex and gender identity, student type, graduation year, ethnicity, message consent, and honors interest
     func loadDataFromStore(){
-        self.getContactId()
+        let contactId = defaults.string(forKey: "ContactId")
         let querySpec = QuerySpec.buildSmartQuerySpec(
 
-            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c}, {Contact:Status_Category__c} from {Contact} where {Contact:Id} == '\(self.contactId)'",
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'",
             pageSize: 10)
 
 
         do {
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            
+            print(records!)
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                
                 return
             }
-           
+
             let name = (record[0][0])
             let phone = record[0][1]
             let address = record[0][2]
@@ -178,7 +154,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
             let honors = record[0][14]
-           
+
             DispatchQueue.main.async {
                 self.userName.text = name
                 self.userName.textColor = UIColor.black
@@ -229,6 +205,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
         let cofcPlacemark = MKPlacemark(coordinate: cofcLocation, addressDictionary: nil)
         
+        
         let currentMapItem = MKMapItem(placemark: currentPlacemark)
         let cofcMapItem = MKMapItem(placemark: cofcPlacemark)
         
@@ -268,5 +245,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.distanceText.text = "\((distanceInMeters/1609.344).rounded().formatForProfile) miles"
     }
+    
+   
 }
 

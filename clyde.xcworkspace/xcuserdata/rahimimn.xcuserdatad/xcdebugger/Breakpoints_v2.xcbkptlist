@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/ProfileViewController.swift"
-            timestampString = "589731727.34017"
+            timestampString = "589746559.035307"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5"
@@ -49,67 +49,6 @@
             endingLineNumber = "42"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "clyde/ProfileViewController.swift"
-            timestampString = "589732196.702709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "clyde.EditProfileViewController.genderPicker.getter : __C.UIPickerView"
-                  moduleName = "clyde"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rahimimn/clyde/clyde/ProfileViewController.swift"
-                  timestampString = "589732197.110765"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "clyde.EditProfileViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; clyde.EditProfileViewController"
-                  moduleName = "clyde"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rahimimn/clyde/clyde/ProfileViewController.swift"
-                  timestampString = "589732197.126972"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "2757">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "clyde.EditProfileViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;clyde.EditProfileViewController&gt;"
-                  moduleName = "clyde"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rahimimn/clyde/clyde/ProfileViewController.swift"
-                  timestampString = "589732197.133013"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "276"
-                  endingLineNumber = "276"
-                  offsetFromSymbolStart = "2663">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

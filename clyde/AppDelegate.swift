@@ -24,18 +24,21 @@
 
 import Foundation
 import UIKit
+import SalesforceSDKCore
 import SmartSync
 import SwiftyJSON
 
 class AppDelegate : UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    override init() {
+    override
+    init()
+    {
         super.init()
         SmartSyncSDKManager.initializeSDK()
-        AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
-            self.resetViewState {
-                self.setupRootViewController()
+        AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
+            self?.resetViewState {
+                self?.setupRootViewController()
             }
         })
         
@@ -66,11 +69,8 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         //loginViewConfig.navigationBarTextColor = UIColor.white
         //loginViewConfig.navigationBarFont = UIFont(name: "Helvetica", size: 16.0)
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
-        AuthHelper.loginIfRequired {
-            SmartStoreSDKManager.shared.setupUserStoreFromDefaultConfig()
-            SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
-            self.setupRootViewController()
-            
+        AuthHelper.loginIfRequired { [weak self] in
+            self?.setupRootViewController()
         }
         
         

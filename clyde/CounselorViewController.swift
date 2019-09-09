@@ -73,7 +73,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             mailView.mailComposeDelegate = self
             mailView.setSubject(subject)
             mailView.setMessageBody(body, isHTML: false)
-        mailView.setToRecipients(to as! [String])
+        mailView.setToRecipients(to as? [String])
             
             self.present(mailView, animated: true, completion: nil)
 
@@ -127,7 +127,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     
     func loadDataFromStore(){
         // Loading Indicator is created, starts animated before user's information request is sent
-        var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
         loadingIndicator.center = counselorView.center
         loadingIndicator.hidesWhenStopped = true
@@ -191,7 +191,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     func pullInformation(){
         
         // Loading Indicator is created, starts animated before user's information request is sent
-        var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
         loadingIndicator.center = counselorView.center
         loadingIndicator.hidesWhenStopped = true

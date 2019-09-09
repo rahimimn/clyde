@@ -61,15 +61,14 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
+        self.pullAddress()
         
         
-        // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
-        
-        // For use in foreground
+        // Ask for Authorization from the user when the app is in use.
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
+            map.delegate = self
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
@@ -151,11 +150,12 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
                     self!.details.text = "\(name.capitalized)\n\(date)\n\(street), \(city) \n\(state), \(zip)"
             }
                 let address = "\(street), \(city), \(zip)"
-              
+                
                 self!.getCoordinate(addressString: address, completionHandler: { coordinate, error in
                     guard error == nil else {return}
                     //use the coordinate here
-                    print(coordinate)
+                    self?.createMap(coordinates: coordinate, name: name)
+                    
                 })
             
         }
@@ -164,7 +164,75 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }//func
     
+    /// Updates the location constantly.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        self.currentLocation = locations.last as CLLocation?
+        
+    }
     
+    
+    
+    /// Asks the delegate for a renderer object to use when drawing the specified overlay.
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
+        return polylineRenderer
+    }
+    
+    
+    func createMap(coordinates: CLLocationCoordinate2D, name: String){
+        
+        
+        map.layoutMargins = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
+        
+        guard let currentLocation = locationManager.location else{
+            return
+        }
+        
+        
+        let eventLocation = coordinates
+        let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
+        
+        let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
+        let eventPlacemark = MKPlacemark(coordinate: eventLocation, addressDictionary: nil)
+        
+        
+        let currentMapItem = MKMapItem(placemark: currentPlacemark)
+        let eventMapItem = MKMapItem(placemark: eventPlacemark)
+        
+        let currentPointAnnotation = MKPointAnnotation()
+        currentPointAnnotation.title = "You are here!"
+        if let location = currentPlacemark.location {
+            currentPointAnnotation.coordinate = location.coordinate
+        }
+        
+        
+        let eventPointAnnotation = MKPointAnnotation()
+        eventPointAnnotation.title = name.capitalized
+        
+        
+        if let location = eventPlacemark.location {
+            eventPointAnnotation.coordinate = location.coordinate
+        }
+        self.map.showAnnotations([currentPointAnnotation, eventPointAnnotation], animated: true)
+        
+        let directionsRequest = MKDirections.Request()
+        directionsRequest.source = currentMapItem
+        directionsRequest.destination = eventMapItem
+        directionsRequest.transportType = .automobile
+        
+        let calculateDirections = MKDirections(request: directionsRequest)
+        
+        calculateDirections.calculate { [weak self] response, error in
+            guard let unwrappedResponse = response else { return }
+            
+            for route in unwrappedResponse.routes {
+                self?.map.addOverlay(route.polyline)
+                self?.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+        
+    }
     
 
     /// Pulled from the Apple Developer Documentation
@@ -188,91 +256,14 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
-    }
-    
-    /// Updates the location constantly.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        self.currentLocation = locations.last as CLLocation?
-
-    }
-    
-    // Doing something with this eventually
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation){
-        
-    }
-    
-    
-    
-    
-    /// Asks the delegate for a renderer object to use when drawing the specified overlay.
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
-        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
-        return polylineRenderer
-    }
-    
-    func pushMap(coordinates: CLLocationCoordinate2D){
-        // MAP
-        map.delegate = self
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-       map.showsUserLocation = false
-       map.layoutMargins = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
-        
-        
-        guard let currentLocation = locationManager.location else{
-            print("Stop here")
-            return
         }
         
-        let destinationLocation = coordinates
-        let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
-        
-        let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-        
-        let currentMapItem = MKMapItem(placemark: currentPlacemark)
-        let cofcMapItem = MKMapItem(placemark: destinationPlacemark)
-        
-        let currentPointAnnotation = MKPointAnnotation()
-        currentPointAnnotation.title = "You"
-        currentPointAnnotation.subtitle = "This is your location."
-        if let location = currentPlacemark.location {
-            currentPointAnnotation.coordinate = location.coordinate
-        }
-        
-        
-        let destinationPointAnnotation = MKPointAnnotation()
-        destinationPointAnnotation.title = "Destination"
-        
-        if let location = destinationPlacemark.location {
-            destinationPointAnnotation.coordinate = location.coordinate
-        }
-        self.map.showAnnotations([currentPointAnnotation, destinationPointAnnotation], animated: true)
-        
-        let directionsRequest = MKDirections.Request()
-        directionsRequest.source = currentMapItem
-        directionsRequest.destination = cofcMapItem
-        directionsRequest.transportType = .automobile
-        
-        let calculateDirections = MKDirections(request: directionsRequest)
-        
-        calculateDirections.calculate { [weak self] response, error in
-            guard let unwrappedResponse = response else { return }
-            
-            for route in unwrappedResponse.routes {
-                self?.map.addOverlay(route.polyline)
-                self?.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-            }
-        }
-        let destination = CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
-        let distanceInMeters = currentLocation.distance(from:destination)
-        
-      print( "\((distanceInMeters/1609.344).rounded().formatForProfile) miles")
-    }
     
+    
+    
+    
+    
+   
     }
     
 
