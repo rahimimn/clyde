@@ -17,9 +17,10 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     
     var capturedEventId : String?
+    var directions = ""
 
-
-   
+    @IBOutlet weak var directionsLabel: UILabel!
+    
 
     @IBOutlet weak var map: MKMapView!
     private var locationManager = CLLocationManager()
@@ -61,18 +62,13 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-        self.pullAddress()
         
-        
-        // Ask for Authorization from the user when the app is in use.
-        self.locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            map.delegate = self
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        directionsLabel.addGestureRecognizer(swipeLeft)
+        directionsLabel.addGestureRecognizer(swipeRight)
         
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]
@@ -96,9 +92,19 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    @objc func handleSwipe(_ sender:UISwipeGestureRecognizer) {
+        
+        if (sender.direction == .left) {
+            print("Swipe Left")
+        }
+        
+        if (sender.direction == .right) {
+            print("Swipe Right")
+        }
+    }
+    
     override func loadView() {
         super.loadView()
-        //self.pullAddress()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,7 +187,12 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     func createMap(coordinates: CLLocationCoordinate2D, name: String){
-        
+        map.delegate = self
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        map.showsUserLocation = false
         
         map.layoutMargins = UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100)
         
@@ -219,7 +230,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         let directionsRequest = MKDirections.Request()
         directionsRequest.source = currentMapItem
         directionsRequest.destination = eventMapItem
-        directionsRequest.transportType = .automobile
+        directionsRequest.transportType = .walking
         
         let calculateDirections = MKDirections(request: directionsRequest)
         
@@ -229,6 +240,11 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             for route in unwrappedResponse.routes {
                 self?.map.addOverlay(route.polyline)
                 self?.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                print("---------------------------------------------------")
+                for step in route.steps {
+                    self!.directionsLabel.text = step.instructions
+                    print(step.instructions)
+                }
             }
         }
         
