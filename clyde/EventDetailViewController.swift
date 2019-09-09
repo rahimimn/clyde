@@ -150,9 +150,13 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
                 DispatchQueue.main.async {
                     self!.details.text = "\(name.capitalized)\n\(date)\n\(street), \(city) \n\(state), \(zip)"
             }
-                self!.getCoordinates(address: "\(street), \(city), \(zip)")
-            
-            
+                let address = "\(street), \(city), \(zip)"
+              
+                self!.getCoordinate(addressString: address, completionHandler: { coordinate, error in
+                    guard error == nil else {return}
+                    //use the coordinate here
+                    print(coordinate)
+                })
             
         }
         
@@ -162,30 +166,28 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     
     
-    /// Given a string address, will return the coordinates of that address.
+
+    /// Pulled from the Apple Developer Documentation
+    /// Getting a coordinate from an address string
     ///
-    /// - Parameter address: address
-    func getCoordinates(address: String) -> [Double]{
-        
-        var latitude: Double?
-        var longitude: Double?
-        CLGeocoder().geocodeAddressString(address, completionHandler: { placemarks, error in
-            if (error != nil) {
-                return
+    /// - Parameters:
+    ///   - addressString: address
+    ///   - completionHandler: handler
+    func getCoordinate( addressString : String,
+                        completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                    
+                    completionHandler(location.coordinate, nil)
+                    return
+                }
             }
             
-            if let placemark = placemarks?[0]  {
-                let latitudeS = String(format: "%.04f", (placemark.location?.coordinate.longitude ?? 0.0)!)
-                let longitudeS = String(format: "%.04f", (placemark.location?.coordinate.latitude ?? 0.0)!)
-                latitude = (latitudeS as NSString).doubleValue
-                longitude = (longitudeS as NSString).doubleValue
-                print(latitude)
-                print(longitude)
-                //self.pushMap(latitude: latitude, longitude: longitude)
-                
-            }
-        })
-        return [latitude!, longitude!]
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+        }
     }
     
     /// Updates the location constantly.
@@ -209,7 +211,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         return polylineRenderer
     }
     
-    func pushMap(latitude: Double, longitude: Double){
+    func pushMap(coordinates: CLLocationCoordinate2D){
         // MAP
         map.delegate = self
         locationManager.delegate = self
@@ -225,8 +227,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             return
         }
         
-        print("the coords are \(longitude) and \(latitude)")
-        let destinationLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let destinationLocation = coordinates
         let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
         
         let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )

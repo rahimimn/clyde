@@ -32,7 +32,6 @@
 		B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */; };
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
-		B230DD3422E8A7E0005674B4 /* userstore.json in Resources */ = {isa = PBXBuildFile; fileRef = B230DD3322E8A7DF005674B4 /* userstore.json */; };
 		B230DD4022E9FACB005674B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B230DD4522EA04E7005674B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B230DD4422EA04E7005674B4 /* Reachability.m */; };
 		B230DD4822EB35E7005674B4 /* usersyncs.json in Resources */ = {isa = PBXBuildFile; fileRef = B230DD4722EB35E7005674B4 /* usersyncs.json */; };
@@ -56,6 +55,8 @@
 		B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */; };
 		B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */; };
 		B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */; };
+		B2B44D9D23268CC200FC1498 /* userstore.json in Resources */ = {isa = PBXBuildFile; fileRef = B2B44D9B23268B0900FC1498 /* userstore.json */; };
+		B2B44D9F232697DC00FC1498 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D9E232697DC00FC1498 /* EditProfileViewController.swift */; };
 		B2C19FF422BC17E400C5634C /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF322BC17E300C5634C /* images.png */; };
 		B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */; };
 		B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */; };
@@ -126,7 +127,6 @@
 		B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
-		B230DD3322E8A7DF005674B4 /* userstore.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = userstore.json; path = ../userstore.json; sourceTree = "<group>"; };
 		B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B230DD4222E9FB60005674B4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../Downloads/Reachability-master/Reachability.h"; sourceTree = "<group>"; };
 		B230DD4422EA04E7005674B4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../Downloads/Reachability-master/Reachability.m"; sourceTree = "<group>"; };
@@ -151,6 +151,8 @@
 		B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
 		B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Clyde-Campus-Tour.jpg"; path = "../../Desktop/College of Charleston/Images/Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
+		B2B44D9B23268B0900FC1498 /* userstore.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = userstore.json; sourceTree = "<group>"; };
+		B2B44D9E232697DC00FC1498 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		B2C19FF322BC17E300C5634C /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
 		B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Details Popup.png"; sourceTree = "<group>"; };
 		B2C19FF722BD34D200C5634C /* icons8-Maintenance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Maintenance.png"; sourceTree = "<group>"; };
@@ -213,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				B230DD4722EB35E7005674B4 /* usersyncs.json */,
-				B230DD3322E8A7DF005674B4 /* userstore.json */,
+				B2B44D9B23268B0900FC1498 /* userstore.json */,
 				B27609FE22CA4FD300A122F7 /* user.swift */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				B227D0B122BBEB0600AA0634 /* ProfileViewController.swift */,
+				B2B44D9E232697DC00FC1498 /* EditProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -538,8 +541,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B44D9D23268CC200FC1498 /* userstore.json in Resources */,
 				B230DD4822EB35E7005674B4 /* usersyncs.json in Resources */,
-				B230DD3422E8A7E0005674B4 /* userstore.json in Resources */,
 				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
 				B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */,
 				B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */,
@@ -665,6 +668,7 @@
 				B227D0AB22BBE58200AA0634 /* CounselorViewController.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
 				B227D0B222BBEB0600AA0634 /* ProfileViewController.swift in Sources */,
+				B2B44D9F232697DC00FC1498 /* EditProfileViewController.swift in Sources */,
 				B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */,
 				B227D0A722BBD94500AA0634 /* ViewController.swift in Sources */,
 				B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */,
