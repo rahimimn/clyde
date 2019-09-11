@@ -36,6 +36,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     {
         super.init()
         SmartSyncSDKManager.initializeSDK()
+        
+        SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
+        SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
             self?.resetViewState {
                 self?.setupRootViewController()
