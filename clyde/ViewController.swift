@@ -42,6 +42,7 @@ class HomeViewController: UIViewController{
        // self.loadFromStore()
         //self.loadDataIntoStore()
         self.loadData()
+        self.pullImage()
 
     }
     
@@ -101,6 +102,7 @@ class HomeViewController: UIViewController{
             let email = jsonResponse["email"].stringValue
             DispatchQueue.main.async {
                 self?.userId = id
+                self!.defaults.set(id,forKey: "UserId")
             }
             let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User WHERE Id = '\(id)'")
             
@@ -298,8 +300,34 @@ class HomeViewController: UIViewController{
         }
 
 
-
-
+    func pullImage(){
+        print("-----------------------------------------------------------")
+        let id = defaults.string(forKey: "UserId")
+        let userPhotoRequest = RestClient.shared.request(forQuery: "SELECT FullPhotoUrl FROM User WHERE Id = '\(id!)'")
+        
+        RestClient.shared.send(request: userPhotoRequest, onFailure: {(error, urlResponse) in
+            print(error)
+        }) { [weak self] (response, urlResponse) in
+            guard let _ = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let _ = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            let jsonContact = JSON(response)
+            let pictureUrl = jsonContact["records"][0]["FullPhotoUrl"].stringValue
+            
+            DispatchQueue.main.async {
+                let sep = pictureUrl.components(separatedBy: "portal/")
+                let url = "https://c.cs40.content.force.com/" + sep[1]
+                
+                self!.defaults.set(url, forKey: "ProfilePhotoURL")            }
+            
+        }
+        
+    }
+    
 
 
 

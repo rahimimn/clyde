@@ -47,6 +47,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
    //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Profile")
+    
     let defaults = UserDefaults.standard
     
     // Private variables for map
@@ -90,19 +91,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-       self.createMap()
-        
-        
-//            let url = URL(string: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")!
-//
-//            let task = URLSession.shared.dataTask(with: url){ data,response, error in
-//                guard let data = data, error == nil else {return}
-//                DispatchQueue.main.async {
-//                    self.profileImageView.image = UIImage(data:data)
-//
-//                }
-//            }
-//            task.resume()
+        self.createMap()
+        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
+            let url = URL(string: profilePhotoString!)!
+
+            let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                guard let data = data, error == nil else {return}
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data:data)
+
+                }
+            }
+            task.resume()
     }
     
     /// Updates the location constantly.
@@ -210,15 +210,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let cofcMapItem = MKMapItem(placemark: cofcPlacemark)
         
         let currentPointAnnotation = MKPointAnnotation()
-        currentPointAnnotation.title = "You"
-        currentPointAnnotation.subtitle = "This is your location."
+        currentPointAnnotation.title = "Your Location"
         if let location = currentPlacemark.location {
             currentPointAnnotation.coordinate = location.coordinate
         }
         
         
         let cofcPointAnnotation = MKPointAnnotation()
-        cofcPointAnnotation.title = "The College of Charleston!"
+        cofcPointAnnotation.title = "The College of Charleston: \nOffice of Admissions"
         
         if let location = cofcPlacemark.location {
             cofcPointAnnotation.coordinate = location.coordinate
@@ -241,11 +240,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         let cofcAddress = CLLocation(latitude: cofcLocation.latitude, longitude: cofcLocation.longitude)
-        let distanceInMeters = currentLocation.distance(from:cofcAddress)
+        var distanceInMeters = currentLocation.distance(from:cofcAddress)
+        let kilometersToMilesConversion = 1609.344
+        distanceInMeters = distanceInMeters/kilometersToMilesConversion
+        if distanceInMeters < 1 {
+            self.distanceText.text = "\((String(format: "%.2f", distanceInMeters))) miles"
+            
+        }else{
+        self.distanceText.text = "\((distanceInMeters).rounded().formatForProfile) miles"
+        }
         
-        self.distanceText.text = "\((distanceInMeters/1609.344).rounded().formatForProfile) miles"
+        
     }
     
+    
+    
+
    
 }
 

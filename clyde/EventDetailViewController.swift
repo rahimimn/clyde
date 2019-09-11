@@ -15,13 +15,16 @@ import MapKit
 
 class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-    
+   
     var capturedEventId : String?
     var directions = ""
-
+    var directionsCounter = 1
+    var directionsArray: Array<Any> = []
     @IBOutlet weak var directionsLabel: UILabel!
     
-
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
+    
     @IBOutlet weak var map: MKMapView!
     private var locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
@@ -63,12 +66,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        directionsLabel.addGestureRecognizer(swipeLeft)
-        directionsLabel.addGestureRecognizer(swipeRight)
+      
         
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]
@@ -92,16 +90,30 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
-    @objc func handleSwipe(_ sender:UISwipeGestureRecognizer) {
-        
-        if (sender.direction == .left) {
-            print("Swipe Left")
+    
+    @IBAction func rightButton(_ sender: UIButton) {
+        if directionsCounter + 1 <= directionsArray.count{
+            self.directionsLabel.text = directionsArray[directionsCounter] as? String
+              directionsCounter = directionsCounter + 1
         }
-        
-        if (sender.direction == .right) {
-            print("Swipe Right")
+        else{
+            self.directionsLabel.text = "You have arrived."
         }
     }
+    
+    
+    @IBAction func leftButton(_ sender: UIButton) {
+        if directionsCounter == 1 {
+            self.directionsLabel.text = directionsArray[directionsCounter] as? String
+        }else{
+            self.directionsLabel.text = directionsArray[directionsCounter] as? String
+            directionsCounter = directionsCounter - 1
+
+        }
+        
+        
+    }
+    
     
     override func loadView() {
         super.loadView()
@@ -235,16 +247,20 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         let calculateDirections = MKDirections(request: directionsRequest)
         
         calculateDirections.calculate { [weak self] response, error in
-            guard let unwrappedResponse = response else { return }
+            guard let unwrappedResponse = response else {
+                print(error)
+                return }
             
             for route in unwrappedResponse.routes {
                 self?.map.addOverlay(route.polyline)
                 self?.map.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 print("---------------------------------------------------")
+                
                 for step in route.steps {
-                    self!.directionsLabel.text = step.instructions
-                    print(step.instructions)
+                    self?.directionsArray.append(step.instructions)
+                    print(self?.directionsArray)
                 }
+                self?.directionsLabel.text = "Your directions are ready!"
             }
         }
         

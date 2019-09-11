@@ -259,7 +259,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
-        //  self.pushImage()
+        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
+        let url = URL(string: profilePhotoString!)!
+        
+        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+            guard let data = data, error == nil else {return}
+            DispatchQueue.main.async {
+                self.profileImageView.image = UIImage(data:data)
+                
+            }
+        }
+        task.resume()        //  self.pushImage()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -610,6 +620,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             os_log("\nSuccessful response received")
             print(self.profileImage.jpegData(compressionQuality: 0.0)!)
         }}
+    
+    
+    
     func imageSaved(){
         let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
         let base64 = imageData.base64EncodedString(options: .endLineWithLineFeed)
