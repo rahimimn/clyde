@@ -10,6 +10,14 @@
         ]
     },
     {
+        "soupName": "School",
+        "indexes": [
+            { "path": "Id", "type": "string"},
+            { "path": "Name", "type": "string"}
+            
+        ]
+    },
+    {
         "soupName": "Contact",
         "indexes": [
             { "path": "Name", "type": "string"},

@@ -24,6 +24,7 @@ PODS:
   - SalesforceSDKCore/SalesforceSDKCore/no-arc (7.1.0):
     - SalesforceAnalytics
     - SalesforceSDKCore/SalesforceSDKCore/base
+  - SearchTextField (1.2.4)
   - SmartStore (7.1.0):
     - SmartStore/SmartStore (= 7.1.0)
   - SmartStore/SmartStore (7.1.0):
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - SalesforceAnalytics (from `mobile_sdk/SalesforceMobileSDK-iOS`)
   - SalesforceSDKCommon (from `mobile_sdk/SalesforceMobileSDK-iOS`)
   - SalesforceSDKCore (from `mobile_sdk/SalesforceMobileSDK-iOS`)
+  - SearchTextField
   - SmartStore (from `mobile_sdk/SalesforceMobileSDK-iOS`)
   - SmartSync (from `mobile_sdk/SalesforceMobileSDK-iOS`)
   - SwiftyJSON (~> 4.0)
@@ -55,6 +57,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FMDB
+    - SearchTextField
     - SQLCipher
     - SwiftyJSON
 
@@ -75,11 +78,12 @@ SPEC CHECKSUMS:
   SalesforceAnalytics: d209ca61ff08212f31c404f8b07fe0e3b16dfe40
   SalesforceSDKCommon: a8a763aef796a9c9dfa21cea2521b8782534c4c8
   SalesforceSDKCore: be30729df30d3c2d2fafe71b34e6e24d7c79409a
+  SearchTextField: 40dc3cc57def5a211f263cac263622c163bbc25a
   SmartStore: f176baeb2a3e092daa803c590632b529ff9d35d0
   SmartSync: cb418d12e1a20631cbd3c95cb0bcde39b21dca5c
   SQLCipher: 4636a257060f6f1b4e143a143028b61a2b462d0d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 2c4a3e9f91ab501cdd2efb6b7f43440859fcb5cd
+PODFILE CHECKSUM: 79964aaaa8c044620be2b73201a3c2e6a328d522
 
 COCOAPODS: 1.6.0

@@ -42,7 +42,7 @@ class HomeViewController: UIViewController{
        // self.loadFromStore()
         //self.loadDataIntoStore()
         self.loadData()
-        self.pullImage()
+//        self.pullImage()
 
     }
     
@@ -92,6 +92,9 @@ class HomeViewController: UIViewController{
     }
  
     
+    
+    
+    
     func loadData(){
        
         let userIdRequest = RestClient.shared.requestForUserInfo()
@@ -118,16 +121,13 @@ class HomeViewController: UIViewController{
                 let jsonContact = JSON(response)
                 let contactId = jsonContact["records"][0]["ContactId"].stringValue
                 self!.defaults.set(contactId, forKey: "ContactId")
-                DispatchQueue.main.async {
-                    print("---------------This is within the user id request----------------------")
-                    print(contactId)
-                }
+
                 
-                SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+                //SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
                 if ((((strongSelf.store.soupExists(forName: "User"))))) {
                     strongSelf.store.clearSoup("User")
                     strongSelf.store.upsert(entries: results, forSoupNamed: "User")
-                    os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
+                    os_log("\n\n----------------------SmartStore loaded records for user.-------------------------------", log: strongSelf.mylog, type: .debug)
                 }
                 
                 //Loads contactData into store
@@ -144,11 +144,11 @@ class HomeViewController: UIViewController{
                     let jsonContact = JSON(response)
                     let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                     
-                    SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+                   // SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
                     if (((strongSelf.store.soupExists(forName: "Contact")))){
                         strongSelf.store.clearSoup("Contact")
                         strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
-                        os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
+                        os_log("\n\n----------------------SmartStore loaded records for contact.-------------------------------", log: strongSelf.mylog, type: .debug)
                     }
                     
                     //Loads counselor data into the store
@@ -162,11 +162,11 @@ class HomeViewController: UIViewController{
                                 print("\nWeak or absent connection.")
                                 return
                         }
-                        SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
+                     //   SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
                         if (((strongSelf.store.soupExists(forName: "Counselor")))){
                             strongSelf.store.clearSoup("Counselor")
                             strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
-                            os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
+                            os_log("\n\n----------------------SmartStore loaded records for counselor.-------------------------------", log: strongSelf.mylog, type: .debug)
                         }
                     }
                 }
@@ -182,11 +182,11 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
-                SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+               // SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
                 if (((strongSelf.store.soupExists(forName: "Major")))) {
                     strongSelf.store.clearSoup("Major")
                     strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
-                    os_log("\n\nSmartStore loaded records for majors.", log: strongSelf.mylog, type: .debug)
+                    os_log("\n\n----------------------SmartStore loaded records for majors.-------------------------------", log: strongSelf.mylog, type: .debug)
                 }
         
             }

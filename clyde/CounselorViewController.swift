@@ -66,7 +66,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         let email = self.email
             //Email "settings", these can be changed to anything.
             let subject = "Question Sent From Clyde Club"
-            let body = "Hi!"
+            let body = "Hi! This is a test email from Clyde Club. Clyde Club is an app that is being developed by the Office of Admissions. If you have any questions, please contact rahimimn@cofc.edu."
             let to = [email]
             //Creates the mail view, allows user to write an email to the counselor.
             let mailView: MFMailComposeViewController = MFMailComposeViewController()

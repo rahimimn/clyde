@@ -13,6 +13,7 @@ import SmartSync
 import SmartStore
 import SwiftyJSON
 import MapKit
+import SearchTextField
 import CoreLocation
 
 /// Class for the Edit Profile View
@@ -20,6 +21,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     // Variables
+    var namesArray = ["names"]
     var contactId = ""
     var profileImage: UIImage!
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -54,7 +56,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var zipTextField: UITextField!
     @IBOutlet weak var birthDateTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var highSchoolTextField: UITextField!
+    @IBOutlet weak var highSchoolTextField: SearchTextField!
+    
     @IBOutlet weak var graduationYearTextField: UITextField!
     @IBOutlet weak var ethnicOriginTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
@@ -259,17 +262,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
-        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
-        let url = URL(string: profilePhotoString!)!
-        
-        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-            guard let data = data, error == nil else {return}
-            DispatchQueue.main.async {
-                self.profileImageView.image = UIImage(data:data)
-                
-            }
-        }
-        task.resume()        //  self.pushImage()
+//        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
+//        let url = URL(string: profilePhotoString!)!
+//        
+//        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+//            guard let data = data, error == nil else {return}
+//            DispatchQueue.main.async {
+//                self.profileImageView.image = UIImage(data:data)
+//                
+//            }
+//        }
+//        task.resume()        //  self.pushImage()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -359,6 +362,45 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @objc func keyboardWillHide(notification:NSNotification) {
         scrollView.contentOffset = .zero
     }
+    
+    
+    
+    
+    func loadSchools(){
+        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
+        RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
+            
+            print("-----------------------------------------------------")
+            print(error)
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            let json = results[2]["Name"] as? String
+            var counter = results.count-1
+            for i in 0...counter{
+                let name  = results[i]["Name"] as! String
+                print(name)
+                self!.namesArray.insert(name, at: i)
+                
+            }
+            self!.namesArray.sort()
+            
+            print(self!.namesArray)
+            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
+            if (((strongSelf.store!.soupExists(forName: "School")))){
+                strongSelf.store!.clearSoup("School")
+                strongSelf.store!.upsert(entries: results, forSoupNamed: "School")
+                os_log("\n\n----------------------SmartStore loaded records for school.-------------------------------", log: strongSelf.mylog, type: .debug)
+            }
+        }
+    }
+
     
     
     /// Loads data from store and presents on edit profile
@@ -547,12 +589,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         textField.textColor = UIColor.black
     }
     
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.isEnabled = self.studentStatus
         self.mobileSwitch.isEnabled = false
         self.honorsSwitch.isEnabled = self.studentStatus
         return self.studentStatus
     }
+    
+    
     
     /// Method that creates the camera and photo library action
     @objc func tappedView(){

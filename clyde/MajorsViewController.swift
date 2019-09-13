@@ -222,7 +222,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         if let email = self.email{
             //Email "settings", these can be changed to anything.
             let subject = "Question Sent From Clyde Club Regarding Major"
-            let body = "Hi!"
+            let body = "Hi! This is a test email from Clyde Club. Clyde Club is an app that is being developed by the Office of Admissions. If you have any questions, please contact rahimimn@cofc.edu."
             let to = [email]
             //Creates the mail view, allows user to write an email to the contact for the major.
             let mailView: MFMailComposeViewController = MFMailComposeViewController()
