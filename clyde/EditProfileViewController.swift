@@ -21,7 +21,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     // Variables
-    var namesArray = ["names"]
     var contactId = ""
     var profileImage: UIImage!
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -262,6 +261,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
+        let dataArray = loadSchoolsFromStore()
 //        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
 //        let url = URL(string: profilePhotoString!)!
 //        
@@ -299,6 +299,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         genderTextField.delegate = self
         studentTypeTextField.delegate = self
         
+        let schoolid = getSchoolId(name: "Shelterwood School")
+        print(schoolid)
+        print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+        
         // Calls showDatePicker
         showDatePicker()
         menuBar(menuBarItem: menuBarButton)
@@ -329,7 +333,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         ethnicOriginTextField.inputView = ethnicPicker
         ethnicPicker.delegate = self
         
-        
+        highSchoolTextField.startVisibleWithoutInteraction = false
+        highSchoolTextField.filterStrings(dataArray)
+        highSchoolTextField.theme.font = UIFont(name: "Adobe Caslon Pro", size: 14.0)!
+        highSchoolTextField.theme.bgColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         mobileTextField.inputAccessoryView = toolbar
         graduationYearTextField.inputAccessoryView = toolbar
@@ -366,41 +373,54 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     
-    func loadSchools(){
-        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
-        RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
-            
-            print("-----------------------------------------------------")
-            print(error)
-        }) { [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
-                let jsonResponse = response as? Dictionary<String, Any>,
-                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                
-                else{
-                    print("\nWeak or absent connection.")
-                    return
-            }
-            let json = results[2]["Name"] as? String
-            var counter = results.count-1
-            for i in 0...counter{
-                let name  = results[i]["Name"] as! String
-                print(name)
-                self!.namesArray.insert(name, at: i)
-                
-            }
-            self!.namesArray.sort()
-            
-            print(self!.namesArray)
-            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
-            if (((strongSelf.store!.soupExists(forName: "School")))){
-                strongSelf.store!.clearSoup("School")
-                strongSelf.store!.upsert(entries: results, forSoupNamed: "School")
-                os_log("\n\n----------------------SmartStore loaded records for school.-------------------------------", log: strongSelf.mylog, type: .debug)
-            }
-        }
-    }
 
+    func getSchoolId(name: String) -> String{
+        var schoolId = ""
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Id} from {School} where {School:Name} == '\(String(describing: name))'", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return schoolId
+            }
+            print(record)
+            let id = (record[0][0])
+            schoolId = id
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return schoolId
+    }//function    }
+    
+    
+    func loadSchoolsFromStore() -> Array<String>{
+        var namesArray = ["name"]
+        
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name},{School:Id} from {School}", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return namesArray
+            }
+            let counter = record.count-1
+            for i in 0...counter{
+                let name  = record[i][0]
+                print(name)
+                namesArray.insert(name, at: i)
+                
+            }
+            namesArray.sort()
+            
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return namesArray
+    }//function
     
     
     /// Loads data from store and presents on edit profile
@@ -583,7 +603,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black    }
+        textField.textColor = UIColor.black
+        
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.textColor = UIColor.black

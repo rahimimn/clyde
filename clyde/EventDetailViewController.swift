@@ -15,7 +15,9 @@ import MapKit
 
 class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
-   
+    //--------------------------------------------------------------------------
+    // MARK: Variables
+    
     var capturedEventId : String?
     var directions = ""
     var directionsCounter = 1
@@ -33,34 +35,23 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var qrView: UIImageView!
     
-    /// Action Button that performs a segue back to the orignial page
-    @IBAction func backButton(_ sender: UIBarButtonItem) {
+   
+    
+    //---------------------------------------------------------------------
+    // MARK: View Methods
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.loadView()
+        self.pullAddress()
         
     }
-    
-    //Create an instance of CoreImage filter with the name "CIQRCodeGenerator", which lets us reference Swift's built-in QR code generation through the Core Image framework.
-    func generateQRCode(from string: String) -> UIImage? {
-        let data = string.data(using: String.Encoding.isoLatin1)
-        
-        if let filter = CIFilter(name: "CIQRCodeGenerator"){
-            filter.setValue(data, forKey: "inputMessage")
-           
-            
-            guard let qrCodeImage = filter.outputImage else{ return nil }
-            
-            let scaleX = qrView.frame.size.width / qrCodeImage.extent.size.width
-            let scaleY = qrView.frame.size.height / qrCodeImage.extent.size.height
-            
-            let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-            
-            if let output = filter.outputImage?.transformed(by: transform){
-                return UIImage(ciImage: output)
-            }
-        }
-        return nil
+
+    override func loadView() {
+        super.loadView()
     }
     
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
@@ -70,6 +61,9 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]
+        
+        
+        // Picture method
         let imageUrl = "https://chart.googleapis.com/chart?chs=325x325&cht=qr&chl=https://cofc.tfaforms.net/217890?tfa_1="
         let url = imageUrl + id
            
@@ -90,7 +84,17 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    //--------------------------------------------------------------------------
+    // Action Buttons
     
+    
+    /// Action Button that performs a segue back to the orignial page
+    @IBAction func backButton(_ sender: UIBarButtonItem) {}
+    
+    /// Action function for the right button, increases through the directions array.
+    ///
+    /// Simple logic.
+    /// - Parameter sender: UIButton
     @IBAction func rightButton(_ sender: UIButton) {
         if directionsCounter + 1 <= directionsArray.count{
             self.directionsLabel.text = directionsArray[directionsCounter] as? String
@@ -99,40 +103,38 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         else{
             self.directionsLabel.text = "You have arrived."
         }
-    }
+    }//rightButton
     
     
+    /// Action function for the left button, decreases through the directions array.
+    ///
+    /// Simple logic
+    /// - Parameter sender: UIButton
     @IBAction func leftButton(_ sender: UIButton) {
         if directionsCounter == 1 {
             self.directionsLabel.text = directionsArray[directionsCounter] as? String
         }else{
             self.directionsLabel.text = directionsArray[directionsCounter] as? String
             directionsCounter = directionsCounter - 1
-
         }
-        
-        
-    }
+    }//leftButton
     
     
-    override func loadView() {
-        super.loadView()
-    }
+
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.loadView()
-        self.pullAddress()
-        
-    }
+    //---------------------------------------------------------------------
+    // MARK: Salesforce Functions
     
+
+    /// Salesforce function that pulls the address of an event directly from Salesforce
     func pullAddress(){
+        
+        // Takes the id that was captured on the Check-In page and splits it based on spaces
         let idSplit = capturedEventId?.split(separator: " ")
         let id = idSplit![1]
+        // Creates the event id request and asks for the contact schedule item that is connected to the event and then sends it to Salesforce
         let eventIdRequest = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c From TargetX_Eventsb__ContactScheduleItem__c WHERE Id = '\(id)'")
         RestClient.shared.send(request: eventIdRequest, onFailure: {(error, urlResponse) in
-       
-        print(error)
-            
         }) { [weak self] (response, urlResponse) in
             guard let _ = self,
                 let jsonResponse = response as? Dictionary<String, Any>,
@@ -143,7 +145,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             }
             let jsonContact = JSON(response!)
             let eventOrgId = jsonContact["records"][0]["TargetX_Eventsb__OrgEvent__c"].stringValue
-          
+            // Creates the address request and asks for the full address and time where/when the event is and then sends it to Salesforce.
             let addressRequest = RestClient.shared.request(forQuery: "SELECT Name, Event_City__c,Event_State__c,Event_Street__c,Event_Zip__c, TargetX_Eventsb__Start_Time_TZ_Adjusted__c  FROM TargetX_Eventsb__OrgEvent__c WHERE Id = '\(eventOrgId)'")
             RestClient.shared.send(request: addressRequest, onFailure: {(error, urlResponse) in
                 
@@ -169,28 +171,30 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             }
                 let address = "\(street), \(city), \(zip)"
                 
+                
+                // Gets the coordinates of using the address and then creates the map based on those coordinates.
                 self!.getCoordinate(addressString: address, completionHandler: { coordinate, error in
                     guard error == nil else {return}
                     //use the coordinate here
                     self?.createMap(coordinates: coordinate, name: name)
-                    
                 })
-            
+            }
         }
-        
-        }
-        
     }//func
     
-    /// Updates the location constantly.
+    
+    // -------------------------------------------------------------------------
+    // MARK: Map Functions
+    
+    
+    // Tells the delegate that the new location data is available
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         self.currentLocation = locations.last as CLLocation?
-        
     }
     
     
     
-    /// Asks the delegate for a renderer object to use when drawing the specified overlay.
+    // Asks the delegate for a renderer object to use when drawing the specified overlay.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
         polylineRenderer.strokeColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
@@ -198,6 +202,14 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
+    
+    /// Displays a map and creates a route between the user's current location and the event.
+    ///
+    /// Populates an array with "walking" instructions
+    ///
+    /// - Parameters:
+    ///   - coordinates: event coordinates
+    ///   - name: event name
     func createMap(coordinates: CLLocationCoordinate2D, name: String){
         map.delegate = self
         locationManager.delegate = self
@@ -267,15 +279,20 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
 
-    /// Pulled from the Apple Developer Documentation
+    
     /// Getting a coordinate from an address string
+    ///
+    /// Pulled from the Apple Developer Documentation
     ///
     /// - Parameters:
     ///   - addressString: address
     ///   - completionHandler: handler
     func getCoordinate( addressString : String,
                         completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+        ///Initializes an interface for converting between geographic coordinates and place names
         let geocoder = CLGeocoder()
+        
+        // Submits a forward-geocoding request using the specified string and then determines the coordinates of address within the string
         geocoder.geocodeAddressString(addressString) { (placemarks, error) in
             if error == nil {
                 if let placemark = placemarks?[0] {
@@ -285,17 +302,16 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
                     return
                 }
             }
-            
             completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
-        }
+    }//getCoordinate
         
     
     
-    
+   // -------------------------------------------------------------------------
     
     
    
-    }
+    }//class
     
 

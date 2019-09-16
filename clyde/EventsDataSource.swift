@@ -3,6 +3,7 @@
 //  clyde
 //
 //  Created by Rahimi, Meena Nichole (Student) on 8/23/19.
+//  Adapted from a Salesforce Mobile SDK tutorial
 //  Copyright © 2019 Salesforce. All rights reserved.
 //
 
@@ -83,7 +84,10 @@ class EventsDataSource: NSObject {
         } else {
             errorDescription = "An unknown error occurred."
         }
+        
         SalesforceLogger.e(type(of: self), message: "Failed to successfully complete the REST request. \(errorDescription)")
+        DispatchQueue.main.async{
+        }
     }
     
     /// Executes the `soqlQuery`.

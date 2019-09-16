@@ -42,6 +42,7 @@ class HomeViewController: UIViewController{
        // self.loadFromStore()
         //self.loadDataIntoStore()
         self.loadData()
+        self.loadSchools()
 //        self.pullImage()
 
     }
@@ -195,8 +196,31 @@ class HomeViewController: UIViewController{
     }//func
         
     
-
-    
+    func loadSchools(){
+        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
+        RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
+            
+            print("-----------------------------------------------------")
+            print(error)
+            
+            
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
+            if (((strongSelf.store.soupExists(forName: "School")))){
+                strongSelf.store.clearSoup("School")
+                strongSelf.store.upsert(entries: results, forSoupNamed: "School")
+                os_log("\n\n----------------------SmartStore loaded records for school.-------------------------------", log: strongSelf.mylog, type: .debug)
+            }
+        }
+    }
     /// Loads important data into the offline storage
     func loadDataIntoStore(){
         //Loads user id into store

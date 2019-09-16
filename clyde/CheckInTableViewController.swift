@@ -11,17 +11,31 @@ import SalesforceSDKCore
 import SmartSync
 
 class CheckInTableViewController: UITableViewController {
+    
+    ///Events Dictionary
     var events : [Dictionary<String,Any>] = []
+    ///User's contact Id is populated by User Defaults
     var contactId = ""
+    ///Event Id
     var eventId: String!
+    ///Contact Schedule Id that is linked to the Event
     var contactSchedId: String!
+    
+    ///Smart Store
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Registered Events")
     
+    ///Init User Defaults
+    let defaults = UserDefaults.standard
     
-    
+    ///Outlet for the "hamburger" menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
 
+    
+    
+    
+    
+    
     /// Init for the events list data source
     /// Displays the student's registered events on the table view.
     private let dataSource = EventsDataSource(cellReuseIdentifier: "sampleEvent") { record, cell in
@@ -32,7 +46,7 @@ class CheckInTableViewController: UITableViewController {
         
     }
     
-    
+    // Calld after the view controller is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         //Determines the height of each row
@@ -44,7 +58,7 @@ class CheckInTableViewController: UITableViewController {
         // Adds the cofc logo to the nav
         self.addLogoToNav()
         // Returns the contact id
-        self.contactId = getContactId()
+        self.contactId = defaults.string(forKey: "ContactId")!
         
         // Sets the table data source
         self.dataSource.delegate = self as EventsDataSourceDelegate
@@ -55,49 +69,39 @@ class CheckInTableViewController: UITableViewController {
         refreshControl?.addTarget(self.dataSource, action: #selector(self.dataSource.fetchData), for: UIControl.Event.valueChanged)
         self.tableView.addSubview(refreshControl!)
         // Executes the soqlQuery
+    
+        
         self.dataSource.fetchData()
         _ = self.dataSource.returnEventName()
-    }
+        
+        
+    }//viewDidLoad
     
     
-    /// Pulls the student's registered events
-    /// Deprecated
-    private func requestListOfRegisteredEvents(){
-        let id = self.getContactId()
-        let request = RestClient.shared.request(forQuery: "SELECT TargetX_Eventsb__OrgEvent__c,Id,Event_Name__c FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(id)'")
-        RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking: \(String(describing: error))")
-        }) { [weak self] (response, urlResponse) in
-            
-            guard let _ = self,
-                let jsonResponse = response as? Dictionary<String,Any>,
-                let result = jsonResponse ["records"] as? [Dictionary<String,Any>]  else {
-                    return
-            }
-            DispatchQueue.main.async {
-                self!.events = result
-            }
-        }    }
+    
+    // -------------------------------------------------------------
+    // MARK: Table View Functions
     
     
-    // MARK: - Table view data source
-
+    //Returns the number of sections within the table.
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    //Returns the number of rows in a given section.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 4
+        
     }
     
+    //Tells the tableview the specific row that is selected.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         // Get the cell label
         let indexPath = tableView.indexPathForSelectedRow!
         let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        //Pulls the eventId from the detail text label (this label is hidden on the actual view controller so that the user cannot see the id)
         eventId = currentCell.detailTextLabel?.text
+        //Performs segue to view the details of the specific event in the selected row.
         performSegue(withIdentifier: "ViewEventDetails", sender: self)
     }
     
@@ -141,55 +145,25 @@ class CheckInTableViewController: UITableViewController {
         return view
     }
     
-    
+    //Sets the header height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 182.67
+        return 180
     }
 
+    //Notifies the view that a segue is about to be performed.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        // If the segue identifier is ViewEventDetails, then set the destination and push the capturedEventId to the destination
         if (segue.identifier == "ViewEventDetails"){
             let detailsViewController = segue.destination as! EventDetailViewController
             detailsViewController.capturedEventId = eventId
-           
         }
-        
         
     }
 
-    
-    
-    /// Pulls user's contact id
-    ///
-    /// - Returns: contact id
-    func getContactId() -> String{
-        
-        var id = ""
-        let userQuery = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Id} from {Contact}", pageSize: 1)
-        do{
-            let records = try self.store.query(using: userQuery!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else{
-                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                return "no"
-            }
-            
-            id = record[0][0]
-            return id
-
-            DispatchQueue.main.async {
-                
-                DispatchQueue.main.async {
-                    self.contactId = id
-                    
-                }
-            }
-            
-        }catch let e as Error?{
-            print(e as Any)
-        }
-        return id
-    }
 }
+    //-------------------------------------------------------------------------
+    // Mark: Extension
+    
 extension CheckInTableViewController: EventsDataSourceDelegate {
     func EventsDataSourceDidUpdateRecords(_ dataSource: EventsDataSource) {
         DispatchQueue.main.async {
