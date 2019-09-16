@@ -11,7 +11,14 @@ import SafariServices
 
 class ResourcesTableViewController: UITableViewController {
 
+    
+    //------------------------------------------------------------------------
+    // MARK: Outlets
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    
+    //------------------------------------------------------------------------
+    // MARK: View functions
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +32,8 @@ class ResourcesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    //-------------------------------------------------------------------------
+    // MARK: Table View Methods
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -46,7 +54,12 @@ class ResourcesTableViewController: UITableViewController {
     
     }
 
-    //Takes a url as a parameter, and then makes it appear with an internal safari page.
+    //-----------------------------------------------------------------------
+    // MARK: Helper functions
+    
+    /// Displays the URL within Safari
+    ///
+    /// - Parameter url: the url to be displayed
     func show(_ url: String) {
         if let url = URL(string: url) {
             let config = SFSafariViewController.Configuration()

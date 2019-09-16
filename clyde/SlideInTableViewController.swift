@@ -12,8 +12,12 @@ import SalesforceSDKCore
 
 class SlideInTableViewController: UITableViewController{
    
+    //-------------------------------------------------------------------------
+    // MARK: Variables
     var window: UIWindow?
 
+    //-------------------------------------------------------------------------
+    // MARK: View functions
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,6 +26,9 @@ class SlideInTableViewController: UITableViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    //-------------------------------------------------------------------------
+    // MARK: Table functions
     
     //Returns the number of sections.
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,6 +58,10 @@ class SlideInTableViewController: UITableViewController{
             show(urlArray[2])
         }
     }
+    
+    //-------------------------------------------------------------------------
+    // MARK: Helper functions
+    
     
     //Takes a url as a parameter, and then makes it appear with an internal safari page.
     func show(_ url: String) {

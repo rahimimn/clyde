@@ -14,8 +14,9 @@ import SmartSync
 
 class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
+    //--------------------------------------------------------------------------
+    // MARK: Variables
     
-    //Variables
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Majors")
     var majorCounter: Int = 0
@@ -27,15 +28,18 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     var preference = ""
     var selectedId =  ""
     
-    //Outlets
+    //--------------------------------------------------------------------------
+    // MARK: Outlets
+    
     @IBOutlet weak var majorImage: UIImageView!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var majorDescription: UITextView!
-    
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     
    
+    //--------------------------------------------------------------------------
+    // MARK: View Functions
     
     /// Overrides the viewDidLoad function. Adds the menu bar, adds the logo to the nav bar, adjusts font for major label and major description
     override func viewDidLoad() {
@@ -49,23 +53,28 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     override func loadView() {
         super.loadView()
         self.loadFromStore()
-
     }
     
+    //-------------------------------------------------------------------------
+    // MARK: Salesforce Functions
 
+    
+    /// SmartStore related function that loads data into variables.
+    ///
+    /// Loads from the 'Major' store:
+    /// - Name - Email - Description - ImageUrl - Id - ContactEmail
     func loadFromStore(){
+        // Creates the query spec. Query specs must be formatted in this way.
         let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c}, {Major:Id}, {Major:Contact_Email__c} from {Major}", pageSize: 60)
         do{
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-
                 return
             }
             if majorCounter == record.count{
                 majorCounter = 0
             }
-            
             let name = record[self.majorCounter][0]
             let website = record[self.majorCounter][1]
             let description = record[self.majorCounter][2]
@@ -88,7 +97,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                         self.interestName = name
                         self.interestId = id
                         self.email = contactEmail
-
                     }
                 }
                 task.resume()
@@ -96,12 +104,12 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         }catch let e as Error?{
             print(e as Any)
         }
-        
     }
     
     
-    
-    
+    /// Salesforce related function that pushes the preference data for each major into Salesforce
+    ///
+    /// - Parameter button: preference button
     func pushUsingSalesforce(_ button: Int){
         var createRecord = [String : Any]()
         var updateRecord = [String : Any]()
@@ -159,28 +167,12 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
             } else{
                 print("This is a problem.")
             }
-            
         }
+    }
     
- // This is code that can be used for event registration.
-//        var event = [String : Any]()
-//        event["TargetX_Eventsb__Contact__c"] = contactId
-//        event["TargetX_Eventsb__OrgEvent__c"] = "a0JG000000VTLttMAH"
-//        event["TargetX_Eventsb__Confirmed__c"] = true
-//        
-//        
-//        let eventRequest = RestClient.shared.requestForUpsert(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", externalIdField: "Id", externalId: nil, fields: event)
-//        //let selectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: record)
-//        RestClient.shared.send(request: eventRequest, onFailure: { (error, URLResponse) in
-//            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(eventRequest), error: \(error)")
-//            
-//        }){(response, URLResponse) in
-//            //Creates a save alert to be presented whenever the user saves their information
-//            os_log("\nSuccessful response received")
-//        }
-//        
-        
-            }
+    
+    //---------------------------------------------------------------------
+    // MARK: Contact Functions
     
     /// Tells the delegate that the user wants to close the mail composition
     /// view.
@@ -204,13 +196,10 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         }
         controller.dismiss(animated: true, completion: nil)
     }
-
     
-    
-    
-    
-    
-    
+    /// Website Action button that when pressed will present the department website of each major.
+    ///
+    /// - Parameter sender: website button
     @IBAction func WebsiteButton(_ sender: UIButton) {
         self.show(websiteUrl)
     }
@@ -235,27 +224,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
             
         }    }
     
-    @IBAction func likeButton(_ sender: UIButton) {
-        loadFromStore()
-        
-        let button = sender.tag
-        pushUsingSalesforce(button)
-        
-    }
-    @IBAction func dislikeButton(_ sender: UIButton) {
-        loadFromStore()
-        let button = sender.tag
-        pushUsingSalesforce(button)
-        
-    }
-    
-    @IBAction func maybeButton(_ sender: UIButton) {
-        loadFromStore()
-        let button = sender.tag
-        pushUsingSalesforce(button)
-    }
-    
-    
     //Takes a url as a parameter, and then makes it appear with an internal safari page.
     func show(_ url: String) {
         if let url = URL(string: url) {
@@ -265,5 +233,35 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
             let vc = SFSafariViewController(url: url, configuration: config)
             present(vc, animated: true)
         }
+    }    //------------------------------------------------------------------------
+    // MARK: Preference Buttons
+    
+    /// Preference button: like, when pressed will load the next major, and save the user's preference for the major into Salesforce
+    ///
+    /// - Parameter sender: like button
+    @IBAction func likeButton(_ sender: UIButton) {
+        loadFromStore()
+        let button = sender.tag
+        pushUsingSalesforce(button)
+    }
+    
+    
+    /// Preference button: dislike, when pressed will load the next major, and save the user's preference for the major into Salesforce
+    ///
+    /// - Parameter sender: dislike button
+    @IBAction func dislikeButton(_ sender: UIButton) {
+        loadFromStore()
+        let button = sender.tag
+        pushUsingSalesforce(button)
+    }
+    
+    
+    /// Preference button: maybe, when pressed will load the next major, and save the user's preference for the major into Salesforce
+    ///
+    /// - Parameter sender: maybe button
+    @IBAction func maybeButton(_ sender: UIButton) {
+        loadFromStore()
+        let button = sender.tag
+        pushUsingSalesforce(button)
     }
 }

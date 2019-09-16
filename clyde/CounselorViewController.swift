@@ -16,7 +16,8 @@ import MessageUI
 /// Pulls the user's admission counselor from Salesforce and then presents the data on the view controller.
 class CounselorViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
-    //Variable names
+    //-------------------------------------------------------------------------
+    // MARK: Variables
     var name: String = ""
     var about: String = ""
     var email: String? = ""
@@ -26,7 +27,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "profile")
     
-   //Outlets for the view controller
+    //------------------------------------------------------------------------
+    // MARK: Outlets
+    
     @IBOutlet var counselorView: UIView!
     @IBOutlet weak var counselorImage: UIImageView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
@@ -39,8 +42,12 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     @IBOutlet weak var counselorEmail: UIButton!
     @IBOutlet weak var phoneText: UIButton!
     
+
+    //-------------------------------------------------------------------------
+    // MARK: Action buttons
     
     /// When button is pressed, will take in the counselor's phone number, remove the - and (), and then calls the number.
+    ///
     /// This will not work in the simulator.
     /// - Parameter sender: action button
     @IBAction func phone(_ sender: UIButton) {
@@ -76,9 +83,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         mailView.setToRecipients(to as? [String])
             
             self.present(mailView, animated: true, completion: nil)
-
-        
-        
     }
     
 
@@ -89,19 +93,23 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     @IBAction func instagram(_ sender: UIButton) {
         show("https://www.instagram.com/cofcadmissions/")    }
     
-    /// ViewDidLoad
+    
+    //-----------------------------------------------------------------------
+    // MARK: View functions
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    //self.pullInformation()
-       // self.hardCode()
         self.loadDataFromStore()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-       
-        
-        
     }
    
+    
+    //------------------------------------------------------------------------
+    // MARK: Mail Compose Function
+    
+    
     /// Tells the delegate that the user wants to close the mail composition
     /// view.
     ///
@@ -125,6 +133,15 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         controller.dismiss(animated: true, completion: nil)
     }
     
+    
+    
+    //--------------------------------------------------------------------------
+    // MARK: Salesforce Functions
+    
+    
+    /// SmartStore related function that loads Counselor data from the 'Counselor' soup
+    ///
+    /// Loads Name, MobilePhone, AboutMe, Email, ImageUrl
     func loadDataFromStore(){
         // Loading Indicator is created, starts animated before user's information request is sent
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -183,109 +200,9 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         }
     }
     
-    
-    
-    
-    
-    /// Pulls counselor infomation from Salesforce and then presents it.
-    /// Information pulled: Image, Name, About, Email, Phone
-    /// No longer in use
-    func pullInformation(){
-        
-        // Loading Indicator is created, starts animated before user's information request is sent
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-        loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
-        loadingIndicator.center = counselorView.center
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-        loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
-        counselorView.addSubview(loadingIndicator)
-        loadingIndicator.startAnimating()
-        let alert = UIAlertController(title: "Counselor Not Available", message: "There was an error involving the database.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-//        let idquerySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:Id} from {User}", pageSize: 1)
-//        do{
-//            let records = try self.store.query(using: idquerySpec!, startingFromPageIndex: 0)
-//            guard let
-//        }
-//
-//
-        //Gets the user's information from Salesforce using the user's id.
-       let userRequest = RestClient.shared.requestForUserInfo()
-       RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user info request: \(userRequest)")
-            loadingIndicator.stopAnimating()
-            self.present(alert, animated:true)
-        
-       }) { [weak self] (response, urlResponse) in
-        let userAccountJSON = JSON(response!);           let userAccountID = userAccountJSON["user_id"].stringValue
-        
-        //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
-            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
-            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
-                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
-                loadingIndicator.stopAnimating()
-                self!.present(alert, animated:true)
-            }) { [weak self] (response, urlResponse) in
-                let contactAccountJSON = JSON(response!)
-                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                
-                
-                // Creates a request for the user's counselor id, sends it, and saves json into response, uses SWIFTYJSON to convert needed data
-                let counselorIDRequest = RestClient.shared.request(forQuery: "SELECT OwnerId FROM Contact WHERE Id = '\(contactAccountID)'")
-                RestClient.shared.send(request: counselorIDRequest, onFailure: { (error, urlResponse) in
-                    print(error!)
-                    loadingIndicator.stopAnimating()
-                    self!.present(alert, animated:true)
-                    SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor ID Request: \(counselorIDRequest)")
-                    
-                }) { [weak self] (response, urlResponse) in
-                    let counselorAccountJSON = JSON(response!)
-                    let counselorId = counselorAccountJSON["records"][0]["OwnerId"]
-                    
-                    
-                    //Creates a request for counselor info, and saves json into response, uses SWIFTYJSON to convert needed data
-                    let counselorInfoRequest = RestClient.shared.request(forQuery: "SELECT AboutMe,Email,Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
-                    
-                    RestClient.shared.send(request: counselorInfoRequest, onFailure: { (error, urlResponse) in
-                        loadingIndicator.stopAnimating()
-                        self!.present(alert, animated:true)
-                        SalesforceLogger.d(type(of:self!), message:"Error invoking on counselor info Request: \(counselorInfoRequest)")
-                        
-                    }) { [weak self] (response, urlResponse) in
-                        let counselorInfoJSON = JSON(response!)
-                        let counselorName = counselorInfoJSON["records"][0]["Name"].stringValue
-                        let counselorAbout = counselorInfoJSON["records"][0]["AboutMe"].stringValue
-                        let counselorEmail = counselorInfoJSON["records"][0]["Email"].stringValue
-                        let counselorPhone = counselorInfoJSON["records"][0]["MobilePhone"].stringValue
-                        let counselorImageUrl = counselorInfoJSON["records"][0]["Image_Url__c"].stringValue
-                        print(counselorInfoJSON)
-                DispatchQueue.main.async {
-                   
-                    self!.aboutMeText.text = counselorAbout
-                    self!.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-                    self!.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-                    self!.name = counselorName
-                    self!.counselorName.text = counselorName
-                    self!.counselorEmail.setTitle("Email: \(counselorEmail)", for: .normal)
-                    self!.phoneText.setTitle("Phone: \(counselorPhone)", for: .normal)
-                    self!.contactLabel.text = "Contact Information"
-                    self!.aboutLabel.text = "About"
-                    self!.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
-                self!.instagramButton.setTitle("@cofcadmissions", for: .normal)
-                    self!.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
-                    loadingIndicator.stopAnimating()
-                    
-                }//dispatch
-                    }//counselor info
-                }//counselor id
-        }//contact
-    }//user
-}
 
-    
+    //----------------------------------------------------------------------
+    // MARK: Helper Functions
     
     /// Displays the URL within Safari
     ///
