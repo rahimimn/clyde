@@ -1232,12 +1232,35 @@
         <scene sceneID="6ke-oB-Xks">
             <objects>
                 <viewController id="V9x-m2-Mg2" customClass="InteractiveMapViewController" customModule="clyde" customModuleProvider="target" sceneMemberID="viewController">
-                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybridFlyover" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" showsScale="YES" id="Rar-TD-Bio">
+                    <view key="view" contentMode="scaleToFill" id="jFV-xn-Nhz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </mapView>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybridFlyover" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU2-y9-1Bb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="681"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAr-U9-ARn">
+                                <rect key="frame" x="0.0" y="769" width="414" height="44"/>
+                                <color key="backgroundColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BAr-U9-ARn" firstAttribute="leading" secondItem="LuC-a8-d9b" secondAttribute="leading" id="HuP-Zt-zzF"/>
+                            <constraint firstItem="SU2-y9-1Bb" firstAttribute="leading" secondItem="LuC-a8-d9b" secondAttribute="leading" id="OcC-Fx-GoH"/>
+                            <constraint firstItem="BAr-U9-ARn" firstAttribute="top" secondItem="SU2-y9-1Bb" secondAttribute="bottom" id="YFd-VL-aYC"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="trailing" secondItem="BAr-U9-ARn" secondAttribute="trailing" id="l4T-1I-rti"/>
+                            <constraint firstItem="SU2-y9-1Bb" firstAttribute="top" secondItem="LuC-a8-d9b" secondAttribute="top" id="xC9-sw-CQy"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="bottom" secondItem="BAr-U9-ARn" secondAttribute="bottom" id="yL0-sJ-LRZ"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="trailing" secondItem="SU2-y9-1Bb" secondAttribute="trailing" id="zrK-ey-q6H"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LuC-a8-d9b"/>
+                    </view>
                     <connections>
-                        <outlet property="map" destination="Rar-TD-Bio" id="HkA-1g-m9h"/>
+                        <outlet property="map" destination="SU2-y9-1Bb" id="CbN-VD-3ct"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgF-m6-jNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1542,13 +1565,13 @@
                                                         <rect key="frame" x="0.0" y="348.33333333333337" width="384" height="29.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="278" height="29.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="276.66666666666669" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="258" y="0.0" width="126" height="29.666666666666668"/>
+                                                                <rect key="frame" x="256.66666666666669" y="0.0" width="127.33333333333331" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -4175,6 +4198,7 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
         <image name="thumbsDown.png" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="hvw-qa-vj6"/>
         <segue reference="F4T-Z2-p6E"/>
         <segue reference="1iM-Yc-Rlk"/>
         <segue reference="DYY-bQ-oG7"/>

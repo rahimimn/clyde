@@ -33,7 +33,6 @@
 		B227D0B522BBEB9A00AA0634 /* MajorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */; };
 		B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */; };
 		B230DD4022E9FACB005674B4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		B230DD4522EA04E7005674B4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B230DD4422EA04E7005674B4 /* Reachability.m */; };
 		B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */; };
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
@@ -84,6 +83,10 @@
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
 		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
 		B2D8013F22D8FC430050E376 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013E22D8FC430050E376 /* instagram.png */; };
+		B2F57925233905C900A361B4 /* Reachability.m in Resources */ = {isa = PBXBuildFile; fileRef = B2F57923233905C700A361B4 /* Reachability.m */; };
+		B2F57926233905C900A361B4 /* Reachability.h in Resources */ = {isa = PBXBuildFile; fileRef = B2F57924233905C800A361B4 /* Reachability.h */; };
+		B2F5792E23390F2100A361B4 /* CollegeLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F5792D23390F2100A361B4 /* CollegeLocations.swift */; };
+		B2F57930233935FC00A361B4 /* emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = B2F5792F233935F900A361B4 /* emoji.png */; };
 		B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */; };
 		B77BD8A321125B510036B284 /* bootconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B77BD8A221125B510036B284 /* bootconfig.plist */; };
 		CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA8CA031F071B2300448B51 /* Images.xcassets */; };
@@ -129,8 +132,6 @@
 		B227D0B422BBEB9A00AA0634 /* MajorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorsViewController.swift; sourceTree = "<group>"; };
 		B227D0B722BBEC2100AA0634 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		B230DD3F22E9FACB005674B4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B230DD4222E9FB60005674B4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../Downloads/Reachability-master/Reachability.h"; sourceTree = "<group>"; };
-		B230DD4422EA04E7005674B4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../Downloads/Reachability-master/Reachability.m"; sourceTree = "<group>"; };
 		B2358DD722CFAFDE00E00348 /* icons8-Logout Rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Logout Rounded.png"; sourceTree = "<group>"; };
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
@@ -176,6 +177,10 @@
 		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		B2D8013C22D8F9230050E376 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		B2D8013E22D8FC430050E376 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
+		B2F57923233905C700A361B4 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
+		B2F57924233905C800A361B4 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
+		B2F5792D23390F2100A361B4 /* CollegeLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLocations.swift; sourceTree = "<group>"; };
+		B2F5792F233935F900A361B4 /* emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji.png; path = "../../Desktop/College of Charleston/Images/emoji.png"; sourceTree = "<group>"; };
 		B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		B77BD8A221125B510036B284 /* bootconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bootconfig.plist; sourceTree = "<group>"; };
 		CEA8CA031F071B2300448B51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "mobile_sdk/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -243,10 +248,10 @@
 			isa = PBXGroup;
 			children = (
 				4F393A281C3C8BCD00B3EA13 /* main.swift */,
+				B2F57924233905C800A361B4 /* Reachability.h */,
+				B2F57923233905C700A361B4 /* Reachability.m */,
 				4FF12F8A1DCA91F5004D9EF9 /* clyde.entitlements */,
 				B77BD8A221125B510036B284 /* bootconfig.plist */,
-				B230DD4422EA04E7005674B4 /* Reachability.m */,
-				B230DD4222E9FB60005674B4 /* Reachability.h */,
 				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
 				B7168FBB1FACC6F900A48DB5 /* LaunchScreen.storyboard */,
 				CEA8CA031F071B2300448B51 /* Images.xcassets */,
@@ -410,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C1A02922C27C4200C5634C /* red-symbol.jpg */,
+				B2F5792F233935F900A361B4 /* emoji.png */,
 				B2211D3A22F2018B00D127DB /* whiteLogo.png */,
 				B2C1A02722C27BAE00C5634C /* full-logo.jpg */,
 				B227D07E22BBD87600AA0634 /* cofc-red.jpg */,
@@ -453,6 +459,7 @@
 			children = (
 				B2D8013A22D7A8250050E376 /* GamesViewController.swift */,
 				B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */,
+				B2F5792D23390F2100A361B4 /* CollegeLocations.swift */,
 			);
 			name = Games;
 			sourceTree = "<group>";
@@ -536,6 +543,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F57925233905C900A361B4 /* Reachability.m in Resources */,
+				B2F57926233905C900A361B4 /* Reachability.h in Resources */,
 				B28847542329766200811638 /* usersyncs.json in Resources */,
 				B28847552329766200811638 /* userstore.json in Resources */,
 				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
@@ -544,6 +553,7 @@
 				B2C1A01F22C2693C00C5634C /* cofc-orientation-1-750x499.jpg in Resources */,
 				B227D08622BBD87600AA0634 /* 3844408-48.png in Resources */,
 				B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */,
+				B2F57930233935FC00A361B4 /* emoji.png in Resources */,
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
@@ -677,7 +687,7 @@
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
-				B230DD4522EA04E7005674B4 /* Reachability.m in Sources */,
+				B2F5792E23390F2100A361B4 /* CollegeLocations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
