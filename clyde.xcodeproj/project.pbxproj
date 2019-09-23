@@ -77,7 +77,8 @@
 		B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */; };
 		B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */; };
 		B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */; };
-		B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03922C395DA00C5634C /* accounting.jpg */; };
+		B2D08DE323350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */; };
+		B2D08DE52335126700A8A10B /* InteractiveMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */; };
 		B2D8013622D78D0D0050E376 /* F.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013522D78D0D0050E376 /* F.png */; };
 		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
@@ -168,7 +169,8 @@
 		B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "cofc-campusE.jpg"; path = "../../Desktop/College of Charleston/Images/cofc-campusE.jpg"; sourceTree = "<group>"; };
 		B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern-profile.jpg"; sourceTree = "<group>"; };
 		B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cisternyard_splash.jpg; sourceTree = "<group>"; };
-		B2C1A03922C395DA00C5634C /* accounting.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = accounting.jpg; sourceTree = "<group>"; };
+		B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Randolph_hall_college_of_charleston.jpeg; sourceTree = "<group>"; };
+		B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveMapViewController.swift; sourceTree = "<group>"; };
 		B2D8013522D78D0D0050E376 /* F.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F.png; sourceTree = "<group>"; };
 		B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Installing Updates.png"; sourceTree = "<group>"; };
 		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
@@ -283,7 +285,6 @@
 		B227D07922BBD85900AA0634 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B2C1A03B22C395DD00C5634C /* Majors */,
 				B2C1A02422C27B6F00C5634C /* Icons */,
 				B2C1A02322C27B5C00C5634C /* Logos */,
 				B2C1A02222C27B1000C5634C /* College of Charleston Photos */,
@@ -390,6 +391,7 @@
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
 				B2D8013522D78D0D0050E376 /* F.png */,
 				B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */,
+				B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
@@ -446,18 +448,11 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
-		B2C1A03B22C395DD00C5634C /* Majors */ = {
-			isa = PBXGroup;
-			children = (
-				B2C1A03922C395DA00C5634C /* accounting.jpg */,
-			);
-			name = Majors;
-			sourceTree = "<group>";
-		};
 		B2D8013922D7A8010050E376 /* Games */ = {
 			isa = PBXGroup;
 			children = (
 				B2D8013A22D7A8250050E376 /* GamesViewController.swift */,
+				B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */,
 			);
 			name = Games;
 			sourceTree = "<group>";
@@ -563,13 +558,13 @@
 				B77BD8A321125B510036B284 /* bootconfig.plist in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
-				B2C1A03A22C395DB00C5634C /* accounting.jpg in Resources */,
 				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
 				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
 				B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */,
 				B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
+				B2D08DE323350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg in Resources */,
 				B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */,
 				B2C1A00F22C15A7A00C5634C /* acaslonpro-italic.otf in Resources */,
 				B2C1A00E22C15A7A00C5634C /* acaslonpro-bolditalic.otf in Resources */,
@@ -677,6 +672,7 @@
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */,
 				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
+				B2D08DE52335126700A8A10B /* InteractiveMapViewController.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,

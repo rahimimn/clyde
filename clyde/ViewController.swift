@@ -108,7 +108,7 @@ class HomeViewController: UIViewController{
                 self?.userId = id
                 self!.defaults.set(id,forKey: "UserId")
             }
-            let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User WHERE Id = '\(id)'")
+            let userIdRequest = RestClient.shared.request(forQuery: "Select Name, FirstName, LastName, Id, Email, ContactId From User WHERE Id = '\(id)'")
             
             RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
@@ -121,7 +121,11 @@ class HomeViewController: UIViewController{
                 }
                 let jsonContact = JSON(response)
                 let contactId = jsonContact["records"][0]["ContactId"].stringValue
+                let firstName = jsonContact["records"][0]["FirstName"].stringValue
+                let lastName = jsonContact["records"][0]["LastName"].stringValue
                 self!.defaults.set(contactId, forKey: "ContactId")
+                self!.defaults.set(firstName, forKey: "FirstName")
+                self!.defaults.set(lastName, forKey: "LastName")
 
                 
                 //SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
@@ -132,7 +136,7 @@ class HomeViewController: UIViewController{
                 }
                 
                 //Loads contactData into store
-                let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id  FROM Contact WHERE Email = '\(email)'")
+                let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Email = '\(email)'")
                 RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
                 }) { [weak self] (response, urlResponse) in
                     guard let strongSelf = self,
@@ -246,19 +250,23 @@ class HomeViewController: UIViewController{
             }
 
             //Loads contactData into store
-            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id  FROM Contact")
+            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact")
             RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
                     let jsonResponse = response as? Dictionary<String, Any>,
                     let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                    
                     else{
                         print("\nWeak or absent connection.")
                         return
                 }
+                
                 let jsonContact = JSON(response)
                 let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
-              
+                let accountId = jsonContact["records"][0]["AccountId"].stringValue
+                print("--------------------------------")
+                print(accountId)
                 SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
                 if (((strongSelf.store.soupExists(forName: "Contact")))){
                     strongSelf.store.clearSoup("Contact")

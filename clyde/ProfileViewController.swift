@@ -1,3 +1,4 @@
+
 //
 //  ProfileViewController.swift
 //
@@ -11,16 +12,15 @@ import SmartSync
 import SmartStore
 import SwiftyJSON
 import MapKit
-
 import CoreLocation
 
 
 /// Class for the Profile view
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
    
+    //----------------------------------------------------------------------
+    // MARK: Outlets
     
-    
-   
     // Outlet for the menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
@@ -31,8 +31,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profileImageView: UIImageView!
     
     // Outlets for "Your Information"
-    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var addressText: UITextView!
+    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var birthdateText: UILabel!
     @IBOutlet weak var emailText: UILabel!
     @IBOutlet weak var schoolText: UILabel!
@@ -44,6 +44,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var studentTypeText: UILabel!
     @IBOutlet weak var honorsCollegeInterestText: UILabel!
     @IBOutlet weak var mobileOptInText: UILabel!
+    // Outlet for map view
+    @IBOutlet weak var profileMap: MKMapView!
+    
+    //--------------------------------------------------------------------
+    // MARK: Variables
     
    //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -54,17 +59,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Private variables for map
     private var locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
-    
-    // Outlet for map view
-    @IBOutlet weak var profileMap: MKMapView!
-    
     // Private variables for id
      private var userId = ""
       var contactId = ""
     
-    /// Sent to the view controller when the app recieves a memory warning. This is where variables can be taken out of memory to offload storage.
+    //--------------------------------------------------------------------
+    // MARK: View functions
+    
+    // Sent to the view controller when the app recieves a memory warning. This is where variables can be taken out of memory to offload storage.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    /// Notifies that the view controller is about to be added to memory
+    override func viewWillAppear(_ animated: Bool) {
+        self.createMap()
     }
     
     /// Creates the view that the viewController manages
@@ -80,13 +89,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImageView.layer.cornerRadius = 10
     }
     
-    /// Notifies that the view controller is about to be added to memory
-    override func viewWillAppear(_ animated: Bool) {
-        self.createMap()
 
-        
-      }
-    
     /// Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,14 +109,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 //            task.resume()
     }
     
+    
+    
+    //---------------------------------------------------------------------------
+    // MARK: Location functions
+    
     /// Updates the location constantly.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         self.currentLocation = locations.last as CLLocation?
-
     }
 
-    
-    
+
     /// Asks the delegate for a renderer object to use when drawing the specified overlay.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
@@ -121,68 +127,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return polylineRenderer
     }
     
-    
-    
-    /// Loads the profile data from the SmartStore soup
-    ///
-    /// Displays Name, Mobile number, mailing address, birth sex and gender identity, student type, graduation year, ethnicity, message consent, and honors interest
-    func loadDataFromStore(){
-        let contactId = defaults.string(forKey: "ContactId")
-        let querySpec = QuerySpec.buildSmartQuerySpec(
-
-            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'",
-            pageSize: 10)
-
-
-        do {
-            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            print(records!)
-            guard let record = records as? [[String]] else {
-                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                
-                return
-            }
-
-            let name = (record[0][0])
-            let phone = record[0][1]
-            let address = record[0][2]
-            let genderId = record[0][6]
-            let email = record[0][7]
-            let birthday = record[0][8]
-            let birthsex = record[0][9]
-            let studentType = record[0][10]
-            let graduationYear = record[0][11]
-            let ethnicity = record[0][12]
-            let mobileOpt = record[0][13]
-            let honors = record[0][14]
-
-            DispatchQueue.main.async {
-                self.userName.text = name
-                self.userName.textColor = UIColor.black
-                self.mobileText.text = phone
-                self.addressText.text = address
-                self.emailText.text = email
-                self.birthdateText.text = birthday
-                self.genderIdentityText.text = genderId
-                self.genderText.text = birthsex
-                self.studentTypeText.text = studentType
-                self.anticipatedStartText.text = graduationYear
-                self.ethnicText.text = ethnicity
-                if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
-                else{ self.mobileOptInText.text = "Opt-in"}
-                if honors == "1"{
-                    self.honorsCollegeInterestText.text = "Yes"
-                }else{ self.honorsCollegeInterestText.text = "No"}
-
-            }
-        } catch let e as Error? {
-            print(e as Any)
-            os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
-        }
-
-    }
-    
-   
     /// Adds the map to the view and calculates the distance between the user and College of Charleston
     func createMap(){
         // MAP
@@ -248,14 +192,103 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.distanceText.text = "\((String(format: "%.2f", distanceInMeters))) miles"
             
         }else{
-        self.distanceText.text = "\((distanceInMeters).rounded().formatForProfile) miles"
+            self.distanceText.text = "\((distanceInMeters).rounded().formatForProfile) miles"
         }
         
         
     }
     
+    //---------------------------------------------------------------------------
+    // MARK: Salesforce related functions
     
     
+    
+    /// Smartstore related function that returns the school name
+    ///
+    /// - Parameter name: school id
+    /// - Returns: school name
+    func getSchoolName(id: String) -> String{
+        var schoolName = ""
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return schoolName
+            }
+            print(record)
+            let name = (record[0][0])
+            schoolName = name
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return schoolName
+    }//function
+    
+    
+    
+    /// Loads the profile data from the SmartStore soup
+    ///
+    /// Displays Name, Mobile number, mailing address, birth sex and gender identity, student type, graduation year, ethnicity, message consent, and honors interest
+    func loadDataFromStore(){
+        let contactId = defaults.string(forKey: "ContactId")
+        let querySpec = QuerySpec.buildSmartQuerySpec(
+
+            smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity}, {Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c}, {Contact:AccountId} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'",
+            pageSize: 10)
+
+
+        do {
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            print(records!)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                
+                return
+            }
+
+            let name = (record[0][0])
+            let phone = record[0][1]
+            let address = record[0][2]
+            let genderId = record[0][6]
+            let email = record[0][7]
+            let birthday = record[0][8]
+            let birthsex = record[0][9]
+            let studentType = record[0][10]
+            let graduationYear = record[0][11]
+            let ethnicity = record[0][12]
+            let mobileOpt = record[0][13]
+            let honors = record[0][14]
+            let schoolId = record[0][15]
+
+            DispatchQueue.main.async {
+                self.userName.text = name
+                self.userName.textColor = UIColor.black
+                self.mobileText.text = phone
+                self.addressText.text = address
+                self.emailText.text = email
+                self.birthdateText.text = birthday
+                self.genderIdentityText.text = genderId
+                self.genderText.text = birthsex
+                self.studentTypeText.text = studentType
+                self.anticipatedStartText.text = graduationYear
+                self.ethnicText.text = ethnicity
+                self.schoolText.text = self.getSchoolName(id: schoolId)
+                if mobileOpt == "0"{ self.mobileOptInText.text = "Opt-out"}
+                else{ self.mobileOptInText.text = "Opt-in"}
+                if honors == "1"{
+                    self.honorsCollegeInterestText.text = "Yes"
+                }else{ self.honorsCollegeInterestText.text = "No"}
+
+            }
+        } catch let e as Error? {
+            print(e as Any)
+            os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
+        }
+
+    }
 
    
 }

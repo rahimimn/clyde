@@ -20,7 +20,9 @@ import CoreLocation
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-    // Variables
+    //--------------------------------------------------------------------------
+    // MARK: Variables
+    
     var contactId = ""
     var profileImage: UIImage!
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -34,13 +36,33 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var genderOptions = ["Female","Male","Other"]
     var studentTypeOptions = ["Freshman","Transfer"]
     var ethnicOptions = ["Alaskan Native", "American Indian", "Asian", "Black or African American", "Hispanic", "Mexican or Mexican American", "Middle Eastern", "Native Hawaiian", "Other", "Pacific Islander", "Prefer to not respond", "Puerto Rican", "Two or more races", "White"]
+    let defaults = UserDefaults.standard
+    private var honorsCollegeInterestText = ""
+    private var mobileText = ""
+    private var mobileOptInText = ""
+    // Boolean variable to determine whether a new picture was added.
+    var newPic: Bool?
+    
+    
+    //---------------------------------------------------------------------------
+    // MARK: UI Picker Views
     
     let genderPicker = UIPickerView()
     let genderIdentityPicker = UIPickerView()
     let studentTypePicker = UIPickerView()
     let ethnicPicker = UIPickerView()
+    // Creates a date picker for the birthday field.
+    let datePicker = UIDatePicker()
     
-    // Outlet for the menu button
+    //---------------------------------------------------------------------------
+    // MARK: Gesture Recognizer
+    // Creates a UITapGestureRecognizer to edit the user's image
+    
+    let tapRec = UITapGestureRecognizer()
+    
+    //---------------------------------------------------------------------------
+    // MARK: Outlets
+    
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     // Outlet for user's profile photo image view
@@ -56,7 +78,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var birthDateTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var highSchoolTextField: SearchTextField!
-    
     @IBOutlet weak var graduationYearTextField: UITextField!
     @IBOutlet weak var ethnicOriginTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
@@ -65,9 +86,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var studentTypeTextField: UITextField!
     @IBOutlet weak var userName: UILabel!
     
-    let defaults = UserDefaults.standard
-    private var honorsCollegeInterestText = ""
+    // Outlets for UI Switch
+    @IBOutlet weak var mobileSwitch: UISwitch!
     @IBOutlet weak var honorsSwitch: UISwitch!
+    
+    
+    //----------------------------------------------------------------------------
+    // MARK: Actions
+    
     @IBAction func honorsAction(_ sender: UISwitch) {
         if sender.isOn == true{
             honorsCollegeInterestText = "1"
@@ -76,86 +102,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    private var mobileText = ""
-    private var mobileOptInText = ""
-    @IBOutlet weak var mobileSwitch: UISwitch!
     @IBAction func mobileAction(_ sender: UISwitch) {
         if sender.isOn == true{mobileOptInText = "1"}
         else{mobileOptInText = "0"}
     }
-    
-    
-    // Boolean variable to determine whether a new picture was added.
-    var newPic: Bool?
-    
-    // Creates a UITapGestureRecognizer to edit the user's image
-    let tapRec = UITapGestureRecognizer()
-    
-    // Creates a date picker for the birthday field.
-    let datePicker = UIDatePicker()
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
-    /// Determines whether there is a valid internet connection
-    ///
-    /// - Parameter notification: notification description
-    func reachabilityChanged(notification: NSNotification) {
-        if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN() {
-            print("Service available!!!")
-            self.internetConnection = true
-        } else {
-            print("No service available!!!")
-            self.internetConnection = false
-        }
-    }
-    
-    /// Shows the date picker for the birthdate field when called.
-    private func showDatePicker(){
-        // Formats the date picker.
-        datePicker.datePickerMode = .date
-        
-        // Creates the toolbar and the sizes it to fit.
-        let toolbar = UIToolbar();
-        toolbar.sizeToFit()
-        
-        // Creates the various buttons.
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPicker));
-        
-        // Sets the buttons.
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        // Adds the datepicker and toolbar to the birthdate text field.
-        birthDateTextField.inputAccessoryView = toolbar
-        birthDateTextField.inputView = datePicker
-    }
-    
-    /// Called when the user picks a date
-    ///
-    /// Formats the date correctly so that it will not cause an error once it is pushed into Salesforce
-    @objc func doneDatePicker(){
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        birthDateTextField.text = formatter.string(from: datePicker.date)
-        self.view.endEditing(true)
-    }
-    
-    
-    @objc func cancelPicker(){
-        self.view.endEditing(true)
-    }
-    
     
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if self.studentStatus == true{
             self.insertIntoSoup()
             //self.syncUp()
-              self.updateSalesforceData()
+            self.updateSalesforceData()
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
@@ -167,112 +124,33 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
     }
     
-    /// UIPickerView Functions
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    //-----------------------------------------------------------------------------
+    // MARK: View functions
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if (pickerView == genderIdentityPicker){
-            return genderOptions.count
-        }else if (pickerView == genderPicker){
-            return birthSexOptions.count
-        }else if (pickerView == ethnicPicker){
-            return ethnicOptions.count
-        }
-        else{
-            return studentTypeOptions.count
-        }}
-    
-    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if (pickerView == genderIdentityPicker){
-            return genderOptions[row]
-        } else if pickerView == genderPicker{
-            return birthSexOptions[row]
-        }else if pickerView == ethnicPicker{
-            return ethnicOptions[row]
-        }
-        else{
-            return studentTypeOptions[row]
-        }
-    }
-    
-    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == self.genderIdentityPicker{
-            self.genderIdentityTextField.text = genderOptions[row]
-        }else if pickerView == self.genderPicker{
-            self.genderTextField.text = genderOptions[row]
-        }else if pickerView == self.ethnicPicker{
-            self.ethnicOriginTextField.text = ethnicOptions[row]
-        }else{
-            self.studentTypeTextField.text = studentTypeOptions[row]
-        }
-    }
     override func loadView() {
         super.loadView()
         //self.syncDown()
         self.loadFromStore()
-        //self.loadFromStore()
     }
     
-    
-    
-    /// Syncs the store to Salesforce
-    func syncDown(){
-        if let smartStore = self.store,
-            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-            do {
-                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
-                    if syncState.isDone() {
-                        self?.loadFromStore()
-                        
-                    }
-                }
-            } catch {
-                print("Unexpected sync error: \(error).")
-            }
-        }    }
-    
-  
-    
-    func syncUp(){
-        if let smartStore = self.store,
-            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-            do {
-                try syncMgr.reSync(named: "syncUpContact") {
-                    syncState in
-                    if  syncState.hasFailed(){
-                        print("Sync failed")
-                    }
-                    if syncState.isDone() {
-                        //                        let alert = UIAlertController(title: "Information Saved", message: "Clyde Club saved your information.", preferredStyle: .alert)
-                        //
-                        //                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                        //
-                        //                        self?.present(alert, animated: true)
-                        print("Sync Done")
-                    }
-                }
-            } catch {
-                print("-----------------Unexpected sync error------------------\(error).")
-            }
-        }     }
-    
-    /// Presents view
     override func viewDidLoad() {
         super.viewDidLoad()
         let dataArray = loadSchoolsFromStore()
-//        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
-//        let url = URL(string: profilePhotoString!)!
-//        
-//        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-//            guard let data = data, error == nil else {return}
-//            DispatchQueue.main.async {
-//                self.profileImageView.image = UIImage(data:data)
-//                
-//            }
-//        }
-//        task.resume()        //  self.pushImage()
+        //        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
+        //        let url = URL(string: profilePhotoString!)!
+        //
+        //        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+        //            guard let data = data, error == nil else {return}
+        //            DispatchQueue.main.async {
+        //                self.profileImageView.image = UIImage(data:data)
+        //
+        //            }
+        //        }
+        //        task.resume()        //  self.pushImage()
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -301,7 +179,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         let schoolid = getSchoolId(name: "Shelterwood School")
         print(schoolid)
-        print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
         
         // Calls showDatePicker
         showDatePicker()
@@ -358,75 +235,187 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             
         }}
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
-            return
+    
+    //-------------------------------------------------------------------------
+    // MARK: UI Picker functions
+    
+    /// Shows the date picker for the birthdate field when called.
+    private func showDatePicker(){
+        // Formats the date picker.
+        datePicker.datePickerMode = .date
+        
+        // Creates the toolbar and the sizes it to fit.
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        
+        // Creates the various buttons.
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPicker));
+        
+        // Sets the buttons.
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        // Adds the datepicker and toolbar to the birthdate text field.
+        birthDateTextField.inputAccessoryView = toolbar
+        birthDateTextField.inputView = datePicker
+    }
+    
+    /// Called when the user picks a date
+    ///
+    /// Formats the date correctly so that it will not cause an error once it is pushed into Salesforce
+    @objc func doneDatePicker(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        birthDateTextField.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    
+    @objc func cancelPicker(){
+        self.view.endEditing(true)
+    }
+    
+    
+    /// UIPickerView Functions
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if (pickerView == genderIdentityPicker){
+            return genderOptions.count
+        }else if (pickerView == genderPicker){
+            return birthSexOptions.count
+        }else if (pickerView == ethnicPicker){
+            return ethnicOptions.count
         }
-        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
-        scrollView.contentOffset = CGPoint(x:0, y:keyboardFrame.size.height/2)
+        else{
+            return studentTypeOptions.count
+        }}
+    
+    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if (pickerView == genderIdentityPicker){
+            return genderOptions[row]
+        } else if pickerView == genderPicker{
+            return birthSexOptions[row]
+        }else if pickerView == ethnicPicker{
+            return ethnicOptions[row]
+        }
+        else{
+            return studentTypeOptions[row]
+        }
     }
     
-    @objc func keyboardWillHide(notification:NSNotification) {
-        scrollView.contentOffset = .zero
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == self.genderIdentityPicker{
+            self.genderIdentityTextField.text = genderOptions[row]
+        }else if pickerView == self.genderPicker{
+            self.genderTextField.text = genderOptions[row]
+        }else if pickerView == self.ethnicPicker{
+            self.ethnicOriginTextField.text = ethnicOptions[row]
+        }else{
+            self.studentTypeTextField.text = studentTypeOptions[row]
+        }
     }
     
+    //------------------------------------------------------------------------
+    // MARK: Salesforce related functions
     
+    /// Syncs the store to Salesforce
+    func syncDown(){
+        if let smartStore = self.store,
+            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+            do {
+                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
+                    if syncState.isDone() {
+                        self?.loadFromStore()
+                        
+                    }
+                }
+            } catch {
+                print("Unexpected sync error: \(error).")
+            }
+        }    }
     
+  
+    
+    func syncUp(){
+        if let smartStore = self.store,
+            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
+            do {
+                try syncMgr.reSync(named: "syncUpContact") {
+                    syncState in
+                    if  syncState.hasFailed(){
+                        print("Sync failed")
+                    }
+                    if syncState.isDone() {
+                        //                        let alert = UIAlertController(title: "Information Saved", message: "Clyde Club saved your information.", preferredStyle: .alert)
+                        //
+                        //                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        //
+                        //                        self?.present(alert, animated: true)
+                        print("Sync Done")
+                    }
+                }
+            } catch {
+                print("-----------------Unexpected sync error------------------\(error).")
+            }
+        }     }
+    
+   
+    /// Sends data into Salesforce, this will need to be edited at some point
+    private func updateSalesforceData(){
+        
+        // Creates a new record and stores appropriate fields.
+        var record = [String: Any]()
+        record["MailingStreet"] = self.addressTextField.text
+        record["MailingCity"] = self.cityTextField.text
+        record["LastName"] = self.defaults.string(forKey: "LastName")
+        record["MailingState"] = self.stateTextField.text
+        record["MailingPostalCode"] = self.zipTextField.text
+        record["TargetX_SRMb__Graduation_Year__c"] = self.graduationYearTextField.text
+        record["Ethnicity_Non_Applicants__c"] = self.ethnicOriginTextField.text
+        record["Email"] = self.emailTextField.text
+        record["AccountId"] = self.getSchoolId(name: self.highSchoolTextField.text!)
+        record["Birthdate"] = self.birthDateTextField.text
+        record["MobilePhone"] = self.mobileTextField.text
+        record["TargetX_SRMb__Gender__c"] = self.genderTextField.text
+        record["Gender_Identity__c"] = self.genderIdentityTextField.text
+        record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
+        // record["Honors_College_Interest_Check__c"] = self.honorsCollegeInterestText
+        if self.mobileOptInText == "0"{
+            record["Text_Message_Consent__c"] = "false"
+        }else{
+            record["Text_Message_Consent__c"] = "true"
+            
+        }
+        let contactAccountID = defaults.string(forKey: "ContactId")
+                //Creates the update request.
+        let updateRequest = RestClient.shared.requestForUpdate(withObjectType: "Contact", objectId: contactAccountID!, fields: record)
+                
+                //Sends the update request
+                RestClient.shared.send(request: updateRequest, onFailure: { (error, URLResponse) in
+                    SalesforceLogger.d(type(of:self), message:"Error invoking while sending update request: \(updateRequest), error: \(String(describing: error))")
+                    //Creates a save alert to be presented whenever the user saves their information
+                    let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true)
+                }){(response, URLResponse) in
+                    //Creates a save alert to be presented whenever the user saves their information
+                    let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
+                    saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(saveAlert, animated: true)
+                    os_log("\nSuccessful response received")}
+        
+            }
     
 
-    func getSchoolId(name: String) -> String{
-        var schoolId = ""
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Id} from {School} where {School:Name} == '\(String(describing: name))'", pageSize: 10000)
-        
-        do{
-            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else {
-                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                return schoolId
-            }
-            print(record)
-            let id = (record[0][0])
-            schoolId = id
-        }//do
-        catch let e as Error?{
-            print(e as Any)
-        }
-        return schoolId
-    }//function    }
-    
-    
-    func loadSchoolsFromStore() -> Array<String>{
-        var namesArray = ["name"]
-        
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name},{School:Id} from {School}", pageSize: 10000)
-        
-        do{
-            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else {
-                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
-                return namesArray
-            }
-            let counter = record.count-1
-            for i in 0...counter{
-                let name  = record[i][0]
-                print(name)
-                namesArray.insert(name, at: i)
-                
-            }
-            namesArray.sort()
-            
-        }//do
-        catch let e as Error?{
-            print(e as Any)
-        }
-        return namesArray
-    }//function
     
     
     /// Loads data from store and presents on edit profile
     func loadFromStore(){
         let contactId = defaults.string(forKey: "ContactId")
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity},{Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:Honors_College_Interest_Check__c},{Contact:Status_Category__c},{Contact:Id} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'", pageSize: 1),
+        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity},{Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:AccountId}, {Contact:Honors_College_Interest_Check__c},{Contact:Status_Category__c},{Contact:Id} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'", pageSize: 1),
             let smartStore = self.store,
             let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
             let name = (record[0][0])
@@ -443,9 +432,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let graduationYear = record[0][11]
             let ethnicity = record[0][12]
             let mobileOpt = record[0][13]
-            let honors = record[0][14]
-            let status = record[0][15]
-            let id = record[0][16]
+            let highSchoolId = record[0][14]
+            let honors = record[0][15]
+            let status = record[0][16]
+            let id = record[0][17]
+            print(record)
             DispatchQueue.main.async {
                 self.userName.text = name
                 self.userName.textColor = UIColor.black
@@ -455,6 +446,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 self.stateTextField.text = state
                 self.zipTextField.text = zip
                 self.contactId = id
+                self.highSchoolTextField.text = self.getSchoolName(id: highSchoolId)
                 self.emailTextField.text = email
                 self.birthDateTextField.text = birthday
                 self.genderIdentityTextField.text = genderId
@@ -486,6 +478,81 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     
+    /// Smartstore related function that returns the school id
+    ///
+    /// - Parameter name: school name
+    /// - Returns: school id
+    func getSchoolId(name: String) -> String{
+        var schoolId = ""
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Id} from {School} where {School:Name} == '\(String(describing: name))'", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return schoolId
+            }
+            let id = (record[0][0])
+            schoolId = id
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return schoolId
+    }//function
+    
+    /// Smartstore related function that returns the school name
+    ///
+    /// - Parameter name: school id
+    /// - Returns: school name
+    func getSchoolName(id: String) -> String{
+        var schoolName = ""
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return schoolName
+            }
+            print(record)
+            let name = (record[0][0])
+            schoolName = name
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return schoolName
+    }//function
+    
+    /// Smartstore related function that returns an array of school names
+    ///
+    /// - Returns: Array of school names
+    func loadSchoolsFromStore() -> Array<String>{
+        var namesArray = ["name"]
+        
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name},{School:Id} from {School}", pageSize: 10000)
+        
+        do{
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                return namesArray
+            }
+            let counter = record.count-1
+            for i in 0...counter{
+                let name  = record[i][0]
+                namesArray.insert(name, at: i)
+                
+            }
+            namesArray.sort()
+            
+        }//do
+        catch let e as Error?{
+            print(e as Any)
+        }
+        return namesArray
+    }//function
     
     /// Pulls data from the user form and upserts it into the "Contact" soup
     func insertIntoSoup(){
@@ -503,6 +570,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                                        "TargetX_SRMb__Graduation_Year__c": graduationYearTextField.text!,
                                        "Ethnicity_Non_Applicants__c": ethnicOriginTextField.text!,
                                        "Text_Message_Consent__c": self.mobileOptInText,
+                                       "AccountId": self.getSchoolId(name: self.highSchoolTextField.text!),
                                        "Honors_College_Interest_Check__c": honorsCollegeInterestText,
                                        "__locally_deleted__": false,
                                        "__locally_updated__": true,
@@ -517,80 +585,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     
-    /// Sends data into Salesforce, this will need to be edited at some point
-    private func updateSalesforceData(){
-        
-        // Creates a new record and stores appropriate fields.
-        var record = [String: Any]()
-        record["MailingStreet"] = self.addressTextField.text
-        record["MailingCity"] = self.cityTextField.text
-        record["MailingState"] = self.stateTextField.text
-        record["MailingPostalCode"] = self.zipTextField.text
-        record["TargetX_SRMb__Graduation_Year__c"] = self.graduationYearTextField.text
-        record["Ethnicity_Non_Applicants__c"] = self.ethnicOriginTextField.text
-        record["Email"] = self.emailTextField.text
-        //record["AccountId"] = "001S00000105zkuIAA"
-        record["Birthdate"] = self.birthDateTextField.text
-        record["MobilePhone"] = self.mobileTextField.text
-        record["TargetX_SRMb__Gender__c"] = self.genderTextField.text
-        record["Gender_Identity__c"] = self.genderIdentityTextField.text
-        record["TargetX_SRMb__Student_Type__c"] = self.studentTypeTextField.text
-        // record["Honors_College_Interest_Check__c"] = self.honorsCollegeInterestText
-        if self.mobileOptInText == "0"{
-            record["Text_Message_Consent__c"] = "false"
-        }else{
-            record["Text_Message_Consent__c"] = "true"
-            
-        }
-        //  record["Text_Message_Consent__c"] = self.mobileOptInText
-        // NEED TO FIGURE OUT A WAY TO CONNECT THIS TO A USER NSOBJECT.
-        // Creates a request for user information, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (userAccountId)
-        let userRequest = RestClient.shared.requestForUserInfo()
-        RestClient.shared.send(request: userRequest, onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(userRequest)")
-        }) { [weak self] (response, urlResponse) in
-            let userAccountJSON = JSON(response!)
-            let userAccountID = userAccountJSON["user_id"].stringValue
-            
-            
-            //Creates a request for the user's contact id, sends it, saves the json into response, uses SWIFTYJSON to convert needed data (contactAccountId)
-            let contactIDRequest = RestClient.shared.request(forQuery: "SELECT ContactId FROM User WHERE Id = '\(userAccountID)'")
-            RestClient.shared.send(request: contactIDRequest, onFailure: { (error, urlResponse) in
-                SalesforceLogger.d(type(of:self!), message:"Error invoking on contact id request: \(contactIDRequest)")
-            }) { [weak self] (response, urlResponse) in
-                let contactAccountJSON = JSON(response!)
-                let contactAccountID = contactAccountJSON["records"][0]["ContactId"].stringValue
-                
-                print("Creating update request")
-                
-                //Creates the update request.
-                let updateRequest = RestClient.shared.requestForUpdate(withObjectType: "Contact", objectId: contactAccountID, fields: record)
-                
-                //Sends the update request
-                RestClient.shared.send(request: updateRequest, onFailure: { (error, URLResponse) in
-                    SalesforceLogger.d(type(of:self!), message:"Error invoking while sending upsert request: \(updateRequest), error: \(String(describing: error))")
-                    //Creates a save alert to be presented whenever the user saves their information
-                    let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                    self?.present(errorAlert, animated: true)
-                }){(response, URLResponse) in
-                    //Creates a save alert to be presented whenever the user saves their information
-                    let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
-                    saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                    self?.present(saveAlert, animated: true)
-                    os_log("\nSuccessful response received")
-                }
-            }
-        }
-    }
-    
-    //    private func pushImage(){
-    //        let photoRequest = RestClient.shared.request(forUploadFile: <#T##Data#>, name: <#T##String#>, description: <#T##String#>, mimeType: <#T##String#>)
-    //        }
-    
-    
-    
-    
+    //---------------------------------------------------------------------------
+    // MARK: Textfield functions
     
     
     /// Method that returns a textfield's input
@@ -602,9 +598,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         textField.textColor = UIColor.black
         return true
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.textColor = UIColor.black
-        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -618,6 +614,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.honorsSwitch.isEnabled = self.studentStatus
         return self.studentStatus
     }
+    
+    //---------------------------------------------------------------------------
+    // MARK: Profile Photo functions
     
     
     
@@ -669,6 +668,60 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.dismiss(animated: true, completion: nil)
         imageSaved()
     }
+    
+    //---------------------------------------------------------------------------
+    // MARK: Helper functions
+    
+
+    /// Determines whether there is a valid internet connection
+    ///
+    /// - Parameter notification: notification description
+    func reachabilityChanged(notification: NSNotification) {
+        if self.reach!.isReachableViaWiFi() || self.reach!.isReachableViaWWAN() {
+            print("Service available!!!")
+            self.internetConnection = true
+        } else {
+            print("No service available!!!")
+            self.internetConnection = false
+        }
+    }
+    
+    /// Determines whether the keyboard is in the way of the textfield
+    ///
+    /// - Parameter notification: notification
+    @objc func keyboardWillShow(notification:NSNotification) {
+        guard let keyboardFrameValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
+            return}
+        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
+        scrollView.contentOffset = CGPoint(x:0, y:keyboardFrame.size.height/2)
+    }
+    
+    /// Determines if the keyboard should hide
+    ///
+    /// - Parameter notification: notification
+    @objc func keyboardWillHide(notification:NSNotification) {
+        scrollView.contentOffset = .zero
+    }
+    
+    
+    
+    
+    
+    //-------------------------------------------------------------
+    //MARK: Testing functions
+    
+    
+    
+    //    private func pushImage(){
+    //        let photoRequest = RestClient.shared.request(forUploadFile: <#T##Data#>, name: <#T##String#>, description: <#T##String#>, mimeType: <#T##String#>)
+    //        }
+    
+    
+    
+    
+    
+    
+    
     
     func saveImage(){
         let imageData = self.profileImage.pngData()!
