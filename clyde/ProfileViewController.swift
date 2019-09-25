@@ -96,17 +96,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
         self.createMap()
-//        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
-//            let url = URL(string: profilePhotoString!)!
-//
-//            let task = URLSession.shared.dataTask(with: url){ data,response, error in
-//                guard let data = data, error == nil else {return}
-//                DispatchQueue.main.async {
-//                    self.profileImageView.image = UIImage(data:data)
-//
-//                }
-//            }
-//            task.resume()
+       // let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
+        let url = URL(string: "https://cs40.salesforce.com/sfc/p/540000001Vbx/a/540000008YoS/Q8wtZlCvTojplXTzrPH0Cqd.CuPHfMAyFRNOW29cQPE")!
+        
+        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+            guard let data = data, error == nil else {return}
+            DispatchQueue.main.async {
+                self.profileImageView.image = UIImage(data:data)
+                
+            }
+        }
+        task.resume()
     }
     
     

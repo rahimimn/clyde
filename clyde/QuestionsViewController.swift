@@ -17,68 +17,68 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
+    @IBOutlet weak var TextView: UITextView!
     override func viewDidLoad() {
-        super.viewDidLoad()
-        textInput.delegate = self
-        //reveals menu
+        super.viewDidLoad()        //reveals menu
        self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
     }
 
 
-    @IBOutlet weak var label: UILabel!
-    
-    @IBOutlet weak var textInput: UITextField!
-    
-    @IBAction func send(_ sender: UIButton) {
-        var record = [String: Any]()
-        record["Test_Input__c"] = textInput.text
-        let userRequest = RestClient.shared.requestForUpsert(withObjectType: "Test__c", externalIdField: "Id", externalId: "a3m540000006nvzAAA", fields: record)
-        RestClient.shared.send(request: userRequest, onFailure: { (error, URLResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking while sending upsert request: \(userRequest)")
-            //Creates a save alert to be presented whenever the user saves their information
-        }){(response, URLResponse) in
-            //Creates a save alert to be presented whenever the user saves their information
-            let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
-            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(saveAlert, animated: true)
-            os_log("\nSuccessful response received")
-        }
-        
-    }
-   
-    
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        textField.textColor = UIColor.black
-        return true
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black
-    }
 
 
     override func loadView() {
         super.loadView()
-        let testRequest = RestClient.shared.request(forQuery: "SELECT Name,Test_Input__c FROM Test__c WHERE Name = 'Testing'")
-        RestClient.shared.send(request: testRequest,onFailure: { (error, urlResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking on contact id request: \(testRequest), \(error) ")
-        }) { [weak self] (response, urlResponse) in
-            let testJson = JSON(response!)
-            let name = testJson["records"][0]["Name"].stringValue
-            let input = testJson["records"][0]["Test_Input__c"].stringValue
-            DispatchQueue.main.async {
-                self?.textInput.text = input
-                self?.label.text = name
-            }
-        }
+        
+        var image = UIImage(named: "clyde.jpg")
+        let data = image?.jpegData(compressionQuality: 1.0) as NSData?
+    
+        let b64 = data!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
+        //print(b64)
+        let fields = [
+            "Name": "John's",
+            "Body": b64,
+            "FolderId":"00l54000000GCPI",
+            "IsInternalUseOnly":"false"
+        ]
+        
+        let attachmentRequest = RestClient.shared.requestForCreate(withObjectType: "Documents", fields: fields)
+        RestClient.shared.send(request: attachmentRequest, onFailure: {(error, urlResponse) in
+                        print(error!)
+                    }) { [weak self] (response, urlResponse) in
+                        print(response)
+                       
+                    }
         
     }
+    
+        
+//        let uploadRequest = RestClient.shared.request(forUploadFile: data! as Data, name: "StudentProfilePhoto", description: "testing file upload from clydeClub app", mimeType: "image/jpg")
+//        RestClient.shared.send(request: uploadRequest, onFailure: {(error, urlResponse) in
+//            print(error!)
+//        }) { [weak self] (response, urlResponse) in
+//            print(response)
+//            }
+//
+    
+        
+        
+//
+//
+//        let dataRequest = RestClient.shared.request(forQuery: "SELECT OwnerId,Title FROM ContentDocument WHERE OwnerId = '005540000026ZWJAA2'")
+//        RestClient.shared.send(request: dataRequest, onFailure: {(error, urlResponse) in
+//            print(error!)
+//        }) { [weak self] (response, urlResponse) in
+//            print(response)
+//            let jsonResponse = JSON(response!)
+//            let id = jsonResponse["Title"].stringValue
+//            DispatchQueue.main.async {
+//                print("here we go again")
+//                print(id)
+//            }
+//
+//        }}
 
 
 
