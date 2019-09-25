@@ -1239,25 +1239,47 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybridFlyover" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU2-y9-1Bb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="681"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAr-U9-ARn">
-                                <rect key="frame" x="79" y="769" width="335" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAr-U9-ARn">
+                                <rect key="frame" x="167" y="769" width="80.333333333333314" height="44"/>
                                 <color key="backgroundColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9r3-v0-6zT">
-                                <rect key="frame" x="20" y="783" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-5T-Qhr">
+                                <rect key="frame" x="3" y="769" width="161" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="leftButton:" destination="uEY-Yj-Mvz" eventType="touchUpInside" id="DFf-3S-HLn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ima-Vw-s7v">
+                                <rect key="frame" x="250.33333333333337" y="769" width="160.66666666666663" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="&gt;">
+                                    <color key="titleColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="leftButton:" destination="uEY-Yj-Mvz" eventType="touchUpInside" id="Hu6-y0-wrX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="BAr-U9-ARn" firstAttribute="leading" secondItem="LuC-a8-d9b" secondAttribute="leading" id="HuP-Zt-zzF"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="bottom" secondItem="ima-Vw-s7v" secondAttribute="bottom" id="ErG-6Y-Eed"/>
+                            <constraint firstItem="BAr-U9-ARn" firstAttribute="leading" secondItem="sc9-5T-Qhr" secondAttribute="trailing" constant="3" id="MaX-nb-csE"/>
+                            <constraint firstItem="ima-Vw-s7v" firstAttribute="leading" secondItem="BAr-U9-ARn" secondAttribute="trailing" constant="3" id="NQa-eQ-Gem"/>
                             <constraint firstItem="SU2-y9-1Bb" firstAttribute="leading" secondItem="LuC-a8-d9b" secondAttribute="leading" id="OcC-Fx-GoH"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="bottom" secondItem="sc9-5T-Qhr" secondAttribute="bottom" id="Y5S-01-hdM"/>
                             <constraint firstItem="BAr-U9-ARn" firstAttribute="top" secondItem="SU2-y9-1Bb" secondAttribute="bottom" id="YFd-VL-aYC"/>
-                            <constraint firstItem="LuC-a8-d9b" firstAttribute="trailing" secondItem="BAr-U9-ARn" secondAttribute="trailing" id="l4T-1I-rti"/>
+                            <constraint firstItem="ima-Vw-s7v" firstAttribute="top" secondItem="SU2-y9-1Bb" secondAttribute="bottom" id="YNf-X9-ErT"/>
+                            <constraint firstItem="LuC-a8-d9b" firstAttribute="trailing" secondItem="ima-Vw-s7v" secondAttribute="trailing" constant="3" id="cas-0B-kRw"/>
+                            <constraint firstItem="sc9-5T-Qhr" firstAttribute="top" secondItem="SU2-y9-1Bb" secondAttribute="bottom" id="kV0-OJ-8ff"/>
+                            <constraint firstItem="sc9-5T-Qhr" firstAttribute="width" secondItem="ima-Vw-s7v" secondAttribute="width" id="vzG-sv-7Ta"/>
+                            <constraint firstItem="sc9-5T-Qhr" firstAttribute="leading" secondItem="LuC-a8-d9b" secondAttribute="leading" constant="3" id="wse-Gs-D67"/>
                             <constraint firstItem="SU2-y9-1Bb" firstAttribute="top" secondItem="LuC-a8-d9b" secondAttribute="top" id="xC9-sw-CQy"/>
                             <constraint firstItem="LuC-a8-d9b" firstAttribute="bottom" secondItem="BAr-U9-ARn" secondAttribute="bottom" id="yL0-sJ-LRZ"/>
                             <constraint firstItem="LuC-a8-d9b" firstAttribute="trailing" secondItem="SU2-y9-1Bb" secondAttribute="trailing" id="zrK-ey-q6H"/>
@@ -1570,13 +1592,13 @@
                                                         <rect key="frame" x="0.0" y="348.33333333333337" width="384" height="29.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="275.66666666666669" height="29.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="274.66666666666669" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="255.66666666666669" y="0.0" width="128.33333333333331" height="29.666666666666668"/>
+                                                                <rect key="frame" x="254.66666666666669" y="0.0" width="129.33333333333331" height="29.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>

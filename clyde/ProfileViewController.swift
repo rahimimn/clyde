@@ -97,16 +97,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.addLogoToNav()
         self.createMap()
        // let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
-        let url = URL(string: "https://cs40.salesforce.com/sfc/p/540000001Vbx/a/540000008YoS/Q8wtZlCvTojplXTzrPH0Cqd.CuPHfMAyFRNOW29cQPE")!
+//        let url = URL(string: "https://cs40.salesforce.com/sfc/p/540000001Vbx/a/540000008YoS/Q8wtZlCvTojplXTzrPH0Cqd.CuPHfMAyFRNOW29cQPE")!
+//
+//        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+//            guard let data = data, error == nil else {return}
+//            DispatchQueue.main.async {
+//                self.profileImageView.image = UIImage(data:data)
+//
+//            }
+//        }
+//        task.resume()
         
-        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-            guard let data = data, error == nil else {return}
-            DispatchQueue.main.async {
-                self.profileImageView.image = UIImage(data:data)
-                
-            }
-        }
-        task.resume()
+        let profileImage = UIImage(named: "clyde.jpg")!
+        self.saveImageToUserDefaults(userImage: profileImage)
+        self.profileImageView.image = self.pullImageFromUserDefaults()
     }
     
     
@@ -289,7 +293,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
 
     }
+    
+    
+    //----------------------------------------------------------------------------------------
+    // MARK: Helper functions
+    
+    func saveImageToUserDefaults(userImage: UIImage){
+        let imageData = userImage.jpegData(compressionQuality: 1.0)
+        let b64 = imageData!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
+        defaults.set(b64, forKey: "imageData")
+    }
 
-   
+    func pullImageFromUserDefaults()->UIImage{
+        let imageData = defaults.string(forKey: "imageData")!
+        let decodedData = NSData(base64Encoded: imageData, options: .ignoreUnknownCharacters)
+        var decodedImage:UIImage = UIImage(data: decodedData! as Data)!
+        return decodedImage
+    }
 }
 

@@ -131,15 +131,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.didReceiveMemoryWarning()
     }
     
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.saveImageToUserDefaults(userImage: self.profileImageView.image!)
+    }
     override func loadView() {
         super.loadView()
         //self.syncDown()
         self.loadFromStore()
+        self.profileImageView.image = self.pullImageFromUserDefaults()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let dataArray = loadSchoolsFromStore()
+        self.profileImageView.image = self.pullImageFromUserDefaults()
         //        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
         //        let url = URL(string: profilePhotoString!)!
         //
@@ -661,13 +668,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         if mediaType.isEqual(to: kUTTypeImage as String) {
             self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             profileImageView.image = profileImage
+            self.saveImageToUserDefaults(userImage: profileImage)
             if newPic == true{
                 UIImageWriteToSavedPhotosAlbum(profileImage, self, #selector(imageError), nil)
             }
         }
+        self.saveImageToUserDefaults(userImage: profileImage)
         self.dismiss(animated: true, completion: nil)
-        imageSaved()
+        
     }
+    
+    
     
     //---------------------------------------------------------------------------
     // MARK: Helper functions
@@ -701,6 +712,23 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// - Parameter notification: notification
     @objc func keyboardWillHide(notification:NSNotification) {
         scrollView.contentOffset = .zero
+    }
+    
+    
+    
+    func saveImageToUserDefaults(userImage: UIImage){
+        let imageData = userImage.jpegData(compressionQuality: 1.0)
+        let b64 = imageData!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
+        defaults.set(b64, forKey: "imageData")
+        print("image saved")
+    }
+    
+    func pullImageFromUserDefaults()->UIImage{
+        let imageData = defaults.string(forKey: "imageData")!
+        let decodedData = NSData(base64Encoded: imageData, options: .ignoreUnknownCharacters)
+        var decodedImage:UIImage = UIImage(data: decodedData! as Data)!
+        print(decodedImage)
+        return decodedImage
     }
     
     
