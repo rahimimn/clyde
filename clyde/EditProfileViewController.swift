@@ -134,19 +134,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.saveImageToUserDefaults(userImage: self.profileImageView.image!)
     }
     override func loadView() {
         super.loadView()
+        self.pullImageFromFileManager(imageName: "UserPhoto")
         //self.syncDown()
         self.loadFromStore()
-        self.profileImageView.image = self.pullImageFromUserDefaults()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pullImageFromFileManager(imageName: "UserPhoto")
         let dataArray = loadSchoolsFromStore()
-        self.profileImageView.image = self.pullImageFromUserDefaults()
         //        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
         //        let url = URL(string: profilePhotoString!)!
         //
@@ -668,12 +668,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         if mediaType.isEqual(to: kUTTypeImage as String) {
             self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             profileImageView.image = profileImage
-            self.saveImageToUserDefaults(userImage: profileImage)
+            self.saveImageToFileManager(userImage: profileImage)
             if newPic == true{
                 UIImageWriteToSavedPhotosAlbum(profileImage, self, #selector(imageError), nil)
             }
         }
-        self.saveImageToUserDefaults(userImage: profileImage)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -716,22 +715,28 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     
-    func saveImageToUserDefaults(userImage: UIImage){
-        let imageData = userImage.jpegData(compressionQuality: 1.0)
-        let b64 = imageData!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
-        defaults.set(b64, forKey: "imageData")
-        print("image saved")
+    func saveImageToFileManager(userImage: UIImage){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
+        let data = userImage.jpegData(compressionQuality: 1.0)
+        if fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil){
+            print("this worked!")
+        }
     }
     
-    func pullImageFromUserDefaults()->UIImage{
-        let imageData = defaults.string(forKey: "imageData")!
-        let decodedData = NSData(base64Encoded: imageData, options: .ignoreUnknownCharacters)
-        var decodedImage:UIImage = UIImage(data: decodedData! as Data)!
-        print(decodedImage)
-        return decodedImage
+   
+    
+    func pullImageFromFileManager(imageName: String){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
+        
+        if fileManager.fileExists(atPath: imagePath){
+            profileImageView.image = UIImage(contentsOfFile: imagePath)
+            print(UIImage(contentsOfFile: imagePath)!)
+        }else{
+            print("Panic! No image!")
+        }
     }
-    
-    
     
     
     
@@ -812,12 +817,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         //            self?.present(saveAlert, animated: true)
         //        }
-        
-    }
-    
-    
-    
-    func pullImage(){
         
     }
     

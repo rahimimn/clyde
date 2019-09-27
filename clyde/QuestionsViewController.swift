@@ -37,13 +37,15 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         let b64 = data!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
         //print(b64)
         let fields = [
-            "Name": "John's",
+            "Name": "test",
             "Body": b64,
-            "FolderId":"00l54000000GCPI",
-            "IsInternalUseOnly":"false"
+            "ParentId": "0035400000GV18bAAD",
+            "OwnerId": "005540000026jrpAAA",
+            "IsPrivate": "false",
+            
         ]
         
-        let attachmentRequest = RestClient.shared.requestForCreate(withObjectType: "Documents", fields: fields)
+        let attachmentRequest = RestClient.shared.requestForCreate(withObjectType: "Attachment", fields: fields)
         RestClient.shared.send(request: attachmentRequest, onFailure: {(error, urlResponse) in
                         print(error!)
                     }) { [weak self] (response, urlResponse) in

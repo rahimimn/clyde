@@ -37,6 +37,9 @@
 		B2358DDC22D3A7F800E00348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2358DDB22D3A7F800E00348 /* MapKit.framework */; };
 		B23C492322D3D75600A88C48 /* cal.png in Resources */ = {isa = PBXBuildFile; fileRef = B23C492222D3D75500A88C48 /* cal.png */; };
 		B23C492522D3D9F800A88C48 /* cistern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B23C492422D3D9F800A88C48 /* cistern.jpg */; };
+		B2487EEF233E687200AE5F3B /* twitter.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2487EEE233E687100AE5F3B /* twitter.jpeg */; };
+		B2487EF2233E687D00AE5F3B /* instagram.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2487EF0233E687C00AE5F3B /* instagram.jpeg */; };
+		B2487EF3233E687D00AE5F3B /* facebook.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2487EF1233E687C00AE5F3B /* facebook.jpeg */; };
 		B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */; };
 		B26924872301E39500C480EF /* icons8-thumbs-up-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B26924862301E39500C480EF /* icons8-thumbs-up-100.png */; };
 		B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248A2301E4DB00C480EF /* thumbsDown.png */; };
@@ -136,6 +139,9 @@
 		B2358DDB22D3A7F800E00348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B23C492222D3D75500A88C48 /* cal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cal.png; sourceTree = "<group>"; };
 		B23C492422D3D9F800A88C48 /* cistern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cistern.jpg; sourceTree = "<group>"; };
+		B2487EEE233E687100AE5F3B /* twitter.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twitter.jpeg; sourceTree = "<group>"; };
+		B2487EF0233E687C00AE5F3B /* instagram.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpeg; sourceTree = "<group>"; };
+		B2487EF1233E687C00AE5F3B /* facebook.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = facebook.jpeg; sourceTree = "<group>"; };
 		B2679AB822D63CCC003CCA27 /* CheckInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInTableViewController.swift; sourceTree = "<group>"; };
 		B26924862301E39500C480EF /* icons8-thumbs-up-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-thumbs-up-100.png"; sourceTree = "<group>"; };
 		B269248A2301E4DB00C480EF /* thumbsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbsDown.png; sourceTree = "<group>"; };
@@ -396,7 +402,10 @@
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
 				B2D8013522D78D0D0050E376 /* F.png */,
 				B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */,
+				B2487EF1233E687C00AE5F3B /* facebook.jpeg */,
+				B2487EF0233E687C00AE5F3B /* instagram.jpeg */,
 				B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */,
+				B2487EEE233E687100AE5F3B /* twitter.jpeg */,
 				B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */,
 				B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */,
 				B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */,
@@ -558,6 +567,7 @@
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
+				B2487EF3233E687D00AE5F3B /* facebook.jpeg in Resources */,
 				B269248D2301E51400C480EF /* sideThumb.png in Resources */,
 				B2211D3F22F868D700D127DB /* clyde.jpg in Resources */,
 				B2D8013F22D8FC430050E376 /* instagram.png in Resources */,
@@ -565,6 +575,7 @@
 				B2C1A01122C15A7A00C5634C /* acaslonpro-semibold.otf in Resources */,
 				B2C1A02122C27A8B00C5634C /* cofc-campus.jpg in Resources */,
 				B227D08422BBD87600AA0634 /* white-logo.png in Resources */,
+				B2487EF2233E687D00AE5F3B /* instagram.jpeg in Resources */,
 				B77BD8A321125B510036B284 /* bootconfig.plist in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
@@ -590,6 +601,7 @@
 				B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */,
 				B2358DD822CFAFDF00E00348 /* icons8-Logout Rounded.png in Resources */,
 				B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */,
+				B2487EEF233E687200AE5F3B /* twitter.jpeg in Resources */,
 				B227D08722BBD87600AA0634 /* cofc-red.jpg in Resources */,
 				B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */,
 				B2C1A02A22C27C4200C5634C /* red-symbol.jpg in Resources */,

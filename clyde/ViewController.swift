@@ -22,12 +22,17 @@ class HomeViewController: UIViewController{
     var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
 
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
     var userId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarItem)
         self.addLogoToNav()
+        moreButton.layer.cornerRadius = 5
+        moreButton.layer.borderWidth = 2
+        moreButton.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
+     
         
     }
     
@@ -77,6 +82,16 @@ class HomeViewController: UIViewController{
     /// - Parameter sender: the UIButton tapped
     @IBAction func clickMore(_ sender: UIButton) {
         show("https://today.cofc.edu/")}
+    
+    
+    @IBAction func showFacebook(_ sender: UIButton) {
+    }
+    
+    @IBAction func showInstagram(_ sender: UIButton) {
+    }
+    
+    @IBAction func showTwitter(_ sender: UIButton) {
+    }
     
     
     /// Displays the url as a Safari view controller

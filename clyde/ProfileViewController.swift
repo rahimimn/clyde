@@ -109,8 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 //        task.resume()
         
         let profileImage = UIImage(named: "clyde.jpg")!
-        self.saveImageToUserDefaults(userImage: profileImage)
-        self.profileImageView.image = self.pullImageFromUserDefaults()
+        self.pullImageFromFileManager(imageName:"UserPhoto")
     }
     
     
@@ -298,17 +297,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //----------------------------------------------------------------------------------------
     // MARK: Helper functions
     
-    func saveImageToUserDefaults(userImage: UIImage){
-        let imageData = userImage.jpegData(compressionQuality: 1.0)
-        let b64 = imageData!.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
-        defaults.set(b64, forKey: "imageData")
+  
+    func saveImageToFileManager(userImage: UIImage){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
+        let data = userImage.pngData()
+        if fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil){
+            print("this worked!")
+        }
     }
-
-    func pullImageFromUserDefaults()->UIImage{
-        let imageData = defaults.string(forKey: "imageData")!
-        let decodedData = NSData(base64Encoded: imageData, options: .ignoreUnknownCharacters)
-        var decodedImage:UIImage = UIImage(data: decodedData! as Data)!
-        return decodedImage
+    
+    
+    
+    func pullImageFromFileManager(imageName: String){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
+        if fileManager.fileExists(atPath: imagePath){
+            profileImageView.image = UIImage(contentsOfFile: imagePath)
+        }else{
+            print("Panic! No image!")
+        }
     }
 }
 
