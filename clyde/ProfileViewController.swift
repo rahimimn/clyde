@@ -81,6 +81,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.loadView()
         self.loadDataFromStore()
         self.createMap()
+        self.userName.text = "\(defaults.string(forKey: "FirstName")!)  \(defaults.string(forKey: "LastName")!)"
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
@@ -252,7 +253,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 return
             }
 
-            let name = (record[0][0])
             let phone = record[0][1]
             let address = record[0][2]
             let genderId = record[0][6]
@@ -267,7 +267,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let schoolId = record[0][15]
 
             DispatchQueue.main.async {
-                self.userName.text = name
                 self.userName.textColor = UIColor.black
                 self.mobileText.text = phone
                 self.addressText.text = address

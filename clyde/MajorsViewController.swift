@@ -150,6 +150,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }){(response, URLResponse) in
                     //Creates a save alert to be presented whenever the user saves their information
                     os_log("\nSelected Interest successfully created")
+                    print(response)
                 }
             }
             
@@ -163,6 +164,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }){(response, URLResponse) in
                     //Creates a save alert to be presented whenever the user saves their information
                     os_log("\nSelected Interest successfully updated")
+                    print(response)
                 }
             } else{
                 print("This is a problem.")
