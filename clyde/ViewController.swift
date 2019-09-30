@@ -85,12 +85,15 @@ class HomeViewController: UIViewController{
     
     
     @IBAction func showFacebook(_ sender: UIButton) {
+        show("https://www.facebook.com/CofCAdmissions/")
     }
     
     @IBAction func showInstagram(_ sender: UIButton) {
+        show("https://www.instagram.com/cofcadmissions/")
     }
     
     @IBAction func showTwitter(_ sender: UIButton) {
+        show("https://twitter.com/cofcadmissions")
     }
     
     
