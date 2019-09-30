@@ -40,7 +40,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     private var honorsCollegeInterestText = ""
     private var mobileText = ""
     private var mobileOptInText = ""
-    // Boolean variable to determine whether a new picture was added.
+    // Boolean variable to determine whether a new picture was taken from the camera.
     var newPic: Bool?
     
     
@@ -131,13 +131,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         super.didReceiveMemoryWarning()
     }
     
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-    }
     override func loadView() {
         super.loadView()
-        self.pullImageFromFileManager(imageName: "UserPhoto")
+       
         //self.syncDown()
         self.loadFromStore()
         
@@ -145,20 +141,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pullImageFromFileManager(imageName: "UserPhoto")
+        
         let dataArray = loadSchoolsFromStore()
-        //        let profilePhotoString = defaults.string(forKey: "ProfilePhotoURL")
-        //        let url = URL(string: profilePhotoString!)!
-        //
-        //        let task = URLSession.shared.dataTask(with: url){ data,response, error in
-        //            guard let data = data, error == nil else {return}
-        //            DispatchQueue.main.async {
-        //                self.profileImageView.image = UIImage(data:data)
-        //
-        //            }
-        //        }
-        //        task.resume()        //  self.pushImage()
-        // Sets the image style
+
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
         self.profileImageView.layer.borderWidth = 3
@@ -240,7 +225,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 self.userId = id
             }
             
-        }}
+        }
+        
+        self.pullImageFromFileManager(imageName:"UserPhoto")    }
     
     
     //-------------------------------------------------------------------------
@@ -667,8 +654,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
             self.profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            profileImageView.image = profileImage
             self.saveImageToFileManager(userImage: profileImage)
+            profileImageView.image = profileImage
             if newPic == true{
                 UIImageWriteToSavedPhotosAlbum(profileImage, self, #selector(imageError), nil)
             }
@@ -756,52 +743,52 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     
-    func saveImage(){
-        let imageData = self.profileImage.pngData()!
-        let imageRequest = RestClient.shared.request(forUploadFile: imageData, name: "ProfileImage", description: "This is the user's profile picture.", mimeType: "image/png")
-        RestClient.shared.send(request: imageRequest, onFailure: { (error, URLResponse) in
-            SalesforceLogger.d(type(of:self), message:"Error invoking while sending image request: \(imageRequest), error: \(String(describing: error))")
-            //Creates a save alert to be presented whenever the user saves their information
-            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))" , preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(errorAlert, animated: true)
-        }){(response, URLResponse) in
-            //Creates a save alert to be presented whenever the user saves their information
-            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(saveAlert, animated: true)
-            os_log("\nSuccessful response received")
-            print(self.profileImage.jpegData(compressionQuality: 0.0)!)
-        }}
+//    func saveImage(){
+//        let imageData = self.profileImage.pngData()!
+//        let imageRequest = RestClient.shared.request(forUploadFile: imageData, name: "ProfileImage", description: "This is the user's profile picture.", mimeType: "image/png")
+//        RestClient.shared.send(request: imageRequest, onFailure: { (error, URLResponse) in
+//            SalesforceLogger.d(type(of:self), message:"Error invoking while sending image request: \(imageRequest), error: \(String(describing: error))")
+//            //Creates a save alert to be presented whenever the user saves their information
+//            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))" , preferredStyle: .alert)
+//            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self.present(errorAlert, animated: true)
+//        }){(response, URLResponse) in
+//            //Creates a save alert to be presented whenever the user saves their information
+//            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
+//            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self.present(saveAlert, animated: true)
+//            os_log("\nSuccessful response received")
+//            print(self.profileImage.jpegData(compressionQuality: 0.0)!)
+//        }}
+//
+//
+//
+//    func imageSaved(){
+//        let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
+//        let base64 = imageData.base64EncodedString(options: .endLineWithLineFeed)
+//
+//        let name = userName.text
+//        let data = [
+//            "Name": "user's pic",
+//            "Body": base64,
+//            "ParentId":"0035400000GV18bAAD"
+//        ]
+//
+//        RestClient.shared.create("Attachment", fields: data, onFailure: { (error, urlResponse) in
+//            print(error!)
+//
+//            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
+//            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self.present(errorAlert, animated: true)
+//
+//        }) { [weak self] (response, urlResponse) in
+//            print("yay!!")
+//            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
+//            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//            self?.present(saveAlert, animated: true)
+//        }
+//
     
-    
-    
-    func imageSaved(){
-        let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
-        let base64 = imageData.base64EncodedString(options: .endLineWithLineFeed)
-        
-        let name = userName.text
-        let data = [
-            "Name": "user's pic",
-            "Body": base64,
-            "ParentId":"0035400000GV18bAAD"
-        ]
-        
-        RestClient.shared.create("Attachment", fields: data, onFailure: { (error, urlResponse) in
-            print(error!)
-            
-            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self.present(errorAlert, animated: true)
-            
-        }) { [weak self] (response, urlResponse) in
-            print("yay!!")
-            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            self?.present(saveAlert, animated: true)
-        }
-        
-        
         //        let documentRequest = RestClient.shared.requestForUpsert(withObjectType: "Document", externalIdField: "Id", externalId: nil, fields:JSONData)
         //        RestClient.shared.send(request: documentRequest, onFailure: { (error, urlResponse) in
         //            print(error)
@@ -818,7 +805,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //            self?.present(saveAlert, animated: true)
         //        }
         
-    }
+   // }
     
     
     /// Error handler for the image picker

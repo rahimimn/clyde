@@ -108,7 +108,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 //        }
 //        task.resume()
         
-        let profileImage = UIImage(named: "clyde.jpg")!
+        
         self.pullImageFromFileManager(imageName:"UserPhoto")
     }
     
@@ -147,7 +147,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         
-        let cofcLocation = CLLocationCoordinate2D(latitude: 32.783830198, longitude: -79.936162922)
+        let cofcLocation = CLLocationCoordinate2D(latitude: 32.783025, longitude: -79.936747)
         let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
         
         let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )

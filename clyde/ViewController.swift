@@ -31,7 +31,7 @@ class HomeViewController: UIViewController{
         self.addLogoToNav()
         moreButton.layer.cornerRadius = 5
         moreButton.layer.borderWidth = 2
-        moreButton.layer.borderColor = #colorLiteral(red: 0.4470588235, green: 0.7803921569, blue: 0.9058823529, alpha: 1)
+        moreButton.layer.borderColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 1)
      
         
     }

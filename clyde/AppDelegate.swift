@@ -30,13 +30,15 @@ import SwiftyJSON
 
 class AppDelegate : UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    let RemoteAccessConsumerKey = "3MVG9Z8h6Bxz0zc4iGJzYY6LC4gqPHF0krJQiKeRJP54DQqEx_kts0KyCQR69wqGW98TphCgLSpo5hquAj4TR"
+    let OAuthRedirectURI = "cofcapppartial://oauth/done"
+    let scopes = ["web","api"];
     
     override
     init()
     {
         super.init()
         SmartSyncSDKManager.initializeSDK()
-        
         SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
         SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: { [weak self] in
@@ -74,7 +76,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
         AuthHelper.loginIfRequired { [weak self] in
             self?.setupRootViewController()
-        }
+                  }
         
         
         return true

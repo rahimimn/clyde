@@ -103,6 +103,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         self.loadDataFromStore()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
+        self.counselorImage.layer.cornerRadius = 5
     }
    
     
