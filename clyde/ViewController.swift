@@ -32,6 +32,9 @@ class HomeViewController: UIViewController{
         moreButton.layer.cornerRadius = 5
         moreButton.layer.borderWidth = 2
         moreButton.layer.borderColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 1)
+        if (defaults.object(forKey: "FirstLogin") == nil){
+            self.showInformationPopUp()
+        }
      
         
     }

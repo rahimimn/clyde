@@ -17,6 +17,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     //--------------------------------------------------------------------------
     // MARK: Variables
     
+    let defaults = UserDefaults.standard
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Majors")
     var majorCounter: Int = 0
@@ -48,6 +49,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         self.addLogoToNav()
         self.majorLabel.adjustsFontSizeToFitWidth = true
         self.majorDescription.adjustsFontForContentSizeCategory = true
+        contactId = defaults.string(forKey: "ContactId")!
     }
     
     override func loadView() {
@@ -72,7 +74,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }
-            if majorCounter == record.count{
+                        if majorCounter == record.count{
                 majorCounter = 0
             }
             let name = record[self.majorCounter][0]
@@ -127,7 +129,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         createRecord["Student__c"] = contactId
         updateRecord["Preference__c"] = preference
         
-       
         
         let checkForExistingSelectedInterestRequest = RestClient.shared.request(forQuery: "SELECT Preference__c, Id FROM Selected_Interest__c WHERE Student__c = '\(contactId)' AND Possible_Interest__c = '\(interestId)'")
         RestClient.shared.send(request: checkForExistingSelectedInterestRequest, onFailure: {(error, urlResponse) in
@@ -150,7 +151,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }){(response, URLResponse) in
                     //Creates a save alert to be presented whenever the user saves their information
                     os_log("\nSelected Interest successfully created")
-                    print(response)
                 }
             }
             
@@ -164,7 +164,6 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }){(response, URLResponse) in
                     //Creates a save alert to be presented whenever the user saves their information
                     os_log("\nSelected Interest successfully updated")
-                    print(response)
                 }
             } else{
                 print("This is a problem.")

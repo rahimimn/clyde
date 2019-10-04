@@ -8,42 +8,36 @@
 
 import UIKit
 import SmartSync
+import SearchTextField
 
 class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate {
     
     //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "infoPopUp")
-    
     var counter = 0
+    let defaults = UserDefaults.standard
     var questions = ["Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
-    var salesforceTitles = ["MobilePhone","Text_Message_Consent__c","TargetX_SRMb__Anticipated_Major__c","MailingStreet","MailingCity", "MailingState","MailingPostalCode","TargetX_SRMb__Gender__c","Honors_College_Interest_Check_c","Status_Category__c"]
+    
   
+    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],[],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
     var answers = [] as Array
-    var genderOptions = ["Female","Male"]
-    var studentTypeOptions = ["Freshman","Transfer"]
-    var yesNoOptions = ["Yes","No"]
+
+
     
-    let genderIdentityPicker = UIPickerView()
-    let studentTypePicker = UIPickerView()
-    let yesNoPicker = UIPickerView()
-    
-    @objc func cancelPicker(){
-        self.view.endEditing(true)
-    }
-    
-    @IBOutlet weak var answer: UITextField!
+    @IBOutlet weak var answer: SearchTextField!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var question: UITextView!
     @IBOutlet weak var header: UILabel!
     
     
     @IBAction func nextQuestion(_ sender: UIButton) {
-        
+        answer.startVisibleWithoutInteraction = false
         answer.borderStyle = UITextField.BorderStyle.roundedRect
         self.answers.append(answer.text!)
         print(answers)
         question.text = questions[counter]
+        answer.filterStrings(possibleAnswers[counter])
         header.text = "Clyde wants to know..."
         counter += 1
         if (counter + 1) == questions.count{
@@ -52,27 +46,69 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         if (counter == questions.count){
             self.dismiss(animated: true, completion: nil)
             insertIntoSoup()
-            syncUp()
+            updateToSalesforce()
+            print(answers)
+            defaults.set(false, forKey: "FirstLogin")
         }
-        
         answer.text = ""
     }
     
-    
-    
+    private func updateToSalesforce(){
+        var record = [String: Any]()
+        record["MobilePhone"] = answers[1]
+        record["Text_Message_Consent__c"] = answers[2]
+        record["TargetX_SRMb__Anticipated_Major__c"] = answers[3]
+        record["MailingStreet"] = answers[4]
+        record["MailingCity"] = answers[5]
+        record["MailingPostalCode"] = answers[6]
+        record["MailingState"] = answers[7]
+        record["TargetX_SRMb__Gender__c"] = answers[8]
+        record["Honors_College_Interest_Check__c"] = answers[9]
+        record["Status_Category__c"] = answers[10]
+        
+        if answers[2] as! String == "Yes"{
+            record["Text_Message_Consent__c"] = "true"
+        }else{
+            record["Text_Message_Consent__c"] = "false"
+            
+        }
+        if answers[9] as! String == "Yes"{
+            record["Honors_College_Interest_Check__c"] = "false"
+        }else{
+            record["Honors_College_Interest_Check__c"] = "true"
+            
+        }
+        
+        print(record)
+        
+        
+        let contactAccountID = defaults.string(forKey: "ContactId")
+        //Creates the update request.
+        let updateRequest = RestClient.shared.requestForUpdate(withObjectType: "Contact", objectId: contactAccountID!, fields: record)
+        
+        //Sends the update request
+        RestClient.shared.send(request: updateRequest, onFailure: { (error, URLResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking while sending update request: \(updateRequest), error: \(String(describing: error))")
+            //Creates a save alert to be presented whenever the user saves their information
+            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(errorAlert, animated: true)
+        }){(response, URLResponse) in
+            //Creates a save alert to be presented whenever the user saves their information
+            let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
+            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(saveAlert, animated: true)
+            os_log("\nSuccessful response received")}
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         answer.delegate = self
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelPicker));
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
         answer.delegate = self
         answer.inputAccessoryView = toolbar
-        genderIdentityPicker.delegate = self
-        yesNoPicker.delegate = self
-        studentTypePicker.delegate = self
         
     }
     
@@ -140,35 +176,4 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
     }
     
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if (pickerView == genderIdentityPicker){
-            return genderOptions.count
-        }else if pickerView == yesNoPicker{
-            return yesNoOptions.count
-        }
-        else{
-            return studentTypeOptions.count
-        }}
-    
-    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if (pickerView == genderIdentityPicker){
-            return genderOptions[row]
-        }else if pickerView == yesNoPicker{
-            return yesNoOptions[row]
-        }
-        else{
-            return studentTypeOptions[row]
-        }
-    }
-    
-    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == self.genderIdentityPicker{
-            self.answer.text = genderOptions[row]
-        }else if pickerView == self.yesNoPicker{
-            self.answer.text = yesNoOptions[row]
-        }else{
-            self.answer.text = studentTypeOptions[row]
-        }
-    }
-
 }
