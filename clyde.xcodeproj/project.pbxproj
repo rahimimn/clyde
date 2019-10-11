@@ -83,6 +83,16 @@
 		B2C1A03422C28D9A00C5634C /* cofc-campusE.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */; };
 		B2C1A03622C29B9B00C5634C /* Clyde-Cistern-profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */; };
 		B2C1A03822C2A00700C5634C /* cisternyard_splash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */; };
+		B2CF66972350EB6F00B7273E /* Rita.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66952350EB6D00B7273E /* Rita.jpg */; };
+		B2CF66982350EB6F00B7273E /* road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66962350EB6E00B7273E /* road.jpg */; };
+		B2CF669E2350EECA00B7273E /* 108.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66992350EEC600B7273E /* 108.jpg */; };
+		B2CF669F2350EECA00B7273E /* 31.JPG in Resources */ = {isa = PBXBuildFile; fileRef = B2CF669A2350EEC700B7273E /* 31.JPG */; };
+		B2CF66A02350EECA00B7273E /* 358.JPG in Resources */ = {isa = PBXBuildFile; fileRef = B2CF669B2350EEC800B7273E /* 358.JPG */; };
+		B2CF66A12350EECA00B7273E /* 464.JPG in Resources */ = {isa = PBXBuildFile; fileRef = B2CF669C2350EEC900B7273E /* 464.JPG */; };
+		B2CF66A22350EECA00B7273E /* 27.JPG in Resources */ = {isa = PBXBuildFile; fileRef = B2CF669D2350EEC900B7273E /* 27.JPG */; };
+		B2CF66A62350F01400B7273E /* pride.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A32350F01100B7273E /* pride.jpg */; };
+		B2CF66A72350F01400B7273E /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A42350F01200B7273E /* puppy.jpg */; };
+		B2CF66A82350F01400B7273E /* group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A52350F01300B7273E /* group.jpg */; };
 		B2D08DE323350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */; };
 		B2D08DE52335126700A8A10B /* InteractiveMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */; };
 		B2D8013622D78D0D0050E376 /* F.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013522D78D0D0050E376 /* F.png */; };
@@ -184,6 +194,16 @@
 		B2C1A03322C28D9900C5634C /* cofc-campusE.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "cofc-campusE.jpg"; path = "../../Desktop/College of Charleston/Images/cofc-campusE.jpg"; sourceTree = "<group>"; };
 		B2C1A03522C29B9B00C5634C /* Clyde-Cistern-profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Clyde-Cistern-profile.jpg"; sourceTree = "<group>"; };
 		B2C1A03722C2A00700C5634C /* cisternyard_splash.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cisternyard_splash.jpg; sourceTree = "<group>"; };
+		B2CF66952350EB6D00B7273E /* Rita.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Rita.jpg; sourceTree = "<group>"; };
+		B2CF66962350EB6E00B7273E /* road.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = road.jpg; sourceTree = "<group>"; };
+		B2CF66992350EEC600B7273E /* 108.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 108.jpg; sourceTree = "<group>"; };
+		B2CF669A2350EEC700B7273E /* 31.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 31.JPG; sourceTree = "<group>"; };
+		B2CF669B2350EEC800B7273E /* 358.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 358.JPG; sourceTree = "<group>"; };
+		B2CF669C2350EEC900B7273E /* 464.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 464.JPG; sourceTree = "<group>"; };
+		B2CF669D2350EEC900B7273E /* 27.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 27.JPG; sourceTree = "<group>"; };
+		B2CF66A32350F01100B7273E /* pride.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pride.jpg; sourceTree = "<group>"; };
+		B2CF66A42350F01200B7273E /* puppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = puppy.jpg; sourceTree = "<group>"; };
+		B2CF66A52350F01300B7273E /* group.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = group.jpg; sourceTree = "<group>"; };
 		B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Randolph_hall_college_of_charleston.jpeg; sourceTree = "<group>"; };
 		B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveMapViewController.swift; sourceTree = "<group>"; };
 		B2D8013522D78D0D0050E376 /* F.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F.png; sourceTree = "<group>"; };
@@ -217,6 +237,9 @@
 		4FD6C46B1B754AF1002F9F90 = {
 			isa = PBXGroup;
 			children = (
+				B2CF66A52350F01300B7273E /* group.jpg */,
+				B2CF66A32350F01100B7273E /* pride.jpg */,
+				B2CF66A42350F01200B7273E /* puppy.jpg */,
 				B28847532329766100811638 /* userstore.json */,
 				B28847522329766100811638 /* usersyncs.json */,
 				4FD6C4761B754AF1002F9F90 /* clyde */,
@@ -415,6 +438,13 @@
 			isa = PBXGroup;
 			children = (
 				B23C492422D3D9F800A88C48 /* cistern.jpg */,
+				B2CF66952350EB6D00B7273E /* Rita.jpg */,
+				B2CF66962350EB6E00B7273E /* road.jpg */,
+				B2CF669D2350EEC900B7273E /* 27.JPG */,
+				B2CF669A2350EEC700B7273E /* 31.JPG */,
+				B2CF66992350EEC600B7273E /* 108.jpg */,
+				B2CF669B2350EEC800B7273E /* 358.JPG */,
+				B2CF669C2350EEC900B7273E /* 464.JPG */,
 				B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */,
 				B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */,
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
@@ -572,6 +602,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2CF66A62350F01400B7273E /* pride.jpg in Resources */,
+				B2CF66A72350F01400B7273E /* puppy.jpg in Resources */,
+				B2CF66A82350F01400B7273E /* group.jpg in Resources */,
+				B2CF66972350EB6F00B7273E /* Rita.jpg in Resources */,
+				B2CF66982350EB6F00B7273E /* road.jpg in Resources */,
+				B2CF66A12350EECA00B7273E /* 464.JPG in Resources */,
 				B2F57925233905C900A361B4 /* Reachability.m in Resources */,
 				B2F57926233905C900A361B4 /* Reachability.h in Resources */,
 				B2A4E8AD2350D7710097038A /* icons8-Zoom In.png in Resources */,
@@ -591,6 +627,7 @@
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
 				B2487EF3233E687D00AE5F3B /* facebook.jpeg in Resources */,
 				B269248D2301E51400C480EF /* sideThumb.png in Resources */,
+				B2CF66A02350EECA00B7273E /* 358.JPG in Resources */,
 				B2211D3F22F868D700D127DB /* clyde.jpg in Resources */,
 				B2D8013F22D8FC430050E376 /* instagram.png in Resources */,
 				B2C1A01022C15A7A00C5634C /* acaslonpro-regular.otf in Resources */,
@@ -599,6 +636,8 @@
 				B227D08422BBD87600AA0634 /* white-logo.png in Resources */,
 				B2487EF2233E687D00AE5F3B /* instagram.jpeg in Resources */,
 				B77BD8A321125B510036B284 /* bootconfig.plist in Resources */,
+				B2CF66A22350EECA00B7273E /* 27.JPG in Resources */,
+				B2CF669E2350EECA00B7273E /* 108.jpg in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
 				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
@@ -606,6 +645,7 @@
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,
 				B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */,
 				B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */,
+				B2CF669F2350EECA00B7273E /* 31.JPG in Resources */,
 				B7168FBC1FACC6F900A48DB5 /* LaunchScreen.storyboard in Resources */,
 				B2D08DE323350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg in Resources */,
 				B2C1A01422C15E8300C5634C /* Clyde-Cistern.jpg in Resources */,
