@@ -35,7 +35,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var qrView: UIImageView!
     
-   
     
     //---------------------------------------------------------------------
     // MARK: View Methods
@@ -56,8 +55,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-        
-      
         
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]

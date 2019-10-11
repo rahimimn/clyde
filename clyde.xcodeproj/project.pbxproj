@@ -57,6 +57,8 @@
 		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
 		B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */; };
 		B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E066B22C3AC270035A40F /* EventsTableViewController.swift */; };
+		B2A4E8AD2350D7710097038A /* icons8-Zoom In.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4E8AC2350D7700097038A /* icons8-Zoom In.png */; };
+		B2A4E8B22350E05A0097038A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A4E8B12350E05A0097038A /* GalleryViewController.swift */; };
 		B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */; };
 		B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */; };
 		B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */; };
@@ -161,6 +163,8 @@
 		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
 		B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2016-Orientation-750x499.jpg"; sourceTree = "<group>"; };
 		B28E066B22C3AC270035A40F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
+		B2A4E8AC2350D7700097038A /* icons8-Zoom In.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Zoom In.png"; sourceTree = "<group>"; };
+		B2A4E8B12350E05A0097038A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
 		B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Clyde-Campus-Tour.jpg"; path = "../../Desktop/College of Charleston/Images/Clyde-Campus-Tour.jpg"; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				B2D8013922D7A8010050E376 /* Games */,
 				B227D0B622BBEC0600AA0634 /* Questions */,
 				B2760A0222CA947100A122F7 /* Resources */,
+				B2A4E8B02350E03E0097038A /* Gallery */,
 				B227D09322BBD8F300AA0634 /* Menu Bar */,
 				B227D07822BBD84C00AA0634 /* Assets */,
 				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
@@ -380,6 +385,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		B2A4E8B02350E03E0097038A /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				B2A4E8B12350E05A0097038A /* GalleryViewController.swift */,
+			);
+			name = Gallery;
+			sourceTree = "<group>";
+		};
 		B2C19FFB22BD40DF00C5634C /* Check-In */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +460,7 @@
 				B2C19FF322BC17E300C5634C /* images.png */,
 				B2D8013E22D8FC430050E376 /* instagram.png */,
 				B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */,
+				B2A4E8AC2350D7700097038A /* icons8-Zoom In.png */,
 				B28E066522C3A1EF0035A40F /* icons8-close-window-100.png */,
 				B28E066722C3A2670035A40F /* icons8-help-100.png */,
 				B2C19FF522BD338F00C5634C /* icons8-Details Popup.png */,
@@ -560,6 +574,7 @@
 			files = (
 				B2F57925233905C900A361B4 /* Reachability.m in Resources */,
 				B2F57926233905C900A361B4 /* Reachability.h in Resources */,
+				B2A4E8AD2350D7710097038A /* icons8-Zoom In.png in Resources */,
 				B28847542329766200811638 /* usersyncs.json in Resources */,
 				B28847552329766200811638 /* userstore.json in Resources */,
 				B2C1A01222C15A7A00C5634C /* acaslonpro-semibolditalic.otf in Resources */,
@@ -705,6 +720,7 @@
 				B2D08DE52335126700A8A10B /* InteractiveMapViewController.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				B227D0A822BBD94500AA0634 /* SWRevealViewController.m in Sources */,
+				B2A4E8B22350E05A0097038A /* GalleryViewController.swift in Sources */,
 				B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */,
 				B2679AB922D63CCC003CCA27 /* CheckInTableViewController.swift in Sources */,
 				B2F5792E23390F2100A361B4 /* CollegeLocations.swift in Sources */,
