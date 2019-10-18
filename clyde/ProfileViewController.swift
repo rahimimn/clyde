@@ -214,7 +214,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func getSchoolName(id: String) -> String{
         var schoolName = ""
         let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 10000)
-        
+        print(id)
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else {
@@ -252,7 +252,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
                 return
             }
-
+            print(record)
             let phone = record[0][1]
             let address = record[0][2]
             let genderId = record[0][6]

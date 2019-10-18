@@ -408,67 +408,83 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Loads data from store and presents on edit profile
     func loadFromStore(){
+        print("here i am")
         let contactId = defaults.string(forKey: "ContactId")
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity},{Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:AccountId}, {Contact:Honors_College_Interest_Check__c},{Contact:Status_Category__c},{Contact:Id} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'", pageSize: 1),
-            let smartStore = self.store,
-            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
-            let name = (record[0][0])
-            let phone = record[0][1]
-            let address = record[0][2]
-            let city = record[0][3]
-            let state = record[0][4]
-            let zip = record[0][5]
-            let genderId = record[0][6]
-            let email = record[0][7]
-            let birthday = record[0][8]
-            let birthsex = record[0][9]
-            let studentType = record[0][10]
-            let graduationYear = record[0][11]
-            let ethnicity = record[0][12]
-            let mobileOpt = record[0][13]
-            let highSchoolId = record[0][14]
-            let honors = record[0][15]
-            let status = record[0][16]
-            let id = record[0][17]
-            print(record)
-            DispatchQueue.main.async {
-                self.userName.text = name
-                self.userName.textColor = UIColor.black
-                self.mobileTextField.text = phone
-                self.addressTextField.text = address
-                self.cityTextField.text = city
-                self.stateTextField.text = state
-                self.zipTextField.text = zip
-                self.contactId = id
-                self.highSchoolTextField.text = self.getSchoolName(id: highSchoolId)
-                self.emailTextField.text = email
-                self.birthDateTextField.text = birthday
-                self.genderIdentityTextField.text = genderId
-                self.genderTextField.text = birthsex
-                self.studentTypeTextField.text = studentType
-                self.graduationYearTextField.text = graduationYear
-                self.ethnicOriginTextField.text = ethnicity
-                if mobileOpt == "0"{ self.mobileText = "Opt-out"
-                    self.mobileOptInText = "0"
-                    self.mobileSwitch.setOn(false, animated: true)
-                }
-                else{ self.mobileText = "Opt-in"
-                    self.mobileSwitch.setOn(true, animated: true)
-                    self.mobileOptInText = "1"
-                }
-                if honors == "0"{
-                    self.honorsCollegeInterestText = "0"
-                    self.honorsSwitch.setOn(false, animated: true)
-                }else{ self.honorsCollegeInterestText = "1"
-                    self.honorsSwitch.setOn(true, animated: true)
-                }
-                if status == "Prospect" || status == "Suspect"{
-                    self.studentStatus = true
-                }else{
-                    self.studentStatus = false
-                }
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:Name},{Contact:MobilePhone},{Contact:MailingStreet},{Contact:MailingCity},{Contact:MailingState},{Contact:MailingPostalCode},{Contact:Gender_Identity__c},{Contact:Email},{Contact:Birthdate},{Contact:TargetX_SRMb__Gender__c},{Contact:TargetX_SRMb__Student_Type__c},{Contact:TargetX_SRMb__Graduation_Year__c},{Contact:Ethnicity_Non_Applicants__c},{Contact:Text_Message_Consent__c}, {Contact:AccountId}, {Contact:Honors_College_Interest_Check__c},{Contact:Status_Category__c},{Contact:Id} from {Contact} where {Contact:Id} == '\(String(describing: contactId!))'", pageSize: 1)
+            let smartStore = self.store
+        do {
+            let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            print(records!)
+            guard let record = records as? [[String]] else {
+                os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                
+                return
             }
-        }    }
+                let name = (record[0][0])
+                let phone = record[0][1]
+                let address = record[0][2]
+                let city = record[0][3]
+                let state = record[0][4]
+                let zip = record[0][5]
+                let genderId = record[0][6]
+                let email = record[0][7]
+                let birthday = record[0][8]
+                let birthsex = record[0][9]
+                let studentType = record[0][10]
+                let graduationYear = record[0][11]
+                let ethnicity = record[0][12]
+                let mobileOpt = record[0][13]
+                let highSchoolId = record[0][14]
+                let honors = record[0][15]
+                let status = record[0][16]
+                let id = record[0][17]
+                print("--------------------")
+                print(record)
+                DispatchQueue.main.async {
+                    self.userName.text = name
+                    self.userName.textColor = UIColor.black
+                    self.mobileTextField.text = phone
+                    self.addressTextField.text = address
+                    self.cityTextField.text = city
+                    self.stateTextField.text = state
+                    self.zipTextField.text = zip
+                    self.contactId = id
+                    self.highSchoolTextField.text = self.getSchoolName(id: highSchoolId)
+                    self.emailTextField.text = email
+                    self.birthDateTextField.text = birthday
+                    self.genderIdentityTextField.text = genderId
+                    self.genderTextField.text = birthsex
+                    self.studentTypeTextField.text = studentType
+                    self.graduationYearTextField.text = graduationYear
+                    self.ethnicOriginTextField.text = ethnicity
+                    if mobileOpt == "0"{ self.mobileText = "Opt-out"
+                        self.mobileOptInText = "0"
+                        self.mobileSwitch.setOn(false, animated: true)
+                    }
+                    else{ self.mobileText = "Opt-in"
+                        self.mobileSwitch.setOn(true, animated: true)
+                        self.mobileOptInText = "1"
+                    }
+                    if honors == "0"{
+                        self.honorsCollegeInterestText = "0"
+                        self.honorsSwitch.setOn(false, animated: true)
+                    }else{ self.honorsCollegeInterestText = "1"
+                        self.honorsSwitch.setOn(true, animated: true)
+                    }
+                    if status == "Prospect" || status == "Suspect"{
+                        self.studentStatus = true
+                    }else{
+                        self.studentStatus = false
+                    }
+            }
+        }
+        catch let e as Error? {
+            print(e as Any)
+            os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
+        }
+        print("3 am")
+        
+    }
     
     
     

@@ -93,6 +93,9 @@
 		B2CF66A62350F01400B7273E /* pride.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A32350F01100B7273E /* pride.jpg */; };
 		B2CF66A72350F01400B7273E /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A42350F01200B7273E /* puppy.jpg */; };
 		B2CF66A82350F01400B7273E /* group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A52350F01300B7273E /* group.jpg */; };
+		B2CF66AA2357787700B7273E /* pres.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A92357787700B7273E /* pres.jpg */; };
+		B2CF66AC2357789D00B7273E /* pridee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66AB2357789C00B7273E /* pridee.jpg */; };
+		B2CF66AE2357796F00B7273E /* duo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66AD2357796E00B7273E /* duo.jpg */; };
 		B2D08DE323350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */; };
 		B2D08DE52335126700A8A10B /* InteractiveMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */; };
 		B2D8013622D78D0D0050E376 /* F.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013522D78D0D0050E376 /* F.png */; };
@@ -204,6 +207,9 @@
 		B2CF66A32350F01100B7273E /* pride.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pride.jpg; sourceTree = "<group>"; };
 		B2CF66A42350F01200B7273E /* puppy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = puppy.jpg; sourceTree = "<group>"; };
 		B2CF66A52350F01300B7273E /* group.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = group.jpg; sourceTree = "<group>"; };
+		B2CF66A92357787700B7273E /* pres.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pres.jpg; sourceTree = "<group>"; };
+		B2CF66AB2357789C00B7273E /* pridee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pridee.jpg; sourceTree = "<group>"; };
+		B2CF66AD2357796E00B7273E /* duo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = duo.jpg; sourceTree = "<group>"; };
 		B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Randolph_hall_college_of_charleston.jpeg; sourceTree = "<group>"; };
 		B2D08DE42335126700A8A10B /* InteractiveMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveMapViewController.swift; sourceTree = "<group>"; };
 		B2D8013522D78D0D0050E376 /* F.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F.png; sourceTree = "<group>"; };
@@ -237,6 +243,9 @@
 		4FD6C46B1B754AF1002F9F90 = {
 			isa = PBXGroup;
 			children = (
+				B2CF66AD2357796E00B7273E /* duo.jpg */,
+				B2CF66AB2357789C00B7273E /* pridee.jpg */,
+				B2CF66A92357787700B7273E /* pres.jpg */,
 				B2CF66A52350F01300B7273E /* group.jpg */,
 				B2CF66A32350F01100B7273E /* pride.jpg */,
 				B2CF66A42350F01200B7273E /* puppy.jpg */,
@@ -602,6 +611,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2CF66AE2357796F00B7273E /* duo.jpg in Resources */,
+				B2CF66AC2357789D00B7273E /* pridee.jpg in Resources */,
+				B2CF66AA2357787700B7273E /* pres.jpg in Resources */,
 				B2CF66A62350F01400B7273E /* pride.jpg in Resources */,
 				B2CF66A72350F01400B7273E /* puppy.jpg in Resources */,
 				B2CF66A82350F01400B7273E /* group.jpg in Resources */,
