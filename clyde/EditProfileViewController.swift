@@ -111,7 +111,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if self.studentStatus == true{
             self.insertIntoSoup()
-            //self.syncUp()
+            self.syncUp()
             self.updateSalesforceData()
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{

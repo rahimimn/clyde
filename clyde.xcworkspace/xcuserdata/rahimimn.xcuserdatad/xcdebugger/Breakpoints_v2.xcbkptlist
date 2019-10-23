@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/ProfileViewController.swift"
-            timestampString = "592940012.915619"
+            timestampString = "593367349.8429919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5"
@@ -113,7 +113,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/EditProfileViewController.swift"
-            timestampString = "592940012.9217319"
+            timestampString = "593534637.7402149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
@@ -129,7 +129,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/EditProfileViewController.swift"
-            timestampString = "592940012.921896"
+            timestampString = "593534637.740356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "410"
@@ -145,12 +145,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/EditProfileViewController.swift"
-            timestampString = "592940012.921989"
+            timestampString = "593534637.740455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "413"
             endingLineNumber = "413"
             landmarkName = "loadFromStore()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "clyde/CounselorViewController.swift"
+            timestampString = "593534637.740532"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "loadDataFromStore()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventsTableViewController: UITableViewController {
+class EventsTableViewController: UIViewController {
 
     
     // TO-DO: pull the list of available events from salesforce, present the information within the tableView.
@@ -32,19 +32,5 @@ class EventsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    
-    //Returns the number of sections within a table.
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
 
-    
-    //Returns the number of rows in the section
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 4
-    }
-
-   
 }

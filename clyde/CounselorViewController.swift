@@ -167,7 +167,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             let counselorPhone = record[0][1]
             let counselorAbout = record[0][2]
             let counselorEmail = record[0][3]
-            let counserlorImage = record[0][4]
+            let counserlorImage = ""
             DispatchQueue.main.async {
                 self.aboutMeText.text = counselorAbout
                 self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
