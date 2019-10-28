@@ -11,12 +11,12 @@ import MapKit
 
 class CollegeLocation: NSObject, MKAnnotation{
     var coordinate: CLLocationCoordinate2D
-    var building: String?
+    var title: String?
     var buildingDescription: String?
     
-    init(coordinate: CLLocationCoordinate2D, building: String?, buildingDescription: String?){
+    init(coordinate: CLLocationCoordinate2D, title: String?, buildingDescription: String?){
         self.coordinate = coordinate
-        self.building = building
+        self.title = title
         self.buildingDescription = buildingDescription
     }
 }

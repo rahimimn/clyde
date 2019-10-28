@@ -90,6 +90,7 @@
 		B2CF66A62350F01400B7273E /* pride.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A32350F01100B7273E /* pride.jpg */; };
 		B2CF66A72350F01400B7273E /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A42350F01200B7273E /* puppy.jpg */; };
 		B2CF66A82350F01400B7273E /* group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A52350F01300B7273E /* group.jpg */; };
+		B2D082F02367623100F9E682 /* emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D082EF2367623100F9E682 /* emoji.png */; };
 		B2D8013622D78D0D0050E376 /* F.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013522D78D0D0050E376 /* F.png */; };
 		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
@@ -206,6 +207,7 @@
 		B2CF66A92357787700B7273E /* pres.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pres.jpg; path = ../pres.jpg; sourceTree = "<group>"; };
 		B2CF66AB2357789C00B7273E /* pridee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pridee.jpg; path = ../pridee.jpg; sourceTree = "<group>"; };
 		B2CF66AD2357796E00B7273E /* duo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = duo.jpg; path = ../duo.jpg; sourceTree = "<group>"; };
+		B2D082EF2367623100F9E682 /* emoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji.png; path = "../../Desktop/College of Charleston/Images/emoji.png"; sourceTree = "<group>"; };
 		B2D08DE223350A1300A8A10B /* Randolph_hall_college_of_charleston.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Randolph_hall_college_of_charleston.jpeg; sourceTree = "<group>"; };
 		B2D8013522D78D0D0050E376 /* F.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F.png; sourceTree = "<group>"; };
 		B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Installing Updates.png"; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				B2CF66992350EEC600B7273E /* 108.jpg */,
 				B2CF669B2350EEC800B7273E /* 358.JPG */,
 				B2CF669C2350EEC900B7273E /* 464.JPG */,
+				B2D082EF2367623100F9E682 /* emoji.png */,
 				B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */,
 				B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */,
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
@@ -674,6 +677,7 @@
 				B227D08B22BBD87600AA0634 /* icons8-Vertical Settings Mixer.png in Resources */,
 				B28E066422C3A0FE0035A40F /* icons8-tick-box-100.png in Resources */,
 				B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */,
+				B2D082F02367623100F9E682 /* emoji.png in Resources */,
 				B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */,
 				B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */,
 				B227D07522BBD80900AA0634 /* Main.storyboard in Resources */,
