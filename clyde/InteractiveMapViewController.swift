@@ -48,7 +48,7 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
             mapView.setRegion(viewRegion, animated: false)
         }
         
-        
+        addLocation(building: "Maybank Hall", latitude: 32.784818, longitude: -79.937572, description: "MAyb")
         
         
     
@@ -60,7 +60,7 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Map Functions
     func addLocation(building: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, description: String) {
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        let pin = CollegeLocation(coordinate: coordinates)
+        let pin = CollegeLocation(coordinate: coordinates, title: building, buildingDescription: description)
         pin.title = building
         self.mapView.addAnnotation(pin)
     }
@@ -78,9 +78,15 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
        
         let collegeAnnotation = annotation as! CollegeLocation
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView.image = UIImage(named: "emoji.png")
-            let annotationDescription = UITextView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-            annotationDescription.text = collegeAnnotation.buildingDescription
+        annotationView.image = UIImage(named: "emoji.png")
+        let buildingView = UIView()
+        let buildingLabel = UILabel()
+        buildingLabel.text = collegeAnnotation.title
+        buildingView.addSubview(buildingLabel)
+        let buildingDescription = UITextView()
+        buildingDescription.text = collegeAnnotation.buildingDescription
+        buildingView.addSubview(buildingDescription)
+        annotationView.detailCalloutAccessoryView = buildingView
             annotationView.canShowCallout = true
             annotationView.calloutOffset = CGPoint(x: -8,y: 0)
             annotationView.autoresizesSubviews = true
