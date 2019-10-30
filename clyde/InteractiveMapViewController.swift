@@ -44,13 +44,13 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
         
         //Zoom to user location
         if let userLocation = locationManager.location?.coordinate {
-            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 0, longitudinalMeters: 0)
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 10, longitudinalMeters: 10)
             mapView.setRegion(viewRegion, animated: false)
         }
         
-        addLocation(building: "Maybank Hall", latitude: 32.784818, longitude: -79.937572, description: "MAyb")
+
         
-        
+        self.placeAll()
     
     }
     
@@ -79,22 +79,30 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
         let collegeAnnotation = annotation as! CollegeLocation
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
         annotationView.image = UIImage(named: "emoji.png")
-        let buildingView = UIView()
-        let buildingLabel = UILabel()
-        buildingLabel.text = collegeAnnotation.title
-        buildingView.addSubview(buildingLabel)
-        let buildingDescription = UITextView()
-        buildingDescription.text = collegeAnnotation.buildingDescription
-        buildingView.addSubview(buildingDescription)
-        annotationView.detailCalloutAccessoryView = buildingView
-            annotationView.canShowCallout = true
-            annotationView.calloutOffset = CGPoint(x: -8,y: 0)
-            annotationView.autoresizesSubviews = true
-            annotationView.annotation = annotation
-            
-            
+        
+        
+        
+        
+        let descriptionLabel = UILabel()
+        descriptionLabel.adjustsFontForContentSizeCategory = true
+        descriptionLabel.numberOfLines = 20
+        descriptionLabel.text = collegeAnnotation.buildingDescription
+       
+        annotationView!.detailCalloutAccessoryView = descriptionLabel
+        
+        
+        annotationView.canShowCallout = true
+        annotationView.calloutOffset = CGPoint(x: -8,y: 0)
+        annotationView.autoresizesSubviews = true
+        annotationView.annotation = annotation
+       
         
         return annotationView
     }
     
+    
+    func placeAll(){
+        addLocation(building: "Maybank Hall", latitude: 32.784818, longitude: -79.937572, description: "Maybank Hall was built in 1974, and was used as the main classroom facility on the College campus. Now, this building is used as classrooms, classroom auditoriums, and faculty offices.")
+        addLocation(building: "Randolph Hall", latitude: 32.784023, longitude: -79.937419, description: "Built in 1828, it is one of the oldest college building still in use in the United States. Randolph Hall served as the main academic building for many years, but now it is primarily used for administrative offices.")
+    }
 }
