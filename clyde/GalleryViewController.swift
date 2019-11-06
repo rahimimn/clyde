@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SmartSync
+import SwiftyJSON
 
 class GalleryViewController: UIViewController {
 
@@ -17,17 +19,22 @@ class GalleryViewController: UIViewController {
         self.menuBar(menuBarItem: menuBarButton)
         // Adds the cofc logo to the nav
         self.addLogoToNav()        // Do any additional setup after loading the view.
+        dostuff()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    func dostuff(){
+        let pushRequest = RestClient.shared.request(for)
+        
+        
+        (forOwnedFilesList: "0035400000GV18bAAD", page: 10)
+        print(pushRequest)
+            
+                
+            }
+            
+        
+    
 
 }
+
