@@ -60,8 +60,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     private var locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
     // Private variables for id
-     private var userId = ""
-      var contactId = ""
+    private var userId = ""
+    var contactId = ""
     
     //--------------------------------------------------------------------
     // MARK: View functions

@@ -13,18 +13,34 @@ import SalesforceSDKCore
 import SmartSync
 import SmartStore
 
-
+/// Class for the Home view
 class HomeViewController: UIViewController{
-    let defaults = UserDefaults.standard
     
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    //----------------------------------------------------------------------------
+    // MARK: Outlets
     
-    var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
-
+    //Outlet for the menu button.
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
+    
+    
+    //----------------------------------------------------------------------------
+    // MARK: Variables
+    
+    //Creates the store variable
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
+    //Creates the store variable used for firstLogin
+    var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
+    
+    let defaults = UserDefaults.standard
+    
     var userId = ""
+    
+    //----------------------------------------------------------------------------
+    // MARK: View Functions
+    
+    //Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarItem)
@@ -35,34 +51,65 @@ class HomeViewController: UIViewController{
         if (defaults.object(forKey: "FirstLogin") == nil){
             self.showInformationPopUp()
         }
-     
-        
     }
     
-    func showInformationPopUp(){
-        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
-        popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        self.present(popUp, animated: true)    }
-
-
+    // Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
-       // self.loadFromStore()
+        // self.loadFromStore()
         //self.loadDataIntoStore()
         self.loadData()
         self.loadSchools()
-//        self.pullImage()
-
     }
     
-    
+    // Notifies that the view controller is about to be added to memory
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //self.loadView()
-      // self.loadDataIntoStore()
+        // self.loadDataIntoStore()
         
     }
-    /// Will present the article webpage when tapped
+    
+    //-----------------------------------------------------------------------
+    // MARK: Helper functions
+
+    
+    /// Shows the information pop up when called
+    func showInformationPopUp(){
+        let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
+        popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        self.present(popUp, animated: true)
+    }
+    
+    
+    /// Displays the url as a Safari view controller
+    ///
+    /// - Parameter url: the url to be displayed.
+    func show(_ url: String) {
+        if let url = URL(string: url) {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            
+            let vc = SFSafariViewController(url: url, configuration: config)
+            present(vc, animated: true)
+        }
+    }
+    
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    //------------------------------------------------------------------------
+    // MARK: Link functions
+    
+        /// Will present the article webpage when tapped
     ///
     /// - Parameter sender: the UIButton tapped
     @IBAction func clickFirst(_ sender: UIButton) {
@@ -80,43 +127,45 @@ class HomeViewController: UIViewController{
     @IBAction func clickThird(_ sender: UIButton) {
         show("https://today.cofc.edu/2019/06/12/college-of-charleston-orientation-2019/")}
     
-    /// Will present the article webpage when tapped
+    /// Will present the today.cofc when tapped
     ///
     /// - Parameter sender: the UIButton tapped
     @IBAction func clickMore(_ sender: UIButton) {
         show("https://today.cofc.edu/")}
     
     
+    /// Will present cofc's facebook page
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func showFacebook(_ sender: UIButton) {
         show("https://www.facebook.com/CofCAdmissions/")
     }
     
+    
+    /// Will present cofc's instagram page
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func showInstagram(_ sender: UIButton) {
         show("https://www.instagram.com/cofcadmissions/")
     }
     
+    
+    /// Will present cofc's twitter page
+    ///
+    /// - Parameter sender: the UIButton tapped
     @IBAction func showTwitter(_ sender: UIButton) {
         show("https://twitter.com/cofcadmissions")
     }
     
     
-    /// Displays the url as a Safari view controller
-    ///
-    /// - Parameter url: the url to be displayed.
-    func show(_ url: String) {
-        if let url = URL(string: url) {
-            let config = SFSafariViewController.Configuration()
-            config.entersReaderIfAvailable = true
-            
-            let vc = SFSafariViewController(url: url, configuration: config)
-            present(vc, animated: true)
-        }
-    }
+    
  
+    //-------------------------------------------------------------------------------
+    // MARK: Salesforce related functions
+
+
     
-    
-    
-    
+    /// Loads salesforce data into store
     func loadData(){
        
         let userIdRequest = RestClient.shared.requestForUserInfo()
@@ -221,6 +270,8 @@ class HomeViewController: UIViewController{
     }//func
         
     
+    
+    /// Loads school data into store
     func loadSchools(){
         let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
         RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
@@ -246,6 +297,8 @@ class HomeViewController: UIViewController{
             }
         }
     }
+    
+    
     /// Loads important data into the offline storage
     func loadDataIntoStore(){
         //Loads user id into store
@@ -353,6 +406,7 @@ class HomeViewController: UIViewController{
         }
 
 
+    /// Pulls the url for the user's fullphotourl.
     func pullImage(){
         print("-----------------------------------------------------------")
         let id = defaults.string(forKey: "UserId")
