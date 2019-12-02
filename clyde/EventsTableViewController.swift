@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+/// Class for event registration
 class EventsTableViewController: UIViewController {
 
     

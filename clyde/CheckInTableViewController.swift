@@ -10,8 +10,18 @@ import UIKit
 import SalesforceSDKCore
 import SmartSync
 
+
+//Class for event check in
 class CheckInTableViewController: UITableViewController {
     
+    //-------------------------------------------------------------
+    // MARK: Outlets
+    ///Outlet for the "hamburger" menu button
+    @IBOutlet weak var menuBarButton: UIBarButtonItem!
+
+    //--------------------------------------------------------------
+    //MARK: Variables
+
     ///Events Dictionary
     var events : [Dictionary<String,Any>] = []
     ///User's contact Id is populated by User Defaults
@@ -28,25 +38,23 @@ class CheckInTableViewController: UITableViewController {
     ///Init User Defaults
     let defaults = UserDefaults.standard
     
-    ///Outlet for the "hamburger" menu button
-    @IBOutlet weak var menuBarButton: UIBarButtonItem!
+  
 
-    
-    
-    
+    //-----------------------------------------------------------------
+    //MARK: View functions
     
     
     /// Init for the events list data source
     /// Displays the student's registered events on the table view.
     private let dataSource = EventsDataSource(cellReuseIdentifier: "sampleEvent") { record, cell in
         let eventName = record["Event_Name__c"] as? String ?? ""
-         let eventId = record["Id"] as? String ?? ""
+        let eventId = record["Id"] as? String ?? ""
         cell.textLabel?.text = eventName.capitalized
         cell.detailTextLabel?.text = "Id: \(eventId)"
         
     }
-    
-    // Calld after the view controller is loaded into memory.
+
+    // Called after the view controller is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
         //Determines the height of each row
