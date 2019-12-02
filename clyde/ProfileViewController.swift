@@ -115,7 +115,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     
-    //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
     // MARK: Location functions
     
     /// Updates the location constantly.

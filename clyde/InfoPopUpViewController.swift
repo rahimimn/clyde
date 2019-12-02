@@ -10,26 +10,50 @@ import UIKit
 import SmartSync
 import SearchTextField
 
+/// Class for the Info Pop Up
 class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate {
     
-    //Creates the store variable
-    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
-    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "infoPopUp")
-    var counter = 0
-    let defaults = UserDefaults.standard
-    var questions = ["Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
     
-  
-    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],[],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
-    var answers = [] as Array
-
-
-    
+    //----------------------------------------------------------
+    // MARK: Outlets
     @IBOutlet weak var answer: SearchTextField!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var question: UITextView!
     @IBOutlet weak var header: UILabel!
     
+    
+    //-----------------------------------------------------------
+    // MARK: Variables
+    
+    //Creates the store variable
+    var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
+    let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "infoPopUp")
+    
+    var counter = 0
+    
+    let defaults = UserDefaults.standard
+    
+    var questions = ["Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
+    
+  
+    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],[],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
+    
+    var answers = [] as Array
+
+
+    //------------------------------------------------------------------
+    // MARK: View functions
+    
+    //Called after the controller's view is loaded into memory.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        answer.delegate = self
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        answer.delegate = self
+        answer.inputAccessoryView = toolbar
+        
+    }
     
     @IBAction func nextQuestion(_ sender: UIButton) {
         answer.startVisibleWithoutInteraction = false
@@ -53,6 +77,41 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         answer.text = ""
     }
     
+    
+    //----------------------------------------------------------------
+    //MARK: Textfield functions
+    
+    
+    /// Method that returns a textfield's input
+    ///
+    /// - Parameter textfield: The textfield that will return.
+    /// - Returns: Boolean on whether a textfield should return.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        textField.textColor = UIColor.black
+        return true
+    }
+    
+    /// Method that is called when the textfield ends editing
+    ///
+    /// - Parameter textField: the textfield
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.textColor = UIColor.black    }
+    
+    /// Method that is called when the textfield begins editing
+    ///
+    /// - Parameter textField: the textfield
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = UIColor.black
+        
+    }
+    
+    
+    
+    //-----------------------------------------------------------------
+    // MARK: Salesforce functions
+    
+    /// Pushes answers to salesforce
     private func updateToSalesforce(){
         var record = [String: Any]()
         record["MobilePhone"] = answers[1]
@@ -102,15 +161,7 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         
         
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        answer.delegate = self
-        let toolbar = UIToolbar();
-        toolbar.sizeToFit()
-        answer.delegate = self
-        answer.inputAccessoryView = toolbar
-        
-    }
+   
     
     /// Pulls data from the user form and upserts it into the "Contact" soup
     func insertIntoSoup(){
@@ -158,22 +209,5 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         }     }
     
 
-    /// Method that returns a textfield's input
-    ///
-    /// - Parameter textfield: The textfield that will return.
-    /// - Returns: Boolean on whether a textfield should return.
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        textField.textColor = UIColor.black
-        return true
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black
-        
-    }
-    
-    
+   
 }
