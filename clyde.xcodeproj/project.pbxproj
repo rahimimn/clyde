@@ -96,6 +96,8 @@
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
 		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
 		B2D8013F22D8FC430050E376 /* instagram.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013E22D8FC430050E376 /* instagram.png */; };
+		B2F53C3A239572FE00D3C9E6 /* ClydeWantsToKnow2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2F53C39239572FD00D3C9E6 /* ClydeWantsToKnow2.png */; };
+		B2F53C3C2395743800D3C9E6 /* ClydeWantsToKnow2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2F53C3B2395743700D3C9E6 /* ClydeWantsToKnow2.png */; };
 		B2F57925233905C900A361B4 /* Reachability.m in Resources */ = {isa = PBXBuildFile; fileRef = B2F57923233905C700A361B4 /* Reachability.m */; };
 		B2F57926233905C900A361B4 /* Reachability.h in Resources */ = {isa = PBXBuildFile; fileRef = B2F57924233905C800A361B4 /* Reachability.h */; };
 		B2F5792E23390F2100A361B4 /* CollegeLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F5792D23390F2100A361B4 /* CollegeLocations.swift */; };
@@ -214,6 +216,8 @@
 		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		B2D8013C22D8F9230050E376 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		B2D8013E22D8FC430050E376 /* instagram.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram.png; sourceTree = "<group>"; };
+		B2F53C39239572FD00D3C9E6 /* ClydeWantsToKnow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeWantsToKnow2.png; sourceTree = "<group>"; };
+		B2F53C3B2395743700D3C9E6 /* ClydeWantsToKnow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClydeWantsToKnow2.png; sourceTree = "<group>"; };
 		B2F57923233905C700A361B4 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
 		B2F57924233905C800A361B4 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
 		B2F5792D23390F2100A361B4 /* CollegeLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLocations.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 		4FD6C46B1B754AF1002F9F90 = {
 			isa = PBXGroup;
 			children = (
+				B2F53C3B2395743700D3C9E6 /* ClydeWantsToKnow2.png */,
 				B28900D7236739EB003BC10C /* icons8-Zoom In.png */,
 				B28847532329766100811638 /* userstore.json */,
 				B28847522329766100811638 /* usersyncs.json */,
@@ -456,6 +461,7 @@
 				B2211D4022F868DB00D127DB /* clyde-pineapples.jpg */,
 				B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */,
 				B2211D3E22F868D700D127DB /* clyde.jpg */,
+				B2F53C39239572FD00D3C9E6 /* ClydeWantsToKnow2.png */,
 				B2D8013522D78D0D0050E376 /* F.png */,
 				B20D9BA723423D42000FBF16 /* Update Photo.png */,
 				B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */,
@@ -612,6 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F53C3C2395743800D3C9E6 /* ClydeWantsToKnow2.png in Resources */,
 				B28900D8236739EB003BC10C /* icons8-Zoom In.png in Resources */,
 				B2CF66A62350F01400B7273E /* pride.jpg in Resources */,
 				B2CF66A72350F01400B7273E /* puppy.jpg in Resources */,
@@ -646,6 +653,7 @@
 				B2CF669E2350EECA00B7273E /* 108.jpg in Resources */,
 				CEA8CA041F071B2300448B51 /* Images.xcassets in Resources */,
 				B227D08A22BBD87600AA0634 /* icons8-FAQ.png in Resources */,
+				B2F53C3A239572FE00D3C9E6 /* ClydeWantsToKnow2.png in Resources */,
 				B2211D4122F868DC00D127DB /* clyde-pineapples.jpg in Resources */,
 				B2C1A01D22C2682200C5634C /* basketball.jpg in Resources */,
 				B227D08822BBD87600AA0634 /* icons8-Mind Map.png in Resources */,

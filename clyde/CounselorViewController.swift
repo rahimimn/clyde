@@ -167,7 +167,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             let counselorPhone = record[0][1]
             let counselorAbout = record[0][2]
             let counselorEmail = record[0][3]
-            let counserlorImage = ""
+            let counserlorImage = record[0][4]
             DispatchQueue.main.async {
                 self.aboutMeText.text = counselorAbout
                 self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
@@ -182,7 +182,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 self.instagramButton.setTitle("@cofcadmissions", for: .normal)
                 self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
               
-                
+                if (URL(string: counserlorImage) != nil){
                 let url = URL(string: counserlorImage)!
                 
                 let task = URLSession.shared.dataTask(with: url){ data,response, error in
@@ -196,6 +196,11 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 }
                 task.resume()
                 
+            }
+                else{
+                    print("Where is the image?")
+                    
+                }
             }
         }catch let e as Error?{
             print(e as Any)
