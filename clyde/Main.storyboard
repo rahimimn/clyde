@@ -426,10 +426,10 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-M8-HGJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="716.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1047"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-X8-Elg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="716.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1047"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
@@ -549,7 +549,7 @@
                                                                     <constraint firstAttribute="height" constant="30" id="flo-0f-wL3"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                                <state key="normal" title="More...">
+                                                                <state key="normal" title="More">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -574,7 +574,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b8q-Ve-JZc">
-                                                        <rect key="frame" x="0.0" y="572" width="414" height="144.5"/>
+                                                        <rect key="frame" x="0.0" y="572" width="414" height="475"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Media" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-px-xaJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -613,7 +613,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="76"/>
+                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="406.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                                         <rect key="frame" x="5" y="5" width="404" height="19"/>
@@ -2137,11 +2137,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAt-R5-d8y">
+                                <rect key="frame" x="97.5" y="480" width="230" height="36"/>
+                                <color key="backgroundColor" red="0.56760722399999997" green="0.25434023140000001" blue="0.28862535950000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="tintColor" red="0.56760722399999997" green="0.25434023140000001" blue="0.28862535950000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Frequently Asked Questions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="toFaq:" destination="B6Z-Th-sYg" eventType="touchUpInside" id="Gha-je-8JK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zai-Fp-kYM" firstAttribute="centerX" secondItem="XEO-l7-HJ1" secondAttribute="centerX" id="NRf-zX-e9U"/>
+                            <constraint firstItem="FAt-R5-d8y" firstAttribute="centerX" secondItem="XEO-l7-HJ1" secondAttribute="centerX" id="RZz-JP-cyI"/>
                             <constraint firstItem="zai-Fp-kYM" firstAttribute="centerY" secondItem="XEO-l7-HJ1" secondAttribute="centerY" id="eyQ-DV-LdN"/>
+                            <constraint firstItem="FAt-R5-d8y" firstAttribute="centerY" secondItem="XEO-l7-HJ1" secondAttribute="centerY" constant="50" id="gy9-xH-6Rj"/>
                             <constraint firstItem="jYX-gW-Jbr" firstAttribute="trailing" secondItem="XEO-l7-HJ1" secondAttribute="trailing" id="hPS-s6-8W2"/>
                             <constraint firstItem="jYX-gW-Jbr" firstAttribute="top" secondItem="da8-j6-QIX" secondAttribute="top" id="nDY-8R-0Nz"/>
                             <constraint firstItem="jYX-gW-Jbr" firstAttribute="leading" secondItem="XEO-l7-HJ1" secondAttribute="leading" id="xxg-ob-umA"/>
@@ -2163,6 +2177,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="label" destination="zai-Fp-kYM" id="d2m-Kp-csh"/>
+                        <outlet property="linkToFaq" destination="FAt-R5-d8y" id="oKc-1w-1QQ"/>
                         <outlet property="menuBarButton" destination="G1n-EZ-sjX" id="hCQ-x4-KSN"/>
                     </connections>
                 </viewController>
@@ -2634,7 +2649,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bFt-Ws-hXU">
-                                            <rect key="frame" x="20" y="25" width="31.5" height="22"/>
+                                            <rect key="frame" x="20" y="26" width="31.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
@@ -2647,7 +2662,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2sF-vf-gSd">
-                                            <rect key="frame" x="20" y="50" width="3.5" height="1.5"/>
+                                            <rect key="frame" x="20" y="51" width="3.5" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4074,7 +4089,6 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
         <image name="twitter.jpeg" width="75" height="78"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GE5-aK-Ozv"/>
         <segue reference="F4T-Z2-p6E"/>
         <segue reference="1iM-Yc-Rlk"/>
         <segue reference="DYY-bQ-oG7"/>

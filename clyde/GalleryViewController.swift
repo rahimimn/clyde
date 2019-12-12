@@ -21,14 +21,29 @@ class GalleryViewController: UIViewController {
         // Adds the cofc logo to the nav
         self.addLogoToNav()        // Do any additional setup after loading the view.
         dostuff()
-        urlToImage(imageUrlString: "https://c.cs40.content.force.com/sfc/dist/version/download/?oid=00D540000001Vbx&ids=0680f000004y7IW&d=%2Fa%2F0f000000U0o1%2F3nhjuUujuAwZWtIxj_xrRdC2fIYR9ZYH4FzHqmi5_EE&asPdf=false")
+        //doDifferentStuff()
+        urlToImage(imageUrlString: "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000dtUX&oid=00D540000001Vbx&lastMod=1564422940000")
     }
     
+
+    
+    //https://cs40.salesforce.com/services/data/v46.0/sobjects/Document/01554000000dtUXAAY/body -H "Authorization: Bearer token"
+    
+    func doDifferentStuff(){
+        let request = RestRequest(method: .GET, serviceHostType: .instance, path:"/services/data/v46.0/sobjects/Document/01554000000dtUXAAY", queryParams: nil)
+        RestClient.shared.send(request: request, onFailure: { (error, urlResponse) in
+            SalesforceLogger.d(type(of:self), message:"Error invoking: \(request)")
+            print(error)
+        }) {(self, response) in
+            os_log("\nSuccessful response received")
+            print(response)
+        }
+    }
 
     func dostuff(){
         
         
-       
+       print("do stuff")
         
         //let data = Data(base64Encoded: imageData)!
         //let imaged = UIImage(data: data)
@@ -38,7 +53,8 @@ class GalleryViewController: UIViewController {
         
         //let pushRequest = RestClient.shared.request(forFileContents: "06854000000TCVr", version: nil)
         //let pushRequest = RestClient.shared.request(forQuery: "SELECT ContentDownloadUrl,DistributionPublicUrl,PdfDownloadUrl FROM ContentDistribution")
-        let pushRequest = RestClient.shared.request(forQuery: "SELECT Id FROM Document")
+       // let pushRequest = RestClient.shared.request(forQuery: "SELECT VersionData FROM ContentVersion WHERE FirstPublishLocationId = '058540000006unNAAQ'")
+        let pushRequest = RestClient.shared.request(forQuery: "SELECT Body FROM Document WHERE Id = '01554000000dtUX'")
         RestClient.shared.send(request: pushRequest, onFailure: {(error, urlResponse) in
             print(error)
 
@@ -55,7 +71,9 @@ class GalleryViewController: UIViewController {
         let url = URL(string: imageUrlString)!
         
         let task = URLSession.shared.dataTask(with: url){ data,response, error in
-            guard let data = data, error == nil else {return}
+            guard let data = data, error == nil else {
+                print(error)
+                return}
             print(error)
             DispatchQueue.main.async {
                 print(url)

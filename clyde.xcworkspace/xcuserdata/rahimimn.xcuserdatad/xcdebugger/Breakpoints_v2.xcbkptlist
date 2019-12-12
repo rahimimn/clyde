@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/ProfileViewController.swift"
-            timestampString = "596392018.444876"
+            timestampString = "597856875.8619649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/ViewController.swift"
-            timestampString = "595946231.7894681"
+            timestampString = "597856875.8620549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "HomeViewController"
             landmarkType = "3">
             <Actions>
