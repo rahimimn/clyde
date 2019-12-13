@@ -15,7 +15,7 @@ class GalleryViewController: UIViewController {
     @IBOutlet var imageViewList: [UIImageView]!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
-    
+    var refreshControl: UIRefreshControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Adds the menu bar
@@ -23,15 +23,18 @@ class GalleryViewController: UIViewController {
         // Adds the cofc logo to the nav
         self.addLogoToNav()        // Do any additional setup after loading the view.
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+780)
-        
+        scrollView.alwaysBounceVertical = true
+        scrollView.bounces  = true
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        self.scrollView.addSubview(refreshControl)
         importGallery()
     }
     
     var imageAddresses = ["https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN25&oid=00D540000001Vbx&lastMod=1576246546000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN2K&oid=00D540000001Vbx&lastMod=1576246692000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN2e&oid=00D540000001Vbx&lastMod=1576247060000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN2o&oid=00D540000001Vbx&lastMod=1576247171000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN2t&oid=00D540000001Vbx&lastMod=1576247208000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN33&oid=00D540000001Vbx&lastMod=1576247331000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN41&oid=00D540000001Vbx&lastMod=1576247415000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN5E&oid=00D540000001Vbx&lastMod=1576247828000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN5x&oid=00D540000001Vbx&lastMod=1576248302000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN62&oid=00D540000001Vbx&lastMod=1576248397000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN6C&oid=00D540000001Vbx&lastMod=1576248512000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nN6M&oid=00D540000001Vbx&lastMod=1576248566000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNLc&oid=00D540000001Vbx&lastMod=1576257552000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNLm&oid=00D540000001Vbx&lastMod=1576257642000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNLr&oid=00D540000001Vbx&lastMod=1576257704000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNLw&oid=00D540000001Vbx&lastMod=1576257760000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNfB&oid=00D540000001Vbx&lastMod=1576262465000","https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNff&oid=00D540000001Vbx&lastMod=1576263081000", "https://c.cs40.content.force.com/servlet/servlet.ImageServer?id=01554000000nNgE&oid=00D540000001Vbx&lastMod=1576263582000"]
     
     
-    
-    
+  
     
     func importGallery(){
         var count = 0
@@ -44,7 +47,15 @@ class GalleryViewController: UIViewController {
         
     }
     
-    
+    @objc func didPullToRefresh() {
+        
+        importGallery()
+        
+        // For End refrshing
+        refreshControl?.endRefreshing()
+        
+        
+    }
     
     
     

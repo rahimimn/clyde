@@ -2627,7 +2627,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bFt-Ws-hXU">
-                                            <rect key="frame" x="20" y="25" width="31.5" height="22"/>
+                                            <rect key="frame" x="20" y="26" width="31.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
@@ -2640,7 +2640,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2sF-vf-gSd">
-                                            <rect key="frame" x="20" y="50" width="3.5" height="1.5"/>
+                                            <rect key="frame" x="20" y="51" width="3.5" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3800,7 +3800,7 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brains &amp; Beauty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrm-oI-vHC">
                                                 <rect key="frame" x="0.0" y="18" width="415" height="45"/>
-                                                <color key="backgroundColor" red="0.56760722399999997" green="0.25434023140000001" blue="0.28862535950000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" red="0.3411764706" green="0.58823529409999997" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="415" id="DfC-DB-6UB"/>
                                                     <constraint firstAttribute="height" constant="45" id="Kbc-tl-Ugq"/>
@@ -3831,7 +3831,7 @@
                         <barButtonItem key="leftBarButtonItem" image="3844408-48.png" landscapeImage="3844408-48.png" id="lX7-4g-hwE">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="     " id="fnD-zi-ltO"/>
+                        <barButtonItem key="rightBarButtonItem" title="         " id="fnD-zi-ltO"/>
                     </navigationItem>
                     <connections>
                         <outlet property="menuBarButton" destination="lX7-4g-hwE" id="eqv-4m-U9E"/>
