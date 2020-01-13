@@ -1271,16 +1271,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Campus Bingo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDa-sG-y3V">
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <color key="backgroundColor" red="0.55809803300000005" green="0.1014547695" blue="0.1667655639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="50" id="S7O-ry-Dcj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eYS-fS-ndK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayM-uf-9VU">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="181.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="169"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcZ-Jo-vfp">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Bingo: Coming Soon">
+                                                    <fragment content="Tour the campus">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <font key="NSFont" size="20" name="AvenirNext-Regular"/>
@@ -1291,9 +1301,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-2y-Okk">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Bingo: Coming Soon">
+                                                    <fragment content="Eat at Liberty">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <font key="NSFont" size="20" name="AvenirNext-Regular"/>
@@ -1304,9 +1314,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qd4-D4-QBq">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
-                                                    <fragment content="Bingo: Coming Soon">
+                                                    <fragment content="Submit your application">
                                                         <attributes>
                                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <font key="NSFont" size="20" name="AvenirNext-Regular"/>
@@ -1323,10 +1333,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-Ug-hyS">
-                                        <rect key="frame" x="0.0" y="181.5" width="414" height="181"/>
+                                        <rect key="frame" x="0.0" y="169" width="414" height="168.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-rX-QI0">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1339,7 +1349,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozo-cj-zT9">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1352,7 +1362,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUD-Ro-mQS">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1371,10 +1381,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dO-bf-lZd">
-                                        <rect key="frame" x="0.0" y="362.5" width="414" height="181.5"/>
+                                        <rect key="frame" x="0.0" y="337.5" width="414" height="169"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH8-dU-ybA">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1387,7 +1397,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHh-ol-QWI">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1400,7 +1410,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLZ-rI-dmt">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="181.5"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="169"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1419,10 +1429,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DJL-sN-kjl">
-                                        <rect key="frame" x="0.0" y="544" width="414" height="181"/>
+                                        <rect key="frame" x="0.0" y="506.5" width="414" height="168.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfN-eA-fkP">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1435,7 +1445,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtG-Gj-WGi">
-                                                <rect key="frame" x="138" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1448,7 +1458,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4n-xY-CEc">
-                                                <rect key="frame" x="276" y="0.0" width="138" height="181"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="168.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Bingo: Coming Soon">
                                                         <attributes>
@@ -1473,7 +1483,10 @@
                         <constraints>
                             <constraint firstItem="eYS-fS-ndK" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="4ab-Cx-Epj"/>
                             <constraint firstAttribute="trailing" secondItem="eYS-fS-ndK" secondAttribute="trailing" id="ID5-8R-zao"/>
-                            <constraint firstItem="eYS-fS-ndK" firstAttribute="top" secondItem="FSy-Cx-cID" secondAttribute="top" id="eWT-g7-EzG"/>
+                            <constraint firstItem="DDa-sG-y3V" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="QxF-lw-2kZ"/>
+                            <constraint firstItem="DDa-sG-y3V" firstAttribute="bottom" secondItem="eYS-fS-ndK" secondAttribute="top" id="eWT-g7-EzG"/>
+                            <constraint firstItem="DDa-sG-y3V" firstAttribute="top" secondItem="FSy-Cx-cID" secondAttribute="top" id="oD6-yo-kPj"/>
+                            <constraint firstItem="FSy-Cx-cID" firstAttribute="trailing" secondItem="DDa-sG-y3V" secondAttribute="trailing" id="pZ7-D1-nTX"/>
                             <constraint firstItem="FSy-Cx-cID" firstAttribute="bottom" secondItem="eYS-fS-ndK" secondAttribute="bottom" id="sZI-zp-7pK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FSy-Cx-cID"/>
