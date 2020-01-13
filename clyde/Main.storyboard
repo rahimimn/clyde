@@ -426,16 +426,16 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-M8-HGJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1282.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2072.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-X8-Elg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1282.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="2072.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3d0-VL-7rN">
-                                                        <rect key="frame" x="0.0" y="24" width="414" height="241"/>
+                                                        <rect key="frame" x="0.0" y="323" width="414" height="241"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Happening At CofC?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-02-I2c">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -574,7 +574,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b8q-Ve-JZc">
-                                                        <rect key="frame" x="0.0" y="273" width="414" height="1009.5"/>
+                                                        <rect key="frame" x="0.0" y="572" width="414" height="1500.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Media" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-px-xaJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -613,7 +613,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="941"/>
+                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="1432"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                                         <rect key="frame" x="5" y="5" width="404" height="19"/>
@@ -1271,33 +1271,217 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfN-eA-fkP">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eYS-fS-ndK">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Bingo: Coming Soon">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="47" name="AvenirNext-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayM-uf-9VU">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="181.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcZ-Jo-vfp">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-2y-Okk">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qd4-D4-QBq">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Qd4-D4-QBq" firstAttribute="leading" secondItem="G9U-2y-Okk" secondAttribute="trailing" id="G7T-j7-whV"/>
+                                            <constraint firstItem="G9U-2y-Okk" firstAttribute="leading" secondItem="NcZ-Jo-vfp" secondAttribute="trailing" id="VNg-ER-7Ed"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-Ug-hyS">
+                                        <rect key="frame" x="0.0" y="181.5" width="414" height="181"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-rX-QI0">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozo-cj-zT9">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUD-Ro-mQS">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ozo-cj-zT9" firstAttribute="leading" secondItem="9Qz-rX-QI0" secondAttribute="trailing" id="FfE-YI-BMT"/>
+                                            <constraint firstItem="OUD-Ro-mQS" firstAttribute="leading" secondItem="ozo-cj-zT9" secondAttribute="trailing" id="GR8-NJ-rxf"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dO-bf-lZd">
+                                        <rect key="frame" x="0.0" y="362.5" width="414" height="181.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cH8-dU-ybA">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHh-ol-QWI">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLZ-rI-dmt">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="181.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="bHh-ol-QWI" firstAttribute="leading" secondItem="cH8-dU-ybA" secondAttribute="trailing" id="XLg-tM-76p"/>
+                                            <constraint firstItem="bLZ-rI-dmt" firstAttribute="leading" secondItem="bHh-ol-QWI" secondAttribute="trailing" id="kVn-Uy-hWZ"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DJL-sN-kjl">
+                                        <rect key="frame" x="0.0" y="544" width="414" height="181"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfN-eA-fkP">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtG-Gj-WGi">
+                                                <rect key="frame" x="138" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4n-xY-CEc">
+                                                <rect key="frame" x="276" y="0.0" width="138" height="181"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Bingo: Coming Soon">
+                                                        <attributes>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="x4n-xY-CEc" firstAttribute="leading" secondItem="dtG-Gj-WGi" secondAttribute="trailing" id="LXN-IL-cpn"/>
+                                            <constraint firstItem="dtG-Gj-WGi" firstAttribute="leading" secondItem="LfN-eA-fkP" secondAttribute="trailing" id="fiJ-Ch-ti2"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="LfN-eA-fkP" firstAttribute="top" secondItem="FSy-Cx-cID" secondAttribute="top" id="6V2-Gh-orn"/>
-                            <constraint firstItem="FSy-Cx-cID" firstAttribute="bottom" secondItem="LfN-eA-fkP" secondAttribute="bottom" id="71R-xb-zoC"/>
-                            <constraint firstItem="LfN-eA-fkP" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="Dba-OS-56i"/>
-                            <constraint firstItem="FSy-Cx-cID" firstAttribute="trailing" secondItem="LfN-eA-fkP" secondAttribute="trailing" id="Oer-IS-lT5"/>
+                            <constraint firstItem="eYS-fS-ndK" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="4ab-Cx-Epj"/>
+                            <constraint firstAttribute="trailing" secondItem="eYS-fS-ndK" secondAttribute="trailing" id="ID5-8R-zao"/>
+                            <constraint firstItem="eYS-fS-ndK" firstAttribute="top" secondItem="FSy-Cx-cID" secondAttribute="top" id="eWT-g7-EzG"/>
+                            <constraint firstItem="FSy-Cx-cID" firstAttribute="bottom" secondItem="eYS-fS-ndK" secondAttribute="bottom" id="sZI-zp-7pK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FSy-Cx-cID"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A7O-a7-ob7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11926" y="706"/>
+            <point key="canvasLocation" x="11924.637681159422" y="705.80357142857144"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="4Kx-Q2-YyB">
