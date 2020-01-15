@@ -42,47 +42,121 @@ class StartMapViewController: UIViewController {
 // MARK: Salesforce Functions
     
     func registerEvent(){
-        
-        let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE 'Jan 13, 2020%' AND Name LIKE 'Self%'")
-        RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
-            let jsonResponse = JSON(response!)
+        do{
+            let currentDate = getDate()
             
-         
+            //check if an OrgEvent self-guided tour exists for the current date
+             let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '\(currentDate)%' AND Name LIKE 'Self%'")
+            RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
+                let jsonResponse = JSON(response!)
+                // if match exists, check if the student is registered. Else, create the event.
+                // if registered, do nothing. Else, register the student.
+                if (jsonResponse["totalSize"] == 1){
+                    //if student is registered, do nothing.
+                    //else, register the student
+                    let eventOrgId = jsonResponse["records"][0]["Id"].stringValue
+                    let studentId = self!.defaults.string(forKey: "ContactId")
+                    let registrationStatus = self!.isStudentRegistered(eventOrgId: eventOrgId, contactId: studentId!){ (status) in
+                    
+                        if status == false {
+                            self!.registerStudent(eventOrg: eventOrgId, contactId: studentId!)
+                        }
+                    }
+                }else{
+                    print("you clearly don't know")
+                }
+
+            }
             
-            let id = jsonResponse["records"][0]["Id"].stringValue
-           
-            let checkForExistingSchedule = RestClient.shared.request(forQuery: "SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__OrgEvent__c = '\(id)' AND TargetX_Eventsb__Contact__c = '\(self!.contactId)'")
-               
-            RestClient.shared.send(request: checkForExistingSchedule, onFailure: {(error, urlResponse) in}) { [weak self] (response, urlResponse) in
-                let checkResponse = JSON(response!)
-                print("who are you")
-                print(checkResponse)
-                let results = jsonResponse.dictionaryObject
-                var createRecord = [String : Any]()
-                createRecord["TargetX_Eventsb__Contact__c"] = self?.contactId
-                createRecord["TargetX_Eventsb__OrgEvent__c"] = id
-                createRecord["TargetX_Eventsb__Confirmed__c"] = true
-                createRecord["TargetX_Eventsb__Attended__c"] = true
-                let totalSize = checkResponse["totalSize"].intValue
-                if (totalSize >= 1){
-                    ()
-                }
-                else{
- 
-                   let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
-                    RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
-                        print(error)
-                        print(createRecord)
-                    }) { [weak self] (response, urlResponse) in
-                        print(createRecord)
-                }
+        }catch let e as Error?{
+            print (e as Any)
         }
-        
-        }
-        
-        }
-        
     }
+    
+    /// Helper Salesforce method that determines whether the contact id has the specific event-org id registered as a contact schedule item, using a closure
+    ///
+    /// - Parameters:
+    ///   - eventOrgId: identification of event organization
+    ///   - contactId: identification of student/contact
+    
+    func isStudentRegistered(eventOrgId: String, contactId: String, completion: @escaping (Bool) -> Void){
+        let registrationCheck = RestClient.shared.request(forQuery:"SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId)' AND TargetX_Eventsb__OrgEvent__c = '\(eventOrgId)'")
+        RestClient.shared.send(request: registrationCheck, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
+            let jsonResponse = JSON(response!)
+            print(jsonResponse)
+            
+            // if match exists, check if the student is registered. Else, create the event.
+            // if registered, do nothing. Else, register the student.
+            if (jsonResponse["totalSize"] == 0){
+                completion(false)
+            }else{
+                completion(true)
+            }
+        }
+    }
+    
+    
+    func registerStudent(eventOrg: String, contactId: String){
+        var createRecord = [String : Any]()
+        createRecord["TargetX_Eventsb__Contact__c"] = contactId
+        createRecord["TargetX_Eventsb__OrgEvent__c"] = eventOrg
+        createRecord["TargetX_Eventsb__Confirmed__c"] = true
+        createRecord["TargetX_Eventsb__Attended__c"] = true
+        let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
+        RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
+                                    print(error)
+                                    print(createRecord)
+                                }) { [weak self] (response, urlResponse) in
+                                    print(createRecord)
+                            }
+    }
+    
+    
+    
+    
+//
+//        let currentDate = getDate()
+//        //checks whether an OrgEvent Self-guided tour exists for the current date, if it is pulls the id
+//        let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '\(currentDate)%' AND Name LIKE 'Self%'")
+//        RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
+//            let jsonResponse = JSON(response!)
+//
+//
+//            let id = jsonResponse["records"][0]["Id"].stringValue
+//
+//
+//            let checkForExistingSchedule = RestClient.shared.request(forQuery: "SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__OrgEvent__c = '\(id)' AND TargetX_Eventsb__Contact__c = '\(self!.contactId)'")
+//
+//            RestClient.shared.send(request: checkForExistingSchedule, onFailure: {(error, urlResponse) in}) { [weak self] (response, urlResponse) in
+//                let checkResponse = JSON(response!)
+//                print("who are you")
+//                print(checkResponse)
+//                let results = jsonResponse.dictionaryObject
+//                var createRecord = [String : Any]()
+//                createRecord["TargetX_Eventsb__Contact__c"] = self?.contactId
+//                createRecord["TargetX_Eventsb__OrgEvent__c"] = id
+//                createRecord["TargetX_Eventsb__Confirmed__c"] = true
+//                createRecord["TargetX_Eventsb__Attended__c"] = true
+//                let totalSize = checkResponse["totalSize"].intValue
+//                if (totalSize >= 1){
+//                    ()
+//                }
+//                else{
+//
+//                   let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
+//                    RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
+//                        print(error)
+//                        print(createRecord)
+//                    }) { [weak self] (response, urlResponse) in
+//                        print(createRecord)
+//                }
+//        }
+//
+//        }
+//
+//        }
+        
+    
     
 //-------------------------------------------------------------------------
 // MARK: Helper Functions
@@ -102,6 +176,8 @@ class StartMapViewController: UIViewController {
         // US English Locale (en_US)
         dateFormatter.locale = Locale(identifier: "en_US")
         let currentDate = dateFormatter.string(from: date) // Oct 27, 2019
+        print(currentDate)
         return currentDate
     }
+    
 }
