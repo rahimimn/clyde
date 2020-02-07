@@ -63,7 +63,8 @@ class StartMapViewController: UIViewController {
                         }
                     }
                 }else{
-                    print("you clearly don't know")
+                    print(jsonResponse)
+                    print("don't know")
                 }
 
             }
@@ -102,13 +103,14 @@ class StartMapViewController: UIViewController {
         createRecord["TargetX_Eventsb__OrgEvent__c"] = eventOrg
         createRecord["TargetX_Eventsb__Confirmed__c"] = true
         createRecord["TargetX_Eventsb__Attended__c"] = true
+        print(createRecord)
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
-                                    print(error)
-                                    print(createRecord)
-                                }) { [weak self] (response, urlResponse) in
-                                    print(createRecord)
-                            }
+            print(error)
+            print(createRequest)
+        }) { [weak self] (response, urlResponse) in
+            print(createRecord)
+        }
     }
     
     
@@ -163,7 +165,7 @@ class StartMapViewController: UIViewController {
     
     /// This was adapted from the Apple Developer website documentation for the Date Formatter.
     ///
-    /// It takes today's current date, and formats it for Salesforce. It is then returned/
+    /// It takes today's current date, and formats it for Salesforce. It is then returned.
     ///
     /// - Returns: current date
     func getDate()->String{
