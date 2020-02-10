@@ -41,12 +41,13 @@ class StartMapViewController: UIViewController {
 //-------------------------------------------------------------------------
 // MARK: Salesforce Functions
     
+    /// Description
     func registerEvent(){
         do{
             let currentDate = getDate()
             
             //check if an OrgEvent self-guided tour exists for the current date
-             let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '\(currentDate)%' AND Name LIKE 'Self%'")
+             let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '%Feb 10, 2020%' AND Name LIKE 'Self%'")
             RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
                 let jsonResponse = JSON(response!)
                 // if match exists, check if the student is registered. Else, create the event.
@@ -55,16 +56,20 @@ class StartMapViewController: UIViewController {
                     //if student is registered, do nothing.
                     //else, register the student
                     let eventOrgId = jsonResponse["records"][0]["Id"].stringValue
+                    print(jsonResponse)
                     let studentId = self!.defaults.string(forKey: "ContactId")
                     let registrationStatus = self!.isStudentRegistered(eventOrgId: eventOrgId, contactId: studentId!){ (status) in
                     
                         if status == false {
                             self!.registerStudent(eventOrg: eventOrgId, contactId: studentId!)
                         }
+                        else{
+                            print("This student is registered.")
+                        }
                     }
                 }else{
                     print(jsonResponse)
-                    print("don't know")
+                    print("total size is not 1")
                 }
 
             }
@@ -84,7 +89,6 @@ class StartMapViewController: UIViewController {
         let registrationCheck = RestClient.shared.request(forQuery:"SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId)' AND TargetX_Eventsb__OrgEvent__c = '\(eventOrgId)'")
         RestClient.shared.send(request: registrationCheck, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
             let jsonResponse = JSON(response!)
-            print(jsonResponse)
             
             // if match exists, check if the student is registered. Else, create the event.
             // if registered, do nothing. Else, register the student.
@@ -103,12 +107,15 @@ class StartMapViewController: UIViewController {
         createRecord["TargetX_Eventsb__OrgEvent__c"] = eventOrg
         createRecord["TargetX_Eventsb__Confirmed__c"] = true
         createRecord["TargetX_Eventsb__Attended__c"] = true
-        print(createRecord)
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
             print(error)
+            print("Create Request")
             print(createRequest)
+            print("Create Record")
+            print(createRecord)
         }) { [weak self] (response, urlResponse) in
+            print("Create Record")
             print(createRecord)
         }
     }
