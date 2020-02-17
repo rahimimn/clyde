@@ -47,7 +47,7 @@ class StartMapViewController: UIViewController {
             let currentDate = getDate()
             
             //check if an OrgEvent self-guided tour exists for the current date
-             let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '%Feb 10, 2020%' AND Name LIKE 'Self%'")
+             let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '%\(currentDate)%' AND Name LIKE 'Self%'")
             RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
                 let jsonResponse = JSON(response!)
                 // if match exists, check if the student is registered. Else, create the event.
@@ -69,7 +69,7 @@ class StartMapViewController: UIViewController {
                     }
                 }else{
                     print(jsonResponse)
-                    print("total size is not 1")
+                    print("This event does not exist.")
                 }
 
             }
@@ -103,21 +103,24 @@ class StartMapViewController: UIViewController {
     
     func registerStudent(eventOrg: String, contactId: String){
         var createRecord = [String : Any]()
-        createRecord["TargetX_Eventsb__Contact__c"] = contactId
+      createRecord["TargetX_Eventsb__Contact__c"] = contactId
         createRecord["TargetX_Eventsb__OrgEvent__c"] = eventOrg
         createRecord["TargetX_Eventsb__Confirmed__c"] = true
         createRecord["TargetX_Eventsb__Attended__c"] = true
+        createRecord["TargetX_Eventsb__Number_of_Guests__c"] = 1
+        
+//        createRecord["Organization_Event__c"] = eventOrg
+//        createRecord["Student__c"] = contactId
+//        createRecord["Confirmed__c"] = true
+//        createRecord["Attended__c"] = true
+        
+       //let createRequest = RestClient.shared.requestForCreate(withObjectType: "Campus_Tour__c", fields: createRecord)
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
             print(error)
-            print("Create Request")
-            print(createRequest)
-            print("Create Record")
-            print(createRecord)
+            print("Student was not registered for event.")
         }) { [weak self] (response, urlResponse) in
-            print("Create Record")
-            print(createRecord)
-        }
+            print("Student was registered for event.")
     }
     
     
