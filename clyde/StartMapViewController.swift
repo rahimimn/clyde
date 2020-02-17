@@ -121,7 +121,7 @@ class StartMapViewController: UIViewController {
             print("Student was not registered for event.")
         }) { [weak self] (response, urlResponse) in
             print("Student was registered for event.")
-    }
+        }}
     
     
     
