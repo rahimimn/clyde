@@ -22,6 +22,7 @@ class HomeViewController: UIViewController{
     //Outlet for the menu button.
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
+    @IBOutlet var homeView: UIView!
     
     
     //----------------------------------------------------------------------------
@@ -167,7 +168,19 @@ class HomeViewController: UIViewController{
     
     /// Loads salesforce data into store
     func loadData(){
-       
+        
+        
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0);
+        loadingIndicator.center = homeView.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+        loadingIndicator.color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        loadingIndicator.backgroundColor = #colorLiteral(red: 0.3971119523, green: 0.3989546299, blue: 0.4034414291, alpha: 0.7198469606)
+        loadingIndicator.layer.cornerRadius = 10
+
+        homeView.addSubview(loadingIndicator)
+        loadingIndicator.startAnimating()
         let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
@@ -264,6 +277,7 @@ class HomeViewController: UIViewController{
                     os_log("\n\n----------------------SmartStore loaded records for majors.-------------------------------", log: strongSelf.mylog, type: .debug)
                 }
         
+                loadingIndicator.stopAnimating()
             }
         }//completion
         
