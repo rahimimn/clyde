@@ -147,7 +147,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         // Loading Indicator is created, starts animated before user's information request is sent
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
-        loadingIndicator.center = counselorView.center
+        loadingIndicator.center = counselorImage.center
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
         loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
