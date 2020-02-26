@@ -1048,7 +1048,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-Tg-L6p">
                                 <rect key="frame" x="0.0" y="88" width="414" height="80"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="games" translatesAutoresizingMaskIntoConstraints="NO" id="kol-ND-uCA">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="games" translatesAutoresizingMaskIntoConstraints="NO" id="kol-ND-uCA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     </imageView>
                                 </subviews>
@@ -1618,7 +1618,7 @@
                                             <view contentMode="scaleToFill" restorationIdentifier="BannerView" translatesAutoresizingMaskIntoConstraints="NO" id="SBK-ki-D39">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="0Yq-ON-bYm">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="0Yq-ON-bYm">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="222"/>
                                                     </imageView>
                                                 </subviews>
@@ -2284,7 +2284,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="askClyde" translatesAutoresizingMaskIntoConstraints="NO" id="0Kp-tO-VzZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="askClyde" translatesAutoresizingMaskIntoConstraints="NO" id="0Kp-tO-VzZ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Qjk-ip-uEU"/>
@@ -2292,7 +2292,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAt-R5-d8y">
                                 <rect key="frame" x="20" y="246" width="374" height="559"/>
-                                <color key="backgroundColor" red="0.85882352941176465" green="0.80784313725490198" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.56760722399999997" green="0.25434023140000001" blue="0.28862535950000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="374" id="2mL-3T-8wU"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="171" id="e3R-pt-VAv"/>
@@ -2463,7 +2463,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eventRegistration" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-X4-wPq">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eventRegistration" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-X4-wPq">
                                 <rect key="frame" x="0.0" y="88" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="RdQ-O7-kEn"/>
@@ -2523,7 +2523,7 @@
                                 <rect key="frame" x="87" y="578" width="240" height="240"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egT-tI-cMF">
-                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                                 <color key="backgroundColor" red="0.88081270460000005" green="0.31833547350000002" blue="0.31261432169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UUN-Ur-4j9"/>
@@ -2533,7 +2533,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions to check-in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv1-wP-GuG">
-                                <rect key="frame" x="0.0" y="254" width="414" height="40"/>
+                                <rect key="frame" x="0.0" y="210" width="414" height="40"/>
                                 <color key="backgroundColor" red="0.88081270460000005" green="0.31833547350000002" blue="0.31261432169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Uun-dQ-BkZ"/>
@@ -2553,7 +2553,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kWc-Ya-dIA">
-                                <rect key="frame" x="5" y="131" width="404" height="120"/>
+                                <rect key="frame" x="5" y="87" width="404" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="X5S-80-tjU"/>
@@ -2720,7 +2720,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Campus-Tour.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-xg-f0p">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Campus-Tour.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="OkS-xg-f0p">
                                             <rect key="frame" x="-44" y="0.0" width="504" height="142.5"/>
                                         </imageView>
                                     </subviews>
@@ -2864,7 +2864,7 @@
                                             <view contentMode="scaleToFill" restorationIdentifier="BannerView" translatesAutoresizingMaskIntoConstraints="NO" id="kF3-z1-bIH">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="225"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="mNp-2Z-waD">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="mNp-2Z-waD">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="225"/>
                                                     </imageView>
                                                 </subviews>
@@ -4264,7 +4264,7 @@ E9MT1hPbE+MT5hP4E/sUAAAAAAAAAAIBAAAAAAAAAFcAAAAAAAAAAAAAAAAAABQCA
         <image name="twitter.jpeg" width="75" height="78"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GE5-aK-Ozv"/>
+        <segue reference="zSV-ap-Eip"/>
         <segue reference="F4T-Z2-p6E"/>
         <segue reference="1iM-Yc-Rlk"/>
         <segue reference="DYY-bQ-oG7"/>
