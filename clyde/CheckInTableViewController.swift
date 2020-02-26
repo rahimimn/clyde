@@ -98,7 +98,7 @@ class CheckInTableViewController: UITableViewController {
 
     //Returns the number of rows in a given section.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
         
     }
     
@@ -120,7 +120,7 @@ class CheckInTableViewController: UITableViewController {
         // Sets the background color of the uiview
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         // Image name
-        let imageString = "Clyde-Campus-Tour.jpg"
+        let imageString = "registeredEvents"
         // Creates the image
         let image = UIImage(named: imageString)
         // Creates the image view
@@ -129,33 +129,33 @@ class CheckInTableViewController: UITableViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 422, height: 150
         )
         // Sets the image transparency
-        imageView.alpha = 0.75
+        imageView.alpha = 1
         // Sets the image content mode
         imageView.contentMode = .scaleAspectFill
         // Places the imageView onto the uiView
         view.addSubview(imageView)
         // Creates a label
-        let label = UILabel()
-        // Adds text to the label
-        label.text = "Your Registered Events"
-        // Sets the label background color
-        label.backgroundColor = #colorLiteral(red: 0.9546924233, green: 0.259139955, blue: 0.2854149044, alpha: 1)
-        // Sets the label font
-        label.font = UIFont(name: "Avenir Next Regular", size: 25.0)
-        // Sets label text color and alignment
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.textAlignment = .center
-        label.font = label.font.withSize(25)
-        //
-        label.frame = CGRect(x: 0, y: 142.67, width:414, height: 40)
-        view.addSubview(label)
+//        let label = UILabel()
+//        // Adds text to the label
+//        label.text = "Your Registered Events"
+//        // Sets the label background color
+//        label.backgroundColor = #colorLiteral(red: 0.9546924233, green: 0.259139955, blue: 0.2854149044, alpha: 1)
+//        // Sets the label font
+//        label.font = UIFont(name: "Avenir Next Regular", size: 25.0)
+//        // Sets label text color and alignment
+//        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        label.textAlignment = .center
+//        label.font = label.font.withSize(25)
+//        //
+//        label.frame = CGRect(x: 0, y: 142.67, width:414, height: 40)
+//        view.addSubview(label)
         
         return view
     }
     
     //Sets the header height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 180
+        return 150
     }
 
     //Notifies the view that a segue is about to be performed.

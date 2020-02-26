@@ -16,16 +16,15 @@ import SwiftyJSON
 class QuestionsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
-    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var linkToFaq: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()        //reveals menu
         self.menuBar(menuBarItem: menuBarButton)
         self.addLogoToNav()
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.2
-        label.numberOfLines = 2
+        linkToFaq.titleLabel?.numberOfLines = 3
+        linkToFaq.titleLabel?.lineBreakMode = .byWordWrapping
+        linkToFaq.titleLabel?.adjustsFontSizeToFitWidth = true
     }
 
 

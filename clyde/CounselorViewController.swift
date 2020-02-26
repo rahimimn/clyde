@@ -158,7 +158,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
-                print(records)
+                print(records!)
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }

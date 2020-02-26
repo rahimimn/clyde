@@ -145,13 +145,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "clyde/CounselorViewController.swift"
-            timestampString = "604247166.399992"
+            timestampString = "604429794.627776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "loadDataFromStore()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
