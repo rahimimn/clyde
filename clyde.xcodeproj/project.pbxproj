@@ -12,6 +12,7 @@
 		78A235BD93AB7D080D67CD51 /* Pods_clyde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_clyde.framework */; };
 		B20D9BA823423D43000FBF16 /* Update Photo.png in Resources */ = {isa = PBXBuildFile; fileRef = B20D9BA723423D42000FBF16 /* Update Photo.png */; };
 		B20D9BAC23426D46000FBF16 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20D9BAB23426D45000FBF16 /* InitialViewController.swift */; };
+		B21A4D0F2410460A008B14B2 /* BingoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21A4D0E2410460A008B14B2 /* BingoViewController.swift */; };
 		B2211D3B22F2018B00D127DB /* whiteLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3A22F2018B00D127DB /* whiteLogo.png */; };
 		B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */; };
 		B2211D3F22F868D700D127DB /* clyde.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2211D3E22F868D700D127DB /* clyde.jpg */; };
@@ -117,6 +118,7 @@
 		82A29C75280BDF73123F14B4 /* Pods_clyde.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_clyde.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B20D9BA723423D42000FBF16 /* Update Photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Update Photo.png"; sourceTree = "<group>"; };
 		B20D9BAB23426D45000FBF16 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = ../../CofCApp/CofCApp/InitialViewController.swift; sourceTree = "<group>"; };
+		B21A4D0E2410460A008B14B2 /* BingoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingoViewController.swift; sourceTree = "<group>"; };
 		B2211D3A22F2018B00D127DB /* whiteLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteLogo.png; sourceTree = "<group>"; };
 		B2211D3C22F8635100D127DB /* clydeWantsToKnow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clydeWantsToKnow.png; sourceTree = "<group>"; };
 		B2211D3E22F868D700D127DB /* clyde.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clyde.jpg; sourceTree = "<group>"; };
@@ -306,6 +308,16 @@
 				82A29C75280BDF73123F14B4 /* Pods_clyde.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B21A4D0D241045D4008B14B2 /* Interactive Map */ = {
+			isa = PBXGroup;
+			children = (
+				B27796E72359E87E00E2B3F8 /* StartMapViewController.swift */,
+				B28900D323673854003BC10C /* InteractiveMapViewController.swift */,
+				B2F5792D23390F2100A361B4 /* CollegeLocations.swift */,
+			);
+			name = "Interactive Map";
 			sourceTree = "<group>";
 		};
 		B2211D4222F872C000D127DB /* Pop Up */ = {
@@ -519,10 +531,9 @@
 		B2D8013922D7A8010050E376 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				B21A4D0D241045D4008B14B2 /* Interactive Map */,
 				B2D8013A22D7A8250050E376 /* GamesViewController.swift */,
-				B2F5792D23390F2100A361B4 /* CollegeLocations.swift */,
-				B27796E72359E87E00E2B3F8 /* StartMapViewController.swift */,
-				B28900D323673854003BC10C /* InteractiveMapViewController.swift */,
+				B21A4D0E2410460A008B14B2 /* BingoViewController.swift */,
 			);
 			name = Games;
 			sourceTree = "<group>";
@@ -755,6 +766,7 @@
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				B20D9BAC23426D46000FBF16 /* InitialViewController.swift in Sources */,
 				B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */,
+				B21A4D0F2410460A008B14B2 /* BingoViewController.swift in Sources */,
 				B2D8013D22D8F9230050E376 /* extensions.swift in Sources */,
 				B227D0B822BBEC2100AA0634 /* QuestionsViewController.swift in Sources */,
 				B27796E82359E87E00E2B3F8 /* StartMapViewController.swift in Sources */,
