@@ -29,7 +29,7 @@ class BingoViewController: UIViewController {
         let numbers = randomSequenceGenerator(min: 0, max: index-1)
         for string in bingoStrings{
             var num = numbers()
-            print(string, bingoStrings[num])
+            print(string)
             for item in bingoBoards{
                item.setTitle(string, for: .normal)
             }
