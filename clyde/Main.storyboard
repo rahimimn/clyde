@@ -426,16 +426,16 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-M8-HGJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="15858"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="13299.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-X8-Elg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="15858"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="13299.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3d0-VL-7rN">
-                                                        <rect key="frame" x="0.0" y="323" width="414" height="241"/>
+                                                        <rect key="frame" x="0.0" y="24" width="414" height="241"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's Happening At CofC?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlL-02-I2c">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -574,7 +574,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b8q-Ve-JZc">
-                                                        <rect key="frame" x="0.0" y="572" width="414" height="15286"/>
+                                                        <rect key="frame" x="0.0" y="273" width="414" height="13026.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Media" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-px-xaJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -587,24 +587,24 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kqc-Lh-BMw">
-                                                                <rect key="frame" x="0.0" y="35" width="414" height="33.5"/>
+                                                                <rect key="frame" x="0.0" y="35" width="414" height="28.5"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnC-5i-SFR">
-                                                                        <rect key="frame" x="0.0" y="5.5" width="138" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="3.5" width="138" height="22"/>
                                                                         <state key="normal" image="facebook.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showFacebook:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="6FT-yd-LdV"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5il-QN-Z6P">
-                                                                        <rect key="frame" x="138" y="5.5" width="138" height="22"/>
+                                                                        <rect key="frame" x="138" y="3.5" width="138" height="22"/>
                                                                         <state key="normal" image="instagram.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showInstagram:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="5ZQ-fA-hww"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oek-JG-cUA">
-                                                                        <rect key="frame" x="276" y="5.5" width="138" height="22"/>
+                                                                        <rect key="frame" x="276" y="3.5" width="138" height="22"/>
                                                                         <state key="normal" image="twitter.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showTwitter:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="krz-MI-gkg"/>
@@ -613,10 +613,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="15217.5"/>
+                                                                <rect key="frame" x="0.0" y="63.5" width="414" height="12963"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
-                                                                        <rect key="frame" x="5" y="5" width="404" height="19"/>
+                                                                        <rect key="frame" x="5" y="5" width="404" height="22.5"/>
                                                                         <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="19"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3321,7 +3321,7 @@ Alumni</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bFt-Ws-hXU">
-                                            <rect key="frame" x="20" y="26" width="31.5" height="22"/>
+                                            <rect key="frame" x="20" y="25" width="31.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
@@ -3334,7 +3334,7 @@ Alumni</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2sF-vf-gSd">
-                                            <rect key="frame" x="20" y="51" width="3.5" height="1"/>
+                                            <rect key="frame" x="20" y="50" width="3.5" height="1.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
