@@ -91,7 +91,6 @@
 		B2CF66A62350F01400B7273E /* pride.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A32350F01100B7273E /* pride.jpg */; };
 		B2CF66A72350F01400B7273E /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A42350F01200B7273E /* puppy.jpg */; };
 		B2CF66A82350F01400B7273E /* group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A52350F01300B7273E /* group.jpg */; };
-		B2D082F02367623100F9E682 /* emoji.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D082EF2367623100F9E682 /* emoji.png */; };
 		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
 		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
@@ -576,7 +575,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Salesforce;
 				TargetAttributes = {
 					4FD6C4731B754AF1002F9F90 = {
@@ -682,7 +681,6 @@
 				B227D08B22BBD87600AA0634 /* icons8-Vertical Settings Mixer.png in Resources */,
 				B28E066422C3A0FE0035A40F /* icons8-tick-box-100.png in Resources */,
 				B2C19FF822BD34D300C5634C /* icons8-Maintenance.png in Resources */,
-				B2D082F02367623100F9E682 /* emoji.png in Resources */,
 				B2C19FF622BD338F00C5634C /* icons8-Details Popup.png in Resources */,
 				B2C1A00D22C15A7600C5634C /* acaslonpro-bold.otf in Resources */,
 				B227D07522BBD80900AA0634 /* Main.storyboard in Resources */,
@@ -829,7 +827,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -879,7 +877,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

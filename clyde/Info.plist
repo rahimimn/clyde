@@ -65,7 +65,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
 	<key>SFDCOAuthLoginHost</key>
-	<string>partial-cofcharleston.cs40.force.com/portal</string>
+	<string>full-cofcharleston.cs44.force.com/portal/login</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>acaslonpro-regular.otf</string>
@@ -87,8 +87,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
