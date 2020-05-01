@@ -187,7 +187,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 
                 let task = URLSession.shared.dataTask(with: url){ data,response, error in
                     guard let data = data, error == nil else {return}
-                    print(error)
+                    print(error!)
                     DispatchQueue.main.async {
                         self.counselorImage.image = UIImage(data:data)
                         self.email = counselorEmail

@@ -184,7 +184,7 @@ class HomeViewController: UIViewController{
         let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
-            let jsonResponse = JSON(response)
+            let jsonResponse = JSON(response!)
             let id = jsonResponse["user_id"].stringValue
             let email = jsonResponse["email"].stringValue
             DispatchQueue.main.async {

@@ -24,11 +24,10 @@ class BingoViewController: UIViewController {
     }
     
     func addStrings(){
-        var count = 0
         let index = bingoStrings.count
         let numbers = randomSequenceGenerator(min: 0, max: index-1)
         for string in bingoStrings{
-            var num = numbers()
+            _ = numbers()
             print(string)
             for item in bingoBoards{
                item.setTitle(string, for: .normal)
