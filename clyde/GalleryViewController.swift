@@ -78,7 +78,11 @@ class GalleryViewController: UIViewController {
     
     
     
-    
+    /// Sets image based on image url
+    ///
+    /// - Parameters:
+    ///   - imageUrlString: url of image
+    ///   - image: imageView that needs to be set
     
     func urlToImage(imageUrlString: String, image: UIImageView){
         let url = URL(string: imageUrlString)!

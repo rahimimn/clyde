@@ -425,11 +425,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFa-0w-xYA">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-M8-HGJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="15858"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-M8-HGJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-X8-Elg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="15858"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="792.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
@@ -574,7 +574,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b8q-Ve-JZc">
-                                                        <rect key="frame" x="0.0" y="572" width="414" height="15286"/>
+                                                        <rect key="frame" x="0.0" y="572" width="414" height="220.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Media" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-px-xaJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -613,7 +613,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="15217.5"/>
+                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="152"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                                         <rect key="frame" x="5" y="5" width="404" height="19"/>
@@ -751,7 +751,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="Article1" destination="SvN-sW-OQb" id="das-fA-0kk"/>
+                        <outlet property="Article2" destination="GJ3-5l-453" id="ayD-N1-9MB"/>
+                        <outlet property="Article3" destination="Ox8-Sa-kSr" id="3Cg-hq-H4e"/>
                         <outlet property="homeView" destination="MQp-r6-RJd" id="jru-fI-6ZG"/>
+                        <outlet property="label1" destination="kW9-kB-1GX" id="hGw-Af-8Ic"/>
+                        <outlet property="label2" destination="gWR-cT-mHc" id="FIc-dF-gvJ"/>
+                        <outlet property="label3" destination="cQb-B8-2qX" id="fxx-8C-RaM"/>
                         <outlet property="menuBarItem" destination="t6i-CK-D9e" id="cLc-Si-Qts"/>
                         <outlet property="moreButton" destination="abG-PW-2s6" id="HrE-1i-hLC"/>
                     </connections>

@@ -17,16 +17,14 @@ import SmartStore
 class HomeViewController: UIViewController{
     
     //----------------------------------------------------------------------------
-    // MARK: Outlets
-    
-    //Outlet for the menu button.
-    @IBOutlet weak var moreButton: UIButton!
-    @IBOutlet weak var menuBarItem: UIBarButtonItem!
-    @IBOutlet var homeView: UIView!
-    
-    
-    //----------------------------------------------------------------------------
     // MARK: Variables
+    
+    //Edit these articles to change the homepage articles.
+    var article1 = Article(articleUrl: "https://today.cofc.edu/2019/04/18/college-of-charleston-virtual-tour/", imageUrl: "https://today.cofc.edu/wp-content/uploads/2018/07/cofc-campus.jpg", articleTitle: "CofC Virtual Tours")
+    
+      var article2 = Article(articleUrl: "https://today.cofc.edu/2020/04/23/stress-less-with-president-hsus-spring-finals-playlist/", imageUrl: "https://today.cofc.edu/wp-content/uploads/2020/04/Hsu.Playlist.TCT1_-800x533.jpg", articleTitle: "Dr. Hsu's Playlist")
+    
+      var article3 = Article(articleUrl: "https://today.cofc.edu/2020/04/24/cofc-campus-gets-refreshed-for-250th-anniversary/", imageUrl: "https://today.cofc.edu/wp-content/uploads/2020/03/IMG_5437-800x546.jpg", articleTitle: "Campus Refresh")
     
     //Creates the store variable
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)!
@@ -38,6 +36,27 @@ class HomeViewController: UIViewController{
     
     var userId = ""
     
+    
+    
+    
+    //----------------------------------------------------------------------------
+    // MARK: Outlets
+    
+    //Outlet for the menu button.
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var menuBarItem: UIBarButtonItem!
+    @IBOutlet var homeView: UIView!
+    
+    @IBOutlet weak var Article1: UIButton!
+    @IBOutlet weak var Article2: UIButton!
+    @IBOutlet weak var Article3: UIButton!
+    
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
+    
+    
+    
     //----------------------------------------------------------------------------
     // MARK: View Functions
     
@@ -46,6 +65,22 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         self.menuBar(menuBarItem: menuBarItem)
         self.addLogoToNav()
+    
+        
+        
+        //Change the image for Article1 here
+        urlToButtonImage(imageUrlString: article1.imageUrl, button: Article1)
+        
+        //Change the image for Article2 here
+        urlToButtonImage(imageUrlString: article2.imageUrl, button: Article2)
+        
+        //Change the image for Article3 here
+        urlToButtonImage(imageUrlString: article3.imageUrl, button: Article3)
+        
+        label1.text = article1.articleTitle
+        label2.text = article2.articleTitle
+        label3.text = article3.articleTitle
+        
         moreButton.layer.cornerRadius = 5
         moreButton.layer.borderWidth = 2
         moreButton.layer.borderColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 1)
@@ -71,9 +106,85 @@ class HomeViewController: UIViewController{
         
     }
     
-    //-----------------------------------------------------------------------
+
+//------------------------------------------------------------------------
+    // MARK: Link functions
+    
+    /// Will present the article 1 webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func clickFirst(_ sender: UIButton) {
+        show(article1.articleUrl)}
+    
+    /// Will present the article 2 webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func clickSecond(_ sender: UIButton) {
+        show(article2.articleUrl)}
+    
+    /// Will present the article 3 webpage when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func clickThird(_ sender: UIButton) {
+        show(article3.articleUrl)}
+    
+    /// Will present the today.cofc when tapped
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func clickMore(_ sender: UIButton) {
+        show("https://today.cofc.edu/")}
+    
+    
+    /// Will present cofc's facebook page
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func showFacebook(_ sender: UIButton) {
+        show("https://www.facebook.com/CofCAdmissions/")
+    }
+    
+    
+    /// Will present cofc's instagram page
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func showInstagram(_ sender: UIButton) {
+        show("https://www.instagram.com/cofcadmissions/")
+    }
+    
+    
+    /// Will present cofc's twitter page
+    ///
+    /// - Parameter sender: the UIButton tapped
+    @IBAction func showTwitter(_ sender: UIButton) {
+        show("https://twitter.com/cofcadmissions")
+    }
+    
+    
+    
+//-----------------------------------------------------------------------
     // MARK: Helper functions
 
+    
+    
+    /// Sets image for button using url
+    /// - Parameters:
+    ///   - imageUrlString: url of image
+    ///   - image: imageView that needs to be set
+    
+    func urlToButtonImage(imageUrlString: String, button: UIButton){
+        let url = URL(string: imageUrlString)!
+        
+        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+            guard let data = data, error == nil else {
+                print(error)
+                return}
+            print(error)
+            DispatchQueue.main.async {
+                button.setImage(UIImage(data:data), for: .normal)
+            }
+        }
+        task.resume()    }
+    
+    
     
     /// Shows the information pop up when called
     func showInformationPopUp(){
@@ -106,56 +217,6 @@ class HomeViewController: UIViewController{
     /// Determines the supported orientations
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
-    }
-    //------------------------------------------------------------------------
-    // MARK: Link functions
-    
-        /// Will present the article webpage when tapped
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func clickFirst(_ sender: UIButton) {
-        show("https://today.cofc.edu/2019/06/24/beat-the-heat-public-health-heat-related-illness/")}
-    
-    /// Will present the article webpage when tapped
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func clickSecond(_ sender: UIButton) {
-        show("https://today.cofc.edu/2019/06/21/jarrell-brantley-nba-draft/")}
-    
-    /// Will present the article webpage when tapped
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func clickThird(_ sender: UIButton) {
-        show("https://today.cofc.edu/2019/06/12/college-of-charleston-orientation-2019/")}
-    
-    /// Will present the today.cofc when tapped
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func clickMore(_ sender: UIButton) {
-        show("https://today.cofc.edu/")}
-    
-    
-    /// Will present cofc's facebook page
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func showFacebook(_ sender: UIButton) {
-        show("https://www.facebook.com/CofCAdmissions/")
-    }
-    
-    
-    /// Will present cofc's instagram page
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func showInstagram(_ sender: UIButton) {
-        show("https://www.instagram.com/cofcadmissions/")
-    }
-    
-    
-    /// Will present cofc's twitter page
-    ///
-    /// - Parameter sender: the UIButton tapped
-    @IBAction func showTwitter(_ sender: UIButton) {
-        show("https://twitter.com/cofcadmissions")
     }
     
     

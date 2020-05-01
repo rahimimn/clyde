@@ -92,6 +92,7 @@
 		B2CF66A72350F01400B7273E /* puppy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A42350F01200B7273E /* puppy.jpg */; };
 		B2CF66A82350F01400B7273E /* group.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2CF66A52350F01300B7273E /* group.jpg */; };
 		B2D4488B245C93B100A655E9 /* clydeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D4488A245C93B100A655E9 /* clydeUITests.swift */; };
+		B2D44895245CB1C200A655E9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D44894245CB1C200A655E9 /* Article.swift */; };
 		B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */; };
 		B2D8013B22D7A8250050E376 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013A22D7A8250050E376 /* GamesViewController.swift */; };
 		B2D8013D22D8F9230050E376 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D8013C22D8F9230050E376 /* extensions.swift */; };
@@ -221,6 +222,7 @@
 		B2D44888245C93B100A655E9 /* clydeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clydeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D4488A245C93B100A655E9 /* clydeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clydeUITests.swift; sourceTree = "<group>"; };
 		B2D4488C245C93B100A655E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2D44894245CB1C200A655E9 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		B2D8013722D7A6800050E376 /* icons8-Installing Updates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Installing Updates.png"; sourceTree = "<group>"; };
 		B2D8013A22D7A8250050E376 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		B2D8013C22D8F9230050E376 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				B227D0A322BBD94400AA0634 /* ViewController.swift */,
+				B2D44894245CB1C200A655E9 /* Article.swift */,
 			);
 			name = Homepage;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D44895245CB1C200A655E9 /* Article.swift in Sources */,
 				B27609FF22CA4FD400A122F7 /* user.swift in Sources */,
 				B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
