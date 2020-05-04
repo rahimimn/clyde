@@ -429,7 +429,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-X8-Elg">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="792.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="872"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clyde-Cistern.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VbR-kQ-bvR">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="315"/>
@@ -574,7 +574,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b8q-Ve-JZc">
-                                                        <rect key="frame" x="0.0" y="572" width="414" height="220.5"/>
+                                                        <rect key="frame" x="0.0" y="572" width="414" height="300"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Media" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVP-px-xaJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -613,7 +613,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="152"/>
+                                                                <rect key="frame" x="0.0" y="68.5" width="414" height="231.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                                         <rect key="frame" x="5" y="5" width="404" height="19"/>
@@ -1929,11 +1929,22 @@ Alumni</string>
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="047-cc-IT9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.035865015403904514" green="0.036494712425009748" blue="0.039428902884771522" alpha="0.76000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="047-cc-IT9" firstAttribute="trailing" secondItem="FSy-Cx-cID" secondAttribute="trailing" id="3oa-Dm-Q86"/>
                             <constraint firstItem="OGp-qc-pdM" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="9QK-6v-1sQ"/>
+                            <constraint firstItem="047-cc-IT9" firstAttribute="leading" secondItem="FSy-Cx-cID" secondAttribute="leading" id="G9F-cq-L3b"/>
+                            <constraint firstItem="047-cc-IT9" firstAttribute="top" secondItem="L6F-BP-htM" secondAttribute="top" id="GUi-bv-2p9"/>
                             <constraint firstItem="FSy-Cx-cID" firstAttribute="bottom" secondItem="OGp-qc-pdM" secondAttribute="bottom" id="T3R-ci-Imw"/>
+                            <constraint firstAttribute="bottom" secondItem="047-cc-IT9" secondAttribute="bottom" id="aQB-qJ-g75"/>
                             <constraint firstItem="OGp-qc-pdM" firstAttribute="top" secondItem="FSy-Cx-cID" secondAttribute="top" id="dwq-fW-7oa"/>
                             <constraint firstItem="FSy-Cx-cID" firstAttribute="trailing" secondItem="OGp-qc-pdM" secondAttribute="trailing" id="flf-Ir-WLB"/>
                         </constraints>
@@ -1978,25 +1989,20 @@ Alumni</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKE-x9-fMG">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Scavenger Hunt: Coming Soon">
-                                        <attributes>
-                                            <font key="NSFont" size="47" name="AvenirNext-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvn-uE-t5Y">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" red="0.035865015399999998" green="0.036494712429999999" blue="0.039428902879999998" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="RKE-x9-fMG" firstAttribute="leading" secondItem="tdC-eq-9b7" secondAttribute="leading" id="51w-Q2-EWo"/>
-                            <constraint firstItem="tdC-eq-9b7" firstAttribute="trailing" secondItem="RKE-x9-fMG" secondAttribute="trailing" id="bNv-gN-OOG"/>
-                            <constraint firstItem="RKE-x9-fMG" firstAttribute="top" secondItem="tdC-eq-9b7" secondAttribute="top" id="s3U-Z9-cFF"/>
-                            <constraint firstItem="tdC-eq-9b7" firstAttribute="bottom" secondItem="RKE-x9-fMG" secondAttribute="bottom" id="w3y-fV-x1M"/>
+                            <constraint firstAttribute="trailing" secondItem="wvn-uE-t5Y" secondAttribute="trailing" id="56x-CT-sjW"/>
+                            <constraint firstItem="wvn-uE-t5Y" firstAttribute="leading" secondItem="tdC-eq-9b7" secondAttribute="leading" id="MyO-kI-FDH"/>
+                            <constraint firstItem="wvn-uE-t5Y" firstAttribute="top" secondItem="tdC-eq-9b7" secondAttribute="top" id="hyA-T7-bZD"/>
+                            <constraint firstAttribute="bottom" secondItem="wvn-uE-t5Y" secondAttribute="bottom" id="l4p-3d-tf6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tdC-eq-9b7"/>
                     </view>
@@ -2004,42 +2010,6 @@ Alumni</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2u-xV-hFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="12681" y="706"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="jB8-J0-bbU">
-            <objects>
-                <viewController id="Zz9-Rr-DPD" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Gqv-Oe-6WF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byu-vt-YPr">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Puzzle: Coming Soon">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="47" name="AvenirNext-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="byu-vt-YPr" firstAttribute="bottom" secondItem="aQI-ZA-2Cb" secondAttribute="bottom" id="ZhL-e2-j7I"/>
-                            <constraint firstItem="byu-vt-YPr" firstAttribute="leading" secondItem="aQI-ZA-2Cb" secondAttribute="leading" id="ndL-sc-eM7"/>
-                            <constraint firstItem="byu-vt-YPr" firstAttribute="top" secondItem="aQI-ZA-2Cb" secondAttribute="top" id="qkV-SR-N1m"/>
-                            <constraint firstItem="byu-vt-YPr" firstAttribute="trailing" secondItem="aQI-ZA-2Cb" secondAttribute="trailing" id="xN4-Ar-noN"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="aQI-ZA-2Cb"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ACv-JF-RNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9754" y="-406"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="Lmx-qQ-rDu">
@@ -2066,13 +2036,24 @@ Alumni</string>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full-Randolph" translatesAutoresizingMaskIntoConstraints="NO" id="NIb-W9-IAE">
                                             <rect key="frame" x="-4" y="0.0" width="417" height="751"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym3-B2-hfE">
+                                            <rect key="frame" x="0.0" y="0.0" width="409" height="733"/>
+                                            <color key="backgroundColor" red="0.035865015399999998" green="0.036494712429999999" blue="0.039428902879999998" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="40"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ym3-B2-hfE" secondAttribute="bottom" id="8yH-RC-oWR"/>
                                     <constraint firstItem="NIb-W9-IAE" firstAttribute="leading" secondItem="iVV-ZI-FIB" secondAttribute="leadingMargin" constant="-12" id="DaU-6h-sK6"/>
                                     <constraint firstItem="NIb-W9-IAE" firstAttribute="centerX" secondItem="iVV-ZI-FIB" secondAttribute="centerX" id="L5f-aE-v3r"/>
+                                    <constraint firstItem="Ym3-B2-hfE" firstAttribute="leading" secondItem="iVV-ZI-FIB" secondAttribute="leading" id="SaP-wD-0Y3"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="NIb-W9-IAE" secondAttribute="bottom" constant="-26" id="Uy6-Ep-sk9"/>
                                     <constraint firstItem="NIb-W9-IAE" firstAttribute="top" secondItem="iVV-ZI-FIB" secondAttribute="top" id="Z4m-Zw-ccf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ym3-B2-hfE" secondAttribute="trailing" id="heF-7X-R4h"/>
+                                    <constraint firstItem="Ym3-B2-hfE" firstAttribute="top" secondItem="iVV-ZI-FIB" secondAttribute="top" id="mOQ-rV-tHc"/>
                                 </constraints>
                             </collectionViewCell>
                         </cells>
@@ -3043,15 +3024,26 @@ Alumni</string>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coming Soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1Y-fa-rVJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="backgroundColor" red="0.035865015399999998" green="0.036494712429999999" blue="0.039428902879999998" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jBo-gx-V9f" firstAttribute="trailing" secondItem="9qL-X4-wPq" secondAttribute="trailing" id="0Pr-AO-HpT"/>
+                            <constraint firstItem="jBo-gx-V9f" firstAttribute="trailing" secondItem="P1Y-fa-rVJ" secondAttribute="trailing" id="0hM-Wt-lB1"/>
                             <constraint firstItem="9qL-X4-wPq" firstAttribute="top" secondItem="jBo-gx-V9f" secondAttribute="top" id="3Bz-Am-49B"/>
                             <constraint firstItem="DDJ-cd-GCH" firstAttribute="leading" secondItem="YKI-GP-eQQ" secondAttribute="leading" constant="8" id="CzJ-VD-7bB"/>
                             <constraint firstItem="9qL-X4-wPq" firstAttribute="leading" secondItem="jBo-gx-V9f" secondAttribute="leading" id="DFF-Fi-XsK"/>
                             <constraint firstItem="jBo-gx-V9f" firstAttribute="bottom" secondItem="DDJ-cd-GCH" secondAttribute="bottom" constant="8" id="X2j-NX-e4j"/>
+                            <constraint firstItem="P1Y-fa-rVJ" firstAttribute="top" secondItem="YKI-GP-eQQ" secondAttribute="top" id="aXf-My-72f"/>
+                            <constraint firstItem="P1Y-fa-rVJ" firstAttribute="leading" secondItem="jBo-gx-V9f" secondAttribute="leading" id="k3C-tA-Nud"/>
                             <constraint firstItem="DDJ-cd-GCH" firstAttribute="top" secondItem="9qL-X4-wPq" secondAttribute="bottom" constant="8" id="miX-F0-RWd"/>
+                            <constraint firstItem="jBo-gx-V9f" firstAttribute="bottom" secondItem="P1Y-fa-rVJ" secondAttribute="bottom" id="pdK-Vy-X8r"/>
                             <constraint firstAttribute="trailing" secondItem="DDJ-cd-GCH" secondAttribute="trailing" constant="8" id="zsi-Gq-aTl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jBo-gx-V9f"/>
@@ -3332,7 +3324,7 @@ Alumni</string>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bFt-Ws-hXU">
-                                            <rect key="frame" x="20" y="25" width="31.5" height="22"/>
+                                            <rect key="frame" x="20" y="26" width="31.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
@@ -3345,7 +3337,7 @@ Alumni</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2sF-vf-gSd">
-                                            <rect key="frame" x="20" y="50" width="3.5" height="1.5"/>
+                                            <rect key="frame" x="20" y="51" width="3.5" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
