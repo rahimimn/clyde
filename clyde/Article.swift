@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// This is an article
+/// This is an article struct used for the homepage
 struct Article{
     var articleUrl:String = ""
     var imageUrl: String = ""
