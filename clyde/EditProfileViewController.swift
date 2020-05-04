@@ -127,6 +127,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     //-----------------------------------------------------------------------------
     // MARK: View functions
     
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

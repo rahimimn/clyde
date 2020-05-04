@@ -23,6 +23,20 @@ class BingoViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
+    
     func addStrings(){
         let index = bingoStrings.count
         let numbers = randomSequenceGenerator(min: 0, max: index-1)

@@ -25,9 +25,24 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         linkToFaq.titleLabel?.numberOfLines = 3
         linkToFaq.titleLabel?.lineBreakMode = .byWordWrapping
         linkToFaq.titleLabel?.adjustsFontSizeToFitWidth = true
+        
     }
 
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
 
+    
     @IBAction func toFaq(_ sender: UIButton) {
         
         show("http://admissions.cofc.edu/faq/index.php")

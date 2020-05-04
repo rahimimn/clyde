@@ -18,6 +18,19 @@ class GamesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
 
     /*
     // MARK: - Navigation

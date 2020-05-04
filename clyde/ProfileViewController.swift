@@ -66,6 +66,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //--------------------------------------------------------------------
     // MARK: View functions
     
+    
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
+    
     // Sent to the view controller when the app recieves a memory warning. This is where variables can be taken out of memory to offload storage.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

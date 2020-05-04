@@ -32,6 +32,20 @@ class ResourcesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
+    
     //-------------------------------------------------------------------------
     // MARK: Table View Methods
 

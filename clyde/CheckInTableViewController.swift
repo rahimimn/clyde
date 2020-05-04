@@ -169,6 +169,8 @@ class CheckInTableViewController: UITableViewController {
     }
 
 }
+
+
     //-------------------------------------------------------------------------
     // Mark: Extension
     

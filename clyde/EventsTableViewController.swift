@@ -23,7 +23,17 @@ class EventsTableViewController: UIViewController {
     
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+        
+    }
     
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

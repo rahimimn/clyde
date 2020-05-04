@@ -307,7 +307,17 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
     
    // -------------------------------------------------------------------------
     
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+        
+    }
     
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+        
+    }
    
     }//class
     

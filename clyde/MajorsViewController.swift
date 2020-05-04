@@ -42,6 +42,20 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     //--------------------------------------------------------------------------
     // MARK: View Functions
     
+    
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
+    
     /// Overrides the viewDidLoad function. Adds the menu bar, adds the logo to the nav bar, adjusts font for major label and major description
     override func viewDidLoad() {
         super.viewDidLoad()
