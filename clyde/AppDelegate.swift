@@ -41,8 +41,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
         SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
         
-        //Uncomment following block to enable IDP Login flow.
-        // SalesforceSDK.shared().idpAppURIScheme = "sampleidpapp"
+        
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
             self.resetViewState {
                 self.initializeAppViewState()
@@ -58,41 +57,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.initializeAppViewState();
         
-        // If you wish to register for push notifications, uncomment the line below.  Note that,
-        // if you want to receive push notifications from Salesforce, you will also need to
-        // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
-        //
-        // SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
         
-        //Uncomment the code below to see how you can customize the color, textcolor,
-        //font and fontsize of the navigation bar
-        let loginViewConfig = SalesforceLoginViewControllerConfig()
-        
-        //Set showSettingsIcon to false if you want to hide the settings
-        //icon on the nav bar
-        //loginViewConfig.showsSettingsIcon = false
-        
-        //Set showNavBar to false if you want to hide the top bar
-        loginViewConfig.showsNavigationBar = false
-        //loginViewConfig.navigationBarColor = UIColor(red: 0.051, green: 0.765, blue: 0.733, alpha: 1.0)
-        //loginViewConfig.navigationBarTextColor = UIColor.white
-        //loginViewConfig.navigationBarFont = UIFont(name: "Helvetica", size: 16.0)
-        UserAccountManager.shared.loginViewControllerConfig = loginViewConfig
-        
-        // Uncomment the code below to customize the color, textcolor and font of the Passcode,
-        // Touch Id and Face Id lock screens.  To use this feature please enable inactivity timeout
-        // in your connected app.
-        //
-        //let passcodeViewConfig = AppLockViewControllerConfig()
-        //passcodeViewConfig.backgroundColor = UIColor.black
-        //passcodeViewConfig.primaryColor = UIColor.orange
-        //passcodeViewConfig.secondaryColor = UIColor.gray
-        //passcodeViewConfig.titleTextColor = UIColor.white
-        //passcodeViewConfig.instructionTextColor = UIColor.white
-        //passcodeViewConfig.borderColor = UIColor.yellow
-        //passcodeViewConfig.maxNumberOfAttempts = 3
-        //passcodeViewConfig.forcePasscodeLength = true
-        //UserAccountManager.shared.appLockViewControllerConfig = passcodeViewConfig
         
         AuthHelper.loginIfRequired {
             self.setupRootViewController()
@@ -100,29 +65,10 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-    {
-        //
-        // Uncomment the code below to register your device token with the push notification manager
-        //
-        //
-        // SFPushNotificationManager.sharedInstance().didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
-        // if (SFUserAccountManager.shared.currentUserAccount.credentials.accessToken != nil)
-        // {
-        //     SFPushNotificationManager.sharedInstance().registerSalesforceNotifications(completionBlock: nil, fail: nil)
-        // }
-    }
-    
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error )
-    {
-        // Respond to any push notification registration errors here.
-    }
+ 
+  
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        // Uncomment following block to enable IDP Login flow
-        // return  UserAccountManager.shared.handleIdentityProviderResponse(from: url, with: options)
         return false;
     }
     

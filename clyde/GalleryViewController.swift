@@ -77,11 +77,10 @@ class GalleryViewController: UIViewController {
 
     /// Displays the image urls for every image within the gallery
     func importGallery(){
-        var count = 0
         let index = imageAddresses.count
         let numbers = randomSequenceGenerator(min: 0, max: index-1)
         for image in imageViewList{
-            var num = numbers()
+            let num = numbers()
             urlToImage(imageUrlString: imageAddresses[num], image: image)
         }
     }
@@ -114,9 +113,7 @@ class GalleryViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: url){ data,response, error in
             guard let data = data, error == nil else {
-                print(error)
                 return}
-            print(error)
             DispatchQueue.main.async {
                 image.image = UIImage(data:data)
             }

@@ -42,7 +42,6 @@ class EventsTableViewController: UIViewController {
         self.addLogoToNav()
     }
 
-    // MARK: - Table view data source
     
 
 }

@@ -36,7 +36,7 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
     var questions = ["Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
     
   
-    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],[],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
+    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
     
     var answers = [] as Array
 
@@ -69,9 +69,9 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         }
         if (counter == questions.count){
             self.dismiss(animated: true, completion: nil)
-            insertIntoSoup()
+           // insertIntoSoup()
             updateToSalesforce()
-            print(answers)
+            //print(answers)
             defaults.set(false, forKey: "FirstLogin")
         }
         answer.text = ""
