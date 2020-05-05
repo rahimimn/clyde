@@ -20,8 +20,13 @@ class EventsTableViewController: UIViewController {
     
     
     
-    
+    //----------------------------------------------------------
+    // MARK: Outlets
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    
+    
+    //----------------------------------------------------------
+    // MARK: View functions
     
     /// Determines whether the page can autorotate
     override open var shouldAutorotate: Bool {

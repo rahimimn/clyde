@@ -10,17 +10,22 @@ import UIKit
 
 class BingoViewController: UIViewController {
     
+    //----------------------------------------------------------
+    // MARK: Outlets
     
     @IBOutlet var bingoBoards: [UIButton]!
     
+    //----------------------------------------------------------
+    // MARK: Variables
+    
     var bingoStrings = ["MUSC","Famous Alumni", "The Cistern", "Grad Ceremony", "Historic","Sotitile Theatre","Spoleto Festival","Jewish Studies", "Fraternity Row","Stern Center","Brick Walkways","Honors", "Addlestone Library"]
     
+    //----------------------------------------------------------
+    // MARK: View functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addStrings()
-
-        // Do any additional setup after loading the view.
     }
     
     
@@ -36,6 +41,8 @@ class BingoViewController: UIViewController {
     }
     
     
+    //----------------------------------------------------------
+    // MARK: Helper functions
     
     func addStrings(){
         let index = bingoStrings.count
@@ -51,15 +58,7 @@ class BingoViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
     /// Random sequnce of integers based on your range parameter. This was pulled and adapted from stack overflow: https://stackoverflow.com/questions/26457632/how-to-generate-random-numbers-without-repetition-in-swift
     ///
