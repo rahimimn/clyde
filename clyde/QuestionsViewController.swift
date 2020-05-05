@@ -15,8 +15,21 @@ import SwiftyJSON
 
 class QuestionsViewController: UIViewController, UITextFieldDelegate {
 
+    //----------------------------------------------------------
+    // MARK: Outlets
+    
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     @IBOutlet weak var linkToFaq: UIButton!
+    
+    //----------------------------------------------------------
+    // MARK: Button Action
+    @IBAction func toFaq(_ sender: UIButton) {
+       show("http://admissions.cofc.edu/faq/index.php")
+    }
+    
+    
+    //----------------------------------------------------------
+    // MARK: View functions
     
     override func viewDidLoad() {
         super.viewDidLoad()        //reveals menu
@@ -27,13 +40,16 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
         linkToFaq.titleLabel?.adjustsFontSizeToFitWidth = true
         
     }
-
+    
+    
+    override func loadView() {
+        super.loadView()
+    }
     
     /// Determines whether the page can autorotate
     override open var shouldAutorotate: Bool {
         return false
     }
-    
     
     /// Determines the supported orientations
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -41,18 +57,6 @@ class QuestionsViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-
-    
-    @IBAction func toFaq(_ sender: UIButton) {
-        
-        show("http://admissions.cofc.edu/faq/index.php")
-    }
-    
-
-
-    override func loadView() {
-        super.loadView()
-    }
 
     
 //-------------------------------------------------------------------------
