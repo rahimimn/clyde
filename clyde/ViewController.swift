@@ -308,6 +308,9 @@ class HomeViewController: UIViewController{
                     }
                     
                     //Loads counselor data into the store
+                    print("\n\n\n")
+                    print(counselorId)
+                    print("\n\n\n")
                     let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                     RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
                         print(error)
@@ -319,7 +322,9 @@ class HomeViewController: UIViewController{
                                 print("\nWeak or absent connection.")
                                 return
                         }
-                        print(results)
+                        print("\n\n\n")
+                        print(jsonResponse)
+                        print("\n\n\n")
                      //   SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
                         if (((strongSelf.store.soupExists(forName: "Counselor")))){
                             strongSelf.store.clearSoup("Counselor")

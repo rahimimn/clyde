@@ -173,6 +173,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 let id = jsonResponse["records"][0]["Id"].stringValue
                 let updateSelectedInterestRequest = RestClient.shared.requestForUpdate(withObjectType: "Selected_Interest__c", objectId: id, fields: updateRecord)
                 RestClient.shared.send(request: updateSelectedInterestRequest, onFailure: { (error, URLResponse) in
+                    
                     SalesforceLogger.d(type(of:self!), message:"Error invoking while sending update request: \(updateSelectedInterestRequest), error: \(String(describing: error))")
                     
                 }){(response, URLResponse) in

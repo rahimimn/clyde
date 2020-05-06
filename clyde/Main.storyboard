@@ -587,24 +587,24 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kqc-Lh-BMw">
-                                                                <rect key="frame" x="0.0" y="35" width="375" height="29.5"/>
+                                                                <rect key="frame" x="0.0" y="35" width="375" height="23"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnC-5i-SFR">
-                                                                        <rect key="frame" x="0.0" y="3.5" width="125" height="22"/>
+                                                                        <rect key="frame" x="0.0" y="0.5" width="125" height="22"/>
                                                                         <state key="normal" image="facebook.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showFacebook:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="6FT-yd-LdV"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5il-QN-Z6P">
-                                                                        <rect key="frame" x="125" y="3.5" width="125" height="22"/>
+                                                                        <rect key="frame" x="125" y="0.5" width="125" height="22"/>
                                                                         <state key="normal" image="instagram.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showInstagram:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="5ZQ-fA-hww"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oek-JG-cUA">
-                                                                        <rect key="frame" x="250" y="3.5" width="125" height="22"/>
+                                                                        <rect key="frame" x="250" y="0.5" width="125" height="22"/>
                                                                         <state key="normal" image="twitter.jpeg"/>
                                                                         <connections>
                                                                             <action selector="showTwitter:" destination="tkJ-xS-pVa" eventType="touchUpInside" id="krz-MI-gkg"/>
@@ -613,7 +613,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoR-Yk-gaN">
-                                                                <rect key="frame" x="0.0" y="64.5" width="375" height="435.5"/>
+                                                                <rect key="frame" x="0.0" y="58" width="375" height="442"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2019, College of Charleston Office of Admissions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byQ-Ag-Azy">
                                                                         <rect key="frame" x="5" y="5" width="365" height="19"/>
@@ -841,13 +841,13 @@
                                 <rect key="frame" x="0.0" y="430.5" width="375" height="68.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZn-sg-XT2">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nTX-34-YG5">
-                                        <rect key="frame" x="0.0" y="68.5" width="375" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="68" width="375" height="0.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -900,7 +900,7 @@
                                 <variation key="heightClass=compact-widthClass=regular" spacing="8"/>
                                 <variation key="heightClass=regular-widthClass=compact" spacing="8"/>
                             </stackView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-OY-UZQ">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-OY-UZQ">
                                 <rect key="frame" x="20" y="152" width="335" height="262.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="366" id="8wi-0n-CSk"/>
@@ -2394,13 +2394,13 @@ Alumni</string>
                                                         <rect key="frame" x="0.0" y="348.5" width="345" height="29.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interested in the Honors College?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-bg-uHm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="258.5" height="29.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="262" height="29.5"/>
                                                                 <fontDescription key="fontDescription" name="ACaslonPro-Regular" family="Adobe Caslon Pro" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYP-sb-CR9">
-                                                                <rect key="frame" x="238.5" y="0.0" width="106.5" height="29.5"/>
+                                                                <rect key="frame" x="242" y="0.0" width="103" height="29.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>

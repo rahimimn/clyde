@@ -170,8 +170,14 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
             let counserlorImage = record[0][4]
             DispatchQueue.main.async {
                 self.aboutMeText.text = counselorAbout
+                self.aboutMeText.adjustsFontForContentSizeCategory = true
+                
                 self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                self.aboutLabel.adjustsFontForContentSizeCategory = true
+
                 self.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                self.contactLabel.adjustsFontForContentSizeCategory = true
+
                 self.name = counselorName
                 self.counselorName.text = counselorName
                 self.counselorEmail.setTitle("Email: \(counselorEmail)", for: .normal)
@@ -187,7 +193,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 
                 let task = URLSession.shared.dataTask(with: url){ data,response, error in
                     guard let data = data, error == nil else {return}
-                    print(error!)
                     DispatchQueue.main.async {
                         self.counselorImage.image = UIImage(data:data)
                         self.email = counselorEmail
