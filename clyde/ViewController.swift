@@ -106,6 +106,18 @@ class HomeViewController: UIViewController{
         
     }
     
+    /// Determines whether the page can autorotate
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    
+    /// Determines the supported orientations
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
 
 //------------------------------------------------------------------------
     // MARK: Link functions
@@ -175,9 +187,7 @@ class HomeViewController: UIViewController{
         
         let task = URLSession.shared.dataTask(with: url){ data,response, error in
             guard let data = data, error == nil else {
-                print(error)
                 return}
-            print(error)
             DispatchQueue.main.async {
                 button.setImage(UIImage(data:data), for: .normal)
             }
@@ -208,18 +218,7 @@ class HomeViewController: UIViewController{
     }
     
     
-    /// Determines whether the page can autorotate
-    override open var shouldAutorotate: Bool {
-        return false
-    }
-    
-    
-    /// Determines the supported orientations
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    
+
     
  
     //-------------------------------------------------------------------------------
@@ -230,7 +229,7 @@ class HomeViewController: UIViewController{
     /// Loads salesforce data into store
     func loadData(){
         
-        
+        //Creation of the loading indicator 
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0);
         loadingIndicator.center = homeView.center
@@ -252,6 +251,9 @@ class HomeViewController: UIViewController{
                 self?.userId = id
                 self!.defaults.set(id,forKey: "UserId")
             }
+            print("\n\n\nThe user is")
+            print(self?.userId)
+            print("\n\n\n\n")
             let userIdRequest = RestClient.shared.request(forQuery: "Select Name, FirstName, LastName, Id, Email, ContactId From User WHERE Id = '\(id)'")
             
             RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
@@ -263,6 +265,8 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
+                print(results)
+
                 let jsonContact = JSON(response)
                 let contactId = jsonContact["records"][0]["ContactId"].stringValue
                 let firstName = jsonContact["records"][0]["FirstName"].stringValue
@@ -282,6 +286,7 @@ class HomeViewController: UIViewController{
                 //Loads contactData into store
                 let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Email = '\(email)'")
                 RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+                    print(error)
                 }) { [weak self] (response, urlResponse) in
                     guard let strongSelf = self,
                         let jsonResponse = response as? Dictionary<String, Any>,
@@ -290,6 +295,8 @@ class HomeViewController: UIViewController{
                             print("\nWeak or absent connection.")
                             return
                     }
+                    print(results)
+
                     let jsonContact = JSON(response)
                     let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                     
@@ -303,6 +310,7 @@ class HomeViewController: UIViewController{
                     //Loads counselor data into the store
                     let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
                     RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
+                        print(error)
                     }) { [weak self] (response, urlResponse) in
                         guard let strongSelf = self,
                             let jsonResponse = response as? Dictionary<String, Any>,
@@ -311,6 +319,7 @@ class HomeViewController: UIViewController{
                                 print("\nWeak or absent connection.")
                                 return
                         }
+                        print(results)
                      //   SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
                         if (((strongSelf.store.soupExists(forName: "Counselor")))){
                             strongSelf.store.clearSoup("Counselor")
@@ -323,6 +332,7 @@ class HomeViewController: UIViewController{
             
             let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
             RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
+                print(error)
             }) { [weak self] (response, urlResponse) in
                 guard let strongSelf = self,
                     let jsonResponse = response as? Dictionary<String, Any>,
