@@ -158,12 +158,59 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
-                print(records!)
+                print(records?.count)
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                 let record = ["Admissions Office","843-953-5670", "At the College of Charleston, your education is about much more than your degree. It's about discovery, community, and connection. We encourage you to start now. It's never too late to build your network, connect with your counselor. Making a connection with your counselor can make a big impact on you and your future. ","admissions@cofc.edu","https://c.cs44.content.force.com/servlet/servlet.ImageServer?id=0156f00003Rwc21&oid=00D7A0000009Quh&lastMod=1581100235000"]
+                let counselorName = record[0]
+                print(counselorName)
+                let counselorPhone = record[1]
+                let counselorAbout = record[2]
+                let counselorEmail = record[3]
+                let counserlorImage = record[4]
+                DispatchQueue.main.async {
+                    self.aboutMeText.text = counselorAbout
+                    self.aboutMeText.adjustsFontForContentSizeCategory = true
+                    
+                    self.aboutLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    self.aboutLabel.adjustsFontForContentSizeCategory = true
+                    
+                    self.contactLabel.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    self.contactLabel.adjustsFontForContentSizeCategory = true
+                    
+                    self.name = counselorName
+                    self.counselorName.text = counselorName
+                    self.counselorEmail.setTitle("Email: \(counselorEmail)", for: .normal)
+                    self.phoneText.setTitle("Phone: \(counselorPhone)", for: .normal)
+                    self.contactLabel.text = "Contact Information"
+                    self.aboutLabel.text = "About"
+                    self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
+                    self.instagramButton.setTitle("@cofcadmissions", for: .normal)
+                    self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
+                    
+                    if (URL(string: counserlorImage) != nil){
+                        let url = URL(string: counserlorImage)!
+                        
+                        let task = URLSession.shared.dataTask(with: url){ data,response, error in
+                            guard let data = data, error == nil else {return}
+                            DispatchQueue.main.async {
+                                self.counselorImage.image = UIImage(data:data)
+                                self.email = counselorEmail
+                                loadingIndicator.stopAnimating()
+                            }
+                        }
+                        task.resume()
+                        
+                    }
+                    else{
+                        print("Where is the image?")
+                        
+                    }
+                }
                 return
             }
             
             let counselorName = record[0][0]
+            print(counselorName)
             let counselorPhone = record[0][1]
             let counselorAbout = record[0][2]
             let counselorEmail = record[0][3]

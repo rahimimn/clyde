@@ -81,7 +81,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     /// - Name - Email - Description - ImageUrl - Id - ContactEmail
     func loadFromStore(){
         // Creates the query spec. Query specs must be formatted in this way.
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c}, {Major:Id}, {Major:Contact_Email__c} from {Major}", pageSize: 60)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Major:Name},{Major:Website__c},{Major:Description__c},{Major:Image_Url__c}, {Major:Id}, {Major:Contact_Email__c} from {Major}", pageSize: 100)
         do{
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
@@ -161,7 +161,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 let createSelectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: createRecord)
                 RestClient.shared.send(request: createSelectedInterestRequest, onFailure: { (error, URLResponse) in
                     SalesforceLogger.d(type(of:self!), message:"Error invoking while sending create request: \(createSelectedInterestRequest), error: \(String(describing: error))")
-                    
+                    print(error)
                 }){(response, URLResponse) in
                     //Creates a save alert to be presented whenever the user saves their information
                     os_log("\nSelected Interest successfully created")

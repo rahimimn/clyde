@@ -72,7 +72,6 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
             self.dismiss(animated: true, completion: nil)
            // insertIntoSoup()
             updateToSalesforce()
-            //print(answers)
             
         }
         answer.text = ""
@@ -136,6 +135,7 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         record["TargetX_SRMb__Graduation_Year__c"] = answers[14]
         record["Status_Category__c"] = "Suspect"
         record["AccountId"] = "001G000000t0ynOIAQ"
+        record["First_Login__c"] = 1
         
         if answers[2] as! String == "Yes"{
             record["Text_Message_Consent__c"] = "true"
