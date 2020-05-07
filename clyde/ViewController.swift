@@ -272,8 +272,7 @@ class HomeViewController: UIViewController{
                 let firstName = jsonContact["records"][0]["FirstName"].stringValue
                 let lastName = jsonContact["records"][0]["LastName"].stringValue
                 self!.defaults.set(contactId, forKey: "ContactId")
-                self!.defaults.set(firstName, forKey: "FirstName")
-                self!.defaults.set(lastName, forKey: "LastName")
+               
 
                 
                 //SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")

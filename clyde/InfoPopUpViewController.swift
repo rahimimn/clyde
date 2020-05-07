@@ -33,10 +33,10 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
     
     let defaults = UserDefaults.standard
     
-    var questions = ["Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
+    var questions = ["Your first name:", "Your last name:","Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Are you interested in the Honors College?","Your student type:",""]
     
   
-    var possibleAnswers = [[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
+    var possibleAnswers = [[],[],[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"],[],["Female", "Male", "Other"],["Yes","No"],["Freshman","Transfer"],[]]
     
     var answers = [] as Array
 
@@ -114,16 +114,23 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
     /// Pushes answers to salesforce
     private func updateToSalesforce(){
         var record = [String: Any]()
-        record["MobilePhone"] = answers[1]
-        record["Text_Message_Consent__c"] = answers[2]
-        record["TargetX_SRMb__Anticipated_Major__c"] = answers[3]
-        record["MailingStreet"] = answers[4]
-        record["MailingCity"] = answers[5]
-        record["MailingPostalCode"] = answers[6]
-        record["MailingState"] = answers[7]
-        record["TargetX_SRMb__Gender__c"] = answers[8]
-        record["Honors_College_Interest_Check__c"] = answers[9]
-        record["Status_Category__c"] = answers[10]
+        self.defaults.set(answers, forKey: "infoArray")
+        record["FirstName"] = answers[1]
+        self.defaults.set(answers[1],forKey: "FirstName")
+
+        record["LastName"] = answers[2]
+         self.defaults.set(answers[2],forKey: "LastName")
+        
+        record["MobilePhone"] = answers[3]
+        record["Text_Message_Consent__c"] = answers[4]
+        record["TargetX_SRMb__Anticipated_Major__c"] = answers[5]
+        record["MailingStreet"] = answers[6]
+        record["MailingCity"] = answers[7]
+        record["MailingPostalCode"] = answers[8]
+        record["MailingState"] = answers[9]
+        record["TargetX_SRMb__Gender__c"] = answers[10]
+        record["Honors_College_Interest_Check__c"] = answers[11]
+        record["Status_Category__c"] = answers[12]
         
         if answers[2] as! String == "Yes"{
             record["Text_Message_Consent__c"] = "true"

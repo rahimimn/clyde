@@ -94,9 +94,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     /// Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
+        
+
         self.loadDataFromStore()
         self.createMap()
-        self.userName.text = "\(defaults.string(forKey: "FirstName")!)  \(defaults.string(forKey: "LastName")!)"
+        let name = "\(defaults.string(forKey: "FirstName")!)  \(defaults.string(forKey: "LastName")!)"
+        print("\n\n")
+        print(defaults.object(forKey: "infoArray")!)
+        self.userName.text = name
+        self.userName.textColor = UIColor.black
+        
         // Sets the image style
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
