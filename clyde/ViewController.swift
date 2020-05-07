@@ -94,8 +94,9 @@ class HomeViewController: UIViewController{
         super.loadView()
         // self.loadFromStore()
         //self.loadDataIntoStore()
-        self.loadData()
         self.loadSchools()
+
+        self.loadData()
     }
     
     // Notifies that the view controller is about to be added to memory
@@ -365,7 +366,7 @@ class HomeViewController: UIViewController{
         let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
         RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
             
-            print("-----------------------------------------------------")
+            print("-----------------------Inside loadSchools------------------------------")
             print(error)
             
             
@@ -374,15 +375,17 @@ class HomeViewController: UIViewController{
                 let jsonResponse = response as? Dictionary<String, Any>,
                 let results = jsonResponse["records"] as? [Dictionary<String, Any>]
                 
+                
                 else{
                     print("\nWeak or absent connection.")
                     return
             }
-            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
+            print(results)            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
             if (((strongSelf.store.soupExists(forName: "School")))){
                 strongSelf.store.clearSoup("School")
                 strongSelf.store.upsert(entries: results, forSoupNamed: "School")
                 os_log("\n\n----------------------SmartStore loaded records for school.-------------------------------", log: strongSelf.mylog, type: .debug)
+                
             }
         }
     }

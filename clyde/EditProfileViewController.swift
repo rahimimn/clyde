@@ -242,7 +242,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             
         }
         
-        self.pullImageFromFileManager(imageName:"UserPhoto")    }
+        //self.pullImageFromFileManager(imageName:"UserPhoto")
+        
+    }
     
     
     //-------------------------------------------------------------------------
@@ -429,6 +431,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let smartStore = self.store
         do {
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            print("hu\n")
             print(records!)
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
@@ -513,6 +516,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            if (records?.count == 0){
+                return "001G000000t0ynOIAQ"
+            }
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return schoolId
@@ -536,6 +542,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
+            if(records?.count == 0){
+                return "Unknown School"
+            }
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return schoolName

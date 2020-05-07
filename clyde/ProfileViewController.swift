@@ -100,6 +100,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.createMap()
         let name = "\(defaults.string(forKey: "FirstName")!)  \(defaults.string(forKey: "LastName")!)"
         print("\n\n")
+        
         print(defaults.object(forKey: "infoArray")!)
         //self.userName
         self.userName.text = name
@@ -238,17 +239,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         var schoolName = ""
         let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 10000)
         print(id)
+        
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else {
+            if(records?.count == 0){
+                return "Unknown School"
+            }
+            guard let record = records as? [[String]]
+                else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return schoolName
             }
-            print(record)
+            print("\n\n")
+            print(records)
             let name = (record[0][0])
             schoolName = name
         }//do
         catch let e as Error?{
+            print("what")
             print(e as Any)
         }
         return schoolName
@@ -275,7 +283,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
                 return
             }
+            print("this is from the store\n\n")
             print(record)
+            print("\n\n")
             let phone = record[0][1]
             let address = record[0][2]
             let genderId = record[0][6]
