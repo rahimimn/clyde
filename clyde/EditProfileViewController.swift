@@ -110,8 +110,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if self.studentStatus == true{
-            self.insertIntoSoup()
-            self.syncUp()
+            //self.insertIntoSoup()
+            //self.syncUp()
             self.updateSalesforceData()
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{
@@ -407,15 +407,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 //Sends the update request
                 RestClient.shared.send(request: updateRequest, onFailure: { (error, URLResponse) in
                     SalesforceLogger.d(type(of:self), message:"Error invoking while sending update request: \(updateRequest), error: \(String(describing: error))")
+                    DispatchQueue.main.async {
+
                     //Creates a save alert to be presented whenever the user saves their information
                     let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                     self.present(errorAlert, animated: true)
+                    }
                 }){(response, URLResponse) in
+                    DispatchQueue.main.async {
+
                     //Creates a save alert to be presented whenever the user saves their information
                     let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
-                    saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                    self.present(saveAlert, animated: true)
+                   saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(saveAlert, animated: true)
+                        
+                    }
                     os_log("\nSuccessful response received")}
         
             }
@@ -644,7 +651,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.isEnabled = self.studentStatus
-        self.mobileSwitch.isEnabled = false
+        self.mobileSwitch.isEnabled = self.studentStatus
         self.honorsSwitch.isEnabled = self.studentStatus
         return self.studentStatus
     }

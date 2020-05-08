@@ -131,6 +131,7 @@ class StartMapViewController: UIViewController {
        //let createRequest = RestClient.shared.requestForCreate(withObjectType: "Campus_Tour__c", fields: createRecord)
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
+            print("error in register student")
             print(error)
             print("Student was not registered for event.")
         }) { [weak self] (response, urlResponse) in
