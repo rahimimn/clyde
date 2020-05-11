@@ -45,7 +45,6 @@
 		B26924872301E39500C480EF /* icons8-thumbs-up-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B26924862301E39500C480EF /* icons8-thumbs-up-100.png */; };
 		B269248B2301E4DB00C480EF /* thumbsDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248A2301E4DB00C480EF /* thumbsDown.png */; };
 		B269248D2301E51400C480EF /* sideThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = B269248C2301E51300C480EF /* sideThumb.png */; };
-		B27609FF22CA4FD400A122F7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27609FE22CA4FD300A122F7 /* user.swift */; };
 		B2760A0122CA8FD400A122F7 /* icons8-Org Unit.png in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */; };
 		B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */; };
 		B2760A0622CA95B700A122F7 /* banner037.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2760A0522CA95B700A122F7 /* banner037.jpg */; };
@@ -169,7 +168,6 @@
 		B26924862301E39500C480EF /* icons8-thumbs-up-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-thumbs-up-100.png"; sourceTree = "<group>"; };
 		B269248A2301E4DB00C480EF /* thumbsDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbsDown.png; sourceTree = "<group>"; };
 		B269248C2301E51300C480EF /* sideThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideThumb.png; sourceTree = "<group>"; };
-		B27609FE22CA4FD300A122F7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		B2760A0022CA8FD200A122F7 /* icons8-Org Unit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Org Unit.png"; sourceTree = "<group>"; };
 		B2760A0322CA949800A122F7 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
 		B2760A0522CA95B700A122F7 /* banner037.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner037.jpg; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 		4FD6C4761B754AF1002F9F90 /* clyde */ = {
 			isa = PBXGroup;
 			children = (
-				B27609FE22CA4FD300A122F7 /* user.swift */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				B227D07422BBD80900AA0634 /* Main.storyboard */,
 				B2D8013C22D8F9230050E376 /* extensions.swift */,
@@ -816,7 +813,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D44895245CB1C200A655E9 /* Article.swift in Sources */,
-				B27609FF22CA4FD400A122F7 /* user.swift in Sources */,
 				B2211D4422F872F800D127DB /* InfoPopUpViewController.swift in Sources */,
 				B227D0A922BBD94500AA0634 /* SlideInTableViewController.swift in Sources */,
 				B2760A0422CA949800A122F7 /* ResourcesTableViewController.swift in Sources */,

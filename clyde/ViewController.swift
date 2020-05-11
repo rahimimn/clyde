@@ -92,10 +92,8 @@ class HomeViewController: UIViewController{
     // Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
-        // self.loadFromStore()
-        //self.loadDataIntoStore()
         self.loadSchools()
-
+        self.loadMajors()
         self.loadData()
     }
     
@@ -241,7 +239,7 @@ class HomeViewController: UIViewController{
         homeView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
         
-        //Pulls the user
+        //Pulls the user info (specifically the id and email)
         let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
@@ -252,10 +250,9 @@ class HomeViewController: UIViewController{
                 self?.userId = id
                 self!.defaults.set(id,forKey: "UserId")
             }
-            print("\n\n\nThe user is")
-            print(self?.userId as Any)
-            print("\n\n\n\n")
-            let userIdRequest = RestClient.shared.request(forQuery: "Select Name, FirstName, LastName, Id, Email, ContactId From User WHERE Id = '\(id)'")
+            
+            //Pulls the user info (specifically contactid)
+            let userIdRequest = RestClient.shared.request(forQuery: "Select ContactId From User WHERE Id = '\(id)'")
             
             RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
             }) { [weak self] (response, urlResponse) in
@@ -279,7 +276,7 @@ class HomeViewController: UIViewController{
                     strongSelf.store.clearSoup("User")
                     strongSelf.store.upsert(entries: results, forSoupNamed: "User")
                     os_log("\n\n----------------------SmartStore loaded records for user.-------------------------------", log: strongSelf.mylog, type: .debug)
-                }else{}
+                }
                 
                 //Loads contactData into store
                 let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Email = '\(email)'")
@@ -332,44 +329,41 @@ class HomeViewController: UIViewController{
                     }
                 }
             }
-            
-            let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
-            RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
-                print(error)
-            }) { [weak self] (response, urlResponse) in
-                guard let strongSelf = self,
-                    let jsonResponse = response as? Dictionary<String, Any>,
-                    let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                    else{
-                        print("\nWeak or absent connection.")
-                        return
-                }
-               // SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-                if (((strongSelf.store.soupExists(forName: "Major")))) {
-                    strongSelf.store.clearSoup("Major")
-                    strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
-                    os_log("\n\n----------------------SmartStore loaded records for majors.-------------------------------", log: strongSelf.mylog, type: .debug)
-                }
-        
-                DispatchQueue.main.async {
-                    loadingIndicator.stopAnimating()
-                }
+            DispatchQueue.main.async {
+                loadingIndicator.stopAnimating()
             }
+            
         }//completion
         
     }//func
         
-    
+    func loadMajors(){
+        let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
+        RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
+            print(error)
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            // SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
+            if (((strongSelf.store.soupExists(forName: "Major")))) {
+                strongSelf.store.clearSoup("Major")
+                strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
+                os_log("\n\n----------------------SmartStore loaded records for majors.-------------------------------", log: strongSelf.mylog, type: .debug)
+            }
+            
+           
+        }
+    }
     
     /// Loads school data into store
     func loadSchools(){
         let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
         RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
-            
-            print("-----------------------Inside loadSchools------------------------------")
-            print(error)
-            
-            
         }) { [weak self] (response, urlResponse) in
             guard let strongSelf = self,
                 let jsonResponse = response as? Dictionary<String, Any>,
@@ -380,7 +374,6 @@ class HomeViewController: UIViewController{
                     print("\nWeak or absent connection.")
                     return
             }
-            print(results)            //SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(schoolRequest)")
             if (((strongSelf.store.soupExists(forName: "School")))){
                 strongSelf.store.clearSoup("School")
                 strongSelf.store.upsert(entries: results, forSoupNamed: "School")
@@ -484,6 +477,7 @@ class HomeViewController: UIViewController{
 
 
     /// Loads data from store and presents on edit profile
+    /// Not in use
     func loadFromStore(){
         if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:First_Login__c} from {Contact}", pageSize: 1),
             let smartStore = self.storeO,
@@ -499,6 +493,7 @@ class HomeViewController: UIViewController{
 
 
     /// Pulls the url for the user's fullphotourl.
+    /// Not in use
     func pullImage(){
         print("-----------------------------------------------------------")
         let id = defaults.string(forKey: "UserId")
@@ -527,8 +522,6 @@ class HomeViewController: UIViewController{
         
     }
     
-
-
 
 }//class
     
