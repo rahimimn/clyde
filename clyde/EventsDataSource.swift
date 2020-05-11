@@ -114,7 +114,7 @@ class EventsDataSource: NSObject {
     
     @objc func returnEventName() -> String{
 
-       let eventId = "hi"
+       let eventId = "Event Name"
         return eventId}
 }
 
