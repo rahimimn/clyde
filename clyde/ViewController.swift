@@ -102,8 +102,6 @@ class HomeViewController: UIViewController{
     // Notifies that the view controller is about to be added to memory
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //self.loadView()
-        // self.loadDataIntoStore()
         
     }
     
@@ -242,6 +240,8 @@ class HomeViewController: UIViewController{
 
         homeView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
+        
+        //Pulls the user
         let userIdRequest = RestClient.shared.requestForUserInfo()
         RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
@@ -266,12 +266,10 @@ class HomeViewController: UIViewController{
                         print("\nWeak or absent connection.")
                         return
                 }
-                print(results)
 
-                let jsonContact = JSON(response)
+                let jsonContact = JSON(response!)
                 let contactId = jsonContact["records"][0]["ContactId"].stringValue
-                let firstName = jsonContact["records"][0]["FirstName"].stringValue
-                let lastName = jsonContact["records"][0]["LastName"].stringValue
+                
                 self!.defaults.set(contactId, forKey: "ContactId")
                
 
@@ -281,7 +279,7 @@ class HomeViewController: UIViewController{
                     strongSelf.store.clearSoup("User")
                     strongSelf.store.upsert(entries: results, forSoupNamed: "User")
                     os_log("\n\n----------------------SmartStore loaded records for user.-------------------------------", log: strongSelf.mylog, type: .debug)
-                }
+                }else{}
                 
                 //Loads contactData into store
                 let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Email = '\(email)'")
