@@ -13,8 +13,9 @@
         "soupName": "School",
         "indexes": [
             { "path": "Id", "type": "string"},
-            { "path": "Name", "type": "string"}
-            
+            { "path": "Name", "type": "string"},
+            { "path": "BillingState", "type": "string"},
+            { "path": "BillingCity", "type": "string"}
         ]
     },
     {

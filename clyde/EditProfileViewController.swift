@@ -110,8 +110,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// Method that determines actions after "save" button pressed
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if self.studentStatus == true{
-            //self.insertIntoSoup()
-            //self.syncUp()
             self.updateSalesforceData()
             sender.backgroundColor = #colorLiteral(red: 0.7158062458, green: 0.1300250292, blue: 0.2185922265, alpha: 1)
         }else{
@@ -149,14 +147,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func loadView() {
         super.loadView()
        
-        //self.syncDown()
         self.loadFromStore()
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let dataArray = loadSchoolsFromStore()
 
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
@@ -184,8 +180,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         genderTextField.delegate = self
         studentTypeTextField.delegate = self
         
-        let schoolid = getSchoolId(name: "Shelterwood School")
-        print(schoolid)
         
         // Calls showDatePicker
         showDatePicker()
@@ -332,46 +326,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     //------------------------------------------------------------------------
     // MARK: Salesforce related functions
     
-    /// Syncs the store to Salesforce
-    func syncDown(){
-        if let smartStore = self.store,
-            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-            do {
-                try syncMgr.reSync(named: "syncDownContact") { [weak self] syncState in
-                    if syncState.isDone() {
-                        self?.loadFromStore()
-                        
-                    }
-                }
-            } catch {
-                print("Unexpected sync error: \(error).")
-            }
-        }    }
+    
     
   
-    
-    func syncUp(){
-        if let smartStore = self.store,
-            let  syncMgr = SyncManager.sharedInstance(store: smartStore) {
-            do {
-                try syncMgr.reSync(named: "syncUpContact") {
-                    syncState in
-                    if  syncState.hasFailed(){
-                        print("Sync failed")
-                    }
-                    if syncState.isDone() {
-                        //                        let alert = UIAlertController(title: "Information Saved", message: "Clyde Club saved your information.", preferredStyle: .alert)
-                        //
-                        //                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                        //
-                        //                        self?.present(alert, animated: true)
-                        print("Sync Done")
-                    }
-                }
-            } catch {
-                print("-----------------Unexpected sync error------------------\(error).")
-            }
-        }     }
     
    
     /// Sends data into Salesforce, this will need to be edited at some point
@@ -415,13 +372,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                     self.present(errorAlert, animated: true)
                     }
                 }){(response, URLResponse) in
+                 
                     DispatchQueue.main.async {
-
                     //Creates a save alert to be presented whenever the user saves their information
                     let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
                    saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                         self.present(saveAlert, animated: true)
-                        
+                        self.insertIntoSoup()
                     }
                     os_log("\nSuccessful response received")}
         
@@ -438,7 +395,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             let smartStore = self.store
         do {
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            print("hu\n")
             print(records!)
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
@@ -507,7 +463,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             print(e as Any)
             os_log("\n%{public}@", log: self.mylog, type: .debug, e!.localizedDescription)
         }
-        print("3 am")
         
     }
     
@@ -597,32 +552,35 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Pulls data from the user form and upserts it into the "Contact" soup
     func insertIntoSoup(){
-        let JSONData : [String:Any] = ["Name": self.userName.text!,
-                                       "MobilePhone": self.mobileTextField.text!,
-                                       "MailingStreet": self.addressTextField.text!,
-                                       "MailingCity": self.cityTextField.text!,
-                                       "MailingState": self.stateTextField.text!,
-                                       "MailingPostalCode": self.zipTextField.text!,
-                                       "Gender_Identity__c": self.genderIdentityTextField.text!,
-                                       "Email": emailTextField.text!,
-                                       "Birthdate": birthDateTextField.text!,
-                                       "TargetX_SRMb__Gender__c": genderTextField.text!,
-                                       "TargetX_SRMb__Student_Type__c": studentTypeTextField.text!,
-                                       "TargetX_SRMb__Graduation_Year__c": graduationYearTextField.text!,
-                                       "Ethnicity_Non_Applicants__c": ethnicOriginTextField.text!,
-                                       "Text_Message_Consent__c": self.mobileOptInText,
-                                       "AccountId": self.getSchoolId(name: self.highSchoolTextField.text!),
-                                       "Honors_College_Interest_Check__c": honorsCollegeInterestText,
-                                       "__locally_deleted__": false,
-                                       "__locally_updated__": true,
-                                       "__locally_created__": false,
-                                       "__local__": true,]
-        
-        if (((self.store?.soupExists(forName: "Contact"))!)){
-            self.store?.clearSoup("Contact")
-            self.store?.upsert(entries: [JSONData], forSoupNamed: "Contact")
-            os_log("\n\nSmartStore loaded records for contact.", log: self.mylog, type: .debug)
+        let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Id = '\(self.defaults.string(forKey: "ContactId")!)'")
+        RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
+            print(error)
+        }) { [weak self] (response, urlResponse) in
+            guard let strongSelf = self,
+                let jsonResponse = response as? Dictionary<String, Any>,
+                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
+                else{
+                    print("\nWeak or absent connection.")
+                    return
+            }
+            print(results)
+            
+            let jsonContact = JSON(response)
+            let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+            let state = jsonContact["records"][0]["MailingState"].stringValue
+            DispatchQueue.main.async {
+                self!.defaults.set(state,forKey: "State")
+                
+            }
+            
+            // SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
+            if (((strongSelf.store!.soupExists(forName: "Contact")))){
+                strongSelf.store!.clearSoup("Contact")
+                strongSelf.store!.upsert(entries: results, forSoupNamed: "Contact")
+                os_log("\n\n----------------------SmartStore loaded records for contact.-------------------------------", log: strongSelf.mylog, type: .debug)
+            }
         }
+        
     }
     
     

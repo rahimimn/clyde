@@ -92,9 +92,10 @@ class HomeViewController: UIViewController{
     // Creates the view that the viewController manages
     override func loadView() {
         super.loadView()
+        self.loadData()
         self.loadSchools()
         self.loadMajors()
-        self.loadData()
+        
     }
     
     // Notifies that the view controller is about to be added to memory
@@ -294,6 +295,11 @@ class HomeViewController: UIViewController{
 
                     let jsonContact = JSON(response)
                     let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
+                    let state = jsonContact["records"][0]["MailingState"].stringValue
+                    DispatchQueue.main.async {
+                        self!.defaults.set(state,forKey: "State")
+
+                    }
                     
                    // SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
                     if (((strongSelf.store.soupExists(forName: "Contact")))){
@@ -362,18 +368,19 @@ class HomeViewController: UIViewController{
     
     /// Loads school data into store
     func loadSchools(){
-        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id From Account")
+        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id, BillingState, BillingCity From Account WHERE BillingState = '\(self.defaults.string(forKey: "State")!)'")
         RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
             guard let strongSelf = self,
                 let jsonResponse = response as? Dictionary<String, Any>,
                 let results = jsonResponse["records"] as? [Dictionary<String, Any>]
                 
-                
                 else{
                     print("\nWeak or absent connection.")
                     return
             }
+            print(results)
+
             if (((strongSelf.store.soupExists(forName: "School")))){
                 strongSelf.store.clearSoup("School")
                 strongSelf.store.upsert(entries: results, forSoupNamed: "School")
