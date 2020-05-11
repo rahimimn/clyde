@@ -146,8 +146,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
             let addressRequest = RestClient.shared.request(forQuery: "SELECT Name, Event_City__c,Event_State__c,Event_Street__c,Event_Zip__c, TargetX_Eventsb__Start_Time_TZ_Adjusted__c  FROM TargetX_Eventsb__OrgEvent__c WHERE Id = '\(eventOrgId)'")
             RestClient.shared.send(request: addressRequest, onFailure: {(error, urlResponse) in
                 
-                print(error)
-                
             }) { [weak self] (response, urlResponse) in
                 guard let _ = self,
                     let jsonResponse = response as? Dictionary<String, Any>,
@@ -257,7 +255,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         calculateDirections.calculate { [weak self] response, error in
             guard let unwrappedResponse = response else {
-                print(error)
                 return }
             
             for route in unwrappedResponse.routes {
@@ -267,7 +264,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
                 
                 for step in route.steps {
                     self?.directionsArray.append(step.instructions)
-                    print(self?.directionsArray)
                 }
                 self?.directionsLabel.text = "Your directions are ready!"
             }

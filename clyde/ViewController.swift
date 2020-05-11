@@ -253,7 +253,7 @@ class HomeViewController: UIViewController{
                 self!.defaults.set(id,forKey: "UserId")
             }
             print("\n\n\nThe user is")
-            print(self?.userId)
+            print(self?.userId as Any)
             print("\n\n\n\n")
             let userIdRequest = RestClient.shared.request(forQuery: "Select Name, FirstName, LastName, Id, Email, ContactId From User WHERE Id = '\(id)'")
             
@@ -353,7 +353,9 @@ class HomeViewController: UIViewController{
                     os_log("\n\n----------------------SmartStore loaded records for majors.-------------------------------", log: strongSelf.mylog, type: .debug)
                 }
         
-                loadingIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    loadingIndicator.stopAnimating()
+                }
             }
         }//completion
         

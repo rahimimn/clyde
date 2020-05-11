@@ -158,7 +158,6 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
-                print(records?.count)
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                  let record = ["Admissions Office","843-953-5670", "At the College of Charleston, your education is about much more than your degree. It's about discovery, community, and connection. We encourage you to start now. It's never too late to build your network, connect with your counselor. Making a connection with your counselor can make a big impact on you and your future. ","admissions@cofc.edu","https://c.cs44.content.force.com/servlet/servlet.ImageServer?id=0157A0000006tMP&oid=00D7A0000009Quh&lastMod=1588946070000"]
                 let counselorName = record[0]

@@ -250,13 +250,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return schoolName
             }
-            print("\n\n")
-            print(records)
             let name = (record[0][0])
             schoolName = name
         }//do
         catch let e as Error?{
-            print("what")
             print(e as Any)
         }
         return schoolName

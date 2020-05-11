@@ -16,8 +16,9 @@ class ResourcesTableViewController: UITableViewController {
     // MARK: Outlets
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
-    
+    //If you ever want to add a resource to the 'Resource' page, simply add the link here, and make sure you create a link within the storyboard page
     var urlArray =  ["http://cofc.edu/","http://admissions.cofc.edu/","https://cofcharleston.force.com/portal/TX_SiteLogin?startURL=%2Fportal%2FTargetX_Base__Portal&_ga=2.28995260.1087071607.1563202937-124322718.1558454919","http://cofc.edu/athletics/","http://disabilityservices.cofc.edu/","https://tunein.com/radio/CisternYard-Radio-s208531/","https://cofc.campuslabs.com/engage/organizations", "https://charleston.campusdish.com/","http://orientation.cofc.edu/docs/fa19newstudentcalendar.pdf","http://finaid.cofc.edu/students/incoming-freshmen/index.php","https://cofc.secure.force.com/TravelLookup/?_ga=2.99755421.2063692641.1562763558-124322718.1558454919","http://greeks.cofc.edu/","https://www.youvisit.com/tour/cofc/140487?pl=v&m_prompt=1","http://honors.cofc.edu/admission/","http://www.cofc.edu/campuslife/lifeincharleston/index.php","http://parkingservices.cofc.edu/","http://finaid.cofc.edu/types-of-financial-aid/scholarships/","http://housing.cofc.edu/residence-halls/"]
+    
     //------------------------------------------------------------------------
     // MARK: View functions
     
@@ -67,6 +68,8 @@ class ResourcesTableViewController: UITableViewController {
     
     }
 
+    
+    
     //-----------------------------------------------------------------------
     // MARK: Helper functions
     

@@ -72,7 +72,7 @@ class StartMapViewController: UIViewController {
                     let eventOrgId = jsonResponse["records"][0]["Id"].stringValue
                     print(jsonResponse)
                     let studentId = self!.defaults.string(forKey: "ContactId")
-                    let registrationStatus = self!.isStudentRegistered(eventOrgId: eventOrgId, contactId: studentId!){ (status) in
+                    _ = self!.isStudentRegistered(eventOrgId: eventOrgId, contactId: studentId!){ (status) in
                     
                         if status == false {
                             self!.registerStudent(eventOrg: eventOrgId, contactId: studentId!)
@@ -132,9 +132,8 @@ class StartMapViewController: UIViewController {
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
             print("error in register student")
-            print(error)
             print("Student was not registered for event.")
-        }) { [weak self] (response, urlResponse) in
+        }) { (response, urlResponse) in
             print("Student was registered for event.")
         }}
     
