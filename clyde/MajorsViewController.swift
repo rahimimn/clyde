@@ -85,6 +85,13 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         do{
             let records = try self.store.query(using: querySpec!, startingFromPageIndex: 0)
             guard let record = records as? [[String]] else{
+                DispatchQueue.main.async {
+                    
+                    //Creates a save alert to be presented whenever the user saves their information
+                    let errorAlert = UIAlertController(title: "Error", message: "There was an error with the connection. Please try again.", preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true)
+                }
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 return
             }
