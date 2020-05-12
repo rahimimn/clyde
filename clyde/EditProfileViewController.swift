@@ -152,6 +152,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     override func viewDidLoad() {
+        userId = defaults.string(forKey: "UserId")!
         super.viewDidLoad()
         let dataArray = loadSchoolsFromStore()
 
@@ -212,6 +213,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         ethnicPicker.delegate = self
         
         highSchoolTextField.startVisibleWithoutInteraction = false
+        highSchoolTextField.textFieldDidBeginEditing()
         highSchoolTextField.filterStrings(dataArray)
         highSchoolTextField.theme.font = UIFont(name: "Adobe Caslon Pro", size: 14.0)!
         highSchoolTextField.theme.bgColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -224,19 +226,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
-        
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {User:Id} from {User}", pageSize: 1),
-            let smartStore = self.store,
-            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
-            let id = record[0][0]
-            DispatchQueue.main.async{
-                print(id)
-                self.userId = id
-            }
-            
-        }
-        
-        //self.pullImageFromFileManager(imageName:"UserPhoto")
+      
         
     }
     
@@ -474,7 +464,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     /// - Returns: school id
     func getSchoolId(name: String) -> String{
         var schoolId = ""
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Id} from {School} where {School:Name} == '\(String(describing: name))'", pageSize: 10000)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Id} from {School} where {School:Name} == '\(String(describing: name))'", pageSize: 5000000)
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
@@ -494,13 +484,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return schoolId
     }//function
     
+    
+    
     /// Smartstore related function that returns the school name
     ///
     /// - Parameter name: school id
     /// - Returns: school name
     func getSchoolName(id: String) -> String{
         var schoolName = ""
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 10000)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name} from {School} where {School:Id} == '\(String(describing: id))'", pageSize: 5000000)
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
@@ -509,6 +501,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
             guard let record = records as? [[String]] else {
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
+                
                 return schoolName
             }
             print(record)
@@ -521,13 +514,18 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return schoolName
     }//function
     
+    
+    
+   
+    
+    
     /// Smartstore related function that returns an array of school names
     ///
     /// - Returns: Array of school names
     func loadSchoolsFromStore() -> Array<String>{
         var namesArray = ["name"]
         
-        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name},{School:Id} from {School}", pageSize: 10000)
+        let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {School:Name},{School:Id} from {School}", pageSize: 5000000)
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
@@ -552,7 +550,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     /// Pulls data from the user form and upserts it into the "Contact" soup
     func insertIntoSoup(){
-        let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Id = '\(self.defaults.string(forKey: "ContactId")!)'")
+        let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Source__c,TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact WHERE Id = '\(self.defaults.string(forKey: "ContactId")!)'")
         RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
             print(error)
         }) { [weak self] (response, urlResponse) in

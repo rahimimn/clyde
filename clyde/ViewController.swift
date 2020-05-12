@@ -84,9 +84,7 @@ class HomeViewController: UIViewController{
         moreButton.layer.cornerRadius = 5
         moreButton.layer.borderWidth = 2
         moreButton.layer.borderColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 1)
-        if (defaults.object(forKey: "FirstLogin") == nil){
-            self.showInformationPopUp()
-        }
+        
     }
     
     // Creates the view that the viewController manages
@@ -95,6 +93,10 @@ class HomeViewController: UIViewController{
         self.loadData()
         self.loadSchools()
         self.loadMajors()
+        let login = defaults.bool(forKey: "FirstLogin")
+        if ((login == nil) || (login == false)){
+            self.showInformationPopUp()
+        }
         
     }
     
@@ -296,9 +298,14 @@ class HomeViewController: UIViewController{
                     let jsonContact = JSON(response)
                     let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
                     let state = jsonContact["records"][0]["MailingState"].stringValue
+                    let login = jsonContact["records"][0]["First_Login__c"
+                    ].stringValue
+                    print(jsonContact)
+                    self!.defaults.set(login, forKey: "FirstLogin")
+
+                    
                     DispatchQueue.main.async {
                         self!.defaults.set(state,forKey: "State")
-
                     }
                     
                    // SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
@@ -368,7 +375,7 @@ class HomeViewController: UIViewController{
     
     /// Loads school data into store
     func loadSchools(){
-        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id, BillingState, BillingCity From Account WHERE BillingState = '\(self.defaults.string(forKey: "State")!)'")
+        let schoolRequest = RestClient.shared.request(forQuery: "SELECT Name, Id, BillingState, BillingCity From Account WHERE BillingState = '\(self.defaults.string(forKey: "State")!)' OR Id = '001G000000t0ynOIAQ' ")
         RestClient.shared.send(request: schoolRequest, onFailure: {(error, urlResponse) in
         }) { [weak self] (response, urlResponse) in
             guard let strongSelf = self,
@@ -379,8 +386,6 @@ class HomeViewController: UIViewController{
                     print("\nWeak or absent connection.")
                     return
             }
-            print(results)
-
             if (((strongSelf.store.soupExists(forName: "School")))){
                 strongSelf.store.clearSoup("School")
                 strongSelf.store.upsert(entries: results, forSoupNamed: "School")

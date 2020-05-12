@@ -33,7 +33,7 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
     
     let defaults = UserDefaults.standard
     
-    var questions = ["Your first name:", "Your last name:","Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Your Ethnicity:","Are you interested in the Honors College?","Your student type:","Graduation Year:",""]
+    var questions = ["Your first name:", "Your last name:","Your mobile number:", "Do you want to opt-in for mobile messaging?", "Your major interest?","Your street address:","Your city:","Your state", "Your zip code:","Your gender:", "Your Ethnicity:","Are you interested in the Honors College?","Your student type:","High School Graduation Year:",""]
     
   
     var possibleAnswers = [[],[],[],["Yes", "No"],["Accounting", "African American Studies","Anthropolgy","Archaeology","Art History","Arts Management","Astronomy","Astrophysics","Bachelor of General StudieS","Bachelor of Professional Studies","Biochemisty","Biology","Biomedical Physics","Business Administration","Chemistry","Classics","Commercial Real Estate Finance","Communication","Computer Information Systems","Computer Science","Computing in the Arts","Dance","Data Science","Early Childhood Education","Economics","Elementary Education","Engineering, Systems","English","Exercise Science","Finance","Foreign Language Education","French","General Studies", "Geology","German","Historic Preservation and Community Planning","History","Hospitatlity and Toursim Management","International Business","International Studies","Jewish Studies","Latin American and Caribbean Studies","Marine Biology","Marketing","Mathematics","Meteorology","Middle Grades Education","Music","Philosophy","Physical Education","Physics","Political Science","Psychology","Public Health", "Religious Studies","Secondary Education", "Studio Art", "Spanish", "Sociology", "Supply Chain Management","Theatre","Urban Studies","Women's and Gender Studies"],[],[],["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"],[],["Female", "Male", "Other"],["Alaskan Native","Asian","Black or African American","Hispanic","Mexican or Mexican American", "Native Hawaiian", "Other", "Pacific Islander", "Prefer to not respond","Puerto Rican","Two or more races","White"],["Yes","No"],["Freshman","Transfer"],[],[]]
@@ -59,7 +59,6 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         answer.startVisibleWithoutInteraction = false
         answer.borderStyle = UITextField.BorderStyle.roundedRect
         self.answers.append(answer.text!)
-        print(answers)
         question.text = questions[counter]
         answer.filterStrings(possibleAnswers[counter])
         header.text = "Clyde wants to know..."
@@ -70,7 +69,6 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         if (counter == questions.count){
            
             self.dismiss(animated: true, completion: nil)
-           // insertIntoSoup()
             updateToSalesforce()
             
         }
@@ -132,10 +130,15 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
         record["Ethnicity_Non_Applicants__c"] = answers[11]
         record["Honors_College_Interest_Check__c"] = answers[12]
         record["TargetX_SRMb__Student_Type__c"] = answers[13]
+        record["TargetX_SRMb__Anticipated_Start_Year__c"] = answers[14]
         record["TargetX_SRMb__Graduation_Year__c"] = answers[14]
-        record["Status_Category__c"] = "Suspect"
+        record["Status_Category__c"] = "Prospect"
+        record["TargetX_SRMb__Status__c"] = "Prospect"
+        record["TargetX_SRMb__Anticipated_Start_Term__c"] = "Fall"
         record["AccountId"] = "001G000000t0ynOIAQ"
         record["First_Login__c"] = 1
+        record["TargetX_SRMb__Level__c"] = "Undergraduate"
+        record["TargetX_SRMb__Source__c"] = "Clyde Club"
         
         if answers[2] as! String == "Yes"{
             record["Text_Message_Consent__c"] = "true"
@@ -150,7 +153,6 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
             
         }
         
-        print(record)
         
         
         let contactAccountID = defaults.string(forKey: "ContactId")
@@ -165,7 +167,7 @@ class InfoPopUpViewController: UIViewController, UITextViewDelegate, UITextField
             errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             self.present(errorAlert, animated: true)
         }){(response, URLResponse) in
-            self.defaults.set(false, forKey: "FirstLogin")
+            
             
             //Creates a save alert to be presented whenever the user saves their information
             let saveAlert = UIAlertController(title: "Information Saved", message: "Your information has been saved.", preferredStyle: .alert)
