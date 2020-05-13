@@ -9,6 +9,8 @@
 import Foundation
 
 /// This is an article struct used for the homepage
+///
+/// It contains the articleUrl, imageUrl, and articleTitle.
 struct Article{
     var articleUrl:String = ""
     var imageUrl: String = ""
