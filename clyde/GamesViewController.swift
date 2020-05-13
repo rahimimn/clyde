@@ -8,12 +8,15 @@
 
 import UIKit
 
+///Games View Controller
+///
+///Simple UI menu for the games avaiable in the iOS app
 class GamesViewController: UIViewController {
 
     
     //----------------------------------------------------------
     // MARK: Outlets
-    
+    //Menu button
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
     
     
@@ -22,9 +25,10 @@ class GamesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Adds menu bar controller
         self.menuBar(menuBarItem: menuBarButton)
+        //Adds cofc logo to nav bar
         self.addLogoToNav()
-        // Do any additional setup after loading the view.
     }
     
     

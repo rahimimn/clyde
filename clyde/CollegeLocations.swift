@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import MapKit
 /// College Location instance created for a map, manipulating Annotations
+///
+///Holds the data for each location in the Interactive Map
 class CollegeLocation: NSObject, MKAnnotation{
     
     //---------------------------------------------------------

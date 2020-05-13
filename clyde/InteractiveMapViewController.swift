@@ -73,25 +73,38 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
     
     // -----------------------------------------------------------------------------
     // MARK: Map Functions
+    ///Adds the location to the mapView
+    ///- Parameter building: String that specifies the name
+    ///- Parameter latitude: CLLocationDegrees specifies latitude
+    ///- Parameter longitude: CLLocationDegrees specifies longitude
+    ///- Parameter description: String that describes the location
+    ///
     func addLocation(building: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, description: String) {
+        //creates the coordinates
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        //creates a pin based on the CollegeLocation class
         let pin = CollegeLocation(coordinate: coordinates, title: building, buildingDescription: description)
+        //sets the title of the pin
         pin.title = building
+        //adds the annotation to the map view
         self.mapView.addAnnotation(pin)
     }
     
+    //Tells the delegate which annotation view was selected
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else{
             return
         }
-        
+        //requests directions
         let directionsRequest = MKDirections.Request()
         directionsRequest.source = MKMapItem.forCurrentLocation()
         directionsRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate))
         directionsRequest.transportType = .walking
         
+        //sets the directions
         let directions = MKDirections(request: directionsRequest)
         
+        //calculates the directions
         directions.calculate {
             (response, error) -> Void in
             guard let response = response else {
@@ -130,26 +143,30 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
             return nil
         }
         
+        //set annotation identifier
         let annotationIdentifier = "CollegeLocation"
+        //set the annotation identifier as the annotation view
         var annotationView: MKAnnotationView! = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
-       
+       //sets the collegeAnnotation as CollegeLocation class
         let collegeAnnotation = annotation as! CollegeLocation
+        //sets the view
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+        //sets the image for the annotationView
         annotationView.image = UIImage(named: "emoji.png")
         
         
         
-        
+        //Creates a label for the annotation view and customizes that
         let descriptionLabel = UILabel()
         descriptionLabel.adjustsFontForContentSizeCategory = true
-        
         descriptionLabel.numberOfLines = 20
         descriptionLabel.text = collegeAnnotation.buildingDescription
         descriptionLabel.font = UIFont(name: "Avenir Next", size: 11.0)
        
+        //adds the label to the annotationView
         annotationView!.detailCalloutAccessoryView = descriptionLabel
         
-        
+        //customizes the annotationView
         annotationView.canShowCallout = true
         annotationView.calloutOffset = CGPoint(x: -8,y: 0)
         annotationView.autoresizesSubviews = true
@@ -161,6 +178,9 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
     
     // -----------------------------------------------------------------------------
     // MARK: Helper Functions
+    ///Places the interactive map locations
+    ///
+    ///Uses the addLocation method to do so
     func placeAll(){
         addLocation(building: "Maybank Hall", latitude: 32.784769, longitude: -79.937764, description: "Maybank Hall was built in 1974, and was used as the main classroom facility on the College campus. Now, this building is used as classrooms, classroom auditoriums, and faculty offices.")
         addLocation(building: "Randolph Hall", latitude: 32.784023, longitude: -79.937419, description: "Built in 1828, it is one of the oldest college building still in use in the United States. Randolph Hall served as the main academic building for many years, but now it is primarily used for administrative offices.")
