@@ -10,6 +10,9 @@ import UIKit
 import SmartSync
 import SwiftyJSON
 
+///View controller for the gallery
+///
+/// Takes in a list of image urls from Salesforce documents and presents them using the imageViewList
 class GalleryViewController: UIViewController {
 
     
@@ -77,8 +80,11 @@ class GalleryViewController: UIViewController {
 
     /// Displays the image urls for every image within the gallery
     func importGallery(){
+        //Sets index to the count of imageAddresses
         let index = imageAddresses.count
+        //Create a random sequence of numbers from 0 to index-1, which would be the last index of the imageAddress array
         let numbers = randomSequenceGenerator(min: 0, max: index-1)
+        //For image in the imageViewList(which is the list of UIImageViews within the gallery, let num equal the number sequence, and set the image to the url
         for image in imageViewList{
             let num = numbers()
             urlToImage(imageUrlString: imageAddresses[num], image: image)

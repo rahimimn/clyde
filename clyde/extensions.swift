@@ -13,7 +13,10 @@ import SafariServices
 // MARK: - Double extesion
 extension Double {
     /// Removes the remainder from Double
+    ///
+    /// Used within the ProfileViewController to determine the distance between CofC and the user
     var formatForProfile: String {
+        //removes the remainder and returns a string
         return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }}
 
@@ -21,9 +24,11 @@ extension Double {
 extension UIViewController{
     /// Adds the menu bar controller to the revealViewController
     ///
+    /// This is used in almost every single View Controller
     /// - Parameter menuBarItem: the bar item that controlls the menu reveal.
     func menuBar(menuBarItem: UIBarButtonItem){
         if revealViewController() != nil {
+            //Determines the actions for the menu button
             menuBarItem.target = self.revealViewController()
             menuBarItem.action = #selector(SWRevealViewController().revealToggle(_:))
             self.revealViewController()?.rearViewRevealWidth = 350
