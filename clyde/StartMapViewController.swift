@@ -62,7 +62,9 @@ class StartMapViewController: UIViewController {
             
             //check if an OrgEvent self-guided tour exists for the current date
              let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '%\(currentDate)%' AND Name LIKE 'Self%'")
-            RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
+            RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in
+                print(error)
+            }) { [weak self](response, urlResponse) in
                 let jsonResponse = JSON(response!)
                 // if match exists, check if the student is registered. Else, create the event.
                 // if registered, do nothing. Else, register the student.
@@ -73,11 +75,12 @@ class StartMapViewController: UIViewController {
                     print(jsonResponse)
                     let studentId = self!.defaults.string(forKey: "ContactId")
                     _ = self!.isStudentRegistered(eventOrgId: eventOrgId, contactId: studentId!){ (status) in
-                    
+                        print(status)
                         if status == false {
                             self!.registerStudent(eventOrg: eventOrgId, contactId: studentId!)
                         }
                         else{
+                            
                             print("This student is registered.")
                         }
                     }
@@ -101,7 +104,9 @@ class StartMapViewController: UIViewController {
     
     func isStudentRegistered(eventOrgId: String, contactId: String, completion: @escaping (Bool) -> Void){
         let registrationCheck = RestClient.shared.request(forQuery:"SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__Contact__c = '\(contactId)' AND TargetX_Eventsb__OrgEvent__c = '\(eventOrgId)'")
-        RestClient.shared.send(request: registrationCheck, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
+        RestClient.shared.send(request: registrationCheck, onFailure: {(error, urlResponse) in
+            print(error)
+        }) { [weak self](response, urlResponse) in
             let jsonResponse = JSON(response!)
             
             // if match exists, check if the student is registered. Else, create the event.

@@ -65,7 +65,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) requests access to your photo library.</string>
 	<key>SFDCOAuthLoginHost</key>
-	<string>full-cofcharleston.cs44.force.com/portal</string>
+	<string>cofcharleston.force.com/portal/TX_SiteLogin</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>acaslonpro-regular.otf</string>

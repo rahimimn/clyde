@@ -28,19 +28,21 @@ import SalesforceSDKCore
 import SmartSync
 import SwiftyJSON
 
+
+///The AppDelegate class is the entry point for the iOS app. This implements the standard iOS UIApplicationDelegate interface. It initalizes the Salesforce Mobile SDK. To learn more, here is a link to the Salesforce documentation: https://developer.salesforce.com/docs/atlas.en-us.noversion.mobile_sdk.meta/mobile_sdk/ios_native_app_delegate.htm
 class AppDelegate : UIResponder, UIApplicationDelegate {
+   
     var window: UIWindow?
     
-    override init()
-    {
+    ///Within the init method, the SalesforceManager object initializes the SF Mobile SDK and registers a block to handle user change notifications.
+    override init(){
         
-        super.init()
-        
+        //Initializes everything
         SmartSyncSDKManager.initializeSDK()
         SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
         SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
         
-        
+        //Handles user change notifications
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
             self.resetViewState {
                 self.initializeAppViewState()
@@ -49,8 +51,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         })
     }
     
-    // MARK: - App delegate lifecycle
     
+    
+    //After the iOS finishes launching the app, this is called. The window and view state is set. We then call the AuthHelper.loginIfRequired method to prompt for Salesforce authentication.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -92,7 +95,8 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         //passcodeViewConfig.forcePasscodeLength = true
         //UserAccountManager.shared.appLockViewControllerConfig = passcodeViewConfig
         
-        
+     
+        //The loginIfRequired method takes a block argument that returns void and doesn't have parameters. It prepares the iOS app for the new authenitcated user by resetting the view state to the first custom screen.
         AuthHelper.loginIfRequired {
             self.setupRootViewController()
         }
@@ -102,11 +106,11 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
  
   
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool{
         return false;
     }
     
-    // MARK: - Private methods
+    //
     func initializeAppViewState()
     {
         if (!Thread.isMainThread) {
@@ -120,10 +124,16 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
         self.window!.makeKeyAndVisible()
     }
     
+    
+    
+    ///Block registereed here sets the rootViewController to the app's first custom view.
     func setupRootViewController()
     {
         self.window!.rootViewController = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateInitialViewController()    }
+            .instantiateInitialViewController()
+        
+    }
+    
     
     func resetViewState(_ postResetBlock: @escaping () -> ())
     {
