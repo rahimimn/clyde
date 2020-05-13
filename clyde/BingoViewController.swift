@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+/// Bingo View Controller
+///
+/// Not Completed
+///
+/// TO DO: Generic Bingo Game using things students may see during a Campus Tour
 class BingoViewController: UIViewController {
     
     //----------------------------------------------------------
@@ -17,7 +21,7 @@ class BingoViewController: UIViewController {
     
     //----------------------------------------------------------
     // MARK: Variables
-    
+    //String of possible bingo tiles
     var bingoStrings = ["MUSC","Famous Alumni", "The Cistern", "Grad Ceremony", "Historic","Sotitile Theatre","Spoleto Festival","Jewish Studies", "Fraternity Row","Stern Center","Brick Walkways","Honors", "Addlestone Library"]
     
     //----------------------------------------------------------
@@ -43,7 +47,9 @@ class BingoViewController: UIViewController {
     
     //----------------------------------------------------------
     // MARK: Helper functions
-    
+    /// Add strings to the board
+    ///
+    /// Does not work at the moment
     func addStrings(){
         let index = bingoStrings.count
         let numbers = randomSequenceGenerator(min: 0, max: index-1)
