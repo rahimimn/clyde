@@ -11,7 +11,9 @@ import SalesforceSDKCore
 import SmartSync
 
 
-//Class for event check in
+///Class for event check in
+///
+///Presents the user's registered events pulled from the data source
 class CheckInTableViewController: UITableViewController {
     
     //-------------------------------------------------------------
@@ -134,21 +136,6 @@ class CheckInTableViewController: UITableViewController {
         imageView.contentMode = .scaleAspectFill
         // Places the imageView onto the uiView
         view.addSubview(imageView)
-        // Creates a label
-//        let label = UILabel()
-//        // Adds text to the label
-//        label.text = "Your Registered Events"
-//        // Sets the label background color
-//        label.backgroundColor = #colorLiteral(red: 0.9546924233, green: 0.259139955, blue: 0.2854149044, alpha: 1)
-//        // Sets the label font
-//        label.font = UIFont(name: "Avenir Next Regular", size: 25.0)
-//        // Sets label text color and alignment
-//        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        label.textAlignment = .center
-//        label.font = label.font.withSize(25)
-//        //
-//        label.frame = CGRect(x: 0, y: 142.67, width:414, height: 40)
-//        view.addSubview(label)
         
         return view
     }

@@ -13,11 +13,15 @@ import Foundation
 import CoreLocation
 import MapKit
 
+///Event Detail View Controller
+///
+///Presents details of the event after it is clicked in the check in table view
 class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     //--------------------------------------------------------------------------
     // MARK: Variables
     
+    //event id captured from the check in table view
     var capturedEventId : String?
     var directions = ""
     var directionsCounter = 1
@@ -53,9 +57,13 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate, CLLocation
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //adds the menu bar controller
         self.menuBar(menuBarItem: menuBarButton)
+        //adds the CofC logo to the navigation bar
         self.addLogoToNav()
         
+       
         let array = capturedEventId?.split(separator: " ")
         let id = array![1]
         

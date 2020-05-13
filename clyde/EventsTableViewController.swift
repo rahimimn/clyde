@@ -10,6 +10,8 @@ import UIKit
 
 
 /// Class for event registration
+///
+/// Not completed
 class EventsTableViewController: UIViewController {
 
     
@@ -42,8 +44,9 @@ class EventsTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       self.menuBar(menuBarItem: menuBarButton)
+        //adds a menu bar controller
+        self.menuBar(menuBarItem: menuBarButton)
+        //adds the cofc logo to the navigation bar
         self.addLogoToNav()
     }
 
