@@ -17,6 +17,8 @@ import SearchTextField
 import CoreLocation
 
 /// Class for the Edit Profile View
+///
+/// Pulls user data and presents it, allowing the user to edit it. If the user is no longer a prospect, and has advanced to applying for the college, they can no longer edit their profile.
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RestClientDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
@@ -93,7 +95,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     //----------------------------------------------------------------------------
     // MARK: Actions
-    
+    //switch for honors interest
     @IBAction func honorsAction(_ sender: UISwitch) {
         if sender.isOn == true{
             honorsCollegeInterestText = "1"
@@ -102,6 +104,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    //switch for mobile opt in
     @IBAction func mobileAction(_ sender: UISwitch) {
         if sender.isOn == true{mobileOptInText = "1"}
         else{mobileOptInText = "0"}
@@ -146,7 +149,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func loadView() {
         super.loadView()
-       
+        //loads data from the store
         self.loadFromStore()
         
     }
@@ -154,8 +157,11 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         userId = defaults.string(forKey: "UserId")!
         super.viewDidLoad()
+        
+        //creates an array from all of the schools within the store, this is used as a filter if the student wants to edit their current school
         let dataArray = loadSchoolsFromStore()
 
+        //profile image customization
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true;
         self.profileImageView.layer.borderWidth = 3
@@ -166,7 +172,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         tapRec.addTarget(self, action: #selector(tappedView))
         profileImageView.addGestureRecognizer(tapRec)
         
-        // Delegates
+        // Delegates: A text field delegate responds to editing-related messages from the text field. You can use the delegate to respond to the text entered by the user and to some special commands, such as when Return is tapped.
         addressTextField.delegate = self
         cityTextField.delegate = self
         stateTextField.delegate = self
@@ -184,16 +190,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         // Calls showDatePicker
         showDatePicker()
+        //adds the menu bar to the button
         menuBar(menuBarItem: menuBarButton)
+        //adds cofc logo to the nav bar
         addLogoToNav()
+        
+        //creates the uipicker toolbar and sizes it to fit
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
         
-        // Gender and Gender Identity pickers
+       ///Done button that cancels the picker
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelPicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
         
+         // Gender and Gender Identity pickers
         genderTextField.inputAccessoryView = toolbar
         
         genderTextField.inputView = genderPicker
@@ -203,15 +214,17 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         genderIdentityTextField.inputView = genderIdentityPicker
         genderIdentityPicker.delegate = self
         
-        
+        //Student type pickers
         studentTypeTextField.inputAccessoryView = toolbar
         studentTypeTextField.inputView = studentTypePicker
         studentTypePicker.delegate = self
         
+        //ethnic origin pickers
         ethnicOriginTextField.inputAccessoryView = toolbar
         ethnicOriginTextField.inputView = ethnicPicker
         ethnicPicker.delegate = self
         
+        //high school picker
         highSchoolTextField.startVisibleWithoutInteraction = false
         highSchoolTextField.textFieldDidBeginEditing()
         highSchoolTextField.filterStrings(dataArray)
@@ -221,7 +234,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         mobileTextField.inputAccessoryView = toolbar
         graduationYearTextField.inputAccessoryView = toolbar
         
-        
+        //keyboard notifications
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
@@ -265,7 +278,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         self.view.endEditing(true)
     }
     
-    
+    //Ends editing
     @objc func cancelPicker(){
         self.view.endEditing(true)
     }
@@ -276,6 +289,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         return 1
     }
     
+    //Called by the picker view when it needs the number of rows for a specified component.
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if (pickerView == genderIdentityPicker){
             return genderOptions.count
@@ -288,6 +302,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             return studentTypeOptions.count
         }}
     
+    //Called by the picker view when it needs the title to use for a given row in a given component.
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if (pickerView == genderIdentityPicker){
             return genderOptions[row]
@@ -301,6 +316,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    //Called by the picker view when the user selects a row in a component.
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == self.genderIdentityPicker{
             self.genderIdentityTextField.text = genderOptions[row]
@@ -727,88 +743,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             print("Panic! No image!")
         }
     }
-    
-    
-    
-    //-------------------------------------------------------------
-    //MARK: Testing functions
-    
-    
-    
-    //    private func pushImage(){
-    //        let photoRequest = RestClient.shared.request(forUploadFile: <#T##Data#>, name: <#T##String#>, description: <#T##String#>, mimeType: <#T##String#>)
-    //        }
-    
-    
-    
-    
-    
-    
-    
-    
-//    func saveImage(){
-//        let imageData = self.profileImage.pngData()!
-//        let imageRequest = RestClient.shared.request(forUploadFile: imageData, name: "ProfileImage", description: "This is the user's profile picture.", mimeType: "image/png")
-//        RestClient.shared.send(request: imageRequest, onFailure: { (error, URLResponse) in
-//            SalesforceLogger.d(type(of:self), message:"Error invoking while sending image request: \(imageRequest), error: \(String(describing: error))")
-//            //Creates a save alert to be presented whenever the user saves their information
-//            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))" , preferredStyle: .alert)
-//            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//            self.present(errorAlert, animated: true)
-//        }){(response, URLResponse) in
-//            //Creates a save alert to be presented whenever the user saves their information
-//            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-//            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//            self.present(saveAlert, animated: true)
-//            os_log("\nSuccessful response received")
-//            print(self.profileImage.jpegData(compressionQuality: 0.0)!)
-//        }}
-//
-//
-//
-//    func imageSaved(){
-//        let imageData = self.profileImage.jpegData(compressionQuality: 0.1)!
-//        let base64 = imageData.base64EncodedString(options: .endLineWithLineFeed)
-//
-//        let name = userName.text
-//        let data = [
-//            "Name": "user's pic",
-//            "Body": base64,
-//            "ParentId":"0035400000GV18bAAD"
-//        ]
-//
-//        RestClient.shared.create("Attachment", fields: data, onFailure: { (error, urlResponse) in
-//            print(error!)
-//
-//            let errorAlert = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: .alert)
-//            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//            self.present(errorAlert, animated: true)
-//
-//        }) { [weak self] (response, urlResponse) in
-//            print("yay!!")
-//            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-//            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//            self?.present(saveAlert, animated: true)
-//        }
-//
-    
-        //        let documentRequest = RestClient.shared.requestForUpsert(withObjectType: "Document", externalIdField: "Id", externalId: nil, fields:JSONData)
-        //        RestClient.shared.send(request: documentRequest, onFailure: { (error, urlResponse) in
-        //            print(error)
-        //            print("URLResponse\(documentRequest)")
-        //            print(JSONData)
-        //            let errorAlert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-        //            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        //            self.present(errorAlert, animated: true)
-        //            SalesforceLogger.d(type(of:self), message:"Error invoking on user request: \(documentRequest)")
-        //        }) { [weak self] (response, urlResponse) in
-        //            print("yay!!")
-        //            let saveAlert = UIAlertController(title: "Image Saved", message: "Your information has been saved.", preferredStyle: .alert)
-        //            saveAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        //            self?.present(saveAlert, animated: true)
-        //        }
-        
-   // }
     
     
     /// Error handler for the image picker
