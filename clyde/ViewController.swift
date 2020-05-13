@@ -32,6 +32,7 @@ class HomeViewController: UIViewController{
     var storeO = SmartStore.shared(withName: SmartStore.defaultStoreName)
     let mylog = OSLog(subsystem: "edu.cofc.clyde", category: "Home")
     
+    //Standard user defaults variable
     let defaults = UserDefaults.standard
     
     var userId = ""
@@ -42,15 +43,19 @@ class HomeViewController: UIViewController{
     //----------------------------------------------------------------------------
     // MARK: Outlets
     
-    //Outlet for the menu button.
+    //Outlet for the more button.
     @IBOutlet weak var moreButton: UIButton!
+    //Outlet for the menu button
     @IBOutlet weak var menuBarItem: UIBarButtonItem!
+    //Outlet for the controller's view
     @IBOutlet var homeView: UIView!
     
+    //Outlets for all of the buttons of the articles
     @IBOutlet weak var Article1: UIButton!
     @IBOutlet weak var Article2: UIButton!
     @IBOutlet weak var Article3: UIButton!
     
+    //Outlets for all of the labels of the articles.
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -63,7 +68,9 @@ class HomeViewController: UIViewController{
     //Called after the controller's view is loaded into memory.
     override func viewDidLoad() {
         super.viewDidLoad()
+        //function that adds the menu bar to the view
         self.menuBar(menuBarItem: menuBarItem)
+        //adds the College of Charleston logo to the menu bar
         self.addLogoToNav()
     
         
@@ -77,10 +84,12 @@ class HomeViewController: UIViewController{
         //Change the image for Article3 here
         urlToButtonImage(imageUrlString: article3.imageUrl, button: Article3)
         
+        //Sets the titles for the article labels
         label1.text = article1.articleTitle
         label2.text = article2.articleTitle
         label3.text = article3.articleTitle
         
+        //Sets the border "css"
         moreButton.layer.cornerRadius = 5
         moreButton.layer.borderWidth = 2
         moreButton.layer.borderColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 1)
@@ -93,6 +102,8 @@ class HomeViewController: UIViewController{
         self.loadData()
         self.loadSchools()
         self.loadMajors()
+        
+        //Checks whether the user has logged in before, and if not, presents the information pop up
         let login = defaults.bool(forKey: "FirstLogin")
         if ((login == nil) || (login == false)){
             self.showInformationPopUp()
@@ -177,18 +188,21 @@ class HomeViewController: UIViewController{
 
     
     
-    /// Sets image for button using url
+    /// Sets specified image for button using url
     /// - Parameters:
     ///   - imageUrlString: url of image
-    ///   - image: imageView that needs to be set
+    ///   - button: button that needs to be changed
     
     func urlToButtonImage(imageUrlString: String, button: UIButton){
+        //gets the url
         let url = URL(string: imageUrlString)!
         
+        //Pulls image data
         let task = URLSession.shared.dataTask(with: url){ data,response, error in
             guard let data = data, error == nil else {
                 return}
             DispatchQueue.main.async {
+                //sets the image data to the image view of the button
                 button.setImage(UIImage(data:data), for: .normal)
             }
         }
@@ -198,8 +212,11 @@ class HomeViewController: UIViewController{
     
     /// Shows the information pop up when called
     func showInformationPopUp(){
+        //sets popUp as the "InfoPop" view controller
         let popUp = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoPop") as! InfoPopUpViewController
+        //Determines presentation style, this is basically a pop-up
         popUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        //Presents the pop-up
         self.present(popUp, animated: true)
     }
     
@@ -208,11 +225,15 @@ class HomeViewController: UIViewController{
     ///
     /// - Parameter url: the url to be displayed.
     func show(_ url: String) {
+        //gets the url
         if let url = URL(string: url) {
+            //configures the safari view controller
             let config = SFSafariViewController.Configuration()
+            //this immeditately registers it as reader view, determined this was best since they are looking at an article
             config.entersReaderIfAvailable = true
-            
+            //Sets the view controller based on the configurations made above
             let vc = SFSafariViewController(url: url, configuration: config)
+            //Presents the view controller
             present(vc, animated: true)
         }
     }
@@ -227,10 +248,13 @@ class HomeViewController: UIViewController{
 
     
     /// Loads salesforce data into store
+    ///
+    ///TO-DO: create different functions/methods for each query request
     func loadData(){
         
-        //Creation of the loading indicator 
+        //Creation of the loading indicator, this could be placed somewhere else in theory
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        //Configures the loadingIndicator
         loadingIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0);
         loadingIndicator.center = homeView.center
         loadingIndicator.hidesWhenStopped = true
@@ -239,6 +263,7 @@ class HomeViewController: UIViewController{
         loadingIndicator.backgroundColor = #colorLiteral(red: 0.3971119523, green: 0.3989546299, blue: 0.4034414291, alpha: 0.7198469606)
         loadingIndicator.layer.cornerRadius = 10
 
+        //Adds the loading indicator to the view, and then starts animating
         homeView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
         
@@ -251,10 +276,11 @@ class HomeViewController: UIViewController{
             let email = jsonResponse["email"].stringValue
             DispatchQueue.main.async {
                 self?.userId = id
+                //Sets the "UserId" as Id in the default user storage
                 self!.defaults.set(id,forKey: "UserId")
             }
             
-            //Pulls the user info (specifically contactid)
+            //Pulls the user info (specifically contactid).
             let userIdRequest = RestClient.shared.request(forQuery: "Select ContactId From User WHERE Id = '\(id)'")
             
             RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
@@ -395,145 +421,7 @@ class HomeViewController: UIViewController{
         }
     }
     
-    
-    /// Loads important data into the offline storage
-    func loadDataIntoStore(){
-        //Loads user id into store
-        let userIdRequest = RestClient.shared.request(forQuery: "Select Name, Id, Email, ContactId From User")
-        //let userIdRequest = RestClient.shared.requestForUserInfo()
-        RestClient.shared.send(request: userIdRequest, onFailure: {(error, urlResponse) in
-        }) { [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
-                let jsonResponse = response as? Dictionary<String, Any>,
-                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                else{
-                    print("\nWeak or absent connection.")
-                    return
-            }
-            
-            
 
-            SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-            if ((((strongSelf.store.soupExists(forName: "User"))))) {
-                strongSelf.store.clearSoup("User")
-                strongSelf.store.upsert(entries: results, forSoupNamed: "User")
-                os_log("\n\nSmartStore loaded records for user.", log: strongSelf.mylog, type: .debug)
-            }
-
-            //Loads contactData into store
-            let contactAccountRequest = RestClient.shared.request(forQuery: "SELECT OwnerId, MailingStreet, MailingCity, MailingPostalCode, MailingState, MobilePhone, Email, Name, Text_Message_Consent__c, Birthdate, TargetX_SRMb__Gender__c,TargetX_SRMb__Student_Type__c, Gender_Identity__c, Ethnicity_Non_Applicants__c,TargetX_SRMb__Graduation_Year__c, Honors_College_Interest_Check__c,Status_Category__c,First_Login__c, TargetX_SRMb__Anticipated_Major__c,Id, AccountId  FROM Contact")
-            RestClient.shared.send(request: contactAccountRequest, onFailure: {(error, urlResponse) in
-            }) { [weak self] (response, urlResponse) in
-                guard let strongSelf = self,
-                    let jsonResponse = response as? Dictionary<String, Any>,
-                    let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                    
-                    else{
-                        print("\nWeak or absent connection.")
-                        return
-                }
-                
-                let jsonContact = JSON(response)
-                let counselorId = jsonContact["records"][0]["OwnerId"].stringValue
-                let accountId = jsonContact["records"][0]["AccountId"].stringValue
-                print("--------------------------------")
-                print(accountId)
-                SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")
-                if (((strongSelf.store.soupExists(forName: "Contact")))){
-                    strongSelf.store.clearSoup("Contact")
-                    strongSelf.store.upsert(entries: results, forSoupNamed: "Contact")
-                    os_log("\n\nSmartStore loaded records for contact.", log: strongSelf.mylog, type: .debug)
-                }
-
-                //Loads counselor data into the store
-                let counselorAccountRequest = RestClient.shared.request(forQuery: "SELECT AboutMe, Email, Name,MobilePhone,Image_Url__c FROM User WHERE Id = '\(counselorId)'")
-                RestClient.shared.send(request: counselorAccountRequest, onFailure: {(error, urlResponse) in
-                }) { [weak self] (response, urlResponse) in
-                    guard let strongSelf = self,
-                        let jsonResponse = response as? Dictionary<String, Any>,
-                        let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                        else{
-                            print("\nWeak or absent connection.")
-                            return
-                    }
-                    SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(counselorAccountRequest)")
-                    if (((strongSelf.store.soupExists(forName: "Counselor")))){
-                        strongSelf.store.clearSoup("Counselor")
-                        strongSelf.store.upsert(entries: results, forSoupNamed: "Counselor")
-                        os_log("\n\nSmartStore loaded records for counselor.", log: strongSelf.mylog, type: .debug)
-                    }
-                }
-            }
-        }
-        
-        let majorRequest = RestClient.shared.request(forQuery: "SELECT Contact_Email__c,Description__c,Image_Url__c,Name,Website__c,Id FROM Possible_Interests__c WHERE Type__c = 'Major'")
-        RestClient.shared.send(request: majorRequest, onFailure: {(error, urlResponse) in
-            print(error)
-        }) { [weak self] (response, urlResponse) in
-            guard let strongSelf = self,
-                let jsonResponse = response as? Dictionary<String, Any>,
-                let results = jsonResponse["records"] as? [Dictionary<String, Any>]
-                else{
-                    print("\nWeak or absent connection.")
-                    return
-            }
-            SalesforceLogger.d(type(of: strongSelf), message:"Invoked: \(userIdRequest)")
-            if (((strongSelf.store.soupExists(forName: "Major")))) {
-                strongSelf.store.clearSoup("Major")
-                strongSelf.store.upsert(entries: results, forSoupNamed: "Major")
-                os_log("\n\nSmartStore loaded records for majors.", log: strongSelf.mylog, type: .debug)
-            }
-        }    }
-    
-    
-
-
-    /// Loads data from store and presents on edit profile
-    /// Not in use
-    func loadFromStore(){
-        if  let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Contact:First_Login__c} from {Contact}", pageSize: 1),
-            let smartStore = self.storeO,
-            let record = try? smartStore.query(using: querySpec, startingFromPageIndex: 0) as? [[String]]{
-            let firstTime = (record[0][0])
-            DispatchQueue.main.async {
-                if firstTime == "0"{
-                    self.showInformationPopUp()
-                }
-            }
-        }
-        }
-
-
-    /// Pulls the url for the user's fullphotourl.
-    /// Not in use
-    func pullImage(){
-        print("-----------------------------------------------------------")
-        let id = defaults.string(forKey: "UserId")
-        let userPhotoRequest = RestClient.shared.request(forQuery: "SELECT FullPhotoUrl FROM User WHERE Id = '\(id!)'")
-        
-        RestClient.shared.send(request: userPhotoRequest, onFailure: {(error, urlResponse) in
-            print(error)
-        }) { [weak self] (response, urlResponse) in
-            guard let _ = self,
-                let jsonResponse = response as? Dictionary<String, Any>,
-                let _ = jsonResponse["records"] as? [Dictionary<String, Any>]
-                else{
-                    print("\nWeak or absent connection.")
-                    return
-            }
-            let jsonContact = JSON(response)
-            let pictureUrl = jsonContact["records"][0]["FullPhotoUrl"].stringValue
-            
-            DispatchQueue.main.async {
-                let sep = pictureUrl.components(separatedBy: "portal/")
-                let url = "https://c.cs40.content.force.com/" + sep[1]
-                
-                self!.defaults.set(url, forKey: "ProfilePhotoURL")            }
-            
-        }
-        
-    }
-    
 
 }//class
     
