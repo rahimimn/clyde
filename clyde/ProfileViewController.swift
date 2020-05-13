@@ -171,24 +171,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         
-        
+        //Sets cofc location and user location
         let cofcLocation = CLLocationCoordinate2D(latitude: 32.783025, longitude: -79.936747)
         let userLocation = CLLocationCoordinate2D(latitude: (currentLocation.coordinate.latitude), longitude: (currentLocation.coordinate.longitude))
         
+        //creates current and cofc location
         let currentPlacemark = MKPlacemark(coordinate: userLocation, addressDictionary: nil )
         let cofcPlacemark = MKPlacemark(coordinate: cofcLocation, addressDictionary: nil)
         
-        
+        //creates map items for the user's current location and cofc's location
         let currentMapItem = MKMapItem(placemark: currentPlacemark)
         let cofcMapItem = MKMapItem(placemark: cofcPlacemark)
         
+        
+        //creates an annotation for the user's current location
         let currentPointAnnotation = MKPointAnnotation()
         currentPointAnnotation.title = "Your Location"
         if let location = currentPlacemark.location {
             currentPointAnnotation.coordinate = location.coordinate
         }
         
-        
+        //creates an annotation for cofc's location
         let cofcPointAnnotation = MKPointAnnotation()
         cofcPointAnnotation.title = "The College of Charleston: \nOffice of Admissions"
         
@@ -326,7 +329,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //----------------------------------------------------------------------------------------
     // MARK: Helper functions
     
-  
+  ///saves image to file manager
     func saveImageToFileManager(userImage: UIImage){
         let fileManager = FileManager.default
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
@@ -337,7 +340,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    
+    ///pulls image from file manager
     func pullImageFromFileManager(imageName: String){
         let fileManager = FileManager.default
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserPhoto")
