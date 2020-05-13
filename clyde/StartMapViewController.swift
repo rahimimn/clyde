@@ -16,8 +16,9 @@ class StartMapViewController: UIViewController {
     
 //--------------------------------------------------------------------------
 // MARK: Variables
-    
+    //Default user info storage
     let defaults = UserDefaults.standard
+    //Inits a contactId to be set later
     var contactId = ""
 
 
@@ -25,8 +26,10 @@ class StartMapViewController: UIViewController {
 // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        //These are left removed
         //self.addLogoToNav()
         //self.menuBar(menuBarItem: menuBarButton)
+        //Sets the contactId
         contactId = defaults.string(forKey: "ContactId")!
     }
     
@@ -46,16 +49,17 @@ class StartMapViewController: UIViewController {
     
 //------------------------------------------------------------------------
 // MARK: Button Function
-    
+    //Starts the interactive map
     @IBAction func startButton(_ sender: UIButton) {
-       print(getDate())
+       //print(getDate())
+        //Registers the student for the event once the start button is pressed
         self.registerEvent()
     }
     
 //-------------------------------------------------------------------------
 // MARK: Salesforce Functions
     
-    /// Description
+    /// Registers the student for the 'Self Guided Tour' event
     func registerEvent(){
         do{
             let currentDate = getDate()
@@ -119,76 +123,32 @@ class StartMapViewController: UIViewController {
         }
     }
     
-    
+    /// Helper Salesforce method that actually registers the student
+    ///
+    /// - Parameters:
+    ///   - eventOrgId: identification of event organization
+    ///   - contactId: identification of student/contact
     func registerStudent(eventOrg: String, contactId: String){
+        //Record for the student
         var createRecord = [String : Any]()
-      createRecord["TargetX_Eventsb__Contact__c"] = contactId
+        createRecord["TargetX_Eventsb__Contact__c"] = contactId
         createRecord["TargetX_Eventsb__OrgEvent__c"] = eventOrg
         createRecord["TargetX_Eventsb__Confirmed__c"] = true
         createRecord["TargetX_Eventsb__Attended__c"] = true
         createRecord["TargetX_Eventsb__Number_of_Guests__c"] = 1
         
-//        createRecord["Organization_Event__c"] = eventOrg
-//        createRecord["Student__c"] = contactId
-//        createRecord["Confirmed__c"] = true
-//        createRecord["Attended__c"] = true
-        
-       //let createRequest = RestClient.shared.requestForCreate(withObjectType: "Campus_Tour__c", fields: createRecord)
+       //Creates the request to create
         let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
         RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
             print(error)
-            print("error in register student")
-            print("Student was not registered for event.")
+            //print("error in register student")
+            //print("Student was not registered for event.")
         }) { (response, urlResponse) in
-            print("Student was registered for event.")
+            //print("Student was registered for event.")
         }}
     
     
-    
-    
-//
-//        let currentDate = getDate()
-//        //checks whether an OrgEvent Self-guided tour exists for the current date, if it is pulls the id
-//        let checkForExistingEvent = RestClient.shared.request(forQuery: "SELECT Id,Name,TargetX_Eventsb__Start_Time_TZ_Adjusted__c FROM TargetX_Eventsb__OrgEvent__c WHERE TargetX_Eventsb__Start_Time_TZ_Adjusted__c LIKE '\(currentDate)%' AND Name LIKE 'Self%'")
-//        RestClient.shared.send(request: checkForExistingEvent, onFailure: {(error, urlResponse) in}) { [weak self](response, urlResponse) in
-//            let jsonResponse = JSON(response!)
-//
-//
-//            let id = jsonResponse["records"][0]["Id"].stringValue
-//
-//
-//            let checkForExistingSchedule = RestClient.shared.request(forQuery: "SELECT Id FROM TargetX_Eventsb__ContactScheduleItem__c WHERE TargetX_Eventsb__OrgEvent__c = '\(id)' AND TargetX_Eventsb__Contact__c = '\(self!.contactId)'")
-//
-//            RestClient.shared.send(request: checkForExistingSchedule, onFailure: {(error, urlResponse) in}) { [weak self] (response, urlResponse) in
-//                let checkResponse = JSON(response!)
-//                print("who are you")
-//                print(checkResponse)
-//                let results = jsonResponse.dictionaryObject
-//                var createRecord = [String : Any]()
-//                createRecord["TargetX_Eventsb__Contact__c"] = self?.contactId
-//                createRecord["TargetX_Eventsb__OrgEvent__c"] = id
-//                createRecord["TargetX_Eventsb__Confirmed__c"] = true
-//                createRecord["TargetX_Eventsb__Attended__c"] = true
-//                let totalSize = checkResponse["totalSize"].intValue
-//                if (totalSize >= 1){
-//                    ()
-//                }
-//                else{
-//
-//                   let createRequest = RestClient.shared.requestForCreate(withObjectType: "TargetX_Eventsb__ContactScheduleItem__c", fields: createRecord)
-//                    RestClient.shared.send(request: createRequest, onFailure: {(error, urlResponse) in
-//                        print(error)
-//                        print(createRecord)
-//                    }) { [weak self] (response, urlResponse) in
-//                        print(createRecord)
-//                }
-//        }
-//
-//        }
-//
-//        }
-        
-    
+   
     
 //-------------------------------------------------------------------------
 // MARK: Helper Functions
