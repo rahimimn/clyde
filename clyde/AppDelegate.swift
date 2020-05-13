@@ -35,14 +35,15 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     ///Within the init method, the SalesforceManager object initializes the SF Mobile SDK and registers a block to handle user change notifications.
-    override init(){
+    override init()
+    {
+        super.init()
         
-        //Initializes everything
         SmartSyncSDKManager.initializeSDK()
         SmartSyncSDKManager.shared.setupUserStoreFromDefaultConfig()
         SmartSyncSDKManager.shared.setupUserSyncsFromDefaultConfig()
         
-        //Handles user change notifications
+        
         AuthHelper.registerBlock(forCurrentUserChangeNotifications: {
             self.resetViewState {
                 self.initializeAppViewState()
