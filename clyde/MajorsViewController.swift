@@ -59,15 +59,20 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
     /// Overrides the viewDidLoad function. Adds the menu bar, adds the logo to the nav bar, adjusts font for major label and major description
     override func viewDidLoad() {
         super.viewDidLoad()
+        //adds the menu bar to the view controller
         self.menuBar(menuBarItem: menuBarButton)
+        //adds the cofc logo to the nav bar
         self.addLogoToNav()
+        //customizes the label and description font
         self.majorLabel.adjustsFontSizeToFitWidth = true
         self.majorDescription.adjustsFontForContentSizeCategory = true
+        //sets the contact id
         contactId = defaults.string(forKey: "ContactId")!
     }
     
     override func loadView() {
         super.loadView()
+        //loads from store
         self.loadFromStore()
     }
     
@@ -137,6 +142,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         var createRecord = [String : Any]()
         var updateRecord = [String : Any]()
        
+        //based on the button pressed, sets the preference
         if button == 0{
             preference = "Dislike"
         } else if button == 1{
@@ -144,7 +150,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
         } else{
             preference = "Like"
         }
-        
+        //creates the records
         createRecord["Preference__c"] = preference
         createRecord["Possible_Interest__c"] = interestId
         createRecord["Student__c"] = contactId
@@ -163,7 +169,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
             let results = jsonResponse.dictionaryObject
             let totalSize = jsonResponse["totalSize"].intValue
            
-            
+            //if the total size is 0, create the new selected interest
             if totalSize == 0{
                 let createSelectedInterestRequest = RestClient.shared.requestForCreate(withObjectType: "Selected_Interest__c", fields: createRecord)
                 RestClient.shared.send(request: createSelectedInterestRequest, onFailure: { (error, URLResponse) in
@@ -175,7 +181,7 @@ class MajorsViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }
             }
             
-            
+            //if the total size is greater than 0, then update the existing selected interest
             else if totalSize > 0{
                 let id = jsonResponse["records"][0]["Id"].stringValue
                 let updateSelectedInterestRequest = RestClient.shared.requestForUpdate(withObjectType: "Selected_Interest__c", objectId: id, fields: updateRecord)

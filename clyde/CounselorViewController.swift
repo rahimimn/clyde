@@ -18,10 +18,12 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
 
     //-------------------------------------------------------------------------
     // MARK: Variables
+    //Counselor variables
     var name: String = ""
     var about: String = ""
     var email: String? = ""
     var id: String = ""
+    //User id
     var studentID: String = ""
     
     var store = SmartStore.shared(withName: SmartStore.defaultStoreName)
@@ -48,7 +50,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     
     /// When button is pressed, will take in the counselor's phone number, remove the - and (), and then calls the number.
     ///
-    /// This will not work in the simulator.
+    /// This will not work in the simulator, but it does within an actual iPhone
     /// - Parameter sender: action button
     @IBAction func phone(_ sender: UIButton) {
         if  let phone = phoneText.titleLabel?.text{
@@ -67,7 +69,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
     
     
     /// When button is tapped, will email the counselor.
-    ///This will not work in the simulator.
+    ///This will not work in the simulator, but it does within an actual iPhone
     /// - Parameter sender: action button
     @IBAction func email(_ sender: UIButton) {
         let email = self.email
@@ -100,9 +102,13 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //loads data from store
         self.loadDataFromStore()
+        //adds menu to the view controller
         self.menuBar(menuBarItem: menuBarButton)
+        //added cofc logo to the navigation bar
         self.addLogoToNav()
+        //sets the radius to the counselorImage
         self.counselorImage.layer.cornerRadius = 5
     }
    
@@ -153,11 +159,14 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
         loadingIndicator.color = #colorLiteral(red: 0.6127323508, green: 0.229350239, blue: 0.2821176946, alpha: 1)
         counselorView.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
+        
         let querySpec = QuerySpec.buildSmartQuerySpec(smartSql: "select {Counselor:Name}, {Counselor:MobilePhone}, {Counselor:AboutMe},{Counselor:Email}, {Counselor:Image_Url__c} from {Counselor}", pageSize: 1)
         
         do{
             let records = try self.store?.query(using: querySpec!, startingFromPageIndex: 0)
-            guard let record = records as? [[String]] else{
+            guard let record = records as? [[String]]
+            //if the record errors out, then it creates a default record
+            else{
                 os_log("\nBad data returned from SmartStore query.", log: self.mylog, type: .debug)
                 DispatchQueue.main.async {
                     
@@ -167,6 +176,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     self.present(errorAlert, animated: true)
                 }
                  let record = ["Admissions Office","843-953-5670", "At the College of Charleston, your education is about much more than your degree. It's about discovery, community, and connection. We encourage you to start now. It's never too late to build your network, connect with your counselor. Making a connection with your counselor can make a big impact on you and your future. ","admissions@cofc.edu","https://c.cs44.content.force.com/servlet/servlet.ImageServer?id=0157A0000006tMP&oid=00D7A0000009Quh&lastMod=1588946070000"]
+                
                 let counselorName = record[0]
                 print(counselorName)
                 let counselorPhone = record[1]
@@ -174,6 +184,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 let counselorEmail = record[3]
                 let counserlorImage = record[4]
                 DispatchQueue.main.async {
+                    //sets all of the labels
                     self.aboutMeText.text = counselorAbout
                     self.aboutMeText.adjustsFontForContentSizeCategory = true
                     
@@ -192,7 +203,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                     self.header.backgroundColor = #colorLiteral(red: 0.8870992064, green: 0.8414486051, blue: 0.7297345996, alpha: 1)
                     self.instagramButton.setTitle("@cofcadmissions", for: .normal)
                     self.instagramButton.backgroundColor = #colorLiteral(red: 0.558098033, green: 0.1014547695, blue: 0.1667655639, alpha: 0.6402504281)
-                    
+                    //gets the image url and sets the images
                     if (URL(string: counserlorImage) != nil){
                         let url = URL(string: counserlorImage)!
                         
@@ -214,7 +225,7 @@ class CounselorViewController: UIViewController, MFMailComposeViewControllerDele
                 }
                 return
             }
-            
+            //actual counselor data
             let counselorName = record[0][0]
             print(counselorName)
             let counselorPhone = record[0][1]
