@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>remoteAccessConsumerKey</key>
-	<string>3MVG98XJQQAccJQfn1uhCyaN5Kb35VzUEHOpDeJoTfvRZG1CwCfbkTrjm5Sh7s2qwgoXXWa2vgqI9MM3utwn1</string>
+	<string>3MVG93MGy9V8hF9Mc18rqm84gxLBXTu0FFY8M1OpWnVkRqZJlwk12IEdhZsH4Oc3_dHcTyK1bp14X2c2Mnl8Z</string>
 	<key>oauthRedirectURI</key>
-	<string>clydeProd://oauth/done</string>
+	<string>cofcappfull://oauth/done</string>
 	<key>oauthScopes</key>
 	<array>
 		<string>web</string>

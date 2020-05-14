@@ -100,7 +100,7 @@ class HomeViewController: UIViewController{
     override func loadView() {
         super.loadView()
         self.loadData()
-        self.loadSchools()
+        
         self.loadMajors()
         
         //Checks whether the user has logged in before, and if not, presents the information pop up
@@ -274,10 +274,15 @@ class HomeViewController: UIViewController{
             let jsonResponse = JSON(response!)
             let id = jsonResponse["user_id"].stringValue
             let email = jsonResponse["email"].stringValue
+            let lastname = jsonResponse["family_name"].stringValue
+            let firstname = jsonResponse["given_name"].stringValue
             DispatchQueue.main.async {
                 self?.userId = id
                 //Sets the "UserId" as Id in the default user storage
                 self!.defaults.set(id,forKey: "UserId")
+                self!.defaults.set(email,forKey: "Email")
+                self!.defaults.set(firstname, forKey: "FirstName")
+                self!.defaults.set(lastname, forKey: "LastName")
             }
             
             //Pulls the user info (specifically contactid).
@@ -327,11 +332,12 @@ class HomeViewController: UIViewController{
                     let login = jsonContact["records"][0]["First_Login__c"
                     ].stringValue
                     print(jsonContact)
-                    self!.defaults.set(login, forKey: "FirstLogin")
 
                     
                     DispatchQueue.main.async {
+                        self!.defaults.set(login, forKey: "FirstLogin")
                         self!.defaults.set(state,forKey: "State")
+                        self!.loadSchools()
                     }
                     
                    // SalesforceLogger.d(type(of: strongSelf), message: "Invoked: \(contactAccountRequest)")

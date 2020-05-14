@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let name = "\(defaults.string(forKey: "FirstName")!)  \(defaults.string(forKey: "LastName")!)"
         print("\n\n")
         
-        print(defaults.object(forKey: "infoArray")!)
+        //print(defaults.object(forKey: "infoArray")!)
         //self.userName
         self.userName.text = name
         self.userName.textColor = UIColor.black
