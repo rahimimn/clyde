@@ -58,6 +58,7 @@
 		B28E066822C3A2680035A40F /* icons8-help-100.png in Resources */ = {isa = PBXBuildFile; fileRef = B28E066722C3A2670035A40F /* icons8-help-100.png */; };
 		B28E066A22C3A7C80035A40F /* 2016-Orientation-750x499.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */; };
 		B28E066C22C3AC270035A40F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E066B22C3AC270035A40F /* EventsTableViewController.swift */; };
+		B29B4251246DADF50087A26D /* emojiClick.png in Resources */ = {isa = PBXBuildFile; fileRef = B29B4250246DADF50087A26D /* emojiClick.png */; };
 		B2B44D8C23102E0C00FC1498 /* EventsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */; };
 		B2B44D8E231031BF00FC1498 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */; };
 		B2B44D90231053AC00FC1498 /* Clyde-Campus-Tour.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2B44D8F231053AB00FC1498 /* Clyde-Campus-Tour.jpg */; };
@@ -182,6 +183,7 @@
 		B28E066722C3A2670035A40F /* icons8-help-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-help-100.png"; sourceTree = "<group>"; };
 		B28E066922C3A7C70035A40F /* 2016-Orientation-750x499.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2016-Orientation-750x499.jpg"; sourceTree = "<group>"; };
 		B28E066B22C3AC270035A40F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
+		B29B4250246DADF50087A26D /* emojiClick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emojiClick.png; sourceTree = "<group>"; };
 		B2A4E8AC2350D7700097038A /* icons8-Zoom In.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-Zoom In.png"; sourceTree = "<group>"; };
 		B2B44D8B23102E0C00FC1498 /* EventsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDataSource.swift; sourceTree = "<group>"; };
 		B2B44D8D231031BE00FC1498 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				B2C1A02922C27C4200C5634C /* red-symbol.jpg */,
+				B29B4250246DADF50087A26D /* emojiClick.png */,
 				B2F5792F233935F900A361B4 /* emoji.png */,
 				B2211D3A22F2018B00D127DB /* whiteLogo.png */,
 				B2C1A02722C27BAE00C5634C /* full-logo.jpg */,
@@ -693,6 +696,7 @@
 				B227D08922BBD87600AA0634 /* icons8-User Manual.png in Resources */,
 				B2D8013822D7A6810050E376 /* icons8-Installing Updates.png in Resources */,
 				B2211D3D22F8635200D127DB /* clydeWantsToKnow.png in Resources */,
+				B29B4251246DADF50087A26D /* emojiClick.png in Resources */,
 				B23C492322D3D75600A88C48 /* cal.png in Resources */,
 				B269248D2301E51400C480EF /* sideThumb.png in Resources */,
 				B2CF66A02350EECA00B7273E /* 358.JPG in Resources */,

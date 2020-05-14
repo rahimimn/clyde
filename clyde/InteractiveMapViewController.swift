@@ -95,6 +95,9 @@ class InteractiveMapViewController: UIViewController, MKMapViewDelegate {
         guard let annotation = view.annotation else{
             return
         }
+        view.image = UIImage(named: "emojiClick.png")
+        
+        
         //requests directions
         let directionsRequest = MKDirections.Request()
         directionsRequest.source = MKMapItem.forCurrentLocation()
